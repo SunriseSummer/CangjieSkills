@@ -1,0 +1,5 @@
+# 排除数据库和文档目录（位于 scripts/ 目录下）
+**/chroma_db/
+**/hm-docs/
+**/chroma_db.zip
+**/hm-docs.zip
