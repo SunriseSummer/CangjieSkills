@@ -57,11 +57,11 @@ package test_proj
 import std.math.*
 
 main(): Unit {
-    // 三角函数示例
-    let angle = Float64.PI / 6.0   // 30 度
-    println(sin(angle))             // 0.5
-    println(cos(angle))             // ~0.866
-    println(atan2(1.0, 1.0))       // PI/4
+    // 三角函数示例（参数为弧度）
+    let angle = 3.141592653589793 / 6.0   // 30 度 = PI/6
+    println(sin(angle))                    // 0.5
+    println(cos(angle))                    // ~0.866
+    println(atan2(1.0, 1.0))              // PI/4 ≈ 0.785
 }
 ```
 
@@ -106,13 +106,13 @@ main(): Unit {
 
 ## 5. 浮点数检查
 
-| 常量/函数 | 说明 |
+| 常量/方法 | 说明 |
 |-----------|------|
-| `NaN` | 非数值常量 |
-| `Inf` / `-Inf` | 正/负无穷 |
-| `isNaN(x)` | 是否为 NaN |
-| `isInf(x)` | 是否为无穷 |
-| `isFinite(x)` | 是否为有限数 |
+| `Float64.NaN` | 非数值常量 |
+| `Float64.Inf` | 正无穷常量 |
+| `Float64.Max` / `Float64.Min` | 最大/最小值 |
+| `x.isNaN()` | 是否为 NaN（实例方法） |
+| `x.isInf()` | 是否为无穷（实例方法） |
 
 - **接口**：`FloatingPoint<T>`、`Integer<T>`、`Number<T>` 提供类型约束
 
@@ -121,11 +121,10 @@ package test_proj
 import std.math.*
 
 main(): Unit {
-    // 浮点数检查
-    println(isNaN(Float64.NaN))     // true
-    println(isInf(Float64.Inf))     // true
-    println(isFinite(1.0))          // true
-    println(isFinite(Float64.Inf))  // false
+    // 浮点数特殊值检查（实例方法）
+    println(Float64.NaN.isNaN())     // true
+    println(Float64.Inf.isInf())     // true
+    println(1.0.isNaN())             // false
 }
 ```
 
@@ -138,5 +137,5 @@ main(): Unit {
 3. `gcd` / `lcm` 仅用于整数类型，支持负数参数
 4. `clamp(value, min, max)` 将值限制在闭区间 [min, max]
 5. `checkedAbs(x)` 返回 `Option`，用于安全处理溢出
-6. 浮点数比较前应使用 `isNaN` / `isInf` 检查特殊值
+6. 浮点数特殊值检查使用实例方法：`x.isNaN()`、`x.isInf()`
 7. `NaN` 与任何值比较均为 false，包括自身
