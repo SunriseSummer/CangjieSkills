@@ -1,11 +1,13 @@
 ---
 name: cangjie-toolchains
-description: "提供仓颉语言编译器cjc/调试器cjdb/覆盖率检测工具cjcov/代码格式化工具cjfmt/静态检查工具cjlint/性能分析工具cjprof的使用文档"
+description: "提供仓颉语言编译器cjc/调试器cjdb/覆盖率检测工具cjcov/代码格式化工具cjfmt/静态检查工具cjlint/性能分析工具cjprof/项目管理工具cjpm的使用文档"
 ---
 
 请按需查询当前目录下的工具文档：
 
 [cjc](./cjc/README.md)：仓颉编译器 cjc 核心用法，包括基本编译、输出类型、包编译、模块管理、链接库、调试、测试、宏编译、条件编译、优化、交叉编译等。
+
+[cjpm](./cjpm/README.md)：仓颉项目管理工具 cjpm 核心用法，包括模块初始化(init)、编译(build)、运行(run)、测试(test)、基准测试(bench)、cjpm.toml 配置（package/workspace/dependencies）、依赖管理、Profile 配置、FFI 集成、交叉编译、构建脚本等。
 
 [cjdb](./cjdb/README.md)：仓颉调试工具 cjdb 核心用法，包括启动调试、设置断点（源码断点/函数断点/条件断点）、单步执行、查看和修改变量、表达式计算、观察点、仓颉线程调试、launch/attach 调试方式等。
 
