@@ -94,7 +94,7 @@ while (let Some(i) <- it.next()) {
 | `Range<T>` | `T` | ✅ |
 | `Array<T>` | `T` | ✅ |
 | `ArrayList<T>` | `T` | ✅ |
-| `String` | `Rune` | ✅ |
+| `String` | `Byte`（UTF-8 字节） | ✅ |
 | `HashMap<K, V>` | `(K, V)` | ❌ |
 | `HashSet<T>` | `T` | ❌ |
 
@@ -159,13 +159,15 @@ for (ch in "Hi仓颉") {
 }
 ```
 
-如果需要逐字符（Rune）迭代，可以先调用 `toRuneArray()` 转为字符数组后再使用：
+如果需要逐字符（Rune）迭代，请使用 `runes()` 方法获取 `Iterator<Rune>`：
 
 ```cangjie
-for (ch in "Hi仓颉".toRuneArray()) {
+for (ch in "Hi仓颉".runes()) {
     println(ch)  // 逐个输出：H i 仓 颉
 }
 ```
+
+> 也可以用 `toRuneArray()` 转为 `Array<Rune>` 后再迭代，但 `runes()` 返回迭代器，避免额外的数组分配，是更推荐的方式。
 
 ---
 
