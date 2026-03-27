@@ -78,6 +78,12 @@ import std.deriving.*
 class Task {
     Task(let name: String, let priority: Int64) {}
 }
+
+main() {
+    let t1 = Task("Deploy", 1)
+    let t2 = Task("Build", 2)
+    println(t1 < t2)  // true（先比较 priority）
+}
 ```
 
 ---

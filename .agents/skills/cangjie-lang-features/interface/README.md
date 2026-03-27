@@ -55,6 +55,11 @@ class Circle <: Shape {
 }
 
 // 包外不能实现 Shape（sealed），但可通过非 sealed 的 public 子接口间接实现
+
+main() {
+    let c = Circle(5.0)
+    println(c.area())  // 输出：78.539750
+}
 ```
 
 ---
