@@ -47,16 +47,9 @@ main() {
 
 ---
 
-## 3. SwapEndianOrder
+## 3. 端序转换示例
 
-- 扩展接口，提供字节序反转
-
-| 方法 | 说明 |
-|------|------|
-| `swapEndian(): T` | 返回字节序反转后的值 |
-
-- 用途：在大端与小端之间转换
-- 对 Bool 和单字节类型（Int8/UInt8）无实际效果
+- 大端序写入后用小端序读取，可观察字节序差异
 
 ```cangjie
 package test_proj
@@ -64,13 +57,16 @@ import std.binary.*
 
 main() {
     let v: UInt32 = 0x01020304u32
-    let swapped = v.swapEndian()
-    println(swapped)
-
-    let buf = Array<UInt8>(4, repeat: 0)
-    v.writeBigEndian(buf)
-    let le = UInt32.readLittleEndian(buf)
-    println(le == swapped)
+    let bufBE = Array<UInt8>(4, repeat: 0)
+    let bufLE = Array<UInt8>(4, repeat: 0)
+    v.writeBigEndian(bufBE)
+    v.writeLittleEndian(bufLE)
+    println("BigEndian:    ${bufBE}")      // [1, 2, 3, 4]
+    println("LittleEndian: ${bufLE}")      // [4, 3, 2, 1]
+    // 从各自字节序读回，值相同
+    let readBE = UInt32.readBigEndian(bufBE)
+    let readLE = UInt32.readLittleEndian(bufLE)
+    println(readBE == readLE)              // true
 }
 ```
 
@@ -80,6 +76,6 @@ main() {
 
 1. `writeBigEndian` / `writeLittleEndian` 返回写入字节数，buffer 长度需 >= 类型大小
 2. `readBigEndian` / `readLittleEndian` 是静态方法，通过类型名调用（如 `Int32.readBigEndian(buf)`）
-3. `swapEndian()` 反转字节序，可用于大端 ↔ 小端转换
+3. 大端序写入后用小端序读取结果不同，反之亦然
 4. 网络协议通常使用大端序（BigEndian）
 5. Bool 写入大端序后占 1 字节，`true` 为 `0x01`，`false` 为 `0x00`
