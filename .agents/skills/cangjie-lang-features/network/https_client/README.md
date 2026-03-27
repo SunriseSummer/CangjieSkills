@@ -326,7 +326,7 @@ main() {
     var tlsConfig = TlsClientConfig()
     tlsConfig.verifyMode = TrustAll
     // 设置密钥日志回调（可用于 Wireshark 解密）
-    tlsConfig.keylogCallback = { label, keylog => println("KEYLOG: ${keylog}") }
+    tlsConfig.keylogCallback = { keylog => println("KEYLOG: ${keylog}") }
 
     let client = ClientBuilder()
         .tlsConfig(tlsConfig)
