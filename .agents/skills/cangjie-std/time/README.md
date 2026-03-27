@@ -24,8 +24,8 @@
 | `format(fmt: String): String` | 按模式格式化为字符串 |
 | `inUTC(): DateTime` | 转换为 UTC |
 | `inTimeZone(timeZone: TimeZone): DateTime` | 转换到指定时区 |
-| `addYears(n: Int64): DateTime` / `addMonths(n: Int64)` / `addDays(n: Int64)` | 日期算术 |
-| `addHours(n: Int64)` / `addMinutes(n: Int64)` / `addSeconds(n: Int64)` / `addNanoseconds(n: Int64)` | 时间算术 |
+| `addYears(n: Int64): DateTime` / `addMonths(n: Int64): DateTime` / `addDays(n: Int64): DateTime` | 日期算术 |
+| `addHours(n: Int64): DateTime` / `addMinutes(n: Int64): DateTime` / `addSeconds(n: Int64): DateTime` / `addNanoseconds(n: Int64): DateTime` | 时间算术 |
 | `toString(): String` | 返回 ISO 8601 格式字符串 |
 
 - 支持比较：`==`, `!=`, `<`, `>`, `<=`, `>=`
