@@ -69,5 +69,5 @@ main() {
 1. `Digest` 接口是摘要算法的核心抽象，所有摘要实现均需遵循此接口
 2. `digest()` 便捷函数适用于一次性计算，大数据建议分块 `write()` + `finish()`
 3. `finish()` 后需 `reset()` 才能复用同一实例进行新计算
-4. 具体算法实现（MD5, SHA256 等）可能在扩展标准库中，`std.crypto.digest` 仅定义接口
+4. `std.crypto.digest` 仅定义接口；**具体算法实现（MD5、SHA256、HMAC 等）在扩展标准库 `stdx.crypto.digest` 中**（详见 `cangjie-stdx` Skill）
 5. `finish(to!:)` 变体可避免额外内存分配，buffer 长度需 >= `size`

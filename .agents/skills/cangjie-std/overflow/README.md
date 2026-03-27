@@ -88,10 +88,27 @@ package test_proj
 import std.overflow.*
 
 main() {
-    let a: Int8 = Int8.Max
-    println(a.saturatingAdd(1))
-    println(a.checkedAdd(1))
-    println(a.wrappingAdd(1))
+    let a: Int8 = Int8.Max  // 127
+
+    // 饱和模式：溢出饱和到最大值
+    println(a.saturatingAdd(1))   // 127
+
+    // 检查模式：溢出返回 None
+    println(a.checkedAdd(1))      // None
+
+    // 截断模式：溢出截断（回绕）
+    println(a.wrappingAdd(1))     // -128
+
+    // 异常模式：溢出抛出 OverflowException
+    try {
+        a.throwingAdd(1)
+    } catch (e: OverflowException) {
+        println("overflow caught")
+    }
+
+    // 进位模式：返回 (是否溢出, 截断结果)
+    let (overflow, result) = a.carryingAdd(1)
+    println("carry: overflow=${overflow}, result=${result}")
 }
 ```
 

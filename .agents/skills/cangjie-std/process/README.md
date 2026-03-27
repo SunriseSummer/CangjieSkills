@@ -17,7 +17,24 @@
 | 函数 | 说明 |
 |------|------|
 | `execute(command, ...args)` | 执行命令并等待，返回 `Int64` 退出码 |
-| `executeWithOutput(command, ...args)` | 执行并返回 `(exitCode, stdout, stderr)` |
+| `executeWithOutput(command, ...args)` | 执行并返回 `(Int64, Array<Byte>, Array<Byte>)`（退出码, stdout, stderr） |
+
+```cangjie
+package test_proj
+import std.process.*
+
+main(): Int64 {
+    // execute: 同步执行命令并获取退出码
+    let exitCode = execute("echo", "hello")
+    println("exit code: ${exitCode}")
+
+    // executeWithOutput: 同步执行并捕获输出（返回字节数组）
+    let (code, stdoutBytes, _) = executeWithOutput("echo", "hello cangjie")
+    let output = String.fromUtf8(stdoutBytes).trimEnd()
+    println("code=${code}, output=${output}")
+    return 0
+}
+```
 
 ---
 
