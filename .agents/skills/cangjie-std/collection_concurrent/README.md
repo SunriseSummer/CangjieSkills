@@ -152,6 +152,6 @@ main(): Int64 {
 1. `ConcurrentHashMap` 的 `concurrencyLevel` 建议设置为预期并发线程数
 2. `K` 必须实现 `Hashable & Equatable`
 3. `ArrayBlockingQueue` 容量固定，创建后不可扩容
-4. `add()` / `remove()` 是阻塞操作，`tryAdd()` / `tryRemove()` 是非阻塞操作
-5. `ConcurrentLinkedQueue` 无容量限制，所有操作非阻塞
+4. 阻塞队列的 `add()` / `remove()` 是阻塞操作，`tryAdd()` / `tryRemove()` 是非阻塞操作
+5. `ConcurrentLinkedQueue` 无容量限制，所有操作（`add` / `remove` / `peek`）均为非阻塞
 6. 所有并发集合的 `size` 属性反映调用瞬间的近似值

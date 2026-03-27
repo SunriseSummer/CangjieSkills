@@ -12,6 +12,8 @@
 
 ### 1.2 有效的 main 函数签名
 
+> **注意**：以下是所有合法签名列表，实际项目中每个包只能定义**一个** `main` 函数。
+
 ```text
 // 无参数
 main(): Unit { }
@@ -21,8 +23,6 @@ main(): Int64 { return 0 }
 main(args: Array<String>): Unit { }
 main(args: Array<String>): Int64 { return 0 }
 ```
-
-> **注意**：以上是所有合法签名列表，实际项目中每个包只能定义**一个** `main` 函数。
 
 ### 1.3 使用示例
 
