@@ -9,16 +9,16 @@
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `BigInt(intValue)` | 从整数构造 |
-| `BigInt.parse(string)` | 从十进制字符串解析 |
-| `BigInt.parse(string, radix)` | 从指定进制字符串解析 |
+| `BigInt(intValue: Int64)` | 从整数构造 |
+| `BigInt.parse(string: String): BigInt` | 从十进制字符串解析 |
+| `BigInt.parse(string: String, radix: Int64): BigInt` | 从指定进制字符串解析 |
 | `+, -, *, /` | 四则运算 |
-| `divAndMod(other)` | 返回 `(商, 余数)` 元组 |
-| `modPow(exp, mod)` | 模幂运算 |
-| `bitLen` | 二进制位数 |
-| `sign` | 符号：-1、0 或 1 |
-| `toString()` | 转为十进制字符串 |
-| `toString(radix)` | 转为指定进制字符串 |
+| `divAndMod(other: BigInt): (BigInt, BigInt)` | 返回 `(商, 余数)` 元组 |
+| `modPow(exp: BigInt, mod: BigInt): BigInt` | 模幂运算 |
+| `bitLen: Int64` | 二进制位数 |
+| `sign: Int64` | 符号：-1、0 或 1 |
+| `toString(): String` | 转为十进制字符串 |
+| `toString(radix: Int64): String` | 转为指定进制字符串 |
 
 ```cangjie
 package test_proj
@@ -48,14 +48,14 @@ main(): Int64 {
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `Decimal(string)` | 从字符串构造 |
-| `Decimal(intValue)` | 从整数构造 |
+| `Decimal(string: String)` | 从字符串构造 |
+| `Decimal(intValue: Int64)` | 从整数构造 |
 | `+, -, *, /` | 四则运算 |
-| `precision` | 有效数字位数 |
-| `scale` | 小数位数 |
-| `isZero` | 是否为零 |
-| `isPositive` | 是否为正 |
-| `isNegative` | 是否为负 |
+| `precision: Int64` | 有效数字位数 |
+| `scale: Int64` | 小数位数 |
+| `isZero: Bool` | 是否为零 |
+| `isPositive: Bool` | 是否为正 |
+| `isNegative: Bool` | 是否为负 |
 
 ```cangjie
 package test_proj
@@ -81,10 +81,10 @@ main(): Int64 {
 
 | 函数 | 说明 | 支持类型 |
 |------|------|---------|
-| `abs(value)` | 绝对值 | BigInt / Decimal |
-| `gcd(a, b)` | 最大公约数 | BigInt |
-| `lcm(a, b)` | 最小公倍数 | BigInt |
-| `sqrt(value)` | 平方根 | BigInt / Decimal |
+| `abs(value: T): T` | 绝对值 | BigInt / Decimal |
+| `gcd(a: BigInt, b: BigInt): BigInt` | 最大公约数 | BigInt |
+| `lcm(a: BigInt, b: BigInt): BigInt` | 最小公倍数 | BigInt |
+| `sqrt(value: T): T` | 平方根 | BigInt / Decimal |
 
 ```cangjie
 package test_proj

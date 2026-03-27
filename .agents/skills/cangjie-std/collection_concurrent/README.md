@@ -9,12 +9,12 @@
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `ConcurrentHashMap<K, V>(concurrencyLevel: n)` | 创建实例，指定并发级别 |
-| `put(key, value)` | 插入或更新键值对 |
-| `get(key)` | 获取值，返回 `Option<V>` |
-| `remove(key)` | 删除键值对 |
-| `containsKey(key)` | 判断键是否存在 |
-| `size` | 当前元素数量 |
+| `ConcurrentHashMap<K, V>(concurrencyLevel: Int64)` | 创建实例，指定并发级别 |
+| `put(key: K, value: V): ?V` | 插入或更新键值对，返回旧值 |
+| `get(key: K): ?V` | 获取值，返回 `Option<V>` |
+| `remove(key: K): ?V` | 删除键值对，返回旧值 |
+| `containsKey(key: K): Bool` | 判断键是否存在 |
+| `size: Int64` | 当前元素数量 |
 
 ```cangjie
 package test_proj
@@ -55,28 +55,30 @@ main(): Int64 {
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `ArrayBlockingQueue<E>(capacity)` | 创建固定容量队列 |
-| `add(element)` | 阻塞入队，满则等待 |
-| `add(element, timeout)` | 阻塞入队，超时返回 `false` |
-| `tryAdd(element)` | 非阻塞入队，满则返回 `false` |
-| `remove()` | 阻塞出队，空则等待，返回 `Option<E>` |
-| `remove(timeout)` | 阻塞出队，超时返回 `None` |
-| `tryRemove()` | 非阻塞出队，空返回 `None` |
-| `peek()` | 查看队首元素，不移除 |
-| `capacity` | 队列容量 |
-| `size` | 当前元素数 |
+| `ArrayBlockingQueue<E>(capacity: Int64)` | 创建固定容量队列 |
+| `add(element: E): Unit` | 阻塞入队，满则等待 |
+| `add(element: E, timeout: Duration): Bool` | 阻塞入队，超时返回 `false` |
+| `tryAdd(element: E): Bool` | 非阻塞入队，满则返回 `false` |
+| `remove(): E` | 阻塞出队，空则等待 |
+| `remove(timeout: Duration): Option<E>` | 阻塞出队，超时返回 `None` |
+| `tryRemove(): Option<E>` | 非阻塞出队，空返回 `None` |
+| `peek(): Option<E>` | 查看队首元素，不移除 |
+| `capacity: Int64` | 队列容量 |
+| `size: Int64` | 当前元素数 |
 
 ### LinkedBlockingQueue<E>
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `LinkedBlockingQueue<E>(capacity)` | 创建指定容量队列 |
-| `add(element)` | 阻塞入队，满则等待 |
-| `tryAdd(element)` | 非阻塞入队，满则返回 `false` |
-| `remove()` | 阻塞出队，空则等待 |
-| `tryRemove()` | 非阻塞出队，空返回 `None` |
-| `capacity` | 队列容量 |
-| `size` | 当前元素数 |
+| `LinkedBlockingQueue<E>(capacity: Int64)` | 创建指定容量队列 |
+| `add(element: E): Unit` | 阻塞入队，满则等待 |
+| `add(element: E, timeout: Duration): Bool` | 阻塞入队，超时返回 `false` |
+| `tryAdd(element: E): Bool` | 非阻塞入队，满则返回 `false` |
+| `remove(): E` | 阻塞出队，空则等待 |
+| `remove(timeout: Duration): Option<E>` | 阻塞出队，超时返回 `None` |
+| `tryRemove(): Option<E>` | 非阻塞出队，空返回 `None` |
+| `capacity: Int64` | 队列容量 |
+| `size: Int64` | 当前元素数 |
 
 ```cangjie
 package test_proj
@@ -121,11 +123,11 @@ main(): Int64 {
 | 方法 / 属性 | 说明 |
 |-------------|------|
 | `ConcurrentLinkedQueue<E>()` | 创建空队列 |
-| `add(element)` | 入队，始终成功 |
-| `remove()` | 出队，返回 `Option<E>`，空返回 `None` |
-| `peek()` | 查看队首元素，不移除，返回 `Option<E>` |
-| `isEmpty()` | 是否为空 |
-| `size` | 当前元素数量（近似值） |
+| `add(element: E): Bool` | 入队，始终成功 |
+| `remove(): Option<E>` | 出队，空返回 `None` |
+| `peek(): Option<E>` | 查看队首元素，不移除 |
+| `isEmpty(): Bool` | 是否为空 |
+| `size: Int64` | 当前元素数量（近似值） |
 
 ```cangjie
 package test_proj

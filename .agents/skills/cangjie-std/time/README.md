@@ -21,12 +21,12 @@
 
 | 方法 | 说明 |
 |------|------|
-| `format(pattern)` | 按模式格式化为字符串 |
-| `inUTC()` | 转换为 UTC |
-| `inTimeZone(tz)` | 转换到指定时区 |
-| `addYears(n)` / `addMonths(n)` / `addDays(n)` | 日期算术 |
-| `addHours(n)` / `addMinutes(n)` / `addSeconds(n)` / `addNanoseconds(n)` | 时间算术 |
-| `toString()` | 返回 ISO 8601 格式字符串 |
+| `format(fmt: String): String` | 按模式格式化为字符串 |
+| `inUTC(): DateTime` | 转换为 UTC |
+| `inTimeZone(timeZone: TimeZone): DateTime` | 转换到指定时区 |
+| `addYears(n: Int64): DateTime` / `addMonths(n: Int64)` / `addDays(n: Int64)` | 日期算术 |
+| `addHours(n: Int64)` / `addMinutes(n: Int64)` / `addSeconds(n: Int64)` / `addNanoseconds(n: Int64)` | 时间算术 |
+| `toString(): String` | 返回 ISO 8601 格式字符串 |
 
 - 支持比较：`==`, `!=`, `<`, `>`, `<=`, `>=`
 
@@ -87,9 +87,9 @@ main() {
 |-----|------|
 | `TimeZone.Local` | 本地时区 |
 | `TimeZone.UTC` | UTC 时区 |
-| `TimeZone.load("Asia/Shanghai")` | 按 IANA 名称加载时区 |
-| `datetime.inUTC()` | 转为 UTC |
-| `datetime.inTimeZone(tz)` | 转为指定时区 |
+| `TimeZone.load(id: String): TimeZone` | 按 IANA 名称加载时区 |
+| `datetime.inUTC(): DateTime` | 转为 UTC |
+| `datetime.inTimeZone(timeZone: TimeZone): DateTime` | 转为指定时区 |
 
 ```cangjie
 package test_proj

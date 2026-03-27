@@ -6,9 +6,9 @@
 
 | 函数 | 说明 |
 |------|------|
-| `launch(command, ...args)` | 启动子进程，返回 `SubProcess` |
-| `launch(command, ...args, workingDirectory: Path)` | 指定工作目录启动 |
-| `launch(command, ...args, stdOut: ProcessRedirect.Pipe)` | 重定向标准输出 |
+| `launch(command: String, ...args: String): SubProcess` | 启动子进程，返回 `SubProcess` |
+| `launch(command: String, ...args: String, workingDirectory!: Path)` | 指定工作目录启动 |
+| `launch(command: String, ...args: String, stdOut!: ProcessRedirect)` | 重定向标准输出 |
 
 ---
 
@@ -16,8 +16,8 @@
 
 | 函数 | 说明 |
 |------|------|
-| `execute(command, ...args)` | 执行命令并等待，返回 `Int64` 退出码 |
-| `executeWithOutput(command, ...args)` | 执行并返回 `(Int64, Array<Byte>, Array<Byte>)`（退出码, stdout, stderr） |
+| `execute(command: String, ...args: String): Int64` | 执行命令并等待，返回退出码 |
+| `executeWithOutput(command: String, ...args: String): (Int64, Array<Byte>, Array<Byte>)` | 执行并返回（退出码, stdout, stderr） |
 
 ```cangjie
 package test_proj
@@ -50,11 +50,11 @@ main(): Int64 {
 
 | 属性/方法 | 说明 |
 |-----------|------|
-| `wait()` | 等待子进程结束，返回退出码 |
-| `waitOutput()` | 等待并获取输出 |
-| `stdInPipe` | 子进程标准输入管道 |
-| `stdOutPipe` | 子进程标准输出管道 |
-| `stdErrPipe` | 子进程标准错误管道 |
+| `wait(): Int64` | 等待子进程结束，返回退出码 |
+| `waitOutput(): (Int64, Array<Byte>, Array<Byte>)` | 等待并获取输出 |
+| `stdInPipe: OutputStream` | 子进程标准输入管道 |
+| `stdOutPipe: InputStream` | 子进程标准输出管道 |
+| `stdErrPipe: InputStream` | 子进程标准错误管道 |
 
 ```cangjie
 package test_proj
@@ -76,16 +76,16 @@ main(): Int64 {
 
 | 函数 | 说明 |
 |------|------|
-| `findProcess(pid)` | 按 PID 查找进程，返回 `Process` |
+| `findProcess(pid: Int64): Process` | 按 PID 查找进程，返回 `Process` |
 
 - **Process** 属性与方法：
 
 | 属性/方法 | 说明 |
 |-----------|------|
-| `pid` | 进程 ID |
-| `name` | 进程名称 |
-| `command` | 进程命令 |
-| `terminate(force: Bool)` | 终止进程，`force: true` 强制终止 |
+| `pid: Int64` | 进程 ID |
+| `name: String` | 进程名称 |
+| `command: String` | 进程命令 |
+| `terminate(force!: Bool): Unit` | 终止进程，`force: true` 强制终止 |
 
 ---
 

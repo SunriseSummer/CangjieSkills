@@ -145,15 +145,15 @@ class Config <: Serializable<Config> {
 
 | 方法 | 说明 |
 |------|------|
-| `add(Field)` | 添加字段，返回自身（支持链式调用） |
-| `get(name)` | 按字段名获取 DataModel 值 |
+| `add(field: Field): DataModelStruct` | 添加字段，返回自身（支持链式调用） |
+| `get(name: String): DataModel` | 按字段名获取 DataModel 值 |
 
 ### 4.2 DataModelSeq 方法
 
 | 方法 | 说明 |
 |------|------|
-| `add(DataModel)` | 添加元素 |
-| `get(index)` | 按索引获取元素 |
+| `add(element: DataModel): DataModelSeq` | 添加元素，返回自身（支持链式调用） |
+| `get(index: Int64): DataModel` | 按索引获取元素 |
 
 ---
 

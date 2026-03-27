@@ -30,10 +30,10 @@ main(): Int64 {
 
 | 函数 | 说明 |
 |------|------|
-| `getVariable(name): ?String` | 获取环境变量，不存在返回 `None` |
+| `getVariable(key: String): ?String` | 获取环境变量，不存在返回 `None` |
 | `getVariables(): HashMap<String, String>` | 获取所有环境变量 |
-| `setVariable(name, value)` | 设置环境变量 |
-| `removeVariable(name)` | 移除环境变量 |
+| `setVariable(key: String, value: String): Unit` | 设置环境变量 |
+| `removeVariable(key: String): Unit` | 移除环境变量 |
 
 ```cangjie
 package test_proj
@@ -88,8 +88,8 @@ main(): Int64 {
 
 | 函数 | 说明 |
 |------|------|
-| `exit(code)` | 立即退出进程，code 为退出码 |
-| `atExit(callback)` | 注册进程退出回调函数 |
+| `exit(code: Int64): Nothing` | 立即退出进程，code 为退出码 |
+| `atExit(callback: () -> Unit): Unit` | 注册进程退出回调函数 |
 
 - `atExit` 注册的回调在正常退出或调用 `exit()` 时执行
 - 多个回调按注册逆序执行

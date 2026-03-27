@@ -7,13 +7,13 @@
 
 | 方法/属性 | 说明 |
 |----------|------|
-| `ClassTypeInfo.of(instance)` | 从 class 实例获取类型信息（推荐） |
-| `StructTypeInfo.of<T>()` | 获取 struct 类型信息 |
+| `ClassTypeInfo.of(instance: Object): ClassTypeInfo` | 从 class 实例获取类型信息（推荐） |
+| `StructTypeInfo.of<T>(): StructTypeInfo` | 获取 struct 类型信息 |
 | `name: String` | 类型简名 |
 | `qualifiedName: String` | 类型全限定名 |
-| `instanceFunctions` | 实例方法集合 |
-| `instanceVariables` | 实例字段集合 |
-| `instanceProperties` | 实例属性集合 |
+| `instanceFunctions: Collection<InstanceFunctionInfo>` | 实例方法集合 |
+| `instanceVariables: Collection<InstanceVariableInfo>` | 实例字段集合 |
+| `instanceProperties: Collection<InstancePropertyInfo>` | 实例属性集合 |
 
 > **注意**：`TypeInfo.of(instance)` 已废弃，请使用 `ClassTypeInfo.of(instance)` 替代。
 

@@ -7,17 +7,17 @@
 
 | 方法 | 说明 |
 |------|------|
-| `checkedAdd(y): ?T` | 加法，溢出返回 None |
-| `checkedSub(y): ?T` | 减法 |
-| `checkedMul(y): ?T` | 乘法 |
-| `checkedDiv(y): ?T` | 除法 |
-| `checkedMod(y): ?T` | 取模 |
+| `checkedAdd(y: T): ?T` | 加法，溢出返回 None |
+| `checkedSub(y: T): ?T` | 减法 |
+| `checkedMul(y: T): ?T` | 乘法 |
+| `checkedDiv(y: T): ?T` | 除法 |
+| `checkedMod(y: T): ?T` | 取模 |
 | `checkedInc(): ?T` | 自增 |
 | `checkedDec(): ?T` | 自减 |
 | `checkedNeg(): ?T` | 取反 |
-| `checkedShl(shift): ?T` | 左移 |
-| `checkedShr(shift): ?T` | 右移 |
-| `checkedPow(exp): ?T` | 幂运算 |
+| `checkedShl(shift: Int64): ?T` | 左移 |
+| `checkedShr(shift: Int64): ?T` | 右移 |
+| `checkedPow(exp: UInt64): ?T` | 幂运算 |
 
 ---
 
@@ -27,14 +27,14 @@
 
 | 方法 | 说明 |
 |------|------|
-| `saturatingAdd(y): T` | 加法，溢出饱和 |
-| `saturatingSub(y): T` | 减法 |
-| `saturatingMul(y): T` | 乘法 |
-| `saturatingDiv(y): T` | 除法 |
+| `saturatingAdd(y: T): T` | 加法，溢出饱和 |
+| `saturatingSub(y: T): T` | 减法 |
+| `saturatingMul(y: T): T` | 乘法 |
+| `saturatingDiv(y: T): T` | 除法 |
 | `saturatingInc(): T` | 自增 |
 | `saturatingDec(): T` | 自减 |
 | `saturatingNeg(): T` | 取反 |
-| `saturatingPow(exp): T` | 幂运算 |
+| `saturatingPow(exp: UInt64): T` | 幂运算 |
 
 ---
 
@@ -44,12 +44,12 @@
 
 | 方法 | 说明 |
 |------|------|
-| `throwingAdd(y): T` | 加法，溢出抛异常 |
-| `throwingSub(y): T` | 减法 |
-| `throwingMul(y): T` | 乘法 |
-| `throwingDiv(y): T` | 除法 |
+| `throwingAdd(y: T): T` | 加法，溢出抛异常 |
+| `throwingSub(y: T): T` | 减法 |
+| `throwingMul(y: T): T` | 乘法 |
+| `throwingDiv(y: T): T` | 除法 |
 | `throwingNeg(): T` | 取反 |
-| `throwingPow(exp): T` | 幂运算 |
+| `throwingPow(exp: UInt64): T` | 幂运算 |
 
 - 相关异常：`OvershiftException`（移位量过大），`UndershiftException`（移位量为负）
 
@@ -61,12 +61,12 @@
 
 | 方法 | 说明 |
 |------|------|
-| `wrappingAdd(y): T` | 加法，溢出截断 |
-| `wrappingSub(y): T` | 减法 |
-| `wrappingMul(y): T` | 乘法 |
-| `wrappingDiv(y): T` | 除法 |
+| `wrappingAdd(y: T): T` | 加法，溢出截断 |
+| `wrappingSub(y: T): T` | 减法 |
+| `wrappingMul(y: T): T` | 乘法 |
+| `wrappingDiv(y: T): T` | 除法 |
 | `wrappingNeg(): T` | 取反 |
-| `wrappingPow(exp): T` | 幂运算 |
+| `wrappingPow(exp: UInt64): T` | 幂运算 |
 
 ---
 
@@ -76,8 +76,8 @@
 
 | 方法 | 说明 |
 |------|------|
-| `carryingAdd(y): (Bool, T)` | 加法，Bool 为 true 表示溢出 |
-| `borrowingSub(y): (Bool, T)` | 减法，Bool 为 true 表示借位 |
+| `carryingAdd(y: T): (Bool, T)` | 加法，Bool 为 true 表示溢出 |
+| `borrowingSub(y: T): (Bool, T)` | 减法，Bool 为 true 表示借位 |
 
 ---
 
