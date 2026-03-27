@@ -33,14 +33,14 @@
 
 | 方法 | 说明 |
 |------|------|
-| `log(level: LogLevel, message: String, attrs: Attr...)` | 记录指定级别的日志，附带键值对属性 |
-| `log(level: LogLevel, messageFn: () -> String, attrs: Attr...)` | 延迟求值版本，仅在级别启用时才计算消息 |
-| `trace(message: String, attrs: Attr...)` | 记录 TRACE 级别日志 |
-| `debug(message: String, attrs: Attr...)` | 记录 DEBUG 级别日志 |
-| `info(message: String, attrs: Attr...)` | 记录 INFO 级别日志 |
-| `warn(message: String, attrs: Attr...)` | 记录 WARN 级别日志 |
-| `error(message: String, attrs: Attr...)` | 记录 ERROR 级别日志 |
-| `fatal(message: String, attrs: Attr...)` | 记录 FATAL 级别日志 |
+| `log(level: LogLevel, message: String, attrs: Array<Attr>)` | 记录指定级别的日志，附带键值对属性 |
+| `log(level: LogLevel, messageFn: () -> String, attrs: Array<Attr>)` | 延迟求值版本，仅在级别启用时才计算消息 |
+| `trace(message: String, attrs: Array<Attr>)` | 记录 TRACE 级别日志 |
+| `debug(message: String, attrs: Array<Attr>)` | 记录 DEBUG 级别日志 |
+| `info(message: String, attrs: Array<Attr>)` | 记录 INFO 级别日志 |
+| `warn(message: String, attrs: Array<Attr>)` | 记录 WARN 级别日志 |
+| `error(message: String, attrs: Array<Attr>)` | 记录 ERROR 级别日志 |
+| `fatal(message: String, attrs: Array<Attr>)` | 记录 FATAL 级别日志 |
 | `enabled(level: LogLevel): Bool` | 检查指定级别是否启用 |
 | `withAttrs(attrs: Array<Attr>): Logger` | 创建带预设属性的子 Logger |
 
@@ -53,7 +53,7 @@
 | 函数 | 说明 |
 |------|------|
 | `setGlobalLogger(logger: Logger): Unit` | 设置全局 Logger 实例 |
-| `getGlobalLogger(attrs: Attr...): Logger` | 获取全局 Logger（可附带默认属性） |
+| `getGlobalLogger(attrs: Array<Attr>): Logger` | 获取全局 Logger（可附带默认属性） |
 
 ---
 

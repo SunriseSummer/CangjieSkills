@@ -77,6 +77,7 @@ main(): Int64 {
 | `remove(): E` | 阻塞出队，空则等待 |
 | `remove(timeout: Duration): Option<E>` | 阻塞出队，超时返回 `None` |
 | `tryRemove(): Option<E>` | 非阻塞出队，空返回 `None` |
+| `peek(): Option<E>` | 查看队首元素，不移除 |
 | `capacity: Int64` | 队列容量 |
 | `size: Int64` | 当前元素数 |
 

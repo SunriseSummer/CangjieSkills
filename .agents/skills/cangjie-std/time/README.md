@@ -161,8 +161,8 @@ main() {
 
 | 异常 | 说明 |
 |------|------|
-| `InvalidDataException` | 解析格式不匹配或数据无效 |
-| `TimeZoneNotFoundException` | 时区名称无法识别 |
+| `InvalidDataException` | 时区加载失败（找不到文件、解析失败等） |
+| `TimeParseException` | 时间字符串解析失败 |
 
 ---
 
