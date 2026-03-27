@@ -1,11 +1,9 @@
 ---
 name: cangjie-std
-description: "提供仓颉语言标准库常用功能速查文档，包括集合框架/时间日期/数学运算/并发同步/正则表达式/文件系统/IO流/进程管理/排序/环境变量/随机数/类型转换/标准输入输出/命令行参数处理/单元测试框架等"
+description: "提供仓颉语言标准库常用功能速查文档，包括集合框架/时间日期/数学运算/并发同步/正则表达式/文件系统/IO流/网络通信/进程管理/排序/环境变量/随机数/类型转换/标准输入输出/命令行参数处理/单元测试框架等"
 ---
 
 请按需查询当前目录下的标准库文档：
-
-[std.collection](./collection/README.md)：集合框架，包括 ArrayList、HashMap、HashSet、TreeMap、TreeSet、LinkedList、ArrayDeque 等数据结构，以及函数式管道操作（filter/map/forEach/fold/reduce/collect 等迭代器操作）。
 
 [std.time](./time/README.md)：时间日期处理，包括 DateTime 构造/格式化/解析/时区转换、MonoTime 单调时钟计时、Duration 时间间隔、Month/DayOfWeek 枚举等。
 
