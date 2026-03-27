@@ -58,7 +58,7 @@ class Circle <: Shape {
 
 main() {
     let c = Circle(5.0)
-    println(c.area())  // 输出：78.53975
+    println(c.area())  // 输出：78.539750
 }
 ```
 
