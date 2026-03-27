@@ -92,7 +92,6 @@ main() {
     println(a.saturatingAdd(1))
     println(a.checkedAdd(1))
     println(a.wrappingAdd(1))
-    return 0
 }
 ```
 

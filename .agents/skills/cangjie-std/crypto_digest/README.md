@@ -44,7 +44,6 @@ main() {
     let mydigest = MyDigest()
     let result = digest(mydigest, data)
     println("Digest length: ${result.size}")
-    return 0
 }
 ```
 
