@@ -8,8 +8,8 @@
 
 | 函数 | 说明 |
 |------|------|
-| `sort<T>(arr: Array<T>)` | 默认升序排序（`T <: Comparable`） |
-| `sort<T>(arr: Array<T>, descending!: Bool)` | 降序排序 |
+| `sort<T>(data: Array<T>)` | 默认升序排序（`T <: Comparable`） |
+| `sort<T>(data: Array<T>, descending!: Bool)` | 降序排序 |
 
 ---
 
@@ -17,9 +17,9 @@
 
 | 函数 | 说明 |
 |------|------|
-| `sort<T>(arr: Array<T>, by!: (T, T) -> Ordering)` | 使用比较器排序 |
-| `sort<T>(arr: Array<T>, lessThan!: (T, T) -> Bool)` | 使用比较函数排序 |
-| `sort<T, K>(arr: Array<T>, key!: (T) -> K)` | 按键提取函数排序（`K <: Comparable`） |
+| `sort<T>(data: Array<T>, by!: (T, T) -> Ordering)` | 使用比较器排序 |
+| `sort<T>(data: Array<T>, lessThan!: (T, T) -> Bool)` | 使用比较函数排序 |
+| `sort<T, K>(data: Array<T>, key!: (T) -> K)` | 按键提取函数排序（`K <: Comparable`） |
 
 - 可选命名参数：`stable: Bool = false`、`descending: Bool = false`
 

@@ -7,9 +7,9 @@
 
 | 构造/静态方法 | 说明 |
 |--------------|------|
-| `DateTime.now()` | 获取当前时间 |
-| `DateTime.of(year:, month:, dayOfMonth:, hour:, minute:, second:, nanosecond:, timeZone:)` | 从各分量构造 |
-| `DateTime.parse(string, pattern)` | 从字符串解析 |
+| `DateTime.now(): DateTime` | 获取当前时间 |
+| `DateTime.of(year!: Int64, month!: Month, dayOfMonth!: Int64, ...): DateTime` | 从各分量构造 |
+| `DateTime.parse(str: String, format: String): DateTime` | 从字符串解析 |
 
 | 属性 | 类型/说明 |
 |------|----------|
@@ -17,7 +17,7 @@
 | `month` | `Month` 枚举 |
 | `dayOfWeek` | `DayOfWeek` 枚举 |
 | `zoneId`, `zoneOffset` | 时区标识与偏移 |
-| `isoWeek` | 返回 `(year, week)` 元组 |
+| `isoWeek: (Int64, Int64)` | 返回 `(year, week)` 元组 |
 
 | 方法 | 说明 |
 |------|------|

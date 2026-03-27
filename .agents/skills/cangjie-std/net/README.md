@@ -110,7 +110,7 @@ main(): Int64 {
 
 | 类型 | 说明 |
 |------|------|
-| `IPSocketAddress(host, port)` | IP 地址 + 端口，host 为字符串形式 |
+| `IPSocketAddress(address: String, port: UInt16)` | IP 地址 + 端口，host 为字符串形式 |
 | `IPv4Address` | IPv4 地址类型 |
 | `IPv6Address` | IPv6 地址类型 |
 

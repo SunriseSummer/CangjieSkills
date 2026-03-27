@@ -15,9 +15,9 @@
 | `checkedInc(): ?T` | 自增 |
 | `checkedDec(): ?T` | 自减 |
 | `checkedNeg(): ?T` | 取反 |
-| `checkedShl(shift: Int64): ?T` | 左移 |
-| `checkedShr(shift: Int64): ?T` | 右移 |
-| `checkedPow(exp: UInt64): ?T` | 幂运算 |
+| `checkedShl(y: UInt64): ?T` | 左移 |
+| `checkedShr(y: UInt64): ?T` | 右移 |
+| `checkedPow(y: UInt64): ?T` | 幂运算 |
 
 ---
 
@@ -34,7 +34,7 @@
 | `saturatingInc(): T` | 自增 |
 | `saturatingDec(): T` | 自减 |
 | `saturatingNeg(): T` | 取反 |
-| `saturatingPow(exp: UInt64): T` | 幂运算 |
+| `saturatingPow(y: UInt64): T` | 幂运算 |
 
 ---
 
@@ -49,7 +49,7 @@
 | `throwingMul(y: T): T` | 乘法 |
 | `throwingDiv(y: T): T` | 除法 |
 | `throwingNeg(): T` | 取反 |
-| `throwingPow(exp: UInt64): T` | 幂运算 |
+| `throwingPow(y: UInt64): T` | 幂运算 |
 
 - 相关异常：`OvershiftException`（移位量过大），`UndershiftException`（移位量为负）
 
@@ -66,7 +66,7 @@
 | `wrappingMul(y: T): T` | 乘法 |
 | `wrappingDiv(y: T): T` | 除法 |
 | `wrappingNeg(): T` | 取反 |
-| `wrappingPow(exp: UInt64): T` | 幂运算 |
+| `wrappingPow(y: UInt64): T` | 幂运算 |
 
 ---
 
@@ -77,7 +77,7 @@
 | 方法 | 说明 |
 |------|------|
 | `carryingAdd(y: T): (Bool, T)` | 加法，Bool 为 true 表示溢出 |
-| `borrowingSub(y: T): (Bool, T)` | 减法，Bool 为 true 表示借位 |
+| `carryingSub(y: T): (Bool, T)` | 减法，Bool 为 true 表示借位 |
 
 ---
 

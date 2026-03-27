@@ -10,7 +10,7 @@
 | `load(): T` | 原子读取当前值 |
 | `store(val: T): Unit` | 原子写入值 |
 | `swap(val: T): T` | 原子交换，返回旧值 |
-| `compareAndSwap(old: T, new: T): T` | CAS 操作，返回旧值 |
+| `compareAndSwap(old: T, new: T): Bool` | CAS 操作，成功返回 true |
 | `fetchAdd(val: T): T` | 原子加，返回旧值 |
 | `fetchSub(val: T): T` | 原子减，返回旧值 |
 

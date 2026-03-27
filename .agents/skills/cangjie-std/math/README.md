@@ -84,7 +84,7 @@ main(): Unit {
 |------|------|
 | `gcd(a: T, b: T): T` | 最大公约数（整数类型） |
 | `lcm(a: T, b: T): T` | 最小公倍数（整数类型） |
-| `rotate(value: T, bits: Int64): T` | 位旋转 |
+| `rotate(num: T, d: Int8): T` | 位旋转 |
 
 ```cangjie
 package test_proj

@@ -6,9 +6,7 @@
 
 | 函数 | 说明 |
 |------|------|
-| `launch(command: String, ...args: String): SubProcess` | 启动子进程，返回 `SubProcess` |
-| `launch(command: String, ...args: String, workingDirectory!: Path)` | 指定工作目录启动 |
-| `launch(command: String, ...args: String, stdOut!: ProcessRedirect)` | 重定向标准输出 |
+| `launch(command: String, arguments: Array<String>, workingDirectory!: ?Path, stdOut!: ProcessRedirect, ...): SubProcess` | 启动子进程，返回 `SubProcess` |
 
 ---
 
@@ -16,8 +14,8 @@
 
 | 函数 | 说明 |
 |------|------|
-| `execute(command: String, ...args: String): Int64` | 执行命令并等待，返回退出码 |
-| `executeWithOutput(command: String, ...args: String): (Int64, Array<Byte>, Array<Byte>)` | 执行并返回（退出码, stdout, stderr） |
+| `execute(command: String, arguments: Array<String>, ...): Int64` | 执行命令并等待，返回退出码 |
+| `executeWithOutput(command: String, arguments: Array<String>, ...): (Int64, Array<Byte>, Array<Byte>)` | 执行并返回（退出码, stdout, stderr） |
 
 ```cangjie
 package test_proj
@@ -25,11 +23,11 @@ import std.process.*
 
 main(): Int64 {
     // execute: 同步执行命令并获取退出码
-    let exitCode = execute("echo", "hello")
+    let exitCode = execute("echo", ["hello"])
     println("exit code: ${exitCode}")
 
     // executeWithOutput: 同步执行并捕获输出（返回字节数组）
-    let (code, stdoutBytes, _) = executeWithOutput("echo", "hello cangjie")
+    let (code, stdoutBytes, _) = executeWithOutput("echo", ["hello cangjie"])
     let output = String.fromUtf8(stdoutBytes).trimEnd()
     println("code=${code}, output=${output}")
     return 0
@@ -63,7 +61,7 @@ import std.io.*
 
 main(): Int64 {
     // 启动子进程并读取输出
-    let echoProcess: SubProcess = launch("echo", "hello cangjie!", stdOut: ProcessRedirect.Pipe)
+    let echoProcess: SubProcess = launch("echo", ["hello cangjie!"], stdOut: ProcessRedirect.Pipe)
     let strReader: StringReader<InputStream> = StringReader(echoProcess.stdOutPipe)
     println(strReader.readToEnd())
     return 0

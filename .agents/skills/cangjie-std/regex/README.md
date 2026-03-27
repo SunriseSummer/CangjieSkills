@@ -18,10 +18,8 @@
 | 方法 | 说明 |
 |------|------|
 | `regex.matches(input: String): Bool` | 完整匹配 |
-| `regex.find(input: String): ?MatchData` | 查找第一个匹配 |
-| `regex.find(input: String, startIndex: Int64): ?MatchData` | 从指定位置查找第一个匹配 |
-| `regex.findAll(input: String): Array<MatchData>` | 查找所有匹配 |
-| `regex.findAll(input: String, startIndex: Int64): Array<MatchData>` | 从指定位置查找所有匹配 |
+| `regex.find(input: String, group!: Bool): ?MatchData` | 查找第一个匹配，group 启用分组捕获 |
+| `regex.findAll(input: String, group!: Bool): Array<MatchData>` | 查找所有匹配 |
 | `regex.lazyFindAll(input: String, group!: Bool): Iterator<MatchData>` | 惰性查找所有匹配，支持分组 |
 
 ```cangjie
@@ -57,7 +55,7 @@ main(): Unit {
 | `regex.replace(input: String, replacement: String): String` | 替换第一个匹配 |
 | `regex.replace(input: String, replacement: String, index: Int64): String` | 从指定位置替换第一个匹配 |
 | `regex.replaceAll(input: String, replacement: String): String` | 替换所有匹配 |
-| `regex.replaceAll(input: String, replacement: String, limit: Int64): String` | 从指定位置替换所有匹配 |
+| `regex.replaceAll(input: String, replacement: String, limit: Int64): String` | 替换前 limit 个匹配 |
 
 ```cangjie
 package test_proj
@@ -136,7 +134,7 @@ main(): Unit {
 
 1. `Regex(pattern)` 创建正则，`Regex(pattern, flags)` 支持标志位
 2. `find` 返回 `?MatchData`，需用 `match` 或 `if-let` 解包
-3. `findAll` 返回迭代器，`lazyFindAll` 惰性求值适合大文本
+3. `findAll` 返回 `Array<MatchData>`，`lazyFindAll` 返回惰性迭代器适合大文本
 4. `matchString(groupIndex)` 和 `matchString(groupName)` 分别按索引和名称获取分组
 5. `replace` 替换首个匹配，`replaceAll` 替换全部
 6. 使用原始字符串 `#"..."#` 避免双重转义

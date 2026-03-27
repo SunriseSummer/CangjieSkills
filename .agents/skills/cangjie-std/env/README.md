@@ -31,7 +31,7 @@ main(): Int64 {
 | 函数 | 说明 |
 |------|------|
 | `getVariable(key: String): ?String` | 获取环境变量，不存在返回 `None` |
-| `getVariables(): HashMap<String, String>` | 获取所有环境变量 |
+| `getVariables(): Array<(String, String)>` | 获取所有环境变量 |
 | `setVariable(key: String, value: String): Unit` | 设置环境变量 |
 | `removeVariable(key: String): Unit` | 移除环境变量 |
 

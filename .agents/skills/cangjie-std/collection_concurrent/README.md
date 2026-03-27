@@ -10,10 +10,10 @@
 | 方法 / 属性 | 说明 |
 |-------------|------|
 | `ConcurrentHashMap<K, V>(concurrencyLevel: Int64)` | 创建实例，指定并发级别 |
-| `put(key: K, value: V): ?V` | 插入或更新键值对，返回旧值 |
+| `add(key: K, value: V): ?V` | 插入或更新键值对，返回旧值 |
 | `get(key: K): ?V` | 获取值，返回 `Option<V>` |
 | `remove(key: K): ?V` | 删除键值对，返回旧值 |
-| `containsKey(key: K): Bool` | 判断键是否存在 |
+| `contains(key: K): Bool` | 判断键是否存在 |
 | `size: Int64` | 当前元素数量 |
 
 ```cangjie
@@ -30,7 +30,7 @@ main(): Int64 {
     for (t in 0..threads) {
         jobs[t] = spawn {
             for (i in t..M : threads) {
-                cmap.put(i, i + 3)
+                cmap.add(i, i + 3)
             }
         }
     }

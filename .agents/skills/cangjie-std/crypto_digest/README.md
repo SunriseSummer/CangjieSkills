@@ -57,8 +57,8 @@ main() {
 | 属性/方法 | 说明 |
 |----------|------|
 | `blockSize: Int64` | 分组大小 |
-| `encrypt(input, output)` | 加密一个分组 |
-| `decrypt(input, output)` | 解密一个分组 |
+| `encrypt(input: Array<Byte>): Array<Byte>` | 加密一个分组 |
+| `decrypt(input: Array<Byte>): Array<Byte>` | 解密一个分组 |
 
 - 具体实现（如 AES、SM4）可能在扩展包中提供
 

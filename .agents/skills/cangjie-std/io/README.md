@@ -157,10 +157,10 @@ main(): Unit {
 
 | 函数 | 说明 |
 |------|------|
-| `copy(input: InputStream, to!: OutputStream): Int64` | 流到流数据拷贝，返回拷贝字节数 |
-| `readToEnd<T>(stream: T): Array<Byte>` | 读取流中全部剩余数据为字节数组 |
-| `readString<T>(stream: T): String` | 读取全部剩余数据为 UTF-8 字符串（无效编码抛异常） |
-| `readStringUnchecked<T>(stream: T): String` | 同上但不校验 UTF-8 编码 |
+| `copy(from: InputStream, to!: OutputStream): Int64` | 流到流数据拷贝，返回拷贝字节数 |
+| `readToEnd<T>(from: T): Array<Byte>` | 读取流中全部剩余数据为字节数组 |
+| `readString<T>(from: T): String` | 读取全部剩余数据为 UTF-8 字符串（无效编码抛异常） |
+| `readStringUnchecked<T>(from: T): String` | 同上但不校验 UTF-8 编码 |
 
 ```cangjie
 import std.io.*
