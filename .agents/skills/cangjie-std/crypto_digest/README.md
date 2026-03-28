@@ -22,7 +22,7 @@
 ## 2. digest() 便捷函数
 
 - `digest(algorithm: Digest, data: Array<Byte>): Array<Byte>` — 一次性计算摘要
-- `digest(algorithm: Digest, inputStream: InputStream): Array<Byte>` — 从流计算摘要
+- `digest(algorithm: Digest, input: InputStream): Array<Byte>` — 从流计算摘要
 - 内部自动调用 `write` + `finish`
 
 ```cangjie

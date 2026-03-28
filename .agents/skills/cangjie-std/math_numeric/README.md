@@ -9,12 +9,12 @@
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `BigInt(intValue: Int64)` | 从整数构造 |
-| `BigInt.parse(string: String): BigInt` | 从十进制字符串解析 |
-| `BigInt.parse(string: String, radix: Int64): BigInt` | 从指定进制字符串解析 |
+| `BigInt(val: Int64)` | 从整数构造 |
+| `BigInt.parse(value: String): BigInt` | 从十进制字符串解析 |
+| `BigInt.parse(value: String, radix!: Int64): BigInt` | 从指定进制字符串解析 |
 | `+, -, *, /` | 四则运算 |
 | `divAndMod(other: BigInt): (BigInt, BigInt)` | 返回 `(商, 余数)` 元组 |
-| `modPow(exp: BigInt, mod: BigInt): BigInt` | 模幂运算 |
+| `modPow(n: BigInt, m!: ?BigInt): BigInt` | 模幂运算（`m` 默认 `None`，即普通幂运算） |
 | `bitLen: Int64` | 二进制位数 |
 | `sign: Int64` | 符号：-1、0 或 1 |
 | `toString(): String` | 转为十进制字符串 |
@@ -48,14 +48,13 @@ main(): Int64 {
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `Decimal(string: String)` | 从字符串构造 |
-| `Decimal(intValue: Int64)` | 从整数构造 |
+| `Decimal(val: String)` | 从字符串构造 |
+| `Decimal(val: Int64)` | 从整数构造 |
 | `+, -, *, /` | 四则运算 |
 | `precision: Int64` | 有效数字位数 |
-| `scale: Int64` | 小数位数 |
-| `isZero: Bool` | 是否为零 |
-| `isPositive: Bool` | 是否为正 |
-| `isNegative: Bool` | 是否为负 |
+| `scale: Int32` | 小数位数 |
+| `sign: Int64` | 符号：-1、0 或 1 |
+| `value: BigInt` | 底层 BigInt 值 |
 
 ```cangjie
 package test_proj
@@ -82,8 +81,8 @@ main(): Int64 {
 | 函数 | 说明 | 支持类型 |
 |------|------|---------|
 | `abs(value: T): T` | 绝对值 | BigInt / Decimal |
-| `gcd(a: BigInt, b: BigInt): BigInt` | 最大公约数 | BigInt |
-| `lcm(a: BigInt, b: BigInt): BigInt` | 最小公倍数 | BigInt |
+| `gcd(x: BigInt, y: BigInt): BigInt` | 最大公约数 | BigInt |
+| `lcm(x: BigInt, y: BigInt): BigInt` | 最小公倍数 | BigInt |
 | `sqrt(value: T): T` | 平方根 | BigInt / Decimal |
 
 ```cangjie
@@ -105,9 +104,10 @@ main(): Int64 {
 
 ## 4. 关键规则速查
 
-1. `BigInt.parse(string)` 默认按十进制解析，可指定 `radix` 参数
+1. `BigInt.parse(value)` 默认按十进制解析，可指定 `radix!` 参数
 2. `Decimal` 使用字符串构造以保证精度，避免 `Decimal(floatValue)`
 3. `divAndMod` 同时返回商和余数，比分别计算更高效
-4. `modPow(exp, mod)` 用于密码学等大数模幂场景
+4. `modPow(n, m!)` 用于密码学等大数模幂场景，`m` 默认 `None` 表示普通幂运算
 5. `BigInt` / `Decimal` 均实现 `Comparable`，可直接用于排序和比较
-6. `scale` 表示小数位数，`precision` 表示有效数字总位数
+6. `Decimal.scale` 类型为 `Int32`，`precision` 类型为 `Int64`
+7. 可用 `sign` 属性判断正负零：`-1`（负）、`0`（零）、`1`（正）

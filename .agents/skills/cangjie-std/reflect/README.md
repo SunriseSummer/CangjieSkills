@@ -7,7 +7,7 @@
 
 | 方法/属性 | 说明 |
 |----------|------|
-| `ClassTypeInfo.of(instance: Object): ClassTypeInfo` | 从 class 实例获取类型信息（推荐） |
+| `ClassTypeInfo.of(a: Object): ClassTypeInfo` | 从 class 实例获取类型信息（推荐） |
 | `StructTypeInfo.of<T>(): StructTypeInfo` | 获取 struct 类型信息 |
 | `name: String` | 类型简名 |
 | `qualifiedName: String` | 类型全限定名 |
