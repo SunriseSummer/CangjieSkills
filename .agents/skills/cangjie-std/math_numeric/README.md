@@ -13,12 +13,12 @@
 | `BigInt.parse(value: String): BigInt` | 从十进制字符串解析 |
 | `BigInt.parse(value: String, radix!: Int64): BigInt` | 从指定进制字符串解析 |
 | `+, -, *, /` | 四则运算 |
-| `divAndMod(other: BigInt): (BigInt, BigInt)` | 返回 `(商, 余数)` 元组 |
+| `divAndMod(that: BigInt): (BigInt, BigInt)` | 返回 `(商, 余数)` 元组 |
 | `modPow(n: BigInt, m!: ?BigInt): BigInt` | 模幂运算（`m` 默认 `None`，即普通幂运算） |
 | `bitLen: Int64` | 二进制位数 |
 | `sign: Int64` | 符号：-1、0 或 1 |
 | `toString(): String` | 转为十进制字符串 |
-| `toString(radix: Int64): String` | 转为指定进制字符串 |
+| `toString(radix!: Int64): String` | 转为指定进制字符串 |
 
 ```cangjie
 package test_proj
@@ -80,10 +80,10 @@ main(): Int64 {
 
 | 函数 | 说明 | 支持类型 |
 |------|------|---------|
-| `abs(value: T): T` | 绝对值 | BigInt / Decimal |
-| `gcd(x: BigInt, y: BigInt): BigInt` | 最大公约数 | BigInt |
-| `lcm(x: BigInt, y: BigInt): BigInt` | 最小公倍数 | BigInt |
-| `sqrt(value: T): T` | 平方根 | BigInt / Decimal |
+| `abs(i: BigInt): BigInt` / `abs(d: Decimal): Decimal` | 绝对值 | BigInt / Decimal |
+| `gcd(i1: BigInt, i2: BigInt): BigInt` | 最大公约数 | BigInt |
+| `lcm(i1: BigInt, i2: BigInt): BigInt` | 最小公倍数 | BigInt |
+| `sqrt(i: BigInt): BigInt` / `sqrt(d: Decimal): Decimal` | 平方根 | BigInt / Decimal |
 
 ```cangjie
 package test_proj
