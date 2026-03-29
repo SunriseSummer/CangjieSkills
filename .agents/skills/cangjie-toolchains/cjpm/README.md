@@ -139,7 +139,7 @@ cjpm run --build-args="-s -j16" --run-args="a b c"
 
 | 选项 | 说明 |
 |------|------|
-| `--filter <value>` | 过滤测试用例（正则匹配） |
+| `--filter <value>` | 过滤测试用例（通配符匹配，如 `*`/`*.*`/`*.*Test`） |
 | `--timeout-each <value>` | 单测超时，格式 `%d[millis\|s\|m\|h]` |
 | `--parallel <value>` | 并行策略：`true`/`false`/`nCores`/`<N>` |
 | `--random-seed <value>` | 随机种子（正整数） |

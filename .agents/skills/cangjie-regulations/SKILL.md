@@ -216,7 +216,7 @@ allowMultiLineMethodChain = false
 - 使用 `SyncCounter` 协调多线程的完成顺序。
 - 使用 `ThreadLocal` 存储线程局部数据，避免不必要的锁竞争。
 - 合理使用协作式取消（`Thread.currentThread.requestCancel()`）实现线程的优雅终止。
-- 使用并发集合（`std.collection.concurrent` 中的 `ConcurrentHashMap`、`NonBlockingQueue` 等）替代手动加锁的普通集合。
+- 使用并发集合（`std.collection.concurrent` 中的 `ConcurrentHashMap`、`ConcurrentLinkedQueue` 等）替代手动加锁的普通集合。
 
 ---
 
@@ -337,7 +337,7 @@ cjpm build               # 1. 编译构建
 cjfmt -d src/            # 2. 代码格式化（格式化后检查是否有变更，有则说明代码未预先格式化）
 cjlint -f src/           # 3. 静态代码检查
 cjpm test                # 4. 运行测试
-cjcov --format html      # 5. 生成覆盖率报告
+cjcov --html-details -o output  # 5. 生成覆盖率报告
 ```
 
 ### 11.2 工具配置
@@ -351,5 +351,5 @@ cjcov --format html      # 5. 生成覆盖率报告
 
 - 使用 `cjdb` 进行断点调试和变量检查。
 - 使用 `cjprof` 进行 CPU 采样和堆内存分析，定位性能瓶颈。
-- 使用 `cjcov` 的分支覆盖率模式（`--branch`）检查测试覆盖质量。
+- 使用 `cjcov` 的分支覆盖率模式（`--branches`）检查测试覆盖质量。
 

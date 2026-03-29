@@ -161,4 +161,4 @@ cjc main.cj -g -O0 -o app_debug
 cjc main.cj -O2 --lto=full -s -o app_release
 ```
 
-> **提示**：多文件项目推荐使用 `cjpm`（参见 `cangjie-project-management` Skill），无需手动管理编译依赖。
+> **提示**：多文件项目推荐使用 `cjpm`（参见 `cangjie-toolchains/cjpm` 文档），无需手动管理编译依赖。
