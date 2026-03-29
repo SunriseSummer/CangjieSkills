@@ -308,7 +308,7 @@ HTTPS = HTTP + TLS，在 HTTP 服务端基础上通过 `ServerBuilder.tlsConfig(
 TlsServerConfig(certChain: Array<X509Certificate>, certKey: PrivateKey)
 ```
 
-必须提供服务端证书链和对应私钥。
+必须提供服务端证书链（`Array<X509Certificate>`）和对应私钥。注意 `X509Certificate.decodeFromPem()` 返回的就是 `Array<X509Certificate>`。
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|

@@ -261,7 +261,7 @@ HTTPS = HTTP + TLS，在 HTTP 客户端基础上通过 `ClientBuilder.tlsConfig(
 | `verifyMode` | `CertificateVerifyMode` | `Default` | 证书验证模式 |
 | `domain` | `?String` | `None` | 服务端主机名（SNI），通常自动从 URL 获取 |
 | `alpnProtocolsList` | `Array<String>` | `[]` | ALPN 协议列表（设置 `["h2"]` 启用 HTTP/2） |
-| `clientCertificate` | `?(Array<X509Certificate>, PrivateKey)` | `None` | 客户端证书链和私钥（双向认证时使用） |
+| `clientCertificate` | `?(Array<X509Certificate>, PrivateKey)` | `None` | 客户端证书链和私钥的可选元组（双向认证时使用） |
 | `cipherSuitesV1_2` | `?Array<String>` | `None` | TLS 1.2 密码套件名称列表 |
 | `cipherSuitesV1_3` | `?Array<String>` | `None` | TLS 1.3 密码套件名称列表 |
 | `minVersion` | `TlsVersion` | `V1_2` | 最低 TLS 版本 |
