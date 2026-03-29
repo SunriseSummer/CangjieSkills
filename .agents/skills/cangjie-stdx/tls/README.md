@@ -124,11 +124,26 @@ PEM 文件常见标签：
 ### 3.2 文件加载模式
 
 ```cangjie
-// 从文件加载证书和私钥的标准模式：
-// let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
-// let keyStr = String.fromUtf8(readToEnd(File("./server.key", Read)))
-// let certs = X509Certificate.decodeFromPem(pem)    // 返回 Array<X509Certificate>
-// let key = PrivateKey.decodeFromPem(keyStr)         // 返回 PrivateKey
+import std.io.*
+import std.fs.*
+import stdx.crypto.x509.{X509Certificate, PrivateKey}
+
+func readTextFromFile(path: String): String {
+    var str = ""
+    try (file = File(path, Read)) {
+        str = String.fromUtf8(readToEnd(file))
+    }
+    str
+}
+
+main() {
+    // 从文件加载证书和私钥的标准模式：
+    // let pem = readTextFromFile("./server.crt")
+    // let keyStr = readTextFromFile("./server.key")
+    // let certs = X509Certificate.decodeFromPem(pem)    // 返回 Array<X509Certificate>
+    // let key = PrivateKey.decodeFromPem(keyStr)         // 返回 PrivateKey
+    println("readTextFromFile helper defined")
+}
 ```
 
 > **注意**：`X509Certificate.decodeFromPem()` 返回的是 `Array<X509Certificate>`（证书链），不是单个证书。
@@ -137,36 +152,35 @@ PEM 文件常见标签：
 
 ## 4. 使用示例
 
-### 4.1 TLS 客户端（TrustAll 模式 — 快速测试）
+### 4.1 TLS 客户端
 
-> **⚠️ 警告**：`TrustAll` 模式跳过证书验证，**仅限开发测试环境使用**。
+> **说明**：以下客户端示例与 4.2 服务端示例配对使用。`TrustAll` 模式跳过证书验证，**仅限开发测试环境使用**。
 
 ```cangjie
-package test_proj
 import std.net.TcpSocket
 import stdx.net.tls.*
 
 main() {
     var config = TlsClientConfig()
     config.verifyMode = TrustAll
-    config.alpnProtocolsList = ["h2"]
 
-    // 需要有实际的 TLS 服务端才能连接
-    // try (socket = TcpSocket("127.0.0.1", 8443)) {
-    //     socket.connect()
-    //     try (tls = TlsSocket.client(socket, clientConfig: config)) {
-    //         tls.handshake()
-    //         tls.write("Hello, TLS!\n".toArray())
-    //         let buf = Array<Byte>(1024, repeat: 0)
-    //         let n = tls.read(buf)
-    //         println(String.fromUtf8(buf[..n]))
-    //     }
-    // }
-    println("TLS client config created: verifyMode=TrustAll, ALPN=h2")
+    try (socket = TcpSocket("127.0.0.1", 8443)) {
+        socket.connect()
+        try (tls = TlsSocket.client(socket, clientConfig: config)) {
+            tls.handshake()
+            println("TLS version: ${tls.tlsVersion}, cipher: ${tls.cipherSuite}")
+            tls.write("Hello, TLS!\n".toArray())
+            let buf = Array<Byte>(1024, repeat: 0)
+            let n = tls.read(buf)
+            println("Received: ${String.fromUtf8(buf[..n])}")
+        }
+    }
 }
 ```
 
 ### 4.2 TLS 服务端
+
+> **说明**：需自行准备证书文件，与 4.1 客户端示例配对使用。
 
 ```cangjie
 import std.io.*
@@ -175,9 +189,21 @@ import std.net.{TcpServerSocket, TcpSocket}
 import stdx.crypto.x509.{X509Certificate, PrivateKey}
 import stdx.net.tls.*
 
+// 证书及私钥路径，用户需自备
+let certificatePath = "./server.crt"
+let certificateKeyPath = "./server.key"
+
+func readTextFromFile(path: String): String {
+    var str = ""
+    try (file = File(path, Read)) {
+        str = String.fromUtf8(readToEnd(file))
+    }
+    str
+}
+
 main() {
-    let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
-    let keyText = String.fromUtf8(readToEnd(File("./server.key", Read)))
+    let pem = readTextFromFile(certificatePath)
+    let keyText = readTextFromFile(certificateKeyPath)
     let certificate = X509Certificate.decodeFromPem(pem)
     let privateKey = PrivateKey.decodeFromPem(keyText)
 
@@ -210,10 +236,9 @@ main() {
 
 ### 4.3 会话恢复（减少握手开销）
 
-客户端可以保存 TLS 会话，在后续连接中复用以减少握手开销：
+客户端保存 TLS 会话 ID，在后续连接中传入 `session` 参数复用，减少握手开销：
 
 ```cangjie
-package test_proj
 import std.net.TcpSocket
 import stdx.net.tls.*
 
@@ -223,19 +248,27 @@ main() {
 
     var lastSession: ?TlsSession = None
 
-    // 会话恢复示例（需要实际的 TLS 服务端）
-    // for (i in 0..3) {
-    //     try (socket = TcpSocket("127.0.0.1", 8443)) {
-    //         socket.connect()
-    //         // session 参数传入上次保存的会话
-    //         try (tls = TlsSocket.client(socket, session: lastSession, clientConfig: config)) {
-    //             tls.handshake()
-    //             lastSession = tls.session  // 保存会话用于下次复用
-    //             tls.write("Request ${i}\n".toArray())
-    //         }
-    //     }
-    // }
-    println("TLS session resumption config ready")
+    // 重新连接循环
+    while (true) {
+        try (socket = TcpSocket("127.0.0.1", 8443)) {
+            socket.connect()
+            // session 参数传入上次保存的会话
+            try (tls = TlsSocket.client(socket, session: lastSession, clientConfig: config)) {
+                try {
+                    tls.handshake()
+                    // 协商成功，保存会话用于下次复用
+                    lastSession = tls.session
+                } catch (e: Exception) {
+                    // 协商失败，清除会话
+                    lastSession = None
+                    throw e
+                }
+                tls.write("Hello with session resumption!\n".toArray())
+            }
+        } catch (e: Exception) {
+            println("Connection failed: ${e}, retrying...")
+        }
+    }
 }
 ```
 
@@ -244,9 +277,9 @@ main() {
 TLS 通常通过 HTTP 模块的 `tlsConfig()` 方法集成使用，而非直接操作 `TlsSocket`：
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
 import stdx.net.tls.*
+import std.io.StringReader
 
 main() {
     var tlsConfig = TlsClientConfig()
@@ -256,11 +289,10 @@ main() {
         .tlsConfig(tlsConfig)
         .build()
 
-    // let resp = client.get("https://127.0.0.1:8443/api")
-    // let body = StringReader(resp.body).readToEnd()
-    // println(body)
+    let resp = client.get("https://127.0.0.1:8443/api")
+    let body = StringReader(resp.body).readToEnd()
+    println("Status: ${resp.status}, Body: ${body}")
 
-    println("HTTPS client via TLS config created")
     client.close()
 }
 ```

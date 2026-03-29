@@ -48,7 +48,7 @@ openssl version
 
 ## 2. cjpm.toml 配置
 
-### 2.1 动态库配置（推荐开发阶段）
+### 2.1 动态库配置
 
 ```toml
 [package]
@@ -69,7 +69,7 @@ openssl version
 - macOS x86_64：`target.x86_64-apple-darwin`
 - Windows x86_64：`target.x86_64-w64-mingw32`
 
-### 2.2 静态库配置（推荐生产部署）
+### 2.2 静态库配置
 
 使用 crypto 和 net 包的静态库时，需要额外 `compile-option`：
 

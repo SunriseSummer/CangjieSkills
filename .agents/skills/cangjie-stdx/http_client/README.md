@@ -12,24 +12,16 @@
 ## 2. 快速入门
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
-import std.io.StringReader
 
 main() {
     // 1. 构建 Client
     let client = ClientBuilder().build()
-
-    // 2. 发送 GET 请求（示例使用本地地址，实际替换为目标服务）
-    // let resp = client.get("http://example.com/hello")
-
-    // 3. 读取响应体
-    // let body = StringReader(resp.body).readToEnd()
-    // println("Status: ${resp.status}")
-    // println("Body: ${body}")
-
+    // 2. 发送 GET 请求，其中请求 URL 可根据实际情况修改
+    let resp = client.get("http://example.com/hello")
+    // 3. 打印响应内容
+    println(resp)
     // 4. 关闭客户端，释放所有连接
-    println("Client created and closed successfully")
     client.close()
 }
 ```
@@ -283,7 +275,6 @@ HTTPS = HTTP + TLS，在 HTTP 客户端基础上通过 `ClientBuilder.tlsConfig(
 > **⚠️ 警告**：`TrustAll` 模式跳过证书验证，**仅限开发测试环境使用**，生产环境请使用 `Default` 或 `CustomCA` 模式。
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
 import stdx.net.tls.*
 
@@ -295,10 +286,9 @@ main() {
         .tlsConfig(tlsConfig)
         .build()
 
-    // let resp = client.get("https://127.0.0.1:8443/api")
-    // println("Status: ${resp.status}")
+    let resp = client.get("https://127.0.0.1:8443/api")
+    println("Status: ${resp.status}")
 
-    println("HTTPS client created successfully")
     client.close()
 }
 ```
