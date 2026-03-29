@@ -10,102 +10,16 @@
 - 依赖 **OpenSSL 3** 动态库
 - 通常与 HTTP 模块（`stdx.net.http`）集成使用（详见 `cangjie-stdx` Skill 下的 http_client/http_server 文档），也可独立用于 TCP 层 TLS 加密
 
----
+配置构建：
 
-## 2. OpenSSL 3 安装
-
-### 2.1 Linux
-
-```bash
-# Ubuntu 22.04+ / Debian
-sudo apt install libssl-dev
-
-# CentOS / RHEL
-sudo dnf install openssl-devel
-```
-
-确保系统存在 `libssl.so`、`libssl.so.3`、`libcrypto.so`、`libcrypto.so.3`。
-
-自定义安装路径时：
-
-```bash
-export LD_LIBRARY_PATH=/path/to/openssl/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=/path/to/openssl/lib:$LIBRARY_PATH
-```
-
-### 2.2 macOS
-
-```bash
-brew install openssl@3
-```
-
-确保存在 `libssl.dylib`、`libssl.3.dylib`、`libcrypto.dylib`、`libcrypto.3.dylib`。
-
-### 2.3 Windows
-
-安装 OpenSSL 3.x.x（x64），确保存在 `libssl-3-x64.dll`、`libcrypto-3-x64.dll`，并将目录添加到 `PATH`。
-
-### 2.4 验证
-
-```bash
-openssl version
-# 应输出 OpenSSL 3.x.x
-```
+- 关于 OpenSSL 安装、cjpm.toml 配置和各平台编译构建，请参阅 [BUILD.md](./BUILD.md)
+- 关于扩展标准库 `stdx` 的下载与配置，请参阅 `cangjie-stdx` Skill
 
 ---
 
-## 3. cjpm.toml 配置
+## 2. 核心类型
 
-### 3.1 动态库配置（推荐开发阶段）
-
-```toml
-[package]
-  name = "my-tls-app"
-  version = "1.0.0"
-  output-type = "executable"
-
-[dependencies]
-
-[target.x86_64-unknown-linux-gnu]
-  [target.x86_64-unknown-linux-gnu.bin-dependencies]
-    path-option = ["/path/to/stdx/dynamic/stdx"]
-```
-
-其他平台：
-- Linux aarch64：`target.aarch64-unknown-linux-gnu`
-- macOS aarch64：`target.aarch64-apple-darwin`
-- macOS x86_64：`target.x86_64-apple-darwin`
-- Windows x86_64：`target.x86_64-w64-mingw32`
-
-### 3.2 静态库配置（推荐生产部署）
-
-使用 crypto 和 net 包的静态库时，需要额外 `compile-option`：
-
-| 平台 | compile-option | 原因 |
-|------|----------------|------|
-| Linux | `-ldl` | OpenSSL 静态库依赖 `libdl` |
-| Windows | `-lcrypt32` | OpenSSL 依赖 Windows 证书存储 API |
-| macOS | 无需额外配置 | — |
-
-```toml
-[package]
-  name = "my-tls-app"
-  version = "1.0.0"
-  output-type = "executable"
-  compile-option = "-ldl"
-
-[dependencies]
-
-[target.x86_64-unknown-linux-gnu]
-  [target.x86_64-unknown-linux-gnu.bin-dependencies]
-    path-option = ["/path/to/stdx/static/stdx"]
-```
-
----
-
-## 4. 核心类型
-
-### 4.1 类型总览
+### 2.1 类型总览
 
 | 类型 | 分类 | 说明 |
 |------|------|------|
@@ -121,13 +35,13 @@ openssl version
 | `SignatureAlgorithm` | 枚举 | 签名算法 |
 | `TlsException` | 异常 | TLS 处理异常 |
 
-### 4.2 TlsSocket
+### 2.2 TlsSocket
 
 | 方法 / 属性 | 签名 | 说明 |
 |-------------|------|------|
-| `client` (静态) | `TlsSocket.client(StreamingSocket, clientConfig: TlsClientConfig, session!: ?TlsSession): TlsSocket` | 创建客户端 TLS 套接字 |
-| `server` (静态) | `TlsSocket.server(StreamingSocket, serverConfig: TlsServerConfig, sessionContext!: ?TlsSessionContext): TlsSocket` | 创建服务端 TLS 套接字 |
-| `handshake` | `handshake(timeout!: ?Duration): Unit` | 执行 TLS 握手（仅调用一次） |
+| `client` (静态) | `TlsSocket.client(socket: StreamingSocket, session!: ?TlsSession = None, clientConfig!: TlsClientConfig = TlsClientConfig()): TlsSocket` | 创建客户端 TLS 套接字 |
+| `server` (静态) | `TlsSocket.server(socket: StreamingSocket, sessionContext!: ?TlsSessionContext = None, serverConfig!: TlsServerConfig): TlsSocket` | 创建服务端 TLS 套接字 |
+| `handshake` | `handshake(timeout!: ?Duration = None): Unit` | 执行 TLS 握手（仅调用一次） |
 | `read` | `read(Array<Byte>): Int64` | 读取解密数据 |
 | `write` | `write(Array<Byte>): Unit` | 发送加密数据 |
 | `close` | `close(): Unit` | 关闭 TLS 连接 |
@@ -142,7 +56,7 @@ openssl version
 | `readTimeout` | `readTimeout: ?Duration` | 读超时 |
 | `writeTimeout` | `writeTimeout: ?Duration` | 写超时 |
 
-### 4.3 TlsClientConfig
+### 2.3 TlsClientConfig
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
@@ -158,7 +72,7 @@ openssl version
 | `signatureAlgorithms` | `?Array<SignatureAlgorithm>` | `None` | 签名算法偏好 |
 | `keylogCallback` | `?(TlsSocket, String) -> Unit` | `None` | TLS 密钥日志回调（调试用） |
 
-### 4.4 TlsServerConfig
+### 2.4 TlsServerConfig
 
 | 属性 / 构造 | 类型 | 说明 |
 |-------------|------|------|
@@ -172,7 +86,7 @@ openssl version
 | `dhParameters` | `?DHParameters` | DH 密钥交换参数 |
 | `keylogCallback` | `?(TlsSocket, String) -> Unit` | TLS 密钥日志回调 |
 
-### 4.5 证书验证模式（CertificateVerifyMode）
+### 2.5 证书验证模式（CertificateVerifyMode）
 
 | 模式 | 说明 | 适用场景 |
 |------|------|----------|
@@ -180,7 +94,7 @@ openssl version
 | `CustomCA(Array<X509Certificate>)` | 使用自定义 CA 列表验证 | 自签名证书或私有 CA |
 | `TrustAll` | 信任所有证书，不验证 | **仅限开发测试** |
 
-### 4.6 客户端认证模式（TlsClientIdentificationMode）
+### 2.6 客户端认证模式（TlsClientIdentificationMode）
 
 | 模式 | 说明 |
 |------|------|
@@ -190,9 +104,53 @@ openssl version
 
 ---
 
-## 5. 使用示例
+## 3. 证书解析
 
-### 5.1 TLS 客户端（TrustAll 模式 — 快速测试）
+TLS 通信需要证书和私钥，使用 `stdx.crypto.x509` 包解析 PEM 格式文件。
+
+### 3.1 PEM 文件解析
+
+```cangjie
+package test_proj
+import stdx.crypto.x509.{X509Certificate, PrivateKey, Pem, PemEntry}
+
+main() {
+    // 方式 1：直接从 PEM 字符串解析证书链
+    // let certs = X509Certificate.decodeFromPem(certPemString)
+    // let key = PrivateKey.decodeFromPem(keyPemString)
+
+    // 方式 2：从包含证书和私钥的混合 PEM 文件中分别提取
+    // let entries = Pem.decode(mixedPemString)
+    // let certs = entries
+    //     .filter { entry: PemEntry => entry.label == PemEntry.LABEL_CERTIFICATE }
+    //     .map { entry: PemEntry => X509Certificate.decodeFromDer(entry.data) }
+    // let keyEntry = entries.filter { e: PemEntry => e.label == PemEntry.LABEL_PRIVATE_KEY }[0]
+    // let key = PrivateKey.decodeDer(keyEntry.data)
+
+    println("Certificate parsing APIs available")
+}
+```
+
+### 3.2 从文件加载
+
+```cangjie
+package test_proj
+import std.io.*
+import std.fs.*
+
+main() {
+    // let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
+    // let key = String.fromUtf8(readToEnd(File("./server.key", Read)))
+    // 注意：X509Certificate.decodeFromPem() 返回 Array<X509Certificate>（证书链）
+    println("File loading pattern ready")
+}
+```
+
+---
+
+## 4. 使用示例
+
+### 4.1 TLS 客户端（TrustAll 模式 — 快速测试）
 
 > **⚠️ 警告**：`TrustAll` 模式跳过证书验证，**仅限开发测试环境使用**。
 
@@ -221,7 +179,7 @@ main() {
 }
 ```
 
-### 5.2 TLS 服务端
+### 4.2 TLS 服务端
 
 ```cangjie
 import std.io.*
@@ -246,7 +204,7 @@ main() {
         while (true) {
             let clientSocket = server.accept()
             spawn { =>
-                try (tls = TlsSocket.server(clientSocket, serverConfig: config, sessionContext: sessions)) {
+                try (tls = TlsSocket.server(clientSocket, sessionContext: sessions, serverConfig: config)) {
                     tls.handshake()
                     let buf = Array<Byte>(1024, repeat: 0)
                     let n = tls.read(buf)
@@ -263,7 +221,9 @@ main() {
 }
 ```
 
-### 5.3 会话恢复（减少握手开销）
+### 4.3 会话恢复（减少握手开销）
+
+客户端可以保存 TLS 会话，在后续连接中复用以减少握手开销：
 
 ```cangjie
 package test_proj
@@ -280,7 +240,8 @@ main() {
     // for (i in 0..3) {
     //     try (socket = TcpSocket("127.0.0.1", 8443)) {
     //         socket.connect()
-    //         try (tls = TlsSocket.client(socket, clientConfig: config, session: lastSession)) {
+    //         // session 参数传入上次保存的会话
+    //         try (tls = TlsSocket.client(socket, session: lastSession, clientConfig: config)) {
     //             tls.handshake()
     //             lastSession = tls.session  // 保存会话用于下次复用
     //             tls.write("Request ${i}\n".toArray())
@@ -291,7 +252,7 @@ main() {
 }
 ```
 
-### 5.4 与 HTTP 模块集成（HTTPS）
+### 4.4 与 HTTP 模块集成（HTTPS）
 
 TLS 通常通过 HTTP 模块的 `tlsConfig()` 方法集成使用，而非直接操作 `TlsSocket`：
 
@@ -319,43 +280,15 @@ main() {
 
 ---
 
-## 6. 构建与运行
+## 5. 异常类型
 
-```bash
-# 1. 初始化项目
-cjpm init --name my-tls-app
-
-# 2. 编辑 cjpm.toml，添加 bin-dependencies 配置
-
-# 3. 构建
-cjpm build
-
-# 4. 运行（自动配置动态库路径）
-cjpm run
-```
-
-独立部署运行（动态库）需设置：
-
-| 操作系统 | 环境变量 | 示例 |
-|----------|----------|------|
-| Linux | `LD_LIBRARY_PATH` | `export LD_LIBRARY_PATH=/path/to/stdx/dynamic/stdx:$LD_LIBRARY_PATH` |
-| macOS | `DYLD_LIBRARY_PATH` | `export DYLD_LIBRARY_PATH=/path/to/stdx/dynamic/stdx:$DYLD_LIBRARY_PATH` |
-| Windows | `PATH` | 将 stdx 动态库目录和 OpenSSL DLL 目录添加到 `PATH` |
+| 异常 | 说明 |
+|------|------|
+| `TlsException` | TLS 处理异常（握手失败、证书无效、OpenSSL 未安装等） |
 
 ---
 
-## 7. 常见问题
-
-| 问题 | 原因 | 解决 |
-|------|------|------|
-| `TlsException: Can not load openssl library` | 未安装 OpenSSL 3 或版本低 | 安装 OpenSSL 3，确认 `openssl version` 为 3.x.x |
-| 编译找不到 `stdx.net.tls` 包 | `cjpm.toml` 路径不正确 | 确认路径指向 `dynamic/stdx` 或 `static/stdx` 子目录 |
-| 静态库链接报 undefined reference | 缺少平台链接选项 | Linux 添加 `-ldl`，Windows 添加 `-lcrypt32` |
-| 运行时找不到动态库 | 未设置动态库搜索路径 | 设置 `LD_LIBRARY_PATH` 或改用静态库 |
-
----
-
-## 8. 快速参考
+## 6. 快速参考
 
 | 需求 | 做法 |
 |------|------|
@@ -367,6 +300,4 @@ cjpm run
 | 双向认证 | 服务端 `config.clientIdentityRequired = Required`，客户端设置 `config.clientCertificate` |
 | 限制 TLS 版本 | `config.minVersion = V1_3`、`config.maxVersion = V1_3` |
 | 密钥日志（调试） | `config.keylogCallback = { _: TlsSocket, keylog: String => println(keylog) }` |
-| 动态库配置 | `path-option = ["/path/to/stdx/dynamic/stdx"]` |
-| 静态库配置 | `path-option = ["/path/to/stdx/static/stdx"]` |
-| 构建运行 | `cjpm build && cjpm run` |
+| 配置构建 | 参阅 [BUILD.md](./BUILD.md) |

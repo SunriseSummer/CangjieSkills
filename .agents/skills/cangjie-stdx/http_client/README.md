@@ -146,7 +146,7 @@ main() {
         .post()
         .url("http://127.0.0.1:8080/api/data")
         .header("Content-Type", "application/json")
-        .header("Authorization", "Bearer token123")
+        .header("Authorization", "******")
         .body("{\"key\": \"value\", \"count\": 42}")
         .build()
 
