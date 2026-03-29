@@ -21,7 +21,7 @@ description: "提供仓颉语言标准库常用功能速查文档，包括时间
 
 [std.io](./io/README.md)：I/O 流模型，包括 InputStream/OutputStream 接口、ByteBuffer 内存流、BufferedInputStream/BufferedOutputStream 缓冲流、StringReader/StringWriter 字符串流、ChainedInputStream/MultiOutputStream 链式流、流工具函数(copy/readToEnd/readString)等。
 
-[std.net](./net/README.md)：网络通信，包括 TcpSocket/TcpServerSocket TCP 通信、UdpSocket UDP 通信、IPSocketAddress/IPv4Address/IPv6Address IP 地址、Socket 超时设置、SocketException 异常处理等。
+[std.net](./net/README.md)：Socket 编程，包括 TcpSocket/TcpServerSocket TCP 通信、UdpSocket UDP 通信、UnixSocket/UnixServerSocket/UnixDatagramSocket Unix Domain Socket 通信、IPAddress/IPPrefix IP 地址处理、Socket 选项配置、SocketException 异常处理等。
 
 [std.process](./process/README.md)：进程管理，包括 launch 创建子进程、execute/executeWithOutput 执行命令、SubProcess 标准流重定向(Pipe/Inherit/Null)、findProcess 查找进程、进程等待与终止等。
 

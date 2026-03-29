@@ -1,20 +1,10 @@
 # 仓颉网络编程
 
-请按需查询当前目录下的文档：
+> **注意**：网络编程相关内容已迁移至对应的标准库/扩展标准库 Skill 目录下，请按需查阅：
 
-[socket](./socket/README.md)：仓颉 Socket 编程，包括 UDP/TCP/Unix Socket
-
-[websocket](./websocket/README.md)：仓颉 WebSocket 编程
-
-[http_client](./http_client/README.md)：仓颉 HTTP 客户端编程
-
-[http_server](./http_server/README.md)：仓颉 HTTP 服务端编程
-
-[https_client](./https_client/README.md)：仓颉 HTTPS 客户端编程
-
-[https_server](./https_server/README.md)：仓颉 HTTPS 服务端编程
-
-[tls](./tls/README.md)：仓颉 TLS 安全通信编程，包括这类项目的配置构建指导
-
-
+- **Socket 编程（TCP/UDP/Unix Socket）**：请参阅 `cangjie-std` Skill 下的 [std.net](../../cangjie-std/net/README.md)
+- **HTTP/HTTPS 客户端**：请参阅 `cangjie-stdx` Skill 下的 [http_client](../../cangjie-stdx/http_client/README.md)
+- **HTTP/HTTPS 服务端**：请参阅 `cangjie-stdx` Skill 下的 [http_server](../../cangjie-stdx/http_server/README.md)
+- **WebSocket**：请参阅 `cangjie-stdx` Skill 下的 [websocket](../../cangjie-stdx/websocket/README.md)
+- **TLS 安全通信**：请参阅 `cangjie-stdx` Skill 下的 [tls](../../cangjie-stdx/tls/README.md)
 
