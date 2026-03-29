@@ -199,7 +199,7 @@ main(): Int64 {
         println(String.fromUtf8(buf))  // "hello"
     }
     fut.get()
-    File.delete(SOCK_PATH)
+    remove(SOCK_PATH)
     return 0
 }
 ```
