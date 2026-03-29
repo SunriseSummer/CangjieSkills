@@ -26,7 +26,7 @@ cjprof record -f max -- ./test arg1 arg2
 | `-o` / `--output <file>` | 输出文件名（默认 `cjprof.data`） |
 | `-p` / `--pid <pid>` | 指定进程 ID |
 
-> 采样过程中按 `Ctrl+C` 可提前结束。
+> 采样只在被采样程序退出后结束。如需提前结束，可按 `Ctrl+C` 停止采样。
 
 ### 2.2 生成报告（report）
 
@@ -57,7 +57,7 @@ cjprof report -F -i sample.data -o flame.svg
 cjprof heap -d 12345 -o heap.data      # 导出进程 12345 的堆内存
 ```
 
-> 导出会向进程发送 `SIG_USR1` 信号，需确认目标为仓颉程序。
+> 导出会向进程发送 `SIG_USR1` 信号，需确认目标为仓颉程序。导出时运行目录和程序目录均需写权限。
 
 ### 3.2 分析对象信息
 ```bash
@@ -106,4 +106,6 @@ cjprof heap --show-reference --depth 5
 ## 4. 术语说明
 
 - **浅堆（Shallow Heap）**：对象自身占用的堆内存大小
-- **深堆（Retained Heap）**：对象被 GC 回收后可释放的所有关联对象的浅堆大小之和
+- **深堆（Retained Heap）**：对象被 GC 回收后可释放的所有关联对象（直接或间接引用的对象）的浅堆大小之和
+
+> 当引用关系超出最大展示深度或存在循环引用时，报告中以 `...` 省略后续引用。

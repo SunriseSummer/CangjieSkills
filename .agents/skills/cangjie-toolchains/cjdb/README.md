@@ -97,19 +97,19 @@ cjdb
 (cjdb) expr array[2]       # 索引访问
 ```
 
-> **注意**：不支持带命名参数的函数调用、互操作、扩展、属性、插值字符串。Windows 不支持 Float16 和异常抛出。
+> **注意**：不支持带命名参数的函数调用、互操作、扩展、属性、别名、插值字符串、函数名。Windows 不支持 Float16 类型和异常抛出。macOS 平台暂不支持表达式计算。
 
 ---
 
 ## 7. 观察点
 
 ```text
-(cjdb) wa s v -w read a           # 读观察点
-(cjdb) wa s v -w write a          # 写观察点
-(cjdb) wa s v -w read_write a     # 读写观察点
+(cjdb) watchpoint set variable -w read a     # 读观察点（简写 wa s v）
+(cjdb) wa s v -w write a                     # 写观察点
+(cjdb) wa s v -w read_write a                # 读写观察点
 ```
 
-仅支持基础类型。
+仅支持基础类型。Windows 上设置条件时程序最多只会暂停一次。
 
 ---
 
@@ -137,5 +137,7 @@ cjdb
 |------|----------|
 | Docker 下报 `packet returned an error: 8` | 创建容器时加 `--cap-add=SYS_PTRACE --security-opt seccomp=unconfined` |
 | 持续报 `signal SIGABRT` | `process handle --pass true --stop false --notify true SIGBUS` |
+| 无法捕获 `SIGSEGV` 信号 | `process handle -p true -s true -n true SIGSEGV`（cjdb 默认不捕获 SIGSEGV） |
 | 无法通过 `next/s` 进入 `catch` 块 | 在 `catch` 块内打断点 |
+| macOS 表达式报 `no JIT compiled function` | 表达式计算暂不支持 macOS 平台 |
 | 泛型变元名显示为 T0, T1 | 仓颉 ABI 兼容设计，非错误 |
