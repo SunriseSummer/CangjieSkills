@@ -136,7 +136,7 @@ cjdb
 | 问题 | 解决方案 |
 |------|----------|
 | Docker 下报 `packet returned an error: 8` | 创建容器时加 `--cap-add=SYS_PTRACE --security-opt seccomp=unconfined` |
-| 持续报 `signal SIGABRT` | `process handle --pass true --stop false --notify true SIGBUS` |
+| 持续报 `stop reason = signal XXX` | `process handle --pass true --stop false --notify true <信号名>`（如 `SIGABRT`/`SIGBUS`） |
 | 无法捕获 `SIGSEGV` 信号 | `process handle -p true -s true -n true SIGSEGV`（cjdb 默认不捕获 SIGSEGV） |
 | 无法通过 `next/s` 进入 `catch` 块 | 在 `catch` 块内打断点 |
 | macOS 表达式报 `no JIT compiled function` | 表达式计算暂不支持 macOS 平台 |
