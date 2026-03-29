@@ -17,11 +17,11 @@
 
 | 方法 | 说明 |
 |------|------|
-| `File.create(path)` | 创建文件，返回只写 File |
-| `File.createTemp(dirPath)` | 创建临时文件 |
-| `File.readFrom(path): Array<Byte>` | 一次性读取整个文件 |
-| `File.writeTo(path, data)` | 一次性写入整个文件 |
-| `File.appendTo(path, data)` | 追加写入 |
+| `File.create(path: Path): File` | 创建文件，返回只写 File |
+| `File.createTemp(directoryPath: Path): File` | 创建临时文件 |
+| `File.readFrom(path: Path): Array<Byte>` | 一次性读取整个文件 |
+| `File.writeTo(path: Path, buffer: Array<Byte>): Unit` | 一次性写入整个文件 |
+| `File.appendTo(path: Path, buffer: Array<Byte>): Unit` | 追加写入 |
 
 - 使用 `try-with-resource` 自动关闭
 
@@ -62,11 +62,11 @@ main() {
 
 | 函数 | 说明 |
 |------|------|
-| `exists(path): Bool` | 检查文件/目录是否存在 |
-| `copy(src, to: dst, overwrite)` | 复制文件或目录 |
-| `rename(src, to: dst, overwrite)` | 重命名/移动 |
-| `remove(path, recursive)` | 删除文件或目录 |
-| `removeIfExists(path, recursive)` | 安全删除（不存在不报错） |
+| `exists(path: Path): Bool` | 检查文件/目录是否存在 |
+| `copy(sourcePath: Path, to!: Path, overwrite!: Bool)` | 复制文件或目录 |
+| `rename(sourcePath: Path, to!: Path, overwrite!: Bool)` | 重命名/移动 |
+| `remove(path: Path, recursive!: Bool)` | 删除文件或目录 |
+| `removeIfExists(path: Path, recursive!: Bool): Bool` | 安全删除（不存在不报错） |
 
 ---
 
@@ -74,11 +74,11 @@ main() {
 
 | 方法 | 说明 |
 |------|------|
-| `Directory.create(path, recursive)` | 创建目录，`recursive: true` 递归创建 |
-| `Directory.createTemp(dirPath)` | 创建临时目录 |
-| `Directory.isEmpty(path): Bool` | 检查目录是否为空 |
-| `Directory.readFrom(path): Array<FileInfo>` | 列出目录内容 |
-| `Directory.walk(path, callback)` | 遍历目录（回调返回 false 停止） |
+| `Directory.create(path: Path, recursive!: Bool)` | 创建目录，`recursive: true` 递归创建 |
+| `Directory.createTemp(directoryPath: Path): Path` | 创建临时目录 |
+| `Directory.isEmpty(path: Path): Bool` | 检查目录是否为空 |
+| `Directory.readFrom(path: Path): Array<FileInfo>` | 列出目录内容 |
+| `Directory.walk(path: Path, f: (FileInfo) -> Bool)` | 遍历目录（回调返回 false 停止） |
 
 ```cangjie
 import std.fs.*

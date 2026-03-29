@@ -7,17 +7,17 @@
 
 | 函数 | 说明 |
 |------|------|
-| `abs(x)` | 绝对值（支持 Float16/32/64, Int8/16/32/64） |
-| `sqrt(x)` | 平方根 |
-| `cbrt(x)` | 立方根 |
-| `pow(base, exp)` | 幂运算 |
-| `exp(x)` | e 的 x 次方 |
-| `exp2(x)` | 2 的 x 次方 |
-| `log(x)` | 自然对数 |
-| `log2(x)` | 以 2 为底的对数 |
-| `log10(x)` | 以 10 为底的对数 |
-| `clamp(value, min, max)` | 将值限制在 [min, max] 范围内 |
-| `checkedAbs(x)` | 安全绝对值，返回 `Option` |
+| `abs(x: T): T` | 绝对值（支持 Float16/32/64, Int8/16/32/64） |
+| `sqrt(x: Float64): Float64` | 平方根 |
+| `cbrt(x: Float64): Float64` | 立方根 |
+| `pow(base: Float64, exponent: Float64): Float64` | 幂运算 |
+| `exp(x: Float64): Float64` | e 的 x 次方 |
+| `exp2(x: Float64): Float64` | 2 的 x 次方 |
+| `log(x: Float64): Float64` | 自然对数 |
+| `log2(x: Float64): Float64` | 以 2 为底的对数 |
+| `log10(x: Float64): Float64` | 以 10 为底的对数 |
+| `clamp(v: T, min: T, max: T): T` | 将值限制在 [min, max] 范围内 |
+| `checkedAbs(x: T): ?T` | 安全绝对值，返回 `Option` |
 
 ```cangjie
 package test_proj
@@ -44,13 +44,13 @@ main(): Unit {
 
 | 函数 | 说明 |
 |------|------|
-| `sin(x)` | 正弦（参数为弧度，Float64） |
-| `cos(x)` | 余弦 |
-| `tan(x)` | 正切 |
-| `asin(x)` | 反正弦 |
-| `acos(x)` | 反余弦 |
-| `atan(x)` | 反正切 |
-| `atan2(y, x)` | 二参数反正切 |
+| `sin(x: Float64): Float64` | 正弦（参数为弧度，Float64） |
+| `cos(x: Float64): Float64` | 余弦 |
+| `tan(x: Float64): Float64` | 正切 |
+| `asin(x: Float64): Float64` | 反正弦 |
+| `acos(x: Float64): Float64` | 反余弦 |
+| `atan(x: Float64): Float64` | 反正切 |
+| `atan2(y: Float64, x: Float64): Float64` | 二参数反正切 |
 
 ```cangjie
 package test_proj
@@ -71,10 +71,10 @@ main(): Unit {
 
 | 函数 | 说明 |
 |------|------|
-| `ceil(x)` | 向上取整 |
-| `floor(x)` | 向下取整 |
-| `round(x)` | 四舍五入 |
-| `trunc(x)` | 截断小数部分 |
+| `ceil(x: Float64): Float64` | 向上取整 |
+| `floor(x: Float64): Float64` | 向下取整 |
+| `round(x: Float64): Float64` | 四舍五入 |
+| `trunc(x: Float64): Float64` | 截断小数部分 |
 
 ---
 
@@ -82,9 +82,9 @@ main(): Unit {
 
 | 函数 | 说明 |
 |------|------|
-| `gcd(a, b)` | 最大公约数（整数类型） |
-| `lcm(a, b)` | 最小公倍数（整数类型） |
-| `rotate(value, bits)` | 位旋转 |
+| `gcd(x: T, y: T): T` | 最大公约数（整数类型） |
+| `lcm(x: T, y: T): T` | 最小公倍数（整数类型） |
+| `rotate(num: T, d: Int8): T` | 位旋转 |
 
 ```cangjie
 package test_proj
@@ -135,7 +135,7 @@ main(): Unit {
 1. `abs` 支持多种数值类型（Float16/32/64, Int8/16/32/64）
 2. 三角函数参数为弧度制，类型为 Float64
 3. `gcd` / `lcm` 仅用于整数类型，支持负数参数
-4. `clamp(value, min, max)` 将值限制在闭区间 [min, max]
+4. `clamp(v, min, max)` 将值限制在闭区间 [min, max]
 5. `checkedAbs(x)` 返回 `Option`，用于安全处理溢出
 6. 浮点数特殊值检查使用实例方法：`x.isNaN()`、`x.isInf()`
 7. `NaN` 与任何值比较均为 false，包括自身

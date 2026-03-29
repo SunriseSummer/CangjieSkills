@@ -9,13 +9,13 @@
 
 | 类 / 方法 | 说明 |
 |-----------|------|
-| `TcpServerSocket(bindAt: port)` | 创建服务端套接字 |
-| `serverSocket.bind()` | 绑定到指定端口 |
-| `serverSocket.accept()` | 接受连接，返回 `StreamingSocket` |
-| `TcpSocket(host, port)` | 创建客户端套接字 |
-| `socket.connect()` | 建立连接 |
-| `socket.read(buf)` | 读取数据到缓冲区，返回字节数 |
-| `socket.write(data)` | 写入数据 |
+| `TcpServerSocket(bindAt: UInt16)` | 创建服务端套接字 |
+| `serverSocket.bind(): Unit` | 绑定到指定端口 |
+| `serverSocket.accept(): StreamingSocket` | 接受连接，返回 `StreamingSocket` |
+| `TcpSocket(address: String, port: UInt16)` | 创建客户端套接字 |
+| `socket.connect(): Unit` | 建立连接 |
+| `socket.read(buffer: Array<Byte>): Int64` | 读取数据到缓冲区，返回字节数 |
+| `socket.write(payload: Array<Byte>): Unit` | 写入数据 |
 
 ```cangjie
 package test_proj
@@ -63,10 +63,10 @@ main(): Int64 {
 
 | 方法 | 说明 |
 |------|------|
-| `UdpSocket(bindAt: port)` | 创建 UDP 套接字，端口 0 表示自动分配 |
-| `udpSocket.bind()` | 绑定端口 |
-| `udpSocket.sendTo(address, data)` | 向目标地址发送数据 |
-| `udpSocket.receiveFrom(buf)` | 接收数据，返回 `(SocketAddress, Int64)` |
+| `UdpSocket(bindAt: UInt16)` | 创建 UDP 套接字，端口 0 表示自动分配 |
+| `udpSocket.bind(): Unit` | 绑定端口 |
+| `udpSocket.sendTo(addr: SocketAddress, buffer: Array<Byte>): Unit` | 向目标地址发送数据 |
+| `udpSocket.receiveFrom(buffer: Array<Byte>): (SocketAddress, Int64)` | 接收数据，返回 `(SocketAddress, Int64)` |
 
 ```cangjie
 package test_proj
@@ -110,7 +110,7 @@ main(): Int64 {
 
 | 类型 | 说明 |
 |------|------|
-| `IPSocketAddress(host, port)` | IP 地址 + 端口，host 为字符串形式 |
+| `IPSocketAddress(address: String, port: UInt16)` | IP 地址 + 端口，host 为字符串形式 |
 | `IPv4Address` | IPv4 地址类型 |
 | `IPv6Address` | IPv6 地址类型 |
 

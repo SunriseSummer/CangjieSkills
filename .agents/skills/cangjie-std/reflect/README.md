@@ -7,12 +7,15 @@
 
 | 方法/属性 | 说明 |
 |----------|------|
-| `TypeInfo.of(instance)` | 从实例获取类型信息 |
+| `ClassTypeInfo.of(a: Object): ClassTypeInfo` | 从 class 实例获取类型信息（推荐） |
+| `StructTypeInfo.of<T>(): StructTypeInfo` | 获取 struct 类型信息 |
 | `name: String` | 类型简名 |
 | `qualifiedName: String` | 类型全限定名 |
-| `instanceFunctions` | 实例方法集合 |
-| `instanceVariables` | 实例字段集合 |
-| `instanceProperties` | 实例属性集合 |
+| `instanceFunctions: Collection<InstanceFunctionInfo>` | 实例方法集合 |
+| `instanceVariables: Collection<InstanceVariableInfo>` | 实例字段集合 |
+| `instanceProperties: Collection<InstancePropertyInfo>` | 实例属性集合 |
+
+> **注意**：`TypeInfo.of(instance)` 已废弃，请使用 `ClassTypeInfo.of(instance)` 替代。
 
 ```cangjie
 package test_proj
@@ -25,7 +28,7 @@ public class Foo {
 
 main() {
     let a = Foo()
-    let ty: TypeInfo = TypeInfo.of(a)
+    let ty = ClassTypeInfo.of(a)
     println(ty.name)
     println(ty.qualifiedName)
     println(ty.instanceFunctions.size)
@@ -63,7 +66,39 @@ main() {
 - 通过 `InstanceFunctionInfo` 动态调用方法
 - 通过 `InstanceVariableInfo` 动态读写字段
 - 通过 `InstancePropertyInfo` 动态读写属性
-- **限制**：仅支持 public 成员，macOS 平台不支持反射
+- **限制**：仅支持 public 成员；macOS 平台不支持反射；函数类型、元组类型、枚举类型不支持
+
+```cangjie
+package test_proj
+import std.reflect.*
+
+public class Calculator {
+    public let value: Int64
+
+    public init(value: Int64) {
+        this.value = value
+    }
+
+    public func add(n: Int64): Int64 {
+        value + n
+    }
+}
+
+main() {
+    let calc = Calculator(10)
+    let ti = ClassTypeInfo.of(calc)
+
+    // 遍历实例方法
+    for (f in ti.instanceFunctions) {
+        println("method: ${f.name}")
+    }
+
+    // 动态读取字段值
+    let valueField = ti.instanceVariables.toArray()[0]
+    let val: Any = valueField.getValue(calc)
+    println("dynamic get: ${(val as Int64)}")  // Some(10)（as 返回 Option 类型）
+}
+```
 
 ---
 
@@ -82,9 +117,9 @@ main() {
 
 ## 5. 关键规则速查
 
-1. `TypeInfo.of(instance)` 获取运行时类型信息，是反射入口
+1. `ClassTypeInfo.of(instance)` 获取运行时类型信息，是反射入口（`TypeInfo.of` 已废弃）
 2. 仅 public 成员可通过反射访问
-3. macOS 平台不支持反射功能
+3. macOS 平台不支持反射功能；函数类型、元组类型、枚举类型不支持反射
 4. 动态调用时参数类型和数量必须匹配，否则抛 `MisMatchException`
 5. 通过 `ClassTypeInfo` 的 `constructors` 可动态创建实例
 6. 反射获取的集合（functions/variables/properties）均为只读

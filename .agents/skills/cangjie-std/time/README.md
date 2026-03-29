@@ -7,9 +7,9 @@
 
 | 构造/静态方法 | 说明 |
 |--------------|------|
-| `DateTime.now()` | 获取当前时间 |
-| `DateTime.of(year:, month:, dayOfMonth:, hour:, minute:, second:, nanosecond:, timeZone:)` | 从各分量构造 |
-| `DateTime.parse(string, pattern)` | 从字符串解析 |
+| `DateTime.now(): DateTime` | 获取当前时间 |
+| `DateTime.of(year!: Int64, month!: Month, dayOfMonth!: Int64, ...): DateTime` | 从各分量构造 |
+| `DateTime.parse(str: String, format: String): DateTime` | 从字符串解析 |
 
 | 属性 | 类型/说明 |
 |------|----------|
@@ -17,16 +17,16 @@
 | `month` | `Month` 枚举 |
 | `dayOfWeek` | `DayOfWeek` 枚举 |
 | `zoneId`, `zoneOffset` | 时区标识与偏移 |
-| `isoWeek` | 返回 `(year, week)` 元组 |
+| `isoWeek: (Int64, Int64)` | 返回 `(year, week)` 元组 |
 
 | 方法 | 说明 |
 |------|------|
-| `format(pattern)` | 按模式格式化为字符串 |
-| `inUTC()` | 转换为 UTC |
-| `inTimeZone(tz)` | 转换到指定时区 |
-| `addYears(n)` / `addMonths(n)` / `addDays(n)` | 日期算术 |
-| `addHours(n)` / `addMinutes(n)` / `addSeconds(n)` / `addNanoseconds(n)` | 时间算术 |
-| `toString()` | 返回 ISO 8601 格式字符串 |
+| `format(fmt: String): String` | 按模式格式化为字符串 |
+| `inUTC(): DateTime` | 转换为 UTC |
+| `inTimeZone(timeZone: TimeZone): DateTime` | 转换到指定时区 |
+| `addYears(n: Int64): DateTime` / `addMonths(n: Int64): DateTime` / `addDays(n: Int64): DateTime` | 日期算术 |
+| `addHours(n: Int64): DateTime` / `addMinutes(n: Int64): DateTime` / `addSeconds(n: Int64): DateTime` / `addNanoseconds(n: Int64): DateTime` | 时间算术 |
+| `toString(): String` | 返回 ISO 8601 格式字符串 |
 
 - 支持比较：`==`, `!=`, `<`, `>`, `<=`, `>=`
 
@@ -87,9 +87,9 @@ main() {
 |-----|------|
 | `TimeZone.Local` | 本地时区 |
 | `TimeZone.UTC` | UTC 时区 |
-| `TimeZone.load("Asia/Shanghai")` | 按 IANA 名称加载时区 |
-| `datetime.inUTC()` | 转为 UTC |
-| `datetime.inTimeZone(tz)` | 转为指定时区 |
+| `TimeZone.load(id: String): TimeZone` | 按 IANA 名称加载时区 |
+| `datetime.inUTC(): DateTime` | 转为 UTC |
+| `datetime.inTimeZone(timeZone: TimeZone): DateTime` | 转为指定时区 |
 
 ```cangjie
 package test_proj
@@ -161,8 +161,8 @@ main() {
 
 | 异常 | 说明 |
 |------|------|
-| `InvalidDataException` | 解析格式不匹配或数据无效 |
-| `TimeZoneNotFoundException` | 时区名称无法识别 |
+| `InvalidDataException` | 时区加载失败（找不到文件、解析失败等） |
+| `TimeParseException` | 时间字符串解析失败 |
 
 ---
 

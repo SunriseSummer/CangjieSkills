@@ -30,7 +30,7 @@
 
 ### 2.2 Field 辅助类
 
-`Field` 用于构建 `DataModelStruct` 的字段，通过 `field<T>(name, value)` 函数创建：
+`Field` 用于构建 `DataModelStruct` 的字段，通过 `field<T>(name, data)` 函数创建：
 
 ```cangjie
 field<String>("name", "Alice")   // 字符串字段
@@ -145,15 +145,16 @@ class Config <: Serializable<Config> {
 
 | 方法 | 说明 |
 |------|------|
-| `add(Field)` | 添加字段，返回自身（支持链式调用） |
-| `get(name)` | 按字段名获取 DataModel 值 |
+| `add(fie: Field): DataModelStruct` | 添加字段，返回自身（支持链式调用） |
+| `get(key: String): DataModel` | 按字段名获取 DataModel 值 |
+| `getFields(): ArrayList<Field>` | 获取所有字段列表 |
 
 ### 4.2 DataModelSeq 方法
 
 | 方法 | 说明 |
 |------|------|
-| `add(DataModel)` | 添加元素 |
-| `get(index)` | 按索引获取元素 |
+| `add(dm: DataModel): Unit` | 添加元素到序列末尾 |
+| `getItems(): ArrayList<DataModel>` | 获取所有元素列表 |
 
 ---
 
@@ -165,4 +166,4 @@ class Config <: Serializable<Config> {
 | **DataModel 中间层** | 序列化框架通过 DataModel 解耦类型与格式，便于支持多种输出格式（JSON、XML 等） |
 | **类型匹配** | `deserialize` 中须检查 DataModel 的实际类型，类型不匹配时抛出 `DataModelException` |
 | **内置类型** | `String`、`Int64`、`Float64`、`Bool` 等已实现 `Serializable`，可直接使用 `T.deserialize(dm)` |
-| **field 函数** | `field<T>(name, value)` 中 `T` 须实现 `Serializable<T>` |
+| **field 函数** | `field<T>(name, data)` 中 `T` 须实现 `Serializable<T>` |

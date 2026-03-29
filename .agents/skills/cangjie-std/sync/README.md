@@ -7,12 +7,12 @@
 
 | 方法 | 说明 |
 |------|------|
-| `load()` | 原子读取当前值 |
-| `store(val)` | 原子写入值 |
-| `swap(val)` | 原子交换，返回旧值 |
-| `compareAndSwap(expected, desired)` | CAS 操作，返回旧值 |
-| `fetchAdd(val)` | 原子加，返回旧值 |
-| `fetchSub(val)` | 原子减，返回旧值 |
+| `load(): T` | 原子读取当前值 |
+| `store(val: T): Unit` | 原子写入值 |
+| `swap(val: T): T` | 原子交换，返回旧值 |
+| `compareAndSwap(old: T, new: T): Bool` | CAS 操作，成功返回 true |
+| `fetchAdd(val: T): T` | 原子加，返回旧值 |
+| `fetchSub(val: T): T` | 原子减，返回旧值 |
 
 ```cangjie
 package test_proj
@@ -107,9 +107,9 @@ main(): Int64 {
 
 | 方法 | 说明 |
 |------|------|
-| `Timer.once(duration) { action }` | 延迟执行一次，返回 Timer |
-| `Timer.repeat(duration) { action }` | 重复执行，返回 Timer |
-| `timer.cancel()` | 取消定时器 |
+| `Timer.once(delay: Duration, task: () -> Unit): Timer` | 延迟执行一次，返回 Timer |
+| `Timer.repeat(delay: Duration, interval: Duration, task: () -> Unit): Timer` | 重复执行，返回 Timer |
+| `timer.cancel(): Unit` | 取消定时器 |
 
 ---
 

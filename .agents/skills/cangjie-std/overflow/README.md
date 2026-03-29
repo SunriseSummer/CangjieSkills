@@ -7,17 +7,17 @@
 
 | 方法 | 说明 |
 |------|------|
-| `checkedAdd(y): ?T` | 加法，溢出返回 None |
-| `checkedSub(y): ?T` | 减法 |
-| `checkedMul(y): ?T` | 乘法 |
-| `checkedDiv(y): ?T` | 除法 |
-| `checkedMod(y): ?T` | 取模 |
+| `checkedAdd(y: T): ?T` | 加法，溢出返回 None |
+| `checkedSub(y: T): ?T` | 减法 |
+| `checkedMul(y: T): ?T` | 乘法 |
+| `checkedDiv(y: T): ?T` | 除法 |
+| `checkedMod(y: T): ?T` | 取模 |
 | `checkedInc(): ?T` | 自增 |
 | `checkedDec(): ?T` | 自减 |
 | `checkedNeg(): ?T` | 取反 |
-| `checkedShl(shift): ?T` | 左移 |
-| `checkedShr(shift): ?T` | 右移 |
-| `checkedPow(exp): ?T` | 幂运算 |
+| `checkedShl(y: UInt64): ?T` | 左移 |
+| `checkedShr(y: UInt64): ?T` | 右移 |
+| `checkedPow(y: UInt64): ?T` | 幂运算 |
 
 ---
 
@@ -27,14 +27,14 @@
 
 | 方法 | 说明 |
 |------|------|
-| `saturatingAdd(y): T` | 加法，溢出饱和 |
-| `saturatingSub(y): T` | 减法 |
-| `saturatingMul(y): T` | 乘法 |
-| `saturatingDiv(y): T` | 除法 |
+| `saturatingAdd(y: T): T` | 加法，溢出饱和 |
+| `saturatingSub(y: T): T` | 减法 |
+| `saturatingMul(y: T): T` | 乘法 |
+| `saturatingDiv(y: T): T` | 除法 |
 | `saturatingInc(): T` | 自增 |
 | `saturatingDec(): T` | 自减 |
 | `saturatingNeg(): T` | 取反 |
-| `saturatingPow(exp): T` | 幂运算 |
+| `saturatingPow(y: UInt64): T` | 幂运算 |
 
 ---
 
@@ -44,12 +44,12 @@
 
 | 方法 | 说明 |
 |------|------|
-| `throwingAdd(y): T` | 加法，溢出抛异常 |
-| `throwingSub(y): T` | 减法 |
-| `throwingMul(y): T` | 乘法 |
-| `throwingDiv(y): T` | 除法 |
+| `throwingAdd(y: T): T` | 加法，溢出抛异常 |
+| `throwingSub(y: T): T` | 减法 |
+| `throwingMul(y: T): T` | 乘法 |
+| `throwingDiv(y: T): T` | 除法 |
 | `throwingNeg(): T` | 取反 |
-| `throwingPow(exp): T` | 幂运算 |
+| `throwingPow(y: UInt64): T` | 幂运算 |
 
 - 相关异常：`OvershiftException`（移位量过大），`UndershiftException`（移位量为负）
 
@@ -61,12 +61,12 @@
 
 | 方法 | 说明 |
 |------|------|
-| `wrappingAdd(y): T` | 加法，溢出截断 |
-| `wrappingSub(y): T` | 减法 |
-| `wrappingMul(y): T` | 乘法 |
-| `wrappingDiv(y): T` | 除法 |
+| `wrappingAdd(y: T): T` | 加法，溢出截断 |
+| `wrappingSub(y: T): T` | 减法 |
+| `wrappingMul(y: T): T` | 乘法 |
+| `wrappingDiv(y: T): T` | 除法 |
 | `wrappingNeg(): T` | 取反 |
-| `wrappingPow(exp): T` | 幂运算 |
+| `wrappingPow(y: UInt64): T` | 幂运算 |
 
 ---
 
@@ -76,8 +76,8 @@
 
 | 方法 | 说明 |
 |------|------|
-| `carryingAdd(y): (Bool, T)` | 加法，Bool 为 true 表示溢出 |
-| `borrowingSub(y): (Bool, T)` | 减法，Bool 为 true 表示借位 |
+| `carryingAdd(y: T): (Bool, T)` | 加法，Bool 为 true 表示溢出 |
+| `carryingSub(y: T): (Bool, T)` | 减法，Bool 为 true 表示借位 |
 
 ---
 
@@ -88,10 +88,27 @@ package test_proj
 import std.overflow.*
 
 main() {
-    let a: Int8 = Int8.Max
-    println(a.saturatingAdd(1))
-    println(a.checkedAdd(1))
-    println(a.wrappingAdd(1))
+    let a: Int8 = Int8.Max  // 127
+
+    // 饱和模式：溢出饱和到最大值
+    println(a.saturatingAdd(1))   // 127
+
+    // 检查模式：溢出返回 None
+    println(a.checkedAdd(1))      // None
+
+    // 截断模式：溢出截断（回绕）
+    println(a.wrappingAdd(1))     // -128
+
+    // 异常模式：溢出抛出 OverflowException
+    try {
+        a.throwingAdd(1)
+    } catch (e: OverflowException) {
+        println("overflow caught")
+    }
+
+    // 进位模式：返回 (是否溢出, 截断结果)
+    let (overflow, result) = a.carryingAdd(1)
+    println("carry: overflow=${overflow}, result=${result}")
 }
 ```
 

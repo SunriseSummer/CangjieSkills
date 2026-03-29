@@ -12,13 +12,13 @@
 
 | 方法 | 说明 |
 |------|------|
-| `nextBool()` | 随机布尔值 |
-| `nextInt8/16/32/64()` | 随机有符号整数 |
-| `nextUInt8/16/32/64()` | 随机无符号整数 |
-| `nextFloat16/32/64()` | 随机浮点数，范围 [0.0, 1.0) |
-| `nextInt64(upper)` | 随机整数，范围 [0, upper) |
-| `nextBytes(length)` | 随机字节数组 |
-| `nextGaussianFloat64(mean!, sigma!)` | 高斯分布随机数 |
+| `nextBool(): Bool` | 随机布尔值 |
+| `nextInt8/16/32/64(): IntN` | 随机有符号整数 |
+| `nextUInt8/16/32/64(): UIntN` | 随机无符号整数 |
+| `nextFloat16/32/64(): FloatN` | 随机浮点数，范围 [0.0, 1.0) |
+| `nextInt64(upper: Int64): Int64` | 随机整数，范围 [0, upper) |
+| `nextBytes(length: Int32): Array<Byte>` | 随机字节数组 |
+| `nextGaussianFloat64(mean!: Float64, sigma!: Float64): Float64` | 高斯分布随机数 |
 
 ```cangjie
 package test_proj
