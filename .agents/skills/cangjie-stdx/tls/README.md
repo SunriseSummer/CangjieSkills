@@ -110,41 +110,28 @@ TLS 通信需要证书和私钥，使用 `stdx.crypto.x509` 包解析 PEM 格式
 
 ### 3.1 PEM 文件解析
 
-```cangjie
-package test_proj
-import stdx.crypto.x509.{X509Certificate, PrivateKey, Pem, PemEntry}
+| API | 签名 | 说明 |
+|-----|------|------|
+| `X509Certificate.decodeFromPem` | `decodeFromPem(pemString: String): Array<X509Certificate>` | 从 PEM 字符串解析证书链 |
+| `PrivateKey.decodeFromPem` | `decodeFromPem(pemString: String): PrivateKey` | 从 PEM 字符串解析私钥 |
+| `Pem.decode` | `decode(pemString: String): Array<PemEntry>` | 解析混合 PEM 文件中的所有条目 |
+| `X509Certificate.decodeFromDer` | `decodeFromDer(data: Array<UInt8>): X509Certificate` | 从 DER 格式解析单个证书 |
 
-main() {
-    // 方式 1：直接从 PEM 字符串解析证书链
-    // let certs = X509Certificate.decodeFromPem(certPemString)
-    // let key = PrivateKey.decodeFromPem(keyPemString)
+PEM 文件常见标签：
+- `PemEntry.LABEL_CERTIFICATE` — 证书
+- `PemEntry.LABEL_PRIVATE_KEY` — 私钥
 
-    // 方式 2：从包含证书和私钥的混合 PEM 文件中分别提取
-    // let entries = Pem.decode(mixedPemString)
-    // let certs = entries
-    //     .filter { entry: PemEntry => entry.label == PemEntry.LABEL_CERTIFICATE }
-    //     .map { entry: PemEntry => X509Certificate.decodeFromDer(entry.data) }
-    // let keyEntry = entries.filter { e: PemEntry => e.label == PemEntry.LABEL_PRIVATE_KEY }[0]
-    // let key = PrivateKey.decodeDer(keyEntry.data)
-
-    println("Certificate parsing APIs available")
-}
-```
-
-### 3.2 从文件加载
+### 3.2 文件加载模式
 
 ```cangjie
-package test_proj
-import std.io.*
-import std.fs.*
-
-main() {
-    // let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
-    // let key = String.fromUtf8(readToEnd(File("./server.key", Read)))
-    // 注意：X509Certificate.decodeFromPem() 返回 Array<X509Certificate>（证书链）
-    println("File loading pattern ready")
-}
+// 从文件加载证书和私钥的标准模式：
+// let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
+// let keyStr = String.fromUtf8(readToEnd(File("./server.key", Read)))
+// let certs = X509Certificate.decodeFromPem(pem)    // 返回 Array<X509Certificate>
+// let key = PrivateKey.decodeFromPem(keyStr)         // 返回 PrivateKey
 ```
+
+> **注意**：`X509Certificate.decodeFromPem()` 返回的是 `Array<X509Certificate>`（证书链），不是单个证书。
 
 ---
 
