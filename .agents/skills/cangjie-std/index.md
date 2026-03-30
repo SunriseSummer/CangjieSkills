@@ -489,7 +489,7 @@ import std.collection.{ArrayList, HashMap} // 按需导入 API
 | `Semaphore` | `Semaphore(Int64)` | `acquire()`, `release()`, `tryAcquire(): Bool` | 信号量 |
 | `ReadWriteLock` | `ReadWriteLock()` | `readLock()`, `readUnlock()`, `writeLock()`, `writeUnlock()` | 读写锁 |
 | `SyncCounter` | `SyncCounter(Int64)` | `dec()`, `waitUntilZero()` | 同步计数器 |
-| `Timer` | — | `Timer.once(Duration, () -> Unit): Timer`, `Timer.repeat(Duration, Duration, () -> Unit): Timer`, `cancel()` | 定时器 |
+| `Timer` | —（通过静态方法创建） | `Timer.once(Duration, () -> Unit): Timer`, `Timer.repeat(Duration, Duration, () -> Unit): Timer`, `cancel()` | 定时器 |
 | `Monitor` | `Monitor()` | `enter()`, `leave()`, `wait()`, `notify()`, `notifyAll()` | ⚠️ 已弃用 |
 | `ReentrantMutex` | `ReentrantMutex()` | `lock()`, `unlock()`, `tryLock(): Bool`（可重入） | ⚠️ 已弃用 |
 
