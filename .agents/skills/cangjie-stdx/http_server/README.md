@@ -1,23 +1,26 @@
-# 仓颉语言 HTTP 服务端编程 Skill
+# 仓颉语言 HTTP/HTTPS 服务端编程（stdx.net.http）
 
 ## 1. 概述
 
 - 依赖 `stdx.net.http`，关于扩展标准库 `stdx` 的配置用法，请参阅 `cangjie-stdx` Skill
 - 支持 HTTP/1.0、1.1、2.0（RFC 9110/9112/9113/9218/7541）
 - 核心模式：`ServerBuilder` 构建 → `Server` 注册路由 → `serve()` 阻塞运行
+- HTTPS 需配置 `TlsServerConfig` 并传入 `ServerBuilder.tlsConfig()`，详见 [HTTPS.md](./HTTPS.md)
 
 ---
 
 ## 2. 快速入门
 
 ```cangjie
+package test_proj
 import stdx.net.http.*
+import std.sync.SyncCounter
 
 main() {
     // 1. 构建 Server
     let server = ServerBuilder()
         .addr("127.0.0.1")
-        .port(8080)
+        .port(0)
         .build()
 
     // 2. 注册路由处理器
@@ -26,8 +29,14 @@ main() {
         httpContext.responseBuilder.body("Hello 仓颉!")
     })
 
-    // 3. 启动服务（阻塞当前线程）
-    server.serve()
+    let ready = SyncCounter(1)
+    server.afterBind({ => ready.dec() })
+
+    // 3. 后台启动服务
+    spawn { server.serve() }
+    ready.waitUntilZero()
+    println("Server listening on port ${server.port}")
+    server.close()
 }
 ```
 
@@ -41,7 +50,7 @@ main() {
 |------|------|------|
 | `addr` | `addr(String): ServerBuilder` | 监听地址（如 `"0.0.0.0"`） |
 | `port` | `port(UInt16): ServerBuilder` | 监听端口（0 表示随机端口） |
-| `tlsConfig` | `tlsConfig(TlsServerConfig): ServerBuilder` | TLS 配置（启用 HTTPS，详见 `cangjie-https-server` Skill） |
+| `tlsConfig` | `tlsConfig(TlsServerConfig): ServerBuilder` | TLS 配置（启用 HTTPS，详见 [HTTPS.md](./HTTPS.md)） |
 | `distributor` | `distributor(HttpRequestDistributor): ServerBuilder` | 自定义请求分发器 |
 | `readTimeout` | `readTimeout(Duration): ServerBuilder` | 读取整个请求超时 |
 | `writeTimeout` | `writeTimeout(Duration): ServerBuilder` | 写响应超时 |
@@ -49,7 +58,7 @@ main() {
 | `httpKeepAliveTimeout` | `httpKeepAliveTimeout(Duration): ServerBuilder` | HTTP/1.1 Keep-Alive 超时 |
 | `maxRequestBodySize` | `maxRequestBodySize(Int64): ServerBuilder` | 请求体最大大小（默认 2MB，-1 不限制） |
 | `maxRequestHeaderSize` | `maxRequestHeaderSize(Int64): ServerBuilder` | 请求头最大大小（默认 1MB，-1 不限制） |
-| `transportConfig` | `transportConfig(TransportConfig): ServerBuilder` | 传输层配置（如 TCP 缓冲区大小） |
+| `transportConfig` | `transportConfig(TransportConfig): ServerBuilder` | 传输层配置 |
 | `logger` | `logger(Logger): ServerBuilder` | 自定义日志（需线程安全） |
 | `listener` | `listener(ServerSocket): ServerBuilder` | 自定义监听 Socket（设置后忽略 addr/port） |
 | `servicePoolConfig` | `servicePoolConfig(ServicePoolConfig): ServerBuilder` | 协程池配置 |
@@ -68,33 +77,23 @@ main() {
 | `maxHeaderListSize(UInt32)` | 最大头部列表大小 |
 | `enableConnectProtocol(Bool)` | 是否接受 CONNECT 请求（默认 false） |
 
-### 3.2 配置示例：带超时与传输配置
+**TransportConfig 属性：**
 
-```cangjie
-import stdx.net.http.*
-import std.time.*
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `readTimeout` | `Duration` | `Duration.Max` | 传输层读超时 |
+| `writeTimeout` | `Duration` | `Duration.Max` | 传输层写超时 |
+| `readBufferSize` | `?Int64` | `None` | 读缓冲区大小 |
+| `writeBufferSize` | `?Int64` | `None` | 写缓冲区大小 |
+| `keepAliveConfig` | `SocketKeepAliveConfig` | idle 45s, probe 5s, max 5 | TCP Keep-Alive 配置 |
 
-main() {
-    var transportCfg = TransportConfig()
-    transportCfg.readBufferSize = 8192
+**ServicePoolConfig 属性：**
 
-    let server = ServerBuilder()
-        .addr("0.0.0.0")
-        .port(8080)
-        .readTimeout(Duration.second * 30)
-        .writeTimeout(Duration.second * 30)
-        .readHeaderTimeout(Duration.second * 10)
-        .httpKeepAliveTimeout(Duration.second * 120)
-        .maxRequestBodySize(10 * 1024 * 1024)  // 10MB
-        .transportConfig(transportCfg)
-        .build()
-
-    server.distributor.register("/api", {
-        ctx => ctx.responseBuilder.body("OK")
-    })
-    server.serve()
-}
-```
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `capacity` | `Int64` | `10000` | 协程池容量 |
+| `queueCapacity` | `Int64` | `10000` | 队列容量 |
+| `preheat` | `Int64` | `0` | 预初始化协程数 |
 
 ---
 
@@ -111,8 +110,6 @@ main() {
 | `logger` | `logger: Logger` | 获取日志记录器 |
 | `afterBind` | `afterBind(() -> Unit): Unit` | 绑定端口后的回调 |
 | `onShutdown` | `onShutdown(() -> Unit): Unit` | 关闭时回调 |
-| `updateCert` | `updateCert(String, String): Unit` | 热更新证书（详见 `cangjie-https-server` Skill） |
-| `updateCA` | `updateCA(String): Unit` | 热更新 CA 证书（详见 `cangjie-https-server` Skill） |
 
 ---
 
@@ -121,10 +118,12 @@ main() {
 ### 5.1 基本路由注册
 
 ```cangjie
+package test_proj
 import stdx.net.http.*
+import std.sync.SyncCounter
 
 main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
+    let server = ServerBuilder().addr("127.0.0.1").port(0).build()
 
     // Lambda 形式注册
     server.distributor.register("/hello", {
@@ -139,28 +138,16 @@ main() {
             .body("{\"status\": \"ok\"}")
     })
 
-    server.serve()
+    let ready = SyncCounter(1)
+    server.afterBind({ => ready.dec() })
+    spawn { server.serve() }
+    ready.waitUntilZero()
+    println("Server started on port ${server.port}")
+    server.close()
 }
 ```
 
-### 5.2 使用 FuncHandler 注册
-
-```cangjie
-import stdx.net.http.{ServerBuilder, HttpRequestHandler, FuncHandler}
-
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    var handler: HttpRequestHandler = FuncHandler({
-        ctx => ctx.responseBuilder.body("index page")
-    })
-    server.distributor.register("/index", handler)
-
-    server.serve()
-}
-```
-
-### 5.3 HttpContext 详解
+### 5.2 HttpContext 详解
 
 `HttpContext` 是 handler 中的请求上下文，提供对请求和响应的完整访问：
 
@@ -182,45 +169,6 @@ main() {
 | `request.form` | `Form` | 表单数据（自动解析 URL 编码的表单或 query 参数） |
 | `request.remoteAddr` | `String` | 客户端地址（格式 `ip:port`） |
 | `request.version` | `Protocol` | 协议版本 |
-
-### 5.4 处理不同类型请求的示例
-
-```cangjie
-import stdx.net.http.*
-import std.io.StringReader
-
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    // 读取请求头和查询参数
-    server.distributor.register("/info", {
-        ctx =>
-        let req = ctx.request
-        let userAgent = req.headers.getFirst("user-agent") ?? "unknown"
-        let query = req.url.rawQuery
-        ctx.responseBuilder
-            .header("Content-Type", "text/plain")
-            .body("Method: ${req.method}\nUA: ${userAgent}\nQuery: ${query}")
-    })
-
-    // 读取 POST 请求体
-    server.distributor.register("/echo", {
-        ctx =>
-        let body = StringReader(ctx.request.body).readToEnd()
-        ctx.responseBuilder
-            .header("Content-Type", "text/plain")
-            .body("Echo: ${body}")
-    })
-
-    // 设置状态码
-    server.distributor.register("/error", {
-        ctx =>
-        ctx.responseBuilder.status(500).body("Internal Error")
-    })
-
-    server.serve()
-}
-```
 
 ---
 
@@ -248,27 +196,9 @@ main() {
 |---------|------|
 | `NotFoundHandler()` | 返回 404 Not Found |
 | `RedirectHandler(url, statusCode)` | 重定向（如 301/302/308） |
-| `FileHandler(path, type, maxSize)` | 静态文件服务（上传/下载） |
+| `FileHandler(path, handlerType!, bufferSize!)` | 静态文件服务（上传/下载） |
 | `OptionsHandler()` | 处理 OPTIONS 请求，返回 Allow 头 |
 | `FuncHandler(lambda)` | 将 Lambda 包装为 HttpRequestHandler |
-
-### 7.1 重定向示例
-
-```cangjie
-import stdx.net.http.*
-
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    server.distributor.register("/old-page", RedirectHandler("/new-page", 301))
-    server.distributor.register("/external", RedirectHandler("https://example.com", 302))
-    server.distributor.register("/new-page", {
-        ctx => ctx.responseBuilder.body("Welcome to the new page!")
-    })
-
-    server.serve()
-}
-```
 
 ---
 
@@ -277,8 +207,10 @@ main() {
 实现 `HttpRequestDistributor` 接口可自定义路由逻辑：
 
 ```cangjie
+package test_proj
 import stdx.net.http.*
 import std.collection.HashMap
+import std.sync.SyncCounter
 
 class PrefixDistributor <: HttpRequestDistributor {
     let map = HashMap<String, HttpRequestHandler>()
@@ -287,13 +219,14 @@ class PrefixDistributor <: HttpRequestDistributor {
         map.add(path, handler)
     }
 
-    // 支持前缀匹配的分发逻辑
+    public func register(path: String, handler: (HttpContext) -> Unit): Unit {
+        map.add(path, FuncHandler(handler))
+    }
+
     public func distribute(path: String): HttpRequestHandler {
-        // 先精确匹配
         if (map.contains(path)) {
             return map.get(path) ?? NotFoundHandler()
         }
-        // 再前缀匹配
         for ((prefix, handler) in map) {
             if (path.startsWith(prefix)) {
                 return handler
@@ -306,15 +239,20 @@ class PrefixDistributor <: HttpRequestDistributor {
 main() {
     let server = ServerBuilder()
         .addr("127.0.0.1")
-        .port(8080)
+        .port(0)
         .distributor(PrefixDistributor())
         .build()
 
     server.distributor.register("/api/", {
-        ctx => ctx.responseBuilder.body("API endpoint: ${ctx.request.url.path}")
+        ctx => ctx.responseBuilder.body("API endpoint")
     })
 
-    server.serve()
+    let ready = SyncCounter(1)
+    server.afterBind({ => ready.dec() })
+    spawn { server.serve() }
+    ready.waitUntilZero()
+    println("Server with custom distributor on port ${server.port}")
+    server.close()
 }
 ```
 
@@ -322,105 +260,12 @@ main() {
 
 ---
 
-## 9. 分块传输（Chunked）与 Trailer
-
-使用 `HttpResponseWriter` 实现分块发送响应体：
-
-```cangjie
-import stdx.net.http.*
-
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    server.distributor.register("/stream", {
-        ctx =>
-        let responseBuilder = ctx.responseBuilder
-        // 设置分块传输头
-        responseBuilder.header("transfer-encoding", "chunked")
-        responseBuilder.header("trailer", "checksum")
-
-        // 使用 HttpResponseWriter 逐块写入
-        let writer = HttpResponseWriter(ctx)
-        var total = 0
-        for (i in 0..5) {
-            let chunk = "data chunk ${i}\n"
-            writer.write(chunk.toArray())
-            total += chunk.size
-        }
-
-        // 在所有分块之后发送 Trailer
-        responseBuilder.trailer("checksum", "${total}")
-    })
-
-    server.serve()
-}
-```
-
----
-
-## 10. Cookie 管理（服务端）
-
-服务端通过 `Set-Cookie` 响应头向客户端发送 Cookie：
-
-```cangjie
-import stdx.net.http.*
-
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    server.distributor.register("/login", {
-        ctx =>
-        // 创建 Cookie：名称、值、过期时间、域、路径等
-        let sessionCookie = Cookie("session_id", "abc123",
-            maxAge: 3600,
-            domain: "127.0.0.1",
-            path: "/")
-        // 通过 Set-Cookie 头发送给客户端
-        ctx.responseBuilder
-            .header("Set-Cookie", sessionCookie.toSetCookieString())
-            .body("Login successful")
-    })
-
-    server.distributor.register("/profile", {
-        ctx =>
-        // 读取客户端发来的 Cookie 头
-        let cookieHeader = ctx.request.headers.getFirst("cookie") ?? "none"
-        ctx.responseBuilder.body("Cookie: ${cookieHeader}")
-    })
-
-    server.serve()
-}
-```
-
----
-
-## 11. 日志
-
-```cangjie
-import stdx.log.*
-import stdx.net.http.*
-
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    server.distributor.register("/index", {
-        ctx => ctx.responseBuilder.body("Hello!")
-    })
-
-    // 开启 DEBUG 级别日志
-    server.logger.level = LogLevel.DEBUG
-
-    server.serve()
-}
-```
-
----
-
-## 12. 后台启动与优雅关闭
+## 9. 后台启动与优雅关闭
 
 `serve()` 是阻塞调用，可在新线程中启动：
 
 ```cangjie
+package test_proj
 import stdx.net.http.*
 import std.sync.SyncCounter
 
@@ -444,43 +289,38 @@ main() {
 
     println("Server listening on port ${server.port}")
 
-    // 需要关闭时调用优雅关闭
-    // server.closeGracefully()
+    // 优雅关闭
+    server.closeGracefully()
 }
 ```
 
 ---
 
-## 13. Gzip 压缩响应
+## 10. HTTPS 配置（TLS 加密）
 
-```cangjie
-import stdx.compress.zlib.*
-import stdx.net.http.*
-import std.io.*
+HTTPS = HTTP + TLS，在 HTTP 服务端基础上通过 `ServerBuilder.tlsConfig()` 添加 TLS 加密层。包括 TLS 配置、证书热更新、双向认证（mTLS）等内容。
 
-main() {
-    let server = ServerBuilder().addr("127.0.0.1").port(8080).build()
-
-    server.distributor.register("/gzip", {
-        ctx =>
-        // 设置分块传输 + gzip 压缩
-        ctx.responseBuilder.header("Transfer-Encoding", "chunked")
-        ctx.responseBuilder.header("Content-Encoding", "gzip")
-
-        // 将原始内容用 gzip 压缩后作为响应体
-        let rawBody = ByteBuffer()
-        "Hello, this is gzip compressed content!".toArray() |> rawBody.write
-        let compressedBody = CompressInputStream(rawBody, wrap: GzipFormat)
-        ctx.responseBuilder.body(compressedBody)
-    })
-
-    server.serve()
-}
-```
+👉 详见 [HTTPS.md](./HTTPS.md)
 
 ---
 
-## 14. 异常类型
+## 11. 分块响应与 Trailer
+
+服务端可通过 `HttpResponseWriter` 实现分块传输（Chunked Transfer-Encoding），逐块写入响应数据，并在结束后附加 Trailer 头。
+
+👉 详见 [CHUNKED.md](./CHUNKED.md)
+
+---
+
+## 12. HTTP/2 Server Push
+
+仅用于 HTTP/2 协议（需 TLS + ALPN `h2`），允许服务端主动推送关联资源给客户端，减少客户端请求往返。
+
+👉 详见 [PUSH.md](./PUSH.md)
+
+---
+
+## 13. 异常类型
 
 | 异常 | 说明 |
 |------|------|
@@ -488,10 +328,13 @@ main() {
 | `HttpTimeoutException` | 超时异常 |
 | `ConnectionException` | TCP 连接异常（对端关闭等） |
 | `CoroutinePoolRejectException` | 协程池拒绝处理请求 |
+| `TlsException` | TLS 握手或通信异常（HTTPS 场景） |
+
+> **注意**：HTTPS 场景如果未安装 OpenSSL 3 或安装了低版本，运行时会抛出 `TlsException: Can not load openssl library or function xxx`。
 
 ---
 
-## 15. 关键规则速查
+## 14. 关键规则速查
 
 | 规则 | 说明 |
 |------|------|
@@ -503,4 +346,11 @@ main() {
 | 日志 | `server.logger.level = LogLevel.DEBUG` 开启调试日志 |
 | 优雅关闭 | `closeGracefully()` 等待进行中请求完成；`close()` 立即关闭 |
 | Handler 安全 | Handler 中应对 Host 请求头进行合法性校验，防止 DNS 重绑定攻击 |
-| HTTPS/TLS | HTTPS 配置、证书热更新、双向认证、HTTP/2 Server Push 等，详见 `cangjie-https-server` Skill |
+| 启用 HTTPS | `ServerBuilder().tlsConfig(tlsConfig)`，详见 [HTTPS.md](./HTTPS.md) |
+| 启用 HTTP/2 | `tlsConfig.supportedAlpnProtocols = ["h2"]`；握手失败自动回退 HTTP/1.1 |
+| 证书热更新 | `server.updateCert(certPath, keyPath)` / `server.updateCA(caPath)`，详见 [HTTPS.md](./HTTPS.md) |
+| 双向认证 | `tlsConfig.clientIdentityRequired = Required` + `tlsConfig.verifyMode = CustomCA(caCerts)`，详见 [HTTPS.md](./HTTPS.md) |
+| 获取客户端证书 | Handler 中通过 `ctx.clientCertificate` 获取 |
+| 分块响应 | 使用 `HttpResponseWriter` 逐块写入，详见 [CHUNKED.md](./CHUNKED.md) |
+| Server Push | `HttpResponsePusher.getPusher(ctx)` 获取推送器，仅 HTTP/2 可用，详见 [PUSH.md](./PUSH.md) |
+| OpenSSL 依赖 | HTTPS 需安装 OpenSSL 3，详见 `cangjie-stdx` Skill 下的 tls 文档 |
