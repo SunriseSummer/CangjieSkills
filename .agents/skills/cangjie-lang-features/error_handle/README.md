@@ -142,3 +142,61 @@ match (p) {
 | `NegativeArraySizeException` | 以负数大小创建数组 |
 | `NoneValueException` | 值不存在 |
 | `OverflowException` | 算术溢出 |
+
+---
+
+## 5. 完整可运行示例
+
+```cangjie
+// 自定义异常
+open class AppException <: Exception {
+    public init(message: String) { super(message) }
+}
+
+class ValidationException <: AppException {
+    public init(field: String) { super("Invalid field: ${field}") }
+}
+
+// 可能抛出异常的函数
+func divide(a: Int64, b: Int64): Int64 {
+    if (b == 0) {
+        throw IllegalArgumentException("divisor cannot be zero")
+    }
+    return a / b
+}
+
+// 使用 Option 处理可能缺失的值
+func findUser(id: Int64): ?String {
+    if (id == 1) { "Alice" } else { None }
+}
+
+main() {
+    // try-catch-finally
+    try {
+        let result = divide(10, 0)
+        println(result)
+    } catch (e: IllegalArgumentException) {
+        println("Caught: ${e.message}")  // Caught: divisor cannot be zero
+    } finally {
+        println("cleanup done")
+    }
+
+    // 自定义异常
+    try {
+        throw ValidationException("email")
+    } catch (e: AppException) {
+        println("App error: ${e.message}")  // App error: Invalid field: email
+    }
+
+    // Option 错误处理
+    let name = findUser(1) ?? "unknown"
+    println("user: ${name}")  // user: Alice
+
+    // getOrThrow
+    try {
+        let _ = findUser(99).getOrThrow()
+    } catch (e: NoneValueException) {
+        println("user not found")  // user not found
+    }
+}
+```

@@ -352,3 +352,50 @@ if ((opt ?? 0) != value) { ... }
 
 ---
 
+## 12. 完整可运行示例
+
+```cangjie
+main() {
+    // 整数类型
+    let i: Int64 = 42
+    let hex = 0xFF
+    let bin = 0b1010
+    println("i=${i}, hex=${hex}, bin=${bin}")  // i=42, hex=255, bin=10
+
+    // 浮点类型
+    let pi: Float64 = 3.14159
+    println("pi=${pi}")  // pi=3.141590
+
+    // 布尔
+    let flag = true
+    println("flag=${flag}, not=${!flag}")  // flag=true, not=false
+
+    // 字符类型（Rune）
+    let ch = r'仓'
+    println("ch=${ch}")             // ch=仓
+    let code = UInt32(ch)
+    println("code=${code}")         // code=20179
+
+    // 数值转换
+    let n = Int64(3.14)        // 3（截断）
+    let f = Float64(42)        // 42.000000
+    println("n=${n}, f=${f}")
+
+    // 元组
+    let point = (3, 4)
+    println("x=${point[0]}, y=${point[1]}")  // x=3, y=4
+
+    // 多元赋值与交换
+    var (a, b) = (1, 2)
+    (a, b) = (b, a)
+    println("a=${a}, b=${b}")  // a=2, b=1
+
+    // 区间
+    for (i in 0..5) { print("${i} ") }       // 0 1 2 3 4
+    println("")
+    for (i in 0..=5) { print("${i} ") }      // 0 1 2 3 4 5
+    println("")
+    for (i in 0..10 : 3) { print("${i} ") }  // 0 3 6 9
+    println("")
+}
+```

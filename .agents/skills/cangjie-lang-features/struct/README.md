@@ -164,3 +164,52 @@ struct Foo {
     }
 }
 ```
+
+---
+
+## 4. 完整可运行示例
+
+```cangjie
+struct Point {
+    public var x: Float64
+    public var y: Float64
+    public init(x: Float64, y: Float64) {
+        this.x = x
+        this.y = y
+    }
+    public func distanceTo(other: Point): Float64 {
+        let dx = this.x - other.x
+        let dy = this.y - other.y
+        (dx ** 2 + dy ** 2) ** 0.5
+    }
+}
+
+struct Counter {
+    var count: Int64 = 0
+    public mut func increment() { count++ }
+    public func value(): Int64 { count }
+}
+
+main() {
+    // 值类型语义
+    let p1 = Point(3.0, 4.0)
+    var p2 = p1               // 复制（值语义），独立副本
+    p2.x = 0.0
+    println("p1.x = ${p1.x}")  // 3.000000（未受影响）
+    println("p2.x = ${p2.x}")  // 0.000000
+
+    // 距离计算
+    let origin = Point(0.0, 0.0)
+    println("distance = ${p1.distanceTo(origin)}")  // 5.000000
+
+    // mut 函数
+    var c = Counter()
+    c.increment()
+    c.increment()
+    println("count = ${c.value()}")  // 2
+
+    // let 声明的结构体变量不能调用 mut 函数
+    // let c2 = Counter()
+    // c2.increment()  // 编译错误
+}
+```

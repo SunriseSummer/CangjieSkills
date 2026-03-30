@@ -174,3 +174,44 @@ class Zoo<T> where T <: Animal { ... }
 | 扩展中的泛型 | ✅ | — | — | — | — |
 | 类型别名 | — | ✅ | — | ✅ | ✅ |
 | 子类型型变 | — | 不变 | 不变 | 不变 | 不变 |
+
+---
+
+## 10. 完整可运行示例
+
+```cangjie
+// 泛型函数：打印任意实现 ToString 的值
+func genericPrint<T>(a: T) where T <: ToString {
+    println(a)
+}
+
+// 泛型结构体：键值对
+struct Pair<T, U> {
+    let x: T
+    let y: U
+    public init(a: T, b: U) { x = a; y = b }
+    public func first(): T { x }
+    public func second(): U { y }
+}
+
+// 泛型类：带约束的简单容器
+class Box<T> where T <: ToString {
+    var value: T
+    public init(v: T) { value = v }
+    public func describe(): String { "Box(${value})" }
+}
+
+main() {
+    // 泛型函数
+    genericPrint<Int64>(42)      // 42
+    genericPrint<String>("hello") // hello
+
+    // 泛型结构体
+    let p = Pair<String, Int64>("age", 30)
+    println("${p.first()} = ${p.second()}")  // age = 30
+
+    // 泛型类
+    let box = Box<Int64>(100)
+    println(box.describe())  // Box(100)
+}
+```

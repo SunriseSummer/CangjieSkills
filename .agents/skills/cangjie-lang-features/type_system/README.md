@@ -111,3 +111,56 @@ b as String   // Option<String>.None
 ```cangjie
 type RD<T> = RecordData<T>
 ```
+
+---
+
+## 6. 完整可运行示例
+
+```cangjie
+open class Animal {
+    public open func speak(): String { "..." }
+}
+
+class Dog <: Animal {
+    public override func speak(): String { "Woof!" }
+}
+
+class Cat <: Animal {
+    public override func speak(): String { "Meow!" }
+}
+
+// 类型别名须在顶层定义
+type Ints = Array<Int64>
+
+main() {
+    // 子类型多态
+    let animals: Array<Animal> = [Dog(), Cat(), Dog()]
+    for (a in animals) {
+        println(a.speak())
+    }
+    // 输出：Woof! Meow! Woof!
+
+    // is 运算符：运行时类型检查
+    let a: Animal = Dog()
+    println(a is Dog)     // true
+    println(a is Cat)     // false
+    println(a is Animal)  // true
+
+    // as 运算符：安全向下转型，返回 Option
+    let result = a as Dog
+    match (result) {
+        case Some(d) => println("It's a dog: ${d.speak()}")  // It's a dog: Woof!
+        case None => println("Not a dog")
+    }
+
+    // 数值类型转换
+    let i: Int64 = 42
+    let f = Float64(i)
+    let u = UInt32(i)
+    println("${f}, ${u}")  // 42.000000, 42
+
+    // 类型别名
+    let nums: Ints = [1, 2, 3]
+    println(nums)  // [1, 2, 3]
+}
+```

@@ -132,3 +132,59 @@
 ### 4.6 实例属性与静态属性
 - 实例属性：通过对象访问（`obj.prop`）
 - 静态属性：通过类型名访问（`ClassName.prop`）。可为 `static mut prop`
+
+---
+
+## 5. 完整可运行示例
+
+```cangjie
+// 抽象基类：形状
+abstract class Shape {
+    public open func area(): Float64 { 0.0 }
+    public open func describe(): String { "Shape" }
+}
+
+// 继承：圆形
+class Circle <: Shape {
+    var radius: Float64
+    public init(r: Float64) { radius = r }
+    public override func area(): Float64 { 3.14159 * radius * radius }
+    public override func describe(): String { "Circle(r=${radius})" }
+}
+
+// 继承：矩形
+class Rect <: Shape {
+    var width: Float64
+    var height: Float64
+    public init(w: Float64, h: Float64) { width = w; height = h }
+    public override func area(): Float64 { width * height }
+    public override func describe(): String { "Rect(${width}x${height})" }
+}
+
+// 使用属性
+class Counter {
+    var _count: Int64 = 0
+    public mut prop count: Int64 {
+        get() { _count }
+        set(v) { _count = v }
+    }
+    public func increment() { _count++ }
+}
+
+main() {
+    // 多态
+    let shapes: Array<Shape> = [Circle(5.0), Rect(3.0, 4.0)]
+    for (s in shapes) {
+        println("${s.describe()}: area = ${s.area()}")
+    }
+    // 输出：
+    // Circle(r=5.000000): area = 78.539750
+    // Rect(3.000000x4.000000): area = 12.000000
+
+    // 引用语义：两个变量指向同一对象
+    let c1 = Counter()
+    let c2 = c1           // 共享引用
+    c1.increment()
+    println("c2.count = ${c2.count}")  // 1（c1 和 c2 指向同一对象）
+}
+```

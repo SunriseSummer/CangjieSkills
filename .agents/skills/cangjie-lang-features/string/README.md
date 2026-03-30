@@ -531,3 +531,50 @@ if (cmd.equalsIgnoreAsciiCase("quit")) {
     exit(0)
 }
 ```
+
+---
+
+## 17. 完整可运行示例
+
+```cangjie
+main() {
+    // 构造
+    let s = "Hello, 仓颉!"
+    println(s)
+    println("size = ${s.size}")  // 14（UTF-8 字节数）
+
+    // 搜索
+    println("contains '仓颉': ${s.contains("仓颉")}")  // true
+    println("indexOf '仓颉': ${s.indexOf("仓颉")}")    // Some(7)
+
+    // 分割与拼接
+    let csv = "a,b,c,d"
+    let parts = csv.split(",")
+    println(parts)                                  // [a, b, c, d]
+    let joined = String.join(parts, delimiter: "-")
+    println(joined)                                 // a-b-c-d
+
+    // 替换
+    println("aabbcc".replace("bb", "XX"))  // aaXXcc
+
+    // 裁剪
+    println("  hello  ".trimAscii())  // hello
+
+    // 大小写
+    println("Hello".toAsciiUpper())   // HELLO
+    println("Hello".toAsciiLower())   // hello
+
+    // 填充
+    println("42".padStart(6, padding: "0"))  // 000042
+
+    // 字符串插值
+    let name = "Cangjie"
+    println("Language: ${name}")
+
+    // 按字符迭代（注意 for-in 遍历的是字节，需要用 runes() 遍历字符）
+    for (r in "Hi仓颉".runes()) {
+        print("${r} ")
+    }
+    println("")  // H i 仓 颉
+}
+```
