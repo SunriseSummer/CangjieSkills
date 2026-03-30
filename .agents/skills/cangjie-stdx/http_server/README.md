@@ -5,7 +5,7 @@
 - 依赖 `stdx.net.http`，关于扩展标准库 `stdx` 的配置用法，请参阅 `cangjie-stdx` Skill
 - 支持 HTTP/1.0、1.1、2.0（RFC 9110/9112/9113/9218/7541）
 - 核心模式：`ServerBuilder` 构建 → `Server` 注册路由 → `serve()` 阻塞运行
-- HTTPS 需配置 `TlsServerConfig` 并传入 `ServerBuilder.tlsConfig()`，详见下方第 10 节
+- HTTPS 需配置 `TlsServerConfig` 并传入 `ServerBuilder.tlsConfig()`，详见 [HTTPS.md](./HTTPS.md)
 
 ---
 
@@ -50,7 +50,7 @@ main() {
 |------|------|------|
 | `addr` | `addr(String): ServerBuilder` | 监听地址（如 `"0.0.0.0"`） |
 | `port` | `port(UInt16): ServerBuilder` | 监听端口（0 表示随机端口） |
-| `tlsConfig` | `tlsConfig(TlsServerConfig): ServerBuilder` | TLS 配置（启用 HTTPS，详见第 10 节） |
+| `tlsConfig` | `tlsConfig(TlsServerConfig): ServerBuilder` | TLS 配置（启用 HTTPS，详见 [HTTPS.md](./HTTPS.md)） |
 | `distributor` | `distributor(HttpRequestDistributor): ServerBuilder` | 自定义请求分发器 |
 | `readTimeout` | `readTimeout(Duration): ServerBuilder` | 读取整个请求超时 |
 | `writeTimeout` | `writeTimeout(Duration): ServerBuilder` | 写响应超时 |
@@ -298,170 +298,29 @@ main() {
 
 ## 10. HTTPS 配置（TLS 加密）
 
-HTTPS = HTTP + TLS，在 HTTP 服务端基础上通过 `ServerBuilder.tlsConfig()` 添加 TLS 加密层。
+HTTPS = HTTP + TLS，在 HTTP 服务端基础上通过 `ServerBuilder.tlsConfig()` 添加 TLS 加密层。包括 TLS 配置、证书热更新、双向认证（mTLS）等内容。
 
-### 10.1 TlsServerConfig 配置
-
-**构造函数：**
-
-```
-TlsServerConfig(certChain: Array<X509Certificate>, certKey: PrivateKey)
-```
-
-必须提供服务端证书链（`Array<X509Certificate>`）和对应私钥。注意 `X509Certificate.decodeFromPem()` 返回的就是 `Array<X509Certificate>`。
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `supportedAlpnProtocols` | `Array<String>` | `[]` | 支持的 ALPN 协议（设置 `["h2"]` 启用 HTTP/2） |
-| `clientIdentityRequired` | `TlsClientIdentificationMode` | `Disabled` | 客户端证书认证模式 |
-| `verifyMode` | `CertificateVerifyMode` | `Default` | 证书验证模式（双向认证时验证客户端证书） |
-| `cipherSuitesV1_2` | `Array<String>` | `[]` | TLS 1.2 密码套件名称列表 |
-| `cipherSuitesV1_3` | `Array<String>` | `[]` | TLS 1.3 密码套件名称列表 |
-| `minVersion` | `TlsVersion` | `V1_2` | 最低 TLS 版本 |
-| `maxVersion` | `TlsVersion` | `V1_3` | 最高 TLS 版本 |
-| `securityLevel` | `Int32` | `2` | 安全级别（0-5） |
-| `dhParameters` | `?DHParameters` | `None` | DH 密钥交换参数 |
-
-**客户端认证模式（TlsClientIdentificationMode）：**
-
-| 模式 | 说明 |
-|------|------|
-| `Disabled` | 不要求客户端证书（单向认证，默认） |
-| `Optional` | 客户端可选提供证书 |
-| `Required` | 客户端必须提供证书（双向认证/mTLS） |
-
-### 10.2 HTTPS 快速入门
-
-```cangjie
-import std.io.*
-import std.fs.*
-import stdx.net.http.*
-import stdx.net.tls.*
-import stdx.crypto.x509.{X509Certificate, PrivateKey}
-
-main() {
-    let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
-    let key = String.fromUtf8(readToEnd(File("./server.key", Read)))
-
-    var tlsConfig = TlsServerConfig(
-        X509Certificate.decodeFromPem(pem),
-        PrivateKey.decodeFromPem(key)
-    )
-
-    let server = ServerBuilder()
-        .addr("127.0.0.1")
-        .port(8443)
-        .tlsConfig(tlsConfig)
-        .build()
-
-    server.distributor.register("/", {
-        ctx => ctx.responseBuilder.body("Hello HTTPS!")
-    })
-    server.serve()
-}
-```
-
-### 10.3 证书热更新
-
-运行时无需重启服务即可更新 TLS 证书，更新后新建连接将使用新证书：
-
-| 方法 | 签名 | 说明 |
-|------|------|------|
-| `updateCert` | `updateCert(String, String): Unit` | 通过文件路径更新证书和私钥 |
-| `updateCert` | `updateCert(Array<X509Certificate>, PrivateKey): Unit` | 通过对象更新证书和私钥 |
-| `updateCA` | `updateCA(String): Unit` | 通过文件路径更新 CA 证书 |
-| `updateCA` | `updateCA(Array<X509Certificate>): Unit` | 通过对象更新 CA 证书 |
-
-### 10.4 双向 TLS 认证（mTLS）
-
-双向认证要求客户端也提供证书，服务端验证客户端身份：
-
-```cangjie
-import std.io.*
-import std.fs.*
-import stdx.net.http.*
-import stdx.net.tls.*
-import stdx.crypto.x509.{X509Certificate, PrivateKey}
-
-main() {
-    let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
-    let key = String.fromUtf8(readToEnd(File("./server.key", Read)))
-    let caPem = String.fromUtf8(readToEnd(File("./ca.crt", Read)))
-
-    var tlsConfig = TlsServerConfig(
-        X509Certificate.decodeFromPem(pem),
-        PrivateKey.decodeFromPem(key)
-    )
-    // 要求客户端提供证书
-    tlsConfig.clientIdentityRequired = Required
-    // 使用自定义 CA 验证客户端证书
-    tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(caPem))
-
-    let server = ServerBuilder()
-        .addr("127.0.0.1")
-        .port(8443)
-        .tlsConfig(tlsConfig)
-        .build()
-
-    server.distributor.register("/secure", {
-        ctx =>
-        match (ctx.clientCertificate) {
-            case Some(certs) =>
-                ctx.responseBuilder.body("mTLS OK, client cert count: ${certs.size}")
-            case None =>
-                ctx.responseBuilder.status(401).body("No client certificate")
-        }
-    })
-
-    server.serve()
-}
-```
-
-### 10.5 HTTP/2 Server Push
-
-仅用于 HTTP/2 协议（需 TLS + ALPN `h2`），允许服务端主动推送关联资源给客户端：
-
-```cangjie
-import std.io.*
-import std.fs.*
-import stdx.net.http.*
-import stdx.net.tls.*
-import stdx.crypto.x509.{X509Certificate, PrivateKey}
-
-main() {
-    let pem = String.fromUtf8(readToEnd(File("./server.crt", Read)))
-    let key = String.fromUtf8(readToEnd(File("./server.key", Read)))
-    var tlsConfig = TlsServerConfig(
-        X509Certificate.decodeFromPem(pem),
-        PrivateKey.decodeFromPem(key)
-    )
-    tlsConfig.supportedAlpnProtocols = ["h2"]
-
-    let server = ServerBuilder()
-        .addr("127.0.0.1")
-        .port(8443)
-        .tlsConfig(tlsConfig)
-        .build()
-
-    server.distributor.register("/index.html", {
-        ctx =>
-        let pusher = HttpResponsePusher.getPusher(ctx)
-        match (pusher) {
-            case Some(p) =>
-                p.push("/style.css", "GET", ctx.request.headers)
-                p.push("/app.js", "GET", ctx.request.headers)
-            case None => ()
-        }
-        ctx.responseBuilder.body("<html><body>Hello HTTP/2!</body></html>")
-    })
-
-    server.serve()
-}
-```
+👉 详见 [HTTPS.md](./HTTPS.md)
 
 ---
 
-## 11. 异常类型
+## 11. 分块响应与 Trailer
+
+服务端可通过 `HttpResponseWriter` 实现分块传输（Chunked Transfer-Encoding），逐块写入响应数据，并在结束后附加 Trailer 头。
+
+👉 详见 [CHUNKED.md](./CHUNKED.md)
+
+---
+
+## 12. HTTP/2 Server Push
+
+仅用于 HTTP/2 协议（需 TLS + ALPN `h2`），允许服务端主动推送关联资源给客户端，减少客户端请求往返。
+
+👉 详见 [PUSH.md](./PUSH.md)
+
+---
+
+## 13. 异常类型
 
 | 异常 | 说明 |
 |------|------|
@@ -475,7 +334,7 @@ main() {
 
 ---
 
-## 12. 关键规则速查
+## 14. 关键规则速查
 
 | 规则 | 说明 |
 |------|------|
@@ -487,10 +346,11 @@ main() {
 | 日志 | `server.logger.level = LogLevel.DEBUG` 开启调试日志 |
 | 优雅关闭 | `closeGracefully()` 等待进行中请求完成；`close()` 立即关闭 |
 | Handler 安全 | Handler 中应对 Host 请求头进行合法性校验，防止 DNS 重绑定攻击 |
-| 启用 HTTPS | `ServerBuilder().tlsConfig(tlsConfig)` |
+| 启用 HTTPS | `ServerBuilder().tlsConfig(tlsConfig)`，详见 [HTTPS.md](./HTTPS.md) |
 | 启用 HTTP/2 | `tlsConfig.supportedAlpnProtocols = ["h2"]`；握手失败自动回退 HTTP/1.1 |
-| 证书热更新 | `server.updateCert(certPath, keyPath)` / `server.updateCA(caPath)` |
-| 双向认证 | `tlsConfig.clientIdentityRequired = Required` + `tlsConfig.verifyMode = CustomCA(caCerts)` |
+| 证书热更新 | `server.updateCert(certPath, keyPath)` / `server.updateCA(caPath)`，详见 [HTTPS.md](./HTTPS.md) |
+| 双向认证 | `tlsConfig.clientIdentityRequired = Required` + `tlsConfig.verifyMode = CustomCA(caCerts)`，详见 [HTTPS.md](./HTTPS.md) |
 | 获取客户端证书 | Handler 中通过 `ctx.clientCertificate` 获取 |
-| Server Push | `HttpResponsePusher.getPusher(ctx)` 获取推送器，仅 HTTP/2 可用 |
+| 分块响应 | 使用 `HttpResponseWriter` 逐块写入，详见 [CHUNKED.md](./CHUNKED.md) |
+| Server Push | `HttpResponsePusher.getPusher(ctx)` 获取推送器，仅 HTTP/2 可用，详见 [PUSH.md](./PUSH.md) |
 | OpenSSL 依赖 | HTTPS 需安装 OpenSSL 3，详见 `cangjie-stdx` Skill 下的 tls 文档 |

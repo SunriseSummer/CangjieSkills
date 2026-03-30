@@ -124,7 +124,11 @@ main() {
 
     // body 读取完成后可获取 Trailer
     let trailers = resp.trailers
-    println("Trailers: ${trailers}")
+    // 通过 get 获取指定 Trailer 字段值
+    let values = trailers.get("checkSum")
+    for (v in values) {
+        println("checkSum: ${v}")
+    }
 
     client.close()
 }

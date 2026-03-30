@@ -54,12 +54,12 @@ main() {
 
 ```
 Cookie(name: String, value: String,
-    expires!: ?DateTime,     // 过期时间
-    maxAge!: Int64,          // 过期秒数
-    domain!: String,         // 域名
-    path!: String,           // 路径
-    secure!: Bool,           // 仅 HTTPS
-    httpOnly!: Bool)         // 禁止 JS 访问
+    expires!: ?DateTime = None,  // 过期时间
+    maxAge!: ?Int64 = None,      // 过期秒数
+    domain!: String = "",        // 域名
+    path!: String = "",          // 路径
+    secure!: Bool = false,       // 仅 HTTPS
+    httpOnly!: Bool = false)     // 禁止 JS 访问
 ```
 
 ### 3.2 主要方法
@@ -84,66 +84,65 @@ Cookie(name: String, value: String,
 以下示例展示了服务端设置 Cookie 和客户端发送 Cookie 的完整流程。示例使用本地 raw socket 模拟服务端，演示 Cookie 的设置与回传。
 
 ```cangjie
-import std.net.{TcpServerSocket, TcpSocket, SocketAddress}
-import std.io.*
-import std.sync.*
-import std.collection.ArrayList
 import stdx.net.http.*
+import stdx.encoding.url.*
+import std.net.*
+import std.time.*
+import std.sync.*
 
-// 模拟服务端：返回 Set-Cookie 头
-func startServer(ready: AtomicBool, port: UInt16): Unit {
-    let serverSocket = TcpServerSocket(
-        bindAt: SocketAddress("127.0.0.1", port)
-    )
+main() {
+    // 1、启动 socket 服务器
+    let serverSocket = TcpServerSocket(bindAt: 0)
     serverSocket.bind()
-    println("Server listening on port ${port}")
-    ready.store(true)
-
-    // 处理第一个请求：返回 Set-Cookie
-    let conn1 = serverSocket.accept()
-    let buf1 = Array<UInt8>(4096, repeat: 0)
-    conn1.read(buf1)
-    let response1 = "HTTP/1.1 200 OK\r\nSet-Cookie: session=abc123; Path=/\r\nContent-Length: 2\r\n\r\nOK"
-    conn1.write(response1.toArray())
-    conn1.close()
-
-    // 处理第二个请求：验证客户端发送了 Cookie
-    let conn2 = serverSocket.accept()
-    let buf2 = Array<UInt8>(4096, repeat: 0)
-    let len2 = conn2.read(buf2)
-    let request2 = String.fromUtf8(buf2.slice(0, len2))
-    println("Server received: ${request2}")
-    let response2 = "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nCookie echoed"
-    conn2.write(response2.toArray())
-    conn2.close()
-
+    let fut = spawn {
+        serverPacketCapture(serverSocket)
+    }
+    // 客户端一般从 response 中的 Set-Cookie header 中读取 cookie，并将其存入 cookieJar 中，
+    // 下次发起 request 时，将其放在 request 的 Cookie header 中发送
+    // 2、启动客户端
+    let client = ClientBuilder().build()
+    let port = (serverSocket.localAddress as IPSocketAddress)?.port ?? throw Exception("Port not found.")
+    var u = URL.parse("http://127.0.0.1:${port}/a/b/c")
+    var r = HttpRequestBuilder().url(u).build()
+    // 3、发送 request
+    client.send(r)
+    r = HttpRequestBuilder().url(u).build()
+    // 4、发送新 request，从 CookieJar 中取出 cookie，并转成 Cookie header 中的值
+    // 此时 cookie 2=2 已经过期，因此只发送 1=1 cookie
+    client.send(r)
+    // 5、关闭客户端
+    client.close()
+    fut.get()
     serverSocket.close()
 }
 
-main() {
-    let port: UInt16 = 9527
-    let ready = AtomicBool(false)
+func serverPacketCapture(serverSocket: TcpServerSocket) {
+    let server = serverSocket.accept()
+    let buf = Array<UInt8>(500, repeat: 0)
+    var i = server.read(buf)
+    println(String.fromUtf8(buf[..i]))
 
-    // 启动模拟服务端
-    spawn { startServer(ready, port) }
-    while (!ready.load()) {}
+    // 过期时间为 4 秒的 cookie1
+    let cookie1 = Cookie("1", "1", maxAge: 4, domain: "127.0.0.1", path: "/a/b/")
+    let setCookie1 = cookie1.toSetCookieString()
+    // 过期时间为 2 秒的 cookie2
+    let cookie2 = Cookie("2", "2", maxAge: 2, path: "/a/")
+    let setCookie2 = cookie2.toSetCookieString()
+    // 服务器发送 Set-Cookie 头，客户端解析并将其存进 CookieJar 中
+    server.write(
+        "HTTP/1.1 204 ok\r\nSet-Cookie: ${setCookie1}\r\nSet-Cookie: ${setCookie2}\r\nConnection: close\r\n\r\n"
+            .toArray())
 
-    // 创建客户端（默认启用 CookieJar）
-    let client = ClientBuilder().build()
-
-    // 第一次请求：服务端返回 Set-Cookie
-    let resp1 = client.get("http://127.0.0.1:${port}/login")
-    println("First response: ${resp1.status}")
-
-    // 第二次请求：客户端自动发送之前收到的 Cookie
-    let resp2 = client.get("http://127.0.0.1:${port}/dashboard")
-    println("Second response: ${resp2.status}")
-
-    client.close()
+    let server2 = serverSocket.accept()
+    i = server2.read(buf)
+    // 接收客户端的带 cookie 的请求
+    println(String.fromUtf8(buf[..i]))
+    server2.write("HTTP/1.1 204 ok\r\nConnection: close\r\n\r\n".toArray())
+    server2.close()
 }
 ```
 
-> **说明**：此示例使用本地 raw socket 模拟服务端以演示 Cookie 自动管理流程。端口号可根据实际情况修改。
+> **说明**：此示例展示了服务端设置 Cookie 和客户端自动发送 Cookie 的完整流程。第二次请求中，客户端自动附带了之前收到的有效 Cookie。
 
 ---
 
