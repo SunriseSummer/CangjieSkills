@@ -91,14 +91,13 @@ import std.collection.ArrayList
 import stdx.net.http.*
 
 // 模拟服务端：返回 Set-Cookie 头
-func startServer(barrier: AtomicBool): Unit {
+func startServer(ready: AtomicBool, port: UInt16): Unit {
     let serverSocket = TcpServerSocket(
-        bindAt: SocketAddress("127.0.0.1", 0)
+        bindAt: SocketAddress("127.0.0.1", port)
     )
     serverSocket.bind()
-    let port = serverSocket.localAddress.port
     println("Server listening on port ${port}")
-    barrier.store(true)
+    ready.store(true)
 
     // 处理第一个请求：返回 Set-Cookie
     let conn1 = serverSocket.accept()
@@ -122,28 +121,29 @@ func startServer(barrier: AtomicBool): Unit {
 }
 
 main() {
+    let port: UInt16 = 9527
     let ready = AtomicBool(false)
 
     // 启动模拟服务端
-    spawn { startServer(ready) }
+    spawn { startServer(ready, port) }
     while (!ready.load()) {}
 
     // 创建客户端（默认启用 CookieJar）
     let client = ClientBuilder().build()
 
     // 第一次请求：服务端返回 Set-Cookie
-    let resp1 = client.get("http://127.0.0.1:8080/login")
+    let resp1 = client.get("http://127.0.0.1:${port}/login")
     println("First response: ${resp1.status}")
 
     // 第二次请求：客户端自动发送之前收到的 Cookie
-    let resp2 = client.get("http://127.0.0.1:8080/dashboard")
+    let resp2 = client.get("http://127.0.0.1:${port}/dashboard")
     println("Second response: ${resp2.status}")
 
     client.close()
 }
 ```
 
-> **说明**：上述示例中的端口号需根据实际服务端绑定地址调整。此示例仅用于演示 Cookie 自动管理流程。
+> **说明**：此示例使用本地 raw socket 模拟服务端以演示 Cookie 自动管理流程。端口号可根据实际情况修改。
 
 ---
 
