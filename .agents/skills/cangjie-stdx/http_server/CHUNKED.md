@@ -56,7 +56,7 @@ import std.io.*
 func checksum(chunk: Array<UInt8>): Int64 {
     var sum = 0
     for (i in chunk) {
-        if (i == UInt8(UInt32(r'\n'))) {
+        if (i == b'\n') {
             sum += 1
         }
     }
