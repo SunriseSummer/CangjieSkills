@@ -196,7 +196,7 @@ main() {
 |---------|------|
 | `NotFoundHandler()` | 返回 404 Not Found |
 | `RedirectHandler(url, statusCode)` | 重定向（如 301/302/308） |
-| `FileHandler(path, type, maxSize)` | 静态文件服务（上传/下载） |
+| `FileHandler(path, handlerType!, bufferSize!)` | 静态文件服务（上传/下载） |
 | `OptionsHandler()` | 处理 OPTIONS 请求，返回 Allow 头 |
 | `FuncHandler(lambda)` | 将 Lambda 包装为 HttpRequestHandler |
 

@@ -153,34 +153,39 @@ main() {
 客户端使用 `ClientBuilder` 并启用 HTTP/2 + Push 接收：
 
 ```cangjie
-import stdx.net.http.*
+import std.io.*
+import std.fs.*
+import std.collection.ArrayList
 import stdx.net.tls.*
+import stdx.crypto.x509.X509Certificate
+import stdx.net.http.*
 
 main() {
+    // TLS 配置，其中 TLS 证书文件用户需自行提供
     var tlsConfig = TlsClientConfig()
-    tlsConfig.verifyMode = TrustAll
+    let pem = String.fromUtf8(readToEnd(File("/rootCerPath", Read)))
+    tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(pem))
     tlsConfig.alpnProtocolsList = ["h2"]
 
-    let client = ClientBuilder()
-        .tlsConfig(tlsConfig)
-        .enablePush(true)
-        .build()
+    let client = ClientBuilder().tlsConfig(tlsConfig).build()
 
-    let rsp = client.get("https://127.0.0.1:8443/index.html")
-    println("Response: ${rsp.body}")
-
-    // 接收服务端推送的资源
-    let pushRsp = client.readPush()
-    match (pushRsp) {
-        case Some(push) => println("Pushed: ${push.body}")
-        case None => println("No push received")
+    let response = client.get("https://127.0.0.1:8080/index.html")
+    // 接收服务端推送的响应
+    let pushResponses: Option<ArrayList<HttpResponse>> = response.getPush()
+    match (pushResponses) {
+        case Some(pushList) =>
+            for (pushResp in pushList) {
+                println("Pushed: ${pushResp.status}")
+            }
+        case None =>
+            println("No server push")
     }
 
     client.close()
 }
 ```
 
-> **注意**：客户端需设置 `enablePush(true)` 并使用 `["h2"]` ALPN 协议才能接收推送。`TrustAll` 模式仅限测试环境。
+> **注意**：客户端需使用 `["h2"]` ALPN 协议才能接收推送。通过 `response.getPush()` 获取服务端推送的响应列表。
 
 ---
 
