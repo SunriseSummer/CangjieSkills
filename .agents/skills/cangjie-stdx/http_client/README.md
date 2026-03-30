@@ -15,9 +15,22 @@
 import stdx.net.http.*
 
 main() {
+    // 1. 构建 client 实例
     let client = ClientBuilder().build()
+    // 2. 发送请求，收取响应，其中请求 URL 可根据实际情况修改
     let rsp = client.get("http://example.com/hello")
+    // 3. 打印响应摘要（status-line + headers + body size）
     println(rsp)
+    // 4. 访问响应数据结构
+    println("Status: ${rsp.status}")           // 状态码（UInt16）
+    println("Version: ${rsp.version}")         // 协议版本（Protocol 枚举）
+    // 5. 遍历响应头（HttpHeaders 实现 Iterable<(String, Collection<String>)>）
+    for ((name, values) in rsp.headers) {
+        for (v in values) {
+            println("Header: ${name} = ${v}")
+        }
+    }
+    // 6. 关闭连接
     client.close()
 }
 ```
@@ -156,7 +169,10 @@ main() {
 | `bodySize` | `Option<Int64>` | 响应体大小（未知时为 None） |
 | `trailers` | `HttpHeaders` | Trailer 头 |
 | `version` | `Protocol` | 协议版本 |
+| `request` | `Option<HttpRequest>` | 对应的请求（默认 None） |
+| `isPersistent` | `Bool` | 是否长连接（无 `Connection: close`） |
 | `close()` | `Unit` | 关闭未读完的 body 释放资源 |
+| `toString()` | `String` | 响应摘要（status-line + headers + body size + trailers） |
 
 ### 6.2 读取响应体
 
@@ -202,7 +218,116 @@ main() {
 
 ---
 
-## 7. Cookie 管理
+## 7. HttpHeaders 操作
+
+`HttpHeaders` 用于表示 HTTP 报文的头部（header 和 trailer），实现 `Iterable<(String, Collection<String>)>`。field-name 不区分大小写，内部转为小写存储。
+
+### 7.1 API
+
+| 方法 | 签名 | 说明 |
+|------|------|------|
+| `add` | `add(name: String, value: String): Unit` | 添加键值对（同名追加） |
+| `set` | `set(name: String, value: String): Unit` | 设置键值对（同名覆盖） |
+| `get` | `get(name: String): Collection<String>` | 获取指定名称的值集合（不存在返回空集合） |
+| `getFirst` | `getFirst(name: String): ?String` | 获取第一个值（不存在返回 None） |
+| `del` | `del(name: String): Unit` | 删除指定名称的键值对 |
+| `isEmpty` | `isEmpty(): Bool` | 是否为空 |
+| `iterator` | `iterator(): Iterator<(String, Collection<String>)>` | 遍历所有键值对 |
+
+### 7.2 使用示例
+
+```cangjie
+import stdx.net.http.*
+
+main() {
+    let client = ClientBuilder().build()
+    let resp = client.get("http://example.com/hello")
+
+    // 获取单个头部字段（返回 ?String）
+    let contentType = resp.headers.getFirst("Content-Type")
+    println("Content-Type: ${contentType}")
+
+    // 获取多值头部字段（返回 Collection<String>）
+    let cacheValues = resp.headers.get("Cache-Control")
+    for (v in cacheValues) {
+        println("Cache-Control: ${v}")
+    }
+
+    // 遍历所有头部
+    for ((name, values) in resp.headers) {
+        for (v in values) {
+            println("${name}: ${v}")
+        }
+    }
+
+    client.close()
+}
+```
+
+---
+
+## 8. HttpRequest 属性
+
+`HttpRequest` 继承 `ToString`，是客户端发送的请求对象。
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| `method` | `String` | HTTP 方法（GET/POST 等） |
+| `url` | `URL` | 请求 URL |
+| `headers` | `HttpHeaders` | 请求头 |
+| `body` | `InputStream` | 请求体 |
+| `bodySize` | `Option<Int64>` | 请求体大小 |
+| `version` | `Protocol` | 协议版本 |
+| `trailers` | `HttpHeaders` | Trailer 头 |
+
+---
+
+## 9. 自定义网络配置（TLS + 自定义连接）
+
+完整示例：自定义 TLS 配置 + TCP 连接器 + HTTP/2 协商：
+
+```cangjie
+import std.net.{TcpSocket, SocketAddress}
+import std.convert.Parsable
+import std.fs.*
+import stdx.net.tls.*
+import stdx.crypto.x509.X509Certificate
+import stdx.net.http.*
+import std.io.*
+
+main() {
+    // 1. 自定义配置
+    // TLS 配置
+    var tlsConfig = TlsClientConfig()
+    // TLS 证书文件需要用户自行提供
+    let pem = String.fromUtf8(readToEnd(File("/rootCerPath", Read)))
+    tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(pem))
+    tlsConfig.alpnProtocolsList = ["h2"]
+    // TCP 建连配置
+    let TcpSocketConnector = {
+        sa: SocketAddress =>
+        let socket = TcpSocket(sa)
+        socket.connect()
+        return socket
+    }
+    // 2. 构建 client 实例
+    let client = ClientBuilder().tlsConfig(tlsConfig).enablePush(false).connector(TcpSocketConnector).build()
+    // 3. 发送请求，其中请求 URL 可根据实际情况修改
+    let rsp = client.get("https://example.com/hello")
+    // 4. 读取响应体
+    let buf = Array<UInt8>(1024, repeat: 0)
+    let len = rsp.body.read(buf)
+    println(String.fromUtf8(buf.slice(0, len)))
+    // 5. 关闭连接
+    client.close()
+}
+```
+
+> **说明**：此示例展示了 TLS 自定义 CA 验证 + HTTP/2 ALPN 协商 + 自定义 TCP 连接器的组合使用。各部分也可独立使用，详见 [HTTPS.md](./HTTPS.md) 和 [CONNECTOR.md](./CONNECTOR.md)。
+
+---
+
+## 10. Cookie 管理
 
 `ClientBuilder` 默认启用 `CookieJar`，自动处理 `Set-Cookie` 和 `Cookie` 头。
 
@@ -222,19 +347,20 @@ main() {
 
 ---
 
-## 8. 代理配置
+## 11. 代理配置
 
 ```cangjie
 import stdx.net.http.*
 
 main() {
-    let client = ClientBuilder()
-        .httpProxy("http://127.0.0.1:8080")
-        .build()
-
+    // 1. 构建 client 实例
+    let client = ClientBuilder().httpProxy("http://127.0.0.1:8080").build()
+    // 2. 发送请求，所有请求都会被发送至 127.0.0.1 地址的 8080 端口，而不是 example.com
+    // 用户可根据实际情况修改代理配置和请求 URL
     let rsp = client.get("http://example.com/hello")
+    // 3. 打印响应
     println(rsp)
-
+    // 4. 关闭连接
     client.close()
 }
 ```
@@ -243,7 +369,27 @@ main() {
 
 ---
 
-## 9. HTTPS 配置（TLS 加密）
+## 12. 日志调试
+
+通过 `logger` 属性可以设置日志级别进行调试：
+
+```cangjie
+import stdx.net.http.*
+import stdx.log.*
+
+main() {
+    let client = ClientBuilder().build()
+    // 开启 DEBUG 级别日志
+    client.logger.level = LogLevel.DEBUG
+    let rsp = client.get("http://example.com/hello")
+    println(rsp)
+    client.close()
+}
+```
+
+---
+
+## 13. HTTPS 配置（TLS 加密）
 
 HTTPS = HTTP + TLS，在 HTTP 客户端基础上通过 `ClientBuilder.tlsConfig()` 添加 TLS 加密层。
 
@@ -274,7 +420,7 @@ main() {
 
 ---
 
-## 10. 异常类型
+## 14. 异常类型
 
 | 异常 | 说明 |
 |------|------|
@@ -288,7 +434,7 @@ main() {
 
 ---
 
-## 11. 关键规则速查
+## 15. 关键规则速查
 
 | 规则 | 说明 |
 |------|------|
@@ -305,4 +451,5 @@ main() {
 | 启用 HTTPS | `ClientBuilder().tlsConfig(tlsConfig)`，详见 [HTTPS.md](./HTTPS.md) |
 | 自定义连接 | `ClientBuilder().connector(fn)`，详见 [CONNECTOR.md](./CONNECTOR.md) |
 | 分块传输 | `Transfer-Encoding: chunked` + 自定义 `InputStream`，详见 [CHUNKED.md](./CHUNKED.md) |
+| 日志调试 | `client.logger.level = LogLevel.DEBUG` 开启请求调试日志 |
 | OpenSSL 依赖 | HTTPS 需安装 OpenSSL 3，详见 `cangjie-stdx` Skill 下的 tls 文档 |
