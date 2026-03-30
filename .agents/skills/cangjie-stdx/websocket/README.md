@@ -126,6 +126,7 @@ static func upgradeFromClient(
 | `write` | `write(frameType: WebSocketFrameType, byteArray: Array<UInt8>, frameSize!: Int64 = 4096): Unit` | 发送帧 |
 | `writeCloseFrame` | `writeCloseFrame(status!: ?UInt16 = None, reason!: String = ""): Unit` | 发送关闭帧 |
 | `writePongFrame` | `writePongFrame(payload: Array<UInt8>): Unit` | 回复 Pong 帧 |
+| `writePingFrame` | `writePingFrame(byteArray: Array<UInt8>): Unit` | 发送 Ping 帧 |
 | `closeConn` | `closeConn(): Unit` | 关闭底层连接 |
 | `subProtocol` | `subProtocol: ?String` | 协商的子协议 |
 

@@ -360,6 +360,14 @@ import std.collection.{ArrayList, HashMap} // 按需导入 API
 | `ChainedInputStream` | `ChainedInputStream(Array<InputStream>)` | 串联多个输入流 |
 | `MultiOutputStream` | `MultiOutputStream(Array<OutputStream>)` | 同时写入多个输出流 |
 
+### 6.3 流工具函数
+
+| 函数 | 说明 |
+|------|------|
+| `copy(from: InputStream, to!: OutputStream): Int64` | 流到流数据拷贝，返回拷贝字节数 |
+| `readToEnd<T>(from: T): Array<Byte>` | 读取流中全部剩余数据为字节数组（`T <: InputStream & Seekable`） |
+| `readString<T>(from: T): String` | 读取全部剩余数据为 UTF-8 字符串 |
+
 ---
 
 ## 7. fs — 文件系统
@@ -481,7 +489,7 @@ import std.collection.{ArrayList, HashMap} // 按需导入 API
 | `Semaphore` | `Semaphore(Int64)` | `acquire()`, `release()`, `tryAcquire(): Bool` | 信号量 |
 | `ReadWriteLock` | `ReadWriteLock()` | `readLock()`, `readUnlock()`, `writeLock()`, `writeUnlock()` | 读写锁 |
 | `SyncCounter` | `SyncCounter(Int64)` | `dec()`, `waitUntilZero()` | 同步计数器 |
-| `Timer` | `Timer()` | — | 定时器 |
+| `Timer` | — | `Timer.once(Duration, () -> Unit): Timer`, `Timer.repeat(Duration, Duration, () -> Unit): Timer`, `cancel()` | 定时器 |
 | `Monitor` | `Monitor()` | `enter()`, `leave()`, `wait()`, `notify()`, `notifyAll()` | ⚠️ 已弃用 |
 | `ReentrantMutex` | `ReentrantMutex()` | `lock()`, `unlock()`, `tryLock(): Bool`（可重入） | ⚠️ 已弃用 |
 
