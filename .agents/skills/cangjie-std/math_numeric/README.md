@@ -48,7 +48,7 @@ main(): Int64 {
 
 | 方法 / 属性 | 说明 |
 |-------------|------|
-| `Decimal(val: String)` | 从字符串构造 |
+| `Decimal.parse(val: String): Decimal` | 从字符串解析（推荐） |
 | `Decimal(val: Int64)` | 从整数构造 |
 | `+, -, *, /` | 四则运算 |
 | `precision: Int64` | 有效数字位数 |
@@ -61,8 +61,8 @@ package test_proj
 import std.math.numeric.*
 
 main(): Int64 {
-    let d1 = Decimal("3.14")
-    let d2 = Decimal("2.86")
+    let d1 = Decimal.parse("3.14")
+    let d2 = Decimal.parse("2.86")
     println("${d1} + ${d2} = ${d1 + d2}")
     println("${d1} * ${d2} = ${d1 * d2}")
     // 精度与标度
@@ -105,7 +105,7 @@ main(): Int64 {
 ## 4. 关键规则速查
 
 1. `BigInt.parse(value)` 默认按十进制解析，可指定 `radix!` 参数
-2. `Decimal` 使用字符串构造以保证精度，避免 `Decimal(floatValue)`
+2. `Decimal` 优先使用 `Decimal.parse(value)` 从字符串构造以保证精度（`Decimal(String)` 已废弃）
 3. `divAndMod` 同时返回商和余数，比分别计算更高效
 4. `modPow(n, m!)` 用于密码学等大数模幂场景，`m` 默认 `None` 表示普通幂运算
 5. `BigInt` / `Decimal` 均实现 `Comparable`，可直接用于排序和比较

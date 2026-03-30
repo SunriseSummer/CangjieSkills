@@ -531,7 +531,7 @@ import std.collection.{ArrayList, HashMap} // 按需导入 API
 | 类型 | 构造函数 | 说明 |
 |------|----------|------|
 | `BigInt` | `BigInt(String)`, `BigInt(Int64)` | 任意精度整数，支持 `+`/`-`/`*`/`/`/`%` |
-| `Decimal` | `Decimal(String)`, `Decimal(Float64)` | 任意精度十进制数 |
+| `Decimal` | `Decimal.parse(String)`, `Decimal(Int64)` | 任意精度十进制数（`Decimal(String)` 已废弃，使用 `Decimal.parse` 替代） |
 
 ---
 
