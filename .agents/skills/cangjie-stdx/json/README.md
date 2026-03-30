@@ -148,7 +148,7 @@ import std.io.ByteBuffer
 
 main() {
     let jsonStr = ##"{"name":"Alice","age":30}"##
-    var buf = ByteBuffer()
+    let buf = ByteBuffer()
     unsafe { buf.write(jsonStr.rawData()) }
     let reader = JsonReader(buf)
 
@@ -245,7 +245,7 @@ class User <: JsonDeserializable<User> {
 
 main() {
     let jsonStr = ##"{"name":"Bob","age":25}"##
-    var buf = ByteBuffer()
+    let buf = ByteBuffer()
     unsafe { buf.write(jsonStr.rawData()) }
     let reader = JsonReader(buf)
     let user = reader.readValue<User>()

@@ -102,7 +102,7 @@ main() {
     // 2、启动客户端
     let client = ClientBuilder().build()
     let port = (serverSocket.localAddress as IPSocketAddress)?.port ?? throw Exception("Port not found.")
-    var u = URL.parse("http://127.0.0.1:${port}/a/b/c")
+    let u = URL.parse("http://127.0.0.1:${port}/a/b/c")
     var r = HttpRequestBuilder().url(u).build()
     // 3、发送 request
     client.send(r)

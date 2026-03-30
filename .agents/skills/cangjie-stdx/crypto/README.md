@@ -78,15 +78,15 @@ import stdx.encoding.hex.*
 
 main() {
     // SHA256 摘要
-    var sha256 = SHA256()
+    let sha256 = SHA256()
     sha256.write("hello world".toArray())
-    var digest = sha256.finish()
+    let digest = sha256.finish()
     println("SHA256: ${toHexString(digest)}")
 
     // HMAC-SHA256
-    var hmac = HMAC("secret-key".toArray(), HashType.SHA256)
+    let hmac = HMAC("secret-key".toArray(), HashType.SHA256)
     hmac.write("message".toArray())
-    var mac = hmac.finish()
+    let mac = hmac.finish()
     println("HMAC: ${toHexString(mac)}")
 }
 ```
@@ -124,24 +124,24 @@ import std.crypto.digest.*
 
 main() {
     // 生成 2048 位 RSA 密钥对
-    var rsaPri = RSAPrivateKey(2048)
-    var rsaPub = RSAPublicKey(rsaPri)
+    let rsaPri = RSAPrivateKey(2048)
+    let rsaPub = RSAPublicKey(rsaPri)
 
     // 加密
-    var plaintext = "hello cangjie"
-    var input = ByteBuffer()
-    var encrypted = ByteBuffer()
-    var decrypted = ByteBuffer()
+    let plaintext = "hello cangjie"
+    let input = ByteBuffer()
+    let encrypted = ByteBuffer()
+    let decrypted = ByteBuffer()
     input.write(plaintext.toArray())
 
-    var encOpt = OAEPOption(SHA1(), SHA256())
+    let encOpt = OAEPOption(SHA1(), SHA256())
     rsaPub.encrypt(input, encrypted, padType: OAEP(encOpt))
 
     // 解密
-    var decOpt = OAEPOption(SHA1(), SHA256())
+    let decOpt = OAEPOption(SHA1(), SHA256())
     rsaPri.decrypt(encrypted, decrypted, padType: OAEP(decOpt))
 
-    var buf = Array<Byte>(plaintext.size, repeat: 0)
+    let buf = Array<Byte>(plaintext.size, repeat: 0)
     decrypted.read(buf)
     println(String.fromUtf8(buf))  // hello cangjie
 }
@@ -160,21 +160,21 @@ import stdx.crypto.digest.*
 import std.crypto.digest.*
 
 main() {
-    var rsaPri = RSAPrivateKey(2048)
-    var rsaPub = RSAPublicKey(rsaPri)
+    let rsaPri = RSAPrivateKey(2048)
+    let rsaPub = RSAPublicKey(rsaPri)
 
     // 计算消息摘要
-    var sha256 = SHA256()
+    let sha256 = SHA256()
     sha256.write("important message".toArray())
-    var digest = sha256.finish()
+    let digest = sha256.finish()
 
     // 签名
-    var signature = rsaPri.sign(sha256, digest, padType: PKCS1)
+    let signature = rsaPri.sign(sha256, digest, padType: PKCS1)
 
     // 验签
     sha256.reset()
     sha256.write("important message".toArray())
-    var digest2 = sha256.finish()
+    let digest2 = sha256.finish()
     if (rsaPub.verify(sha256, digest2, signature, padType: PKCS1)) {
         println("signature verified")
     }
@@ -192,18 +192,18 @@ package test_proj
 import stdx.crypto.keys.*
 
 main() {
-    var rsaPri = RSAPrivateKey(2048)
-    var rsaPub = RSAPublicKey(rsaPri)
+    let rsaPri = RSAPrivateKey(2048)
+    let rsaPub = RSAPublicKey(rsaPri)
 
     // 导出为 PEM 格式（返回 PemEntry）
-    var priPem = rsaPri.encodeToPem()
-    var pubPem = rsaPub.encodeToPem()
+    let priPem = rsaPri.encodeToPem()
+    let pubPem = rsaPub.encodeToPem()
     println("private key PEM exported")
     println("public key PEM exported")
 
     // 从 PEM 字符串导入
-    var pri2 = RSAPrivateKey.decodeFromPem(priPem.toString())
-    var pub2 = RSAPublicKey.decodeFromPem(pubPem.toString())
+    let pri2 = RSAPrivateKey.decodeFromPem(priPem.toString())
+    let pub2 = RSAPublicKey.decodeFromPem(pubPem.toString())
     println("key imported successfully")
 }
 ```
@@ -223,15 +223,15 @@ import stdx.crypto.digest.*
 
 main() {
     // 支持的曲线: P224, P256, P384, P521
-    var ecPri = ECDSAPrivateKey(P256)
-    var ecPub = ECDSAPublicKey(ecPri)
+    let ecPri = ECDSAPrivateKey(P256)
+    let ecPub = ECDSAPublicKey(ecPri)
 
-    var sha256 = SHA256()
+    let sha256 = SHA256()
     sha256.write("test data".toArray())
-    var digest = sha256.finish()
+    let digest = sha256.finish()
 
     // ECDSA 签名只需传入摘要
-    var sig = ecPri.sign(digest)
+    let sig = ecPri.sign(digest)
     if (ecPub.verify(digest, sig)) {
         println("ECDSA verify success")
     }
