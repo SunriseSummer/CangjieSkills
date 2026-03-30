@@ -33,8 +33,8 @@ let s5 = """
 let runes: Array<Rune> = [r'H', r'i']
 let s6 = String(runes)          // "Hi"
 
-// 从 Rune 集合构造
-let s7 = String(someRuneCollection)
+// 也支持从任意 Collection<Rune> 构造
+// let s7 = String(someRuneCollection)
 
 // 从 UTF-8 字节数组构造
 let bytes: Array<UInt8> = [72, 101, 108, 108, 111]

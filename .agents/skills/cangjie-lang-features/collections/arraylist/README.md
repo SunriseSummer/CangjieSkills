@@ -30,7 +30,7 @@ let list2 = ArrayList<Int64>(100)
 let list3 = ArrayList<Int64>([1, 2, 3])
 
 // 从其他 Collection 构造
-let list4 = ArrayList<Int64>(otherCollection)
+// let list4 = ArrayList<Int64>(otherCollection)
 
 // 指定大小 + 初始化函数
 let list5 = ArrayList<Int64>(5, {i => i * 10})  // [0, 10, 20, 30, 40]
@@ -117,7 +117,7 @@ let list = ArrayList<Int64>()
 list.add(1)                          // [1]
 list.add(2)                          // [1, 2]
 list.add(all: [3, 4, 5])            // [1, 2, 3, 4, 5]
-list.add(all: otherArrayList)        // 追加另一个集合的元素
+list.add(all: ArrayList<Int64>([6, 7]))  // 追加另一个集合的元素
 ```
 
 ### 5.2 在指定位置插入
@@ -363,8 +363,8 @@ sort(list)  // [1, 1, 3, 4, 5]
 // 以下方法已废弃，建议使用 std.sort
 list.sort()                                          // 升序（T 须 <: Comparable）
 list.sortDescending()                                // 降序
-list.sortBy(comparator: { a, b => b - a })          // 自定义比较器
-list.sortBy(stable: true, comparator: { a, b => a - b }) // 稳定排序
+list.sortBy(comparator: { a, b => a.compare(b) })   // 自定义比较器（返回 Ordering）
+list.sortBy(stable: true, comparator: { a, b => a.compare(b) }) // 稳定排序
 ```
 
 ---

@@ -380,10 +380,23 @@ Array 本身不提供排序方法，需导入 `std.sort`：
 ```cangjie
 import std.sort.*
 
-var arr = [3, 1, 4, 1, 5, 9]
-sort(arr)                        // 原地升序：[1, 1, 3, 4, 5, 9]
-sort(arr) { a, b => b - a }     // 自定义降序
+main() {
+    var arr = [3, 1, 4, 1, 5, 9]
+    sort(arr)                        // 原地升序：[1, 1, 3, 4, 5, 9]
+    println(arr)
+
+    var arr2 = [3, 1, 4, 1, 5, 9]
+    sort(arr2, lessThan: { a: Int64, b: Int64 => a > b })  // 自定义降序
+    println(arr2)                    // [9, 5, 4, 3, 1, 1]
+
+    // 也可以使用内置的 descending 命名参数
+    var arr3 = [3, 1, 4, 1, 5, 9]
+    sort(arr3, descending: true)     // 降序排列
+    println(arr3)                    // [9, 5, 4, 3, 1, 1]
+}
 ```
+
+> **注意**：`sort` 的自定义比较函数须通过命名参数 `lessThan:` 传递，不能使用尾随 Lambda 语法。`lessThan` 函数返回值为 `Bool`，`a < b` 时返回 `true` 表示升序。此外 `sort` 还支持 `stable:` 和 `descending:` 命名参数。
 
 ---
 

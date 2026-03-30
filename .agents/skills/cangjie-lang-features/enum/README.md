@@ -55,7 +55,7 @@ enum Expr {
 enum RGBColor2 {
     | Red | Green | Blue
 
-    public func getName() {
+    public func getName(): String {
         match (this) { // this 表示当前枚举实例
             case Red => "Red"
             case Green => "Green"
@@ -158,9 +158,9 @@ enum Expr {
 
 // 为枚举实现 ToString 接口
 enum Color <: ToString { // 也可用 @Derive[ToString] 自动实现
-    Red | Green | Blue
+    | Red | Green | Blue
 
-    public func toString() { // 枚举中可以定义成员函数
+    public func toString(): String { // 枚举中可以定义成员函数
         match (this) {
             case Red => "Red"
             case Green => "Green"

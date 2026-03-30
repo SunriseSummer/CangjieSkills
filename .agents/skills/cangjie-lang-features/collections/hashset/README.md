@@ -32,7 +32,7 @@ let set2 = HashSet<String>(100)
 let set3 = HashSet<Int64>([0, 1, 2])
 
 // 从集合构造
-let set4 = HashSet<Int64>(otherCollection)
+// let set4 = HashSet<Int64>(otherCollection)
 
 // 指定大小 + 初始化函数
 let set5 = HashSet<Int64>(5, {i => i * i})

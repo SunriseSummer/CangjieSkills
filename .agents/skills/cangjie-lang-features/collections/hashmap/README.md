@@ -31,7 +31,7 @@ let map2 = HashMap<String, Int64>(100)
 let map3 = HashMap<String, Int64>([("a", 1), ("b", 2), ("c", 3)])
 
 // 从键值对集合构造
-let map4 = HashMap<String, Int64>(otherCollection)
+// let map4 = HashMap<String, Int64>(otherCollection)
 
 // 指定大小 + 初始化函数
 let map5 = HashMap<Int64, Int64>(5, {i => (i, i * i)})
