@@ -5,7 +5,7 @@
 - 依赖 `stdx.net.http`，关于扩展标准库 `stdx` 的配置用法，请参阅 `cangjie-stdx` Skill
 - 支持 HTTP/1.0、1.1、2.0（RFC 9110/9112/9113/9218/7541）
 - 核心模式：`ClientBuilder` 构建 → `Client` 发送请求 → 读取响应 → `close()` 释放
-- HTTPS 需配置 `TlsClientConfig` 并传入 `ClientBuilder.tlsConfig()`，详见下方第 9 节
+- HTTPS 需配置 `TlsClientConfig` 并传入 `ClientBuilder.tlsConfig()`，详见 [HTTPS.md](./HTTPS.md)
 
 ---
 
@@ -15,13 +15,9 @@
 import stdx.net.http.*
 
 main() {
-    // 1. 构建 Client
     let client = ClientBuilder().build()
-    // 2. 发送 GET 请求，其中请求 URL 可根据实际情况修改
-    let resp = client.get("http://example.com/hello")
-    // 3. 打印响应内容
-    println(resp)
-    // 4. 关闭客户端，释放所有连接
+    let rsp = client.get("http://example.com/hello")
+    println(rsp)
     client.close()
 }
 ```
@@ -35,17 +31,17 @@ main() {
 | 方法 | 签名 | 说明 |
 |------|------|------|
 | `build` | `build(): Client` | 构建 Client 实例 |
-| `tlsConfig` | `tlsConfig(TlsClientConfig): ClientBuilder` | TLS 配置（启用 HTTPS，详见第 9 节） |
+| `tlsConfig` | `tlsConfig(TlsClientConfig): ClientBuilder` | TLS 配置（启用 HTTPS，详见 [HTTPS.md](./HTTPS.md)） |
 | `httpProxy` | `httpProxy(String): ClientBuilder` | HTTP 代理（格式：`"http://host:port"`） |
 | `httpsProxy` | `httpsProxy(String): ClientBuilder` | HTTPS 代理 |
 | `noProxy` | `noProxy(): ClientBuilder` | 不使用代理（忽略环境变量） |
-| `cookieJar` | `cookieJar(?CookieJar): ClientBuilder` | Cookie 管理器（默认启用） |
+| `cookieJar` | `cookieJar(?CookieJar): ClientBuilder` | Cookie 管理器（默认启用），详见 [COOKIE.md](./COOKIE.md) |
 | `autoRedirect` | `autoRedirect(Bool): ClientBuilder` | 自动跟随重定向（默认 true，304 不重定向） |
 | `readTimeout` | `readTimeout(Duration): ClientBuilder` | 读超时（默认 15 秒） |
 | `writeTimeout` | `writeTimeout(Duration): ClientBuilder` | 写超时（默认 15 秒） |
 | `poolSize` | `poolSize(Int64): ClientBuilder` | HTTP/1.1 连接池大小（同一 host:port 最大连接数，默认 10） |
 | `logger` | `logger(Logger): ClientBuilder` | 自定义日志（需线程安全） |
-| `connector` | `connector((SocketAddress) -> StreamingSocket): ClientBuilder` | 自定义 TCP 连接函数 |
+| `connector` | `connector((SocketAddress) -> StreamingSocket): ClientBuilder` | 自定义 TCP 连接函数，详见 [CONNECTOR.md](./CONNECTOR.md) |
 
 **HTTP/2 专用配置：**
 
@@ -61,7 +57,6 @@ main() {
 ### 3.2 配置示例
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
 import std.time.*
 
@@ -116,8 +111,8 @@ main() {
 | `setHeaders` | `setHeaders(HttpHeaders): HttpRequestBuilder` | 替换全部请求头 |
 | `body` | `body(String): HttpRequestBuilder` | 设置字符串请求体 |
 | `body` | `body(Array<UInt8>): HttpRequestBuilder` | 设置字节数组请求体 |
-| `body` | `body(InputStream): HttpRequestBuilder` | 设置流式请求体 |
-| `trailer` | `trailer(String, String): HttpRequestBuilder` | 添加 Trailer |
+| `body` | `body(InputStream): HttpRequestBuilder` | 设置流式请求体，详见 [CHUNKED.md](./CHUNKED.md) |
+| `trailer` | `trailer(String, String): HttpRequestBuilder` | 添加 Trailer，详见 [CHUNKED.md](./CHUNKED.md) |
 | `version` | `version(Protocol): HttpRequestBuilder` | 指定协议版本 |
 | `readTimeout` | `readTimeout(Duration): HttpRequestBuilder` | 请求级读超时（覆盖 Client 级别） |
 | `writeTimeout` | `writeTimeout(Duration): HttpRequestBuilder` | 请求级写超时（覆盖 Client 级别） |
@@ -127,22 +122,22 @@ main() {
 ### 5.2 自定义请求示例
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
 
 main() {
     let client = ClientBuilder().build()
 
-    // 构建自定义 POST 请求
     let req = HttpRequestBuilder()
         .post()
-        .url("http://127.0.0.1:8080/api/data")
+        .url("http://example.com/api/data")
         .header("Content-Type", "application/json")
-        .header("Authorization", "******")
+        .header("Authorization", "Bearer token")
         .body("{\"key\": \"value\", \"count\": 42}")
         .build()
 
-    println("Request built: ${req.method} ${req.url}")
+    let resp = client.send(req)
+    println(resp)
+
     client.close()
 }
 ```
@@ -168,18 +163,39 @@ main() {
 使用 `StringReader` 一次性读取全部字符串：
 
 ```cangjie
-// let body = StringReader(resp.body).readToEnd()
+import stdx.net.http.*
+import std.io.StringReader
+
+main() {
+    let client = ClientBuilder().build()
+    let resp = client.get("http://example.com/hello")
+
+    let body = StringReader(resp.body).readToEnd()
+    println("Status: ${resp.status}")
+    println("Body: ${body}")
+
+    client.close()
+}
 ```
 
-逐块读取大文件：
+逐块读取大响应体：
 
 ```cangjie
-// let buf = Array<UInt8>(4096, repeat: 0)
-// var len = resp.body.read(buf)
-// while (len > 0) {
-//     println("Read ${len} bytes")
-//     len = resp.body.read(buf)
-// }
+import stdx.net.http.*
+
+main() {
+    let client = ClientBuilder().build()
+    let resp = client.get("http://example.com/hello")
+
+    let buf = Array<UInt8>(4096, repeat: 0)
+    var len = resp.body.read(buf)
+    while (len > 0) {
+        println("Read ${len} bytes")
+        len = resp.body.read(buf)
+    }
+
+    client.close()
+}
 ```
 
 > **重要**：HTTP/1.1 的 `body` 必须完全读取后连接才能被复用。如不需要 body，调用 `resp.close()` 释放资源。
@@ -188,52 +204,37 @@ main() {
 
 ## 7. Cookie 管理
 
-### 7.1 自动 Cookie 管理
-
 `ClientBuilder` 默认启用 `CookieJar`，自动处理 `Set-Cookie` 和 `Cookie` 头。
 
-### 7.2 禁用 Cookie
+禁用 Cookie 管理：
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
 
 main() {
-    // 传 None 禁用 Cookie 管理
     let client = ClientBuilder().cookieJar(None).build()
     println("Client without cookies created")
     client.close()
 }
 ```
 
-### 7.3 Cookie 类构造
-
-```
-Cookie(name: String, value: String,
-    maxAge: Int64,          // 过期秒数
-    domain: String,         // 域名
-    path: String)           // 路径
-```
-
-- `toSetCookieString()` — 生成 `Set-Cookie` 头值（服务端用）
-- `CookieJar.toCookieString(cookies)` — 生成 `Cookie` 头值
-- `CookieJar.parseSetCookieHeader(resp)` — 解析响应中的 `Set-Cookie` 头
+完整的 Cookie API 和使用示例请参阅 [COOKIE.md](./COOKIE.md)。
 
 ---
 
 ## 8. 代理配置
 
 ```cangjie
-package test_proj
 import stdx.net.http.*
 
 main() {
-    // HTTP 代理
     let client = ClientBuilder()
-        .httpProxy("http://proxy.example.com:8080")
+        .httpProxy("http://127.0.0.1:8080")
         .build()
 
-    println("Proxy client created")
+    let rsp = client.get("http://example.com/hello")
+    println(rsp)
+
     client.close()
 }
 ```
@@ -246,33 +247,7 @@ main() {
 
 HTTPS = HTTP + TLS，在 HTTP 客户端基础上通过 `ClientBuilder.tlsConfig()` 添加 TLS 加密层。
 
-### 9.1 TlsClientConfig 配置
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `verifyMode` | `CertificateVerifyMode` | `Default` | 证书验证模式 |
-| `domain` | `?String` | `None` | 服务端主机名（SNI），通常自动从 URL 获取 |
-| `alpnProtocolsList` | `Array<String>` | `[]` | ALPN 协议列表（设置 `["h2"]` 启用 HTTP/2） |
-| `clientCertificate` | `?(Array<X509Certificate>, PrivateKey)` | `None` | 客户端证书链和私钥的可选元组（双向认证时使用） |
-| `cipherSuitesV1_2` | `?Array<String>` | `None` | TLS 1.2 密码套件名称列表 |
-| `cipherSuitesV1_3` | `?Array<String>` | `None` | TLS 1.3 密码套件名称列表 |
-| `minVersion` | `TlsVersion` | `V1_2` | 最低 TLS 版本 |
-| `maxVersion` | `TlsVersion` | `V1_3` | 最高 TLS 版本 |
-| `securityLevel` | `Int32` | `2` | 安全级别（0-5） |
-| `signatureAlgorithms` | `?Array<SignatureAlgorithm>` | `None` | 签名算法偏好 |
-| `keylogCallback` | `?(TlsSocket, String) -> Unit` | `None` | TLS 密钥日志回调（调试用） |
-
-### 9.2 证书验证模式（CertificateVerifyMode）
-
-| 模式 | 说明 | 适用场景 |
-|------|------|----------|
-| `Default` | 使用系统 CA 验证服务端证书 | **生产环境**（默认） |
-| `CustomCA(certs)` | 使用自定义 CA 列表验证 | 自签名证书或私有 CA |
-| `TrustAll` | 信任所有证书，不验证 | **仅限开发测试** |
-
-### 9.3 快速入门（TrustAll 模式，仅测试用）
-
-> **⚠️ 警告**：`TrustAll` 模式跳过证书验证，**仅限开发测试环境使用**，生产环境请使用 `Default` 或 `CustomCA` 模式。
+快速入门（TrustAll 模式，**仅测试用**）：
 
 ```cangjie
 import stdx.net.http.*
@@ -293,163 +268,9 @@ main() {
 }
 ```
 
-### 9.4 使用自定义 CA 证书（CustomCA 模式）
+> **⚠️ 警告**：`TrustAll` 模式跳过证书验证，**仅限开发测试环境使用**。
 
-适用于自签名证书或内部私有 CA 的场景：
-
-```cangjie
-import stdx.net.http.*
-import stdx.net.tls.*
-import stdx.crypto.x509.X509Certificate
-import std.io.*
-import std.fs.*
-
-main() {
-    // 加载自定义 CA 证书
-    let caPem = String.fromUtf8(readToEnd(File("./ca.crt", Read)))
-    let caCerts = X509Certificate.decodeFromPem(caPem)
-
-    var tlsConfig = TlsClientConfig()
-    tlsConfig.verifyMode = CustomCA(caCerts)
-
-    let client = ClientBuilder()
-        .tlsConfig(tlsConfig)
-        .build()
-
-    let resp = client.get("https://myserver.example.com/api")
-    println(StringReader(resp.body).readToEnd())
-
-    client.close()
-}
-```
-
-### 9.5 启用 HTTP/2
-
-HTTP/2 需要 TLS + ALPN `h2` 配置。如果握手失败，自动回退 HTTP/1.1。
-
-```cangjie
-package test_proj
-import stdx.net.http.*
-import stdx.net.tls.*
-
-main() {
-    var tlsConfig = TlsClientConfig()
-    tlsConfig.verifyMode = TrustAll
-    tlsConfig.alpnProtocolsList = ["h2"]
-
-    let client = ClientBuilder()
-        .tlsConfig(tlsConfig)
-        .build()
-
-    println("HTTP/2 client created successfully")
-    client.close()
-}
-```
-
-> **说明**：不支持通过 `Upgrade: h2c` 从 HTTP/1.1 升级到 HTTP/2。
-
-### 9.6 双向 TLS 认证（客户端证书）
-
-当服务端要求客户端提供证书时，需配置客户端证书链和私钥：
-
-```cangjie
-import stdx.net.http.*
-import stdx.net.tls.*
-import stdx.crypto.x509.{X509Certificate, PrivateKey}
-import std.io.*
-import std.fs.*
-
-main() {
-    // 加载 CA 证书（用于验证服务端）
-    let caPem = String.fromUtf8(readToEnd(File("./ca.crt", Read)))
-    let caCerts = X509Certificate.decodeFromPem(caPem)
-
-    // 加载客户端证书链和私钥
-    let clientPem = String.fromUtf8(readToEnd(File("./client.crt", Read)))
-    let clientKey = String.fromUtf8(readToEnd(File("./client.key", Read)))
-    let clientCerts = X509Certificate.decodeFromPem(clientPem)
-    let clientPrivateKey = PrivateKey.decodeFromPem(clientKey)
-
-    var tlsConfig = TlsClientConfig()
-    tlsConfig.verifyMode = CustomCA(caCerts)
-    // 设置客户端证书（双向认证），注意是证书链数组
-    tlsConfig.clientCertificate = (clientCerts, clientPrivateKey)
-
-    let client = ClientBuilder()
-        .tlsConfig(tlsConfig)
-        .build()
-
-    let resp = client.get("https://secure.example.com/api")
-    println(StringReader(resp.body).readToEnd())
-
-    client.close()
-}
-```
-
-### 9.7 HTTP/2 Server Push 接收
-
-当服务端使用 HTTP/2 Server Push 主动推送资源时，客户端可通过 `resp.getPush()` 获取推送的响应：
-
-```cangjie
-import stdx.net.http.*
-import stdx.net.tls.*
-import stdx.crypto.x509.X509Certificate
-import std.io.*
-import std.fs.*
-
-main() {
-    let caPem = String.fromUtf8(readToEnd(File("./ca.crt", Read)))
-    var tlsConfig = TlsClientConfig()
-    tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(caPem))
-    tlsConfig.alpnProtocolsList = ["h2"]
-
-    let client = ClientBuilder()
-        .tlsConfig(tlsConfig)
-        .enablePush(true)
-        .build()
-
-    let resp = client.get("https://127.0.0.1:8443/index.html")
-    println("Main response status: ${resp.status}")
-    println("Main body: ${StringReader(resp.body).readToEnd()}")
-
-    // 获取服务端推送的响应
-    let pushResponses = resp.getPush()
-    match (pushResponses) {
-        case Some(pushList) =>
-            for (pushResp in pushList) {
-                println("Pushed: ${pushResp.status}")
-            }
-        case None =>
-            println("No server push")
-    }
-
-    client.close()
-}
-```
-
-### 9.8 高级 TLS 配置
-
-```cangjie
-package test_proj
-import stdx.net.http.*
-import stdx.net.tls.*
-
-main() {
-    var tlsConfig = TlsClientConfig()
-    tlsConfig.verifyMode = TrustAll
-    // 仅允许 TLS 1.3
-    tlsConfig.minVersion = V1_3
-    tlsConfig.maxVersion = V1_3
-    tlsConfig.alpnProtocolsList = ["h2"]
-
-    let client = ClientBuilder()
-        .tlsConfig(tlsConfig)
-        .build()
-
-    println("TLS 1.3 only client created")
-    client.close()
-}
-```
+完整的 HTTPS/TLS 配置（CustomCA、HTTP/2、双向认证、Server Push、高级选项）请参阅 [HTTPS.md](./HTTPS.md)。
 
 ---
 
@@ -477,15 +298,11 @@ main() {
 | 连接池限制 | HTTP/1.1 默认同一 host 最多 10 个连接，超出抛 `HttpException` |
 | Content-Length | 使用 `String` / `Array<UInt8>` 设置 body 时自动补充；使用自定义 `InputStream` 时需手动设置 |
 | 自动重定向 | 默认启用，304 状态码不重定向 |
-| Cookie 管理 | 默认启用 `CookieJar`，自动处理 `Set-Cookie` / `Cookie` 头 |
+| Cookie 管理 | 默认启用 `CookieJar`，详见 [COOKIE.md](./COOKIE.md) |
 | 代理 | 默认使用环境变量 `http_proxy` / `https_proxy`；`noProxy()` 禁用 |
 | TRACE 请求 | 协议规定 TRACE 请求不能携带 body |
 | 请求级超时 | `HttpRequestBuilder.readTimeout()` / `writeTimeout()` 覆盖 Client 级别设置 |
-| 启用 HTTPS | `ClientBuilder().tlsConfig(tlsConfig)` |
-| 系统 CA 验证 | `tlsConfig.verifyMode = Default`（默认值） |
-| 自定义 CA | `tlsConfig.verifyMode = CustomCA(certs)` |
-| 跳过验证（测试） | `tlsConfig.verifyMode = TrustAll`（**仅测试用**） |
-| 启用 HTTP/2 | `tlsConfig.alpnProtocolsList = ["h2"]`；握手失败自动回退 HTTP/1.1 |
-| 双向认证 | `tlsConfig.clientCertificate = (certChain, privateKey)` |
-| Server Push | `resp.getPush()` 获取推送响应；`enablePush(false)` 禁用 |
+| 启用 HTTPS | `ClientBuilder().tlsConfig(tlsConfig)`，详见 [HTTPS.md](./HTTPS.md) |
+| 自定义连接 | `ClientBuilder().connector(fn)`，详见 [CONNECTOR.md](./CONNECTOR.md) |
+| 分块传输 | `Transfer-Encoding: chunked` + 自定义 `InputStream`，详见 [CHUNKED.md](./CHUNKED.md) |
 | OpenSSL 依赖 | HTTPS 需安装 OpenSSL 3，详见 `cangjie-stdx` Skill 下的 tls 文档 |
