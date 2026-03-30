@@ -1,9 +1,13 @@
 ---
 name: cangjie-std
-description: "提供仓颉语言标准库常用功能速查文档，包括时间日期/数学运算/扩展数值/并发同步/并发集合/正则表达式/文件系统/IO流/网络通信/进程管理/排序/环境变量/随机数/二进制端序/整数溢出/Unicode字符/自动派生/反射/摘要算法/类型转换/标准输入输出/命令行参数处理/单元测试框架等"
+description: "提供仓颉语言标准库常用功能速查文档，包括核心类型/集合/时间日期/数学运算/扩展数值/并发同步/并发集合/正则表达式/文件系统/IO流/网络通信/进程管理/排序/环境变量/随机数/二进制端序/整数溢出/Unicode字符/自动派生/反射/摘要算法/类型转换/标准输入输出/命令行参数处理/单元测试框架/弱引用等"
 ---
 
 请按需查询当前目录下的标准库文档：
+
+[std.core](./core/README.md)：核心包（自动导入），包括基本类型(Int/Float/Bool/String/Array/Option)、核心接口(Comparable/Hashable/Iterable/Resource)、StringBuilder、Duration 时间间隔、全局函数(print/println/spawn/sleep/min/max)、异常体系等。
+
+[std.collection](./collection/README.md)：集合数据结构，包括 ArrayList 动态数组、HashMap/HashSet 哈希集合、TreeMap/TreeSet 有序集合、LinkedList 双向链表、ArrayDeque/ArrayQueue/ArrayStack 双端队列/队列/栈、函数式迭代操作(filter/map/fold/reduce)、收集函数(collectArray/collectHashMap)等。
 
 [std.time](./time/README.md)：时间日期处理，包括 DateTime 构造/格式化/解析/时区转换、MonoTime 单调时钟计时、Duration 时间间隔、Month/DayOfWeek 枚举等。
 
@@ -51,5 +55,5 @@ description: "提供仓颉语言标准库常用功能速查文档，包括时间
 
 [std.args](./args/README.md)：命令行参数处理，包括 main(args) 接收命令行参数、std.argopt 包解析短选项(-v)/长选项(--output)/组合选项、ArgumentSpec/ParsedArguments API 等。
 
-[others](./index.md)：标准库其他包和 API 功能速查表（core/console/database.sql/posix/runtime/objectpool/ast 等）。
+[std.ref](./ref/README.md)：弱引用，包括 WeakRef 弱引用管理、CleanupPolicy 清理策略(EAGER/DEFERRED)、缓存场景用法等。
 
