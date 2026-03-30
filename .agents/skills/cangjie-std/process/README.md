@@ -61,8 +61,8 @@ import std.io.*
 
 main(): Int64 {
     // 启动子进程并读取输出
-    let echoProcess: SubProcess = launch("echo", ["hello cangjie!"], stdOut: ProcessRedirect.Pipe)
-    let strReader: StringReader<InputStream> = StringReader(echoProcess.stdOutPipe)
+    let echoProcess = launch("echo", ["hello cangjie!"], stdOut: ProcessRedirect.Pipe)
+    let strReader = StringReader(echoProcess.stdOutPipe)
     println(strReader.readToEnd())
     return 0
 }

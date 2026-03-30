@@ -59,7 +59,7 @@ func checksum(chunk: Array<UInt8>): Int64 {
 main() {
     let client = ClientBuilder().build()
 
-    var requestBuilder = HttpRequestBuilder()
+    let requestBuilder = HttpRequestBuilder()
     let file = File("./res.jpg", Read)
     let sum = checksum(readToEnd(file))
 

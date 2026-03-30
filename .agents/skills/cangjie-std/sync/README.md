@@ -34,7 +34,7 @@ main(): Int64 {
     for (f in list) {
         f.get()
     }
-    var val = count.load()
+    let val = count.load()
     println("count = ${val}")
     return 0
 }
@@ -58,8 +58,8 @@ main(): Int64 {
 package test_proj
 import std.sync.*
 
-var mt = Mutex()
-var con = synchronized(mt) { mt.condition() }
+let mt = Mutex()
+let con = synchronized(mt) { mt.condition() }
 var flag: Bool = true
 
 main(): Int64 {

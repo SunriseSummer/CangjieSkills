@@ -29,7 +29,7 @@ import std.regex.*
 main(): Unit {
     let r = Regex("a.a")
     // find 返回 ?MatchData
-    var result = r.find("1aba2 ada3")
+    let result = r.find("1aba2 ada3")
     match (result) {
         case Some(md) =>
             println(md.matchString())
@@ -101,7 +101,7 @@ package test_proj
 import std.regex.*
 
 main(): Unit {
-    var r = Regex(#"(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})"#)
+    let r = Regex(#"(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})"#)
     for (md in r.lazyFindAll("2024-10-24&2025-01-01", group: true)) {
         println("# found: `${md.matchString()}` and groupCount: ${md.groupCount()}")
         if (md.groupCount() > 0) {

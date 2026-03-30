@@ -62,7 +62,7 @@ format_spec := [flags][width][.precision][specifier]
 import std.convert.*
 
 main() {
-    var a: Int32 = 20
+    let a: Int32 = 20
 
     // 进制转换
     println(a.format("b"))         // "10100"（二进制）
@@ -89,7 +89,7 @@ main() {
 import std.convert.*
 
 main() {
-    var f: Float64 = 1234.5
+    let f: Float64 = 1234.5
 
     // 默认 6 位小数
     println(f.format(""))              // "1234.500000"
@@ -115,7 +115,7 @@ main() {
 import std.convert.*
 
 main() {
-    var c: Rune = 'A'
+    let c: Rune = 'A'
     println("\"${c.format("5")}\"")    // "    A"（右对齐）
     println("\"${c.format("-5")}\"")   // "A    "（左对齐）
 }
@@ -127,8 +127,8 @@ main() {
 import std.convert.*
 
 class Point <: Formattable {
-    var x: Float64
-    var y: Float64
+    let x: Float64
+    let y: Float64
 
     init(x: Float64, y: Float64) {
         this.x = x

@@ -36,8 +36,8 @@ import std.sort.*
 import std.collection.*
 
 class Student <: ToString {
-    public var name: String
-    public var age: Int64
+    public let name: String
+    public let age: Int64
     public init(name: String, age: Int64) {
         this.name = name
         this.age = age
@@ -49,24 +49,24 @@ class Student <: ToString {
 
 main() {
     // 基本排序
-    var a = [1, 3, 5, 2, 4]
+    let a = [1, 3, 5, 2, 4]
     sort(a)
     println(a)
 
     // by 比较器排序
-    var b = [Student("A", 8), Student("B", 7), Student("C", 3), Student("D", 4), Student("E", 6)]
+    let b = [Student("A", 8), Student("B", 7), Student("C", 3), Student("D", 4), Student("E", 6)]
     let comparator = {l: Student, r: Student => l.age.compare(r.age)}
     sort(b, by: comparator)
     println(b)
 
     // lessThan 降序排序
-    var c = [Student("A", 8), Student("B", 7), Student("C", 3), Student("D", 4), Student("E", 6)]
+    let c = [Student("A", 8), Student("B", 7), Student("C", 3), Student("D", 4), Student("E", 6)]
     let lessThan = {l: Student, r: Student => l.age < r.age}
     sort(c, lessThan: lessThan, descending: true)
     println(c)
 
     // key 稳定排序
-    var d = [Student("A", 8), Student("B", 7), Student("C", 7), Student("D", 4), Student("E", 7)]
+    let d = [Student("A", 8), Student("B", 7), Student("C", 7), Student("D", 4), Student("E", 7)]
     let key = {i: Student => i.age}
     sort(d, key: key, stable: true)
     println(d)

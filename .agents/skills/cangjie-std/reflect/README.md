@@ -96,7 +96,8 @@ main() {
     // 动态读取字段值
     let valueField = ti.instanceVariables.toArray()[0]
     let val: Any = valueField.getValue(calc)
-    println("dynamic get: ${(val as Int64)}")  // Some(10)（as 返回 Option 类型）
+    // as 返回 Option 类型，需解包后使用
+    println("dynamic get: ${(val as Int64).getOrThrow()}")  // 10
 }
 ```
 
