@@ -130,6 +130,8 @@ let result = match (p) {
 println(result)  // "42"
 ```
 
+实际开发中，为简化编码，建议优先使用 if-let 或 while-let 语法糖
+
 #### (b) 合并运算符 `??`
 - `e1 ?? e2` — 若 `e1` 为 `Some(v)` 返回解包值，否则返回 `e2`
 
