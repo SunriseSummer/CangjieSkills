@@ -304,14 +304,14 @@ main() {
     tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(pem))
     tlsConfig.alpnProtocolsList = ["h2"]
     // TCP 建连配置
-    let TcpSocketConnector = {
+    let tcpSocketConnector = {
         sa: SocketAddress =>
         let socket = TcpSocket(sa)
         socket.connect()
         return socket
     }
     // 2. 构建 client 实例
-    let client = ClientBuilder().tlsConfig(tlsConfig).enablePush(false).connector(TcpSocketConnector).build()
+    let client = ClientBuilder().tlsConfig(tlsConfig).enablePush(false).connector(tcpSocketConnector).build()
     // 3. 发送请求，其中请求 URL 可根据实际情况修改
     let rsp = client.get("https://example.com/hello")
     // 4. 读取响应体

@@ -3,3 +3,11 @@
 **/hm-docs/
 **/chroma_db.zip
 **/hm-docs.zip
+
+# 仓颉编译产物
+*.a
+*.cjo
+*.so
+*.o
+*.zip
+*.tar.gz

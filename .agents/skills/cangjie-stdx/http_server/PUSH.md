@@ -110,11 +110,11 @@ import stdx.net.tls.*
 import stdx.crypto.x509.{X509Certificate, PrivateKey}
 
 main() {
-    let pem0 = String.fromUtf8(readToEnd(File("/certPath", Read)))
-    let pem02 = String.fromUtf8(readToEnd(File("/keyPath", Read)))
+    let certPem = String.fromUtf8(readToEnd(File("/certPath", Read)))
+    let keyPem = String.fromUtf8(readToEnd(File("/keyPath", Read)))
     var tlsConfig = TlsServerConfig(
-        X509Certificate.decodeFromPem(pem0),
-        PrivateKey.decodeFromPem(pem02)
+        X509Certificate.decodeFromPem(certPem),
+        PrivateKey.decodeFromPem(keyPem)
     )
     tlsConfig.supportedAlpnProtocols = ["h2"]
 

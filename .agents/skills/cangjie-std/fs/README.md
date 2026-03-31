@@ -132,7 +132,45 @@ main() {
 
 ---
 
-## 6. 异常类型
+## 6. 链接操作
+
+| 类型 | 方法 | 说明 |
+|------|------|------|
+| `HardLink` | `create(link: Path, to!: Path)` | 创建硬链接 |
+| `SymbolicLink` | `create(link: Path, to!: Path)` | 创建符号链接 |
+| `SymbolicLink` | `readFrom(path: Path, recursive!: Bool): Path` | 读取符号链接目标，`recursive: true` 递归解析 |
+
+```cangjie
+import std.fs.*
+
+main() {
+    // 创建测试文件
+    File.writeTo(Path("./original.txt"), "content".toArray())
+
+    // 创建硬链接
+    HardLink.create(Path("./hard.txt"), to: Path("./original.txt"))
+
+    // 创建符号链接
+    SymbolicLink.create(Path("./sym.txt"), to: Path("./original.txt"))
+
+    // 读取符号链接指向的目标路径
+    let target = SymbolicLink.readFrom(Path("./sym.txt"), recursive: true)
+    println("Symlink target: ${target}")
+
+    // 验证硬链接内容一致
+    let data = File.readFrom(Path("./hard.txt"))
+    println(String.fromUtf8(data))  // content
+
+    // 清理
+    remove(Path("./hard.txt"))
+    remove(Path("./sym.txt"))
+    remove(Path("./original.txt"))
+}
+```
+
+---
+
+## 7. 异常类型
 
 | 异常 | 说明 |
 |------|------|
@@ -140,10 +178,12 @@ main() {
 
 ---
 
-## 7. 关键规则速查
+## 8. 关键规则速查
 
 1. 文件使用 `try-with-resource` 自动关闭
 2. `File.readFrom` / `File.writeTo` / `File.appendTo` 是便捷的一次性读写方法
 3. `FileInfo` 每次属性访问都是实时文件系统查询，注意并发竞态
 4. `Directory.create` 需要 `recursive: true` 才能递归创建多级目录
 5. `remove` 删除目录时需要 `recursive: true`
+6. `HardLink.create` 创建硬链接，`SymbolicLink.create` 创建符号链接
+7. `SymbolicLink.readFrom` 读取链接目标，`recursive: true` 递归解析

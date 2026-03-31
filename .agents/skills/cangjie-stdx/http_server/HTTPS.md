@@ -88,11 +88,11 @@ main() {
     var transportCfg = TransportConfig()
     transportCfg.readBufferSize = 8192
 
-    let pem0 = String.fromUtf8(readToEnd(File("/certPath", Read)))
-    let pem02 = String.fromUtf8(readToEnd(File("/keyPath", Read)))
+    let certPem = String.fromUtf8(readToEnd(File("/certPath", Read)))
+    let keyPem = String.fromUtf8(readToEnd(File("/keyPath", Read)))
     var tlsConfig = TlsServerConfig(
-        X509Certificate.decodeFromPem(pem0),
-        PrivateKey.decodeFromPem(pem02)
+        X509Certificate.decodeFromPem(certPem),
+        PrivateKey.decodeFromPem(keyPem)
     )
     tlsConfig.supportedAlpnProtocols = ["h2"]
 
@@ -135,16 +135,16 @@ import stdx.crypto.x509.{X509Certificate, PrivateKey}
 import stdx.net.http.*
 
 main() {
-    let pem0 = String.fromUtf8(readToEnd(File("/certPath", Read)))
-    let pem02 = String.fromUtf8(readToEnd(File("/keyPath", Read)))
+    let certPem = String.fromUtf8(readToEnd(File("/certPath", Read)))
+    let keyPem = String.fromUtf8(readToEnd(File("/keyPath", Read)))
     var tlsConfig = TlsServerConfig(
-        X509Certificate.decodeFromPem(pem0),
-        PrivateKey.decodeFromPem(pem02)
+        X509Certificate.decodeFromPem(certPem),
+        PrivateKey.decodeFromPem(keyPem)
     )
     tlsConfig.supportedAlpnProtocols = ["http/1.1"]
 
-    let pem = String.fromUtf8(readToEnd(File("/rootCerPath", Read)))
-    tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(pem))
+    let caPem = String.fromUtf8(readToEnd(File("/rootCerPath", Read)))
+    tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(caPem))
 
     let server = ServerBuilder()
         .addr("127.0.0.1")

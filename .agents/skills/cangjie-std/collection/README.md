@@ -183,21 +183,29 @@ main() {
 
 双向链表，支持高效的头尾插入删除。核心方法是 `addFirst`/`addLast`/`removeFirst`/`removeLast`，以及基于 `LinkedListNode` 的精确位置操作。
 
+`addFirst`/`addLast`/`addBefore`/`addAfter` 返回 `LinkedListNode<T>`，可用于后续精确位置插入或删除：
+
 ```cangjie
 package test_proj
 import std.collection.*
 
 main() {
     let ll = LinkedList<String>()
-    ll.addLast("A")
+    let nodeA = ll.addLast("A")
     ll.addLast("B")
     ll.addLast("C")
 
+    // 基于节点的精确位置插入
+    ll.addAfter(nodeA, "X")    // A 之后插入 X
+    for (v in ll) { print("${v} ") }
+    println("")  // A X B C
+
+    // 基于节点删除
+    ll.remove(nodeA)
+    for (v in ll) { print("${v} ") }
+    println("")  // X B C
+
     println("size: ${ll.size}")  // 3
-    for (v in ll) {
-        print("${v} ")
-    }
-    println("")  // A B C
 }
 ```
 
