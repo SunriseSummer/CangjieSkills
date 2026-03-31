@@ -133,7 +133,7 @@ func genericPrint<T>(a: T) where T <: ToString {
 ### 7.4 类约束
 - 约束类型参数须为某个类的子类型：
 ```cangjie
-class Zoo<T> where T <: Animal { ... }
+class Zoo<T> where T <: Equatable<T> {}
 ```
 
 ### 7.5 规则

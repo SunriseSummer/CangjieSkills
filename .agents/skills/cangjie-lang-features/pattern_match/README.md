@@ -5,11 +5,14 @@
 ### 1.1 有匹配值的 match
 
 ```cangjie
-match (expr) {
-    case pattern1 => exprs // 不需要用 {} 包裹
-    case pattern2 => exprs // 不需要用 {} 包裹
-    case _ => exprs // 不需要用 {} 包裹
+let x = 2
+// match 是表达式，可赋值给变量或直接使用
+let result = match (x) {
+    case 1 => "one"
+    case 2 => "two"
+    case _ => "other"
 }
+println(result)  // "two"
 ```
 
 **规则：**
@@ -36,6 +39,7 @@ main() {
 ```
 
 ```cangjie
+let x = 1
 // ❌ 错误：case 分支不使用 {} 包裹
 // match (x) {
 //     case 1 => { println("one"); 1 }
@@ -123,21 +127,24 @@ println(level) // B
 - **不能与 `|`** 连接使用；若 `id` 是枚举构造器名则视为枚举模式
 
 ```cangjie
-match (x) {
+let x = 5
+let result = match (x) {
     case 0 => "zero"
     case n => "x = ${n}"  // n 绑定 x 的值
 }
+println(result)  // "x = 5"
 ```
 
 ### 2.4 元组模式
 `(p_1, p_2, ..., p_n)`（`n ≥ 2`），每个位置匹配时整体匹配。同一模式内不允许重复绑定名。
 
 ```cangjie
-match (("Alice", 24)) {
+let result = match (("Alice", 24)) {
     case ("Bob", age) => "Bob is ${age}"
     case ("Alice", age) => "Alice is ${age}"  // 匹配
     case (_, _) => "someone"
 }
+println(result)  // "Alice is 24"
 ```
 
 ### 2.5 类型模式
@@ -152,9 +159,12 @@ class Derived <: Base {
     public init() { a = 20 }
 }
 
-match (Derived()) {
-    case b: Base => b.a    // 匹配：Derived 是 Base 子类型，r = 20
-    case _ => 0
+main() {
+    let r = match (Derived()) {
+        case b: Base => b.a    // 匹配：Derived 是 Base 子类型，r = 20
+        case _ => 0
+    }
+    println(r)  // 20
 }
 ```
 
@@ -168,9 +178,12 @@ enum TimeUnit {
     | Year(UInt64) | Month(UInt64)
 }
 
-match (Year(2)) {
-    case Year(n) => "${n * 12} months"   // 匹配
-    case Month(n) => "${n} months"
+main() {
+    let r = match (Year(2)) {
+        case Year(n) => "${n * 12} months"   // 匹配
+        case Month(n) => "${n} months"
+    }
+    println(r)  // "24 months"
 }
 ```
 
@@ -181,9 +194,11 @@ match (Year(2)) {
 enum TimeUnit { | Year(UInt64) | Month(UInt64) }
 enum Command  { | SetTimeUnit(TimeUnit) | Quit }
 
-match ((SetTimeUnit(Year(2024)), true)) {
-    case (SetTimeUnit(Year(y)), true) => println("year ${y}")  // 匹配
-    case _ => ()
+main() {
+    match ((SetTimeUnit(Year(2024)), true)) {
+        case (SetTimeUnit(Year(y)), true) => println("year ${y}")  // 匹配
+        case _ => ()
+    }
 }
 ```
 
@@ -264,10 +279,14 @@ main() {
 `||` 连接时，模式中**不能有变量绑定**，只能使用通配符 `_`：
 
 ```cangjie
-let a = Num(1)
-let b: Expr = Error
-if (let Num(_) <- a || let Num(_) <- b) {
-    println("至少一个是 Num")  // 匹配
+enum Expr { | Num(Int64) | Err }
+
+main() {
+    let a = Num(1)
+    let b: Expr = Err
+    if (let Num(_) <- a || let Num(_) <- b) {
+        println("至少一个是 Num")  // 匹配
+    }
 }
 ```
 
@@ -312,12 +331,19 @@ main() {
 
 等价的 match 解糖形态：
 ```cangjie
-while (true) {
-    match (s) {
-        case Active(n) =>
-            println(n)
-            s = if (n < 3) { Active(n + 1) } else { Done }
-        case _ => break
+enum State {
+    | Active(Int64) | Done
+}
+
+main() {
+    var s: State = Active(1)
+    while (true) {
+        match (s) {
+            case Active(n) =>
+                println(n)
+                s = if (n < 3) { Active(n + 1) } else { Done }
+            case _ => break
+        }
     }
 }
 ```

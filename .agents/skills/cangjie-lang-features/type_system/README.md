@@ -68,18 +68,28 @@
 ### 4.4 `is` 运算符
 - `e is T` → `Bool`。当 `e` 的**运行时类型**是 `T` 的子类型时返回 `true`
 ```cangjie
-let b: Base = Derived()
-b is Derived  // true
-b is Base     // true
+open class Base {}
+class Derived <: Base {}
+
+main() {
+    let b: Base = Derived()
+    println(b is Derived)  // true
+    println(b is Base)     // true
+}
 ```
 
 ### 4.5 `as` 运算符
 - `e as T` → `Option<T>`。运行时类型是子类型时返回 `Some(e)`，否则返回 `None`
 - 安全向下转型机制 — 无异常，仅返回 `Option`
 ```cangjie
-let b: Base = Derived()
-b as Derived  // Option<Derived>.Some(b)
-b as String   // Option<String>.None
+open class Base {}
+class Derived <: Base {}
+
+main() {
+    let b: Base = Derived()
+    println((b as Derived).isSome())   // true
+    println((b as String).isSome())    // false
+}
 ```
 
 ---
@@ -109,5 +119,6 @@ b as String   // Option<String>.None
 - 类型别名可声明类型参数
 - **不能**对别名类型参数使用 `where` 约束
 ```cangjie
-type RD<T> = RecordData<T>
+import std.collection.*
+type IntList = ArrayList<Int64>
 ```

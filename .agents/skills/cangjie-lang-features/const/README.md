@@ -38,6 +38,10 @@ const G = 6.674e-11
 
 ### 3.1 基本语法
 ```cangjie
+struct Point {
+    const Point(let x: Float64, let y: Float64) {}
+}
+
 const func distance(a: Point, b: Point) {
     let dx = a.x - b.x
     let dy = a.y - b.y

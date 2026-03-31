@@ -79,8 +79,8 @@ func get(index: Int64): Option<T>
 
 ```cangjie
 let arr = [10, 20, 30]
-arr.get(1)   // Some(20)
-arr.get(10)  // None（不抛异常）
+println(arr.get(1))   // Some(20)
+println(arr.get(10))  // None（不抛异常）
 ```
 
 ### 4.3 交换元素 `swap`
@@ -327,8 +327,8 @@ func trimEnd(predicate: (T) -> Bool): Array<T>
 let a = [1, 2, 3]
 let b = [1, 2, 3]
 let c = [1, 2, 4]
-a == b  // true
-a != c  // true
+println(a == b)  // true
+println(a != c)  // true
 ```
 
 ---

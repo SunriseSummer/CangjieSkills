@@ -31,7 +31,7 @@ let map2 = HashMap<String, Int64>(100)
 let map3 = HashMap<String, Int64>([("a", 1), ("b", 2), ("c", 3)])
 
 // 从键值对集合构造
-let map4 = HashMap<String, Int64>(otherCollection)
+let map4 = HashMap<String, Int64>(map3)
 
 // 指定大小 + 初始化函数
 let map5 = HashMap<Int64, Int64>(5, {i => (i, i * i)})
@@ -113,7 +113,9 @@ map["x"] = 20   // 更新
 ### 5.1 下标访问
 
 ```cangjie
+let map = HashMap<String, Int64>([("key", 42)])
 let v = map["key"]   // 返回 V 类型值
+println(v)
 ```
 
 - 键不存在抛出 `NoneValueException`
@@ -126,8 +128,8 @@ func get(key: K): Option<V>
 
 ```cangjie
 let map = HashMap<String, Int64>([("a", 1)])
-map.get("a")    // Some(1)
-map.get("xyz")  // None（不抛异常）
+println(map.get("a"))    // Some(1)
+println(map.get("xyz"))  // None（不抛异常）
 ```
 
 ### 5.3 `contains` — 键是否存在
@@ -139,10 +141,10 @@ func contains(all!: Collection<K>): Bool
 
 ```cangjie
 let map = HashMap<String, Int64>([("a", 1), ("b", 2)])
-map.contains("a")                    // true
-map.contains("xyz")                  // false
-map.contains(all: ["a", "b"])       // true
-map.contains(all: ["a", "c"])       // false（c 不存在）
+println(map.contains("a"))                    // true
+println(map.contains("xyz"))                  // false
+println(map.contains(all: ["a", "b"]))       // true
+println(map.contains(all: ["a", "c"]))       // false（c 不存在）
 ```
 
 ### 5.4 `keys` / `values` / `toArray`
@@ -300,8 +302,8 @@ let a = HashMap<String, Int64>([("x", 1), ("y", 2)])
 let b = HashMap<String, Int64>([("y", 2), ("x", 1)])
 let c = HashMap<String, Int64>([("x", 1), ("y", 3)])
 
-a == b  // true（键值对完全相同，不关心顺序）
-a != c  // true
+println(a == b)  // true（键值对完全相同，不关心顺序）
+println(a != c)  // true
 ```
 
 ---

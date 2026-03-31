@@ -62,15 +62,18 @@ extend Boo {
 ```cangjie
 class Foo<T> where T <: ToString {}
 
-extend Foo<Int64> { ... }   // 仅适用于 Foo<Int64>
+extend Foo<Int64> {
+    public func show(): Unit { println("Foo<Int64>") }
+}
 ```
 
 **形式 B：带新类型参数的泛型扩展：**
 ```cangjie
 class MyList<T> {}
 
-extend<T> MyList<T> { ... }
-extend<T, R> MyList<(T, R)> { ... }
+extend<T> MyList<T> {
+    public func info(): Unit { println("MyList<T>") }
+}
 ```
 - `extend` 后声明的每个类型参数**须**在被扩展类型中使用
 ```cangjie
@@ -179,6 +182,19 @@ main() {
 
 ### 3.5 接口扩展中的泛型约束
 ```cangjie
+class Pair<T1, T2> {
+    var first: T1
+    var second: T2
+    public init(a: T1, b: T2) {
+        first = a
+        second = b
+    }
+}
+
+interface Eq<T> {
+    func equals(other: T): Bool
+}
+
 // 当 T1、T2 可判等时，让 Pair 实现 Eq 接口
 extend<T1, T2> Pair<T1, T2> <: Eq<Pair<T1, T2>> where T1 <: Eq<T1>, T2 <: Eq<T2> {
     public func equals(other: Pair<T1, T2>): Bool {
@@ -273,7 +289,7 @@ class A {
 }
 extend A {
     func f() {
-        print(v1)  // ❌ Error: 不能访问 private 成员
+        // print(v1)  // ❌ Error: 不能访问 private 成员
         print(v2)  // OK
     }
 }
@@ -307,14 +323,14 @@ extend A {
 class Foo {}
 
 extend Foo {
-    private func f() {}
-    func g() {}          // 默认 internal
+    // private func f() {}  // private: 仅限本扩展块
+    func g() {}             // 默认 internal
 }
 
 extend Foo {
     func h() {
         g()  // OK: 可访问其他扩展的非 private 成员
-        f()  // ❌ Error: f 是 private
+        // f()  // ❌ Error: f 是 private
     }
 }
 ```
@@ -339,7 +355,7 @@ extend<X> E<X> <: I1 where X <: B {   // 扩展 1（更严格）
 
 extend<X> E<X> <: I2 where X <: A {   // 扩展 2（更宽松）
     public func f2(): Unit {
-        f1()  // ❌ Error: 较严格扩展的成员不可见
+        // f1()  // ❌ Error: 较严格扩展的成员不可见
     }
 }
 ```

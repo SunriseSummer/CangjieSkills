@@ -32,7 +32,7 @@ let set2 = HashSet<String>(100)
 let set3 = HashSet<Int64>([0, 1, 2])
 
 // 从集合构造
-let set4 = HashSet<Int64>(otherCollection)
+let set4 = HashSet<Int64>(set3)
 
 // 指定大小 + 初始化函数
 let set5 = HashSet<Int64>(5, {i => i * i})
@@ -111,10 +111,10 @@ func contains(all!: Collection<T>): Bool
 
 ```cangjie
 let set = HashSet<String>(["apple", "banana", "orange"])
-set.contains("apple")                    // true
-set.contains("grape")                    // false
-set.contains(all: ["apple", "banana"])  // true
-set.contains(all: ["apple", "grape"])   // false（grape 不存在）
+println(set.contains("apple"))                    // true
+println(set.contains("grape"))                    // false
+println(set.contains(all: ["apple", "banana"]))  // true
+println(set.contains(all: ["apple", "grape"]))   // false（grape 不存在）
 ```
 
 ### 5.2 `toArray` — 转为数组
@@ -147,8 +147,8 @@ func remove(element: T): Bool
 
 ```cangjie
 let set = HashSet<String>(["apple", "banana", "orange"])
-set.remove("apple")   // true
-set.remove("grape")   // false（不存在）
+println(set.remove("apple"))   // true
+println(set.remove("grape"))   // false（不存在）
 ```
 
 ### 6.2 批量删除
@@ -235,8 +235,8 @@ func subsetOf(other: ReadOnlySet<T>): Bool
 ```cangjie
 let a = HashSet<Int64>([1, 2])
 let b = HashSet<Int64>([1, 2, 3, 4])
-a.subsetOf(b)  // true
-b.subsetOf(a)  // false
+println(a.subsetOf(b))  // true
+println(b.subsetOf(a))  // false
 ```
 
 ### 7.5 保留交集元素 `retain`
@@ -322,8 +322,8 @@ let a = HashSet<Int64>([1, 2, 3])
 let b = HashSet<Int64>([3, 2, 1])
 let c = HashSet<Int64>([1, 2, 4])
 
-a == b  // true（元素完全相同，不关心顺序）
-a != c  // true
+println(a == b)  // true（元素完全相同，不关心顺序）
+println(a != c)  // true
 ```
 
 ---

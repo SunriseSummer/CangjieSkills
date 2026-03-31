@@ -30,7 +30,7 @@ let list2 = ArrayList<Int64>(100)
 let list3 = ArrayList<Int64>([1, 2, 3])
 
 // 从其他 Collection 构造
-let list4 = ArrayList<Int64>(otherCollection)
+let list4 = ArrayList<Int64>(list3)
 
 // 指定大小 + 初始化函数
 let list5 = ArrayList<Int64>(5, {i => i * 10})  // [0, 10, 20, 30, 40]
@@ -117,7 +117,8 @@ let list = ArrayList<Int64>()
 list.add(1)                          // [1]
 list.add(2)                          // [1, 2]
 list.add(all: [3, 4, 5])            // [1, 2, 3, 4, 5]
-list.add(all: otherArrayList)        // 追加另一个集合的元素
+let other = ArrayList<Int64>([6, 7])
+list.add(all: other)                 // [1, 2, 3, 4, 5, 6, 7]
 ```
 
 ### 5.2 在指定位置插入
@@ -301,8 +302,8 @@ func contains(element: T): Bool
 
 ```cangjie
 let list = ArrayList<Int64>([1, 2, 3])
-list.contains(2)  // true
-list.contains(5)  // false
+println(list.contains(2))  // true
+println(list.contains(5))  // false
 ```
 
 ---
@@ -313,8 +314,8 @@ list.contains(5)  // false
 let a = ArrayList<Int64>([1, 2, 3])
 let b = ArrayList<Int64>([1, 2, 3])
 let c = ArrayList<Int64>([1, 2, 4])
-a == b  // true
-a != c  // true
+println(a == b)  // true
+println(a != c)  // true
 ```
 
 ---
@@ -373,11 +374,13 @@ list.sortBy(stable: true, comparator: { a, b => a - b }) // 稳定排序
 
 ```cangjie
 import std.collection.*
+import std.sort.*
 
 // 1. 动态收集元素
+let source = [1, -2, 3, -4, 5]
 let results = ArrayList<String>()
 for (item in source) {
-    if (isValid(item)) {
+    if (item > 0) {
         results.add(item.toString())
     }
 }
@@ -385,25 +388,25 @@ for (item in source) {
 // 2. 批量添加
 let list = ArrayList<Int64>()
 list.add(all: [1, 2, 3])
-list.add(all: moreItems)
+list.add(all: [4, 5, 6])
 
 // 3. 安全访问
-if (let Some(v) <- list.get(index)) {
-    process(v)
+if (let Some(v) <- list.get(0)) {
+    println(v)
 }
 
 // 4. 条件过滤删除
 list.removeIf { v => v < 0 }
 
-// 5. 从 Array 创建 → 操作 → 转回 Array
-let arr = [3, 1, 2]
-let list = ArrayList<Int64>(arr)
-sort(list)
-let sorted = list.toArray()  // [1, 2, 3]
+// 5. 从 Array 创建 → 排序 → 转回 Array
+var arr = [3, 1, 2]
+let sortList = ArrayList<Int64>(arr)
+sort(sortList)
+let sorted = sortList.toArray()  // [1, 2, 3]
 
 // 6. 遍历并修改
-for (i in 0..list.size) {
-    list[i] = list[i] * 2
+for (i in 0..sortList.size) {
+    sortList[i] = sortList[i] * 2
 }
 
 // 7. 预分配避免扩容开销
