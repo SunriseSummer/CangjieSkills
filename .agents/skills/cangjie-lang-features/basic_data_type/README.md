@@ -151,8 +151,8 @@
 - **`for (c in s.runes())` 迭代的是字符（`Rune`）**，返回 `Iterator<Rune>`
 - 这与大多数编程语言的行为不同，需要特别注意：
   ```cangjie
-  // c 是 UInt8 类型（字节）
-  for (c in "你好") { println(c) }    // 输出 UTF-8 字节值
+  // c 是 UInt8 类型（字节），"你好" 的 UTF-8 编码为 6 个字节
+  for (c in "你好") { println(c) }    // 输出 6 个字节值
 
   // c 是 Rune 类型（Unicode 字符）
   for (c in "你好".runes()) { println(c) }  // 输出: 你  好

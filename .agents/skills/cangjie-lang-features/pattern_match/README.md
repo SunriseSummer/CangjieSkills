@@ -6,6 +6,7 @@
 
 ```cangjie
 let x = 2
+// match 是表达式，可赋值给变量或直接使用
 let result = match (x) {
     case 1 => "one"
     case 2 => "two"

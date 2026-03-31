@@ -120,9 +120,11 @@ public enum AnnotationKind {
 | 方法 | 说明 |
 |------|------|
 | `TypeInfo.of(a: Any)` | 从实例获取运行时类型信息 |
-| `ClassTypeInfo.of(a: Object)` | 从对象获取 `ClassTypeInfo`（推荐使用，`TypeInfo.of(Object)` 已弃用） |
+| `ClassTypeInfo.of(a: Object)` | 从对象获取 `ClassTypeInfo`（推荐） |
 | `TypeInfo.of<T>()` | 从类型参数获取静态类型信息 |
 | `TypeInfo.get(qualifiedName)` | 从限定名获取，找不到抛 `InfoNotFoundException` |
+
+> **注意**：`TypeInfo.of(Object)` 已弃用，请使用 `ClassTypeInfo.of(Object)` 代替。
 
 ```cangjie
 import std.reflect.*
@@ -141,7 +143,7 @@ main() {
 #### `TypeInfo.get()` 限定名规则
 - 完全限定格式：`"module.package.type"`（如 `"std.socket.TcpSocket"`）
 - 编译器预导入类型（core 包类型和内置类型如 `Int64`、`Option`、`Iterable`）直接使用裸名
-- 不能获取**未实例化**泛型类型的 TypeInfo — 必须先创建该泛型类型的实例
+- 不能获取**未实例化**泛型类型的 TypeInfo — 泛型类型必须指定具体类型参数且该具体类型在运行时已被实例化过
 
 ### 2.2 访问成员
 仅 `public` 成员对反射可见。`TypeInfo` 及其子类 `ClassTypeInfo` 提供以下访问接口：
