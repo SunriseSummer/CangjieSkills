@@ -31,7 +31,7 @@ let map2 = HashMap<String, Int64>(100)
 let map3 = HashMap<String, Int64>([("a", 1), ("b", 2), ("c", 3)])
 
 // 从键值对集合构造
-let map4 = HashMap<String, Int64>(otherCollection)
+let map4 = HashMap<String, Int64>(map3)
 
 // 指定大小 + 初始化函数
 let map5 = HashMap<Int64, Int64>(5, {i => (i, i * i)})
@@ -69,7 +69,7 @@ println(map.capacity)  // >= 2
 
 ### 4.1 `add` — 添加单个键值对
 
-```cangjie
+```text
 func add(key: K, value: V): Option<V>
 ```
 
@@ -85,18 +85,18 @@ println(map["a"])         // 99
 
 ### 4.2 `add` — 批量添加
 
-```cangjie
+```text
 func add(all!: Collection<(K, V)>): Unit
 ```
 
-```cangjie
+```text
 map.add(all: [("b", 2), ("c", 3)])
 map.add(all: otherMap)
 ```
 
 ### 4.3 下标赋值
 
-```cangjie
+```text
 map["key"] = value   // 键存在则更新，不存在则新增
 ```
 
@@ -113,41 +113,43 @@ map["x"] = 20   // 更新
 ### 5.1 下标访问
 
 ```cangjie
+let map = HashMap<String, Int64>([("key", 42)])
 let v = map["key"]   // 返回 V 类型值
+println(v)
 ```
 
 - 键不存在抛出 `NoneValueException`
 
 ### 5.2 安全访问 `get`
 
-```cangjie
+```text
 func get(key: K): Option<V>
 ```
 
 ```cangjie
 let map = HashMap<String, Int64>([("a", 1)])
-map.get("a")    // Some(1)
-map.get("xyz")  // None（不抛异常）
+println(map.get("a"))    // Some(1)
+println(map.get("xyz"))  // None（不抛异常）
 ```
 
 ### 5.3 `contains` — 键是否存在
 
-```cangjie
+```text
 func contains(key: K): Bool
 func contains(all!: Collection<K>): Bool
 ```
 
 ```cangjie
 let map = HashMap<String, Int64>([("a", 1), ("b", 2)])
-map.contains("a")                    // true
-map.contains("xyz")                  // false
-map.contains(all: ["a", "b"])       // true
-map.contains(all: ["a", "c"])       // false（c 不存在）
+println(map.contains("a"))                    // true
+println(map.contains("xyz"))                  // false
+println(map.contains(all: ["a", "b"]))       // true
+println(map.contains(all: ["a", "c"]))       // false（c 不存在）
 ```
 
 ### 5.4 `keys` / `values` / `toArray`
 
-```cangjie
+```text
 func keys(): EquatableCollection<K>   // 所有键
 func values(): Collection<V>          // 所有值
 func toArray(): Array<(K, V)>         // 所有键值对数组
@@ -162,7 +164,7 @@ let pairs = map.toArray()     // [("a", 1), ("b", 2)]（顺序不保证）
 
 ### 5.5 `entryView` — 获取条目引用视图
 
-```cangjie
+```text
 func entryView(key: K): MapEntryView<K, V>
 ```
 
@@ -174,7 +176,7 @@ func entryView(key: K): MapEntryView<K, V>
 
 ### 6.1 按键删除
 
-```cangjie
+```text
 func remove(key: K): Option<V>
 ```
 
@@ -188,17 +190,17 @@ let nothing = map.remove("xyz") // None
 
 ### 6.2 批量删除
 
-```cangjie
+```text
 func remove(all!: Collection<K>): Unit
 ```
 
-```cangjie
+```text
 map.remove(all: ["a", "b"])
 ```
 
 ### 6.3 条件删除
 
-```cangjie
+```text
 func removeIf(predicate: (K, V) -> Bool): Unit
 ```
 
@@ -211,11 +213,11 @@ map.removeIf { k, v => v > 10 }  // 删除 v > 10 的条目 → {"a": 1, "c": 3}
 
 ### 6.4 清空
 
-```cangjie
+```text
 func clear(): Unit
 ```
 
-```cangjie
+```text
 map.clear()  // size = 0
 ```
 
@@ -223,7 +225,7 @@ map.clear()  // size = 0
 
 ## 7. 遍历
 
-```cangjie
+```text
 func iterator(): HashMapIterator<K, V>
 ```
 
@@ -252,11 +254,11 @@ for (v in map.values()) {
 
 ## 8. 容量管理
 
-```cangjie
+```text
 func reserve(additional: Int64): Unit
 ```
 
-```cangjie
+```text
 map.reserve(100)  // 扩容以容纳更多元素
 ```
 
@@ -268,11 +270,11 @@ map.reserve(100)  // 扩容以容纳更多元素
 
 ## 9. 判空
 
-```cangjie
+```text
 func isEmpty(): Bool
 ```
 
-```cangjie
+```text
 HashMap<String, Int64>().isEmpty()  // true
 ```
 
@@ -280,7 +282,7 @@ HashMap<String, Int64>().isEmpty()  // true
 
 ## 10. 拷贝
 
-```cangjie
+```text
 func clone(): HashMap<K, V>
 ```
 
@@ -300,19 +302,19 @@ let a = HashMap<String, Int64>([("x", 1), ("y", 2)])
 let b = HashMap<String, Int64>([("y", 2), ("x", 1)])
 let c = HashMap<String, Int64>([("x", 1), ("y", 3)])
 
-a == b  // true（键值对完全相同，不关心顺序）
-a != c  // true
+println(a == b)  // true（键值对完全相同，不关心顺序）
+println(a != c)  // true
 ```
 
 ---
 
 ## 12. 转为字符串（需要 K <: ToString, V <: ToString）
 
-```cangjie
+```text
 func toString(): String
 ```
 
-```cangjie
+```text
 HashMap<String, Int64>([("a", 1), ("b", 2)]).toString()
 // "[(a, 1), (b, 2)]"（顺序不保证）
 ```
@@ -321,7 +323,7 @@ HashMap<String, Int64>([("a", 1), ("b", 2)]).toString()
 
 ## 13. 常见用法总结
 
-```cangjie
+```text
 import std.collection.*
 
 // 1. 基本键值存储

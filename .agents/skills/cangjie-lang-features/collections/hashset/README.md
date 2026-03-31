@@ -32,7 +32,7 @@ let set2 = HashSet<String>(100)
 let set3 = HashSet<Int64>([0, 1, 2])
 
 // 从集合构造
-let set4 = HashSet<Int64>(otherCollection)
+let set4 = HashSet<Int64>(set3)
 
 // 指定大小 + 初始化函数
 let set5 = HashSet<Int64>(5, {i => i * i})
@@ -70,7 +70,7 @@ println(set.capacity)  // >= 3
 
 ### 4.1 `add` — 添加单个元素
 
-```cangjie
+```text
 func add(element: T): Bool
 ```
 
@@ -87,11 +87,11 @@ println(set.size)   // 2
 
 ### 4.2 `add` — 批量添加
 
-```cangjie
+```text
 func add(all!: Collection<T>): Unit
 ```
 
-```cangjie
+```text
 set.add(all: ["orange", "peach"])
 set.add(all: otherSet)
 ```
@@ -104,22 +104,22 @@ set.add(all: otherSet)
 
 ### 5.1 `contains` — 元素是否存在
 
-```cangjie
+```text
 func contains(element: T): Bool
 func contains(all!: Collection<T>): Bool
 ```
 
 ```cangjie
 let set = HashSet<String>(["apple", "banana", "orange"])
-set.contains("apple")                    // true
-set.contains("grape")                    // false
-set.contains(all: ["apple", "banana"])  // true
-set.contains(all: ["apple", "grape"])   // false（grape 不存在）
+println(set.contains("apple"))                    // true
+println(set.contains("grape"))                    // false
+println(set.contains(all: ["apple", "banana"]))  // true
+println(set.contains(all: ["apple", "grape"]))   // false（grape 不存在）
 ```
 
 ### 5.2 `toArray` — 转为数组
 
-```cangjie
+```text
 func toArray(): Array<T>
 ```
 
@@ -138,7 +138,7 @@ HashSet 是无序集合，**不支持下标访问**（无索引概念）。
 
 ### 6.1 按元素删除
 
-```cangjie
+```text
 func remove(element: T): Bool
 ```
 
@@ -147,23 +147,23 @@ func remove(element: T): Bool
 
 ```cangjie
 let set = HashSet<String>(["apple", "banana", "orange"])
-set.remove("apple")   // true
-set.remove("grape")   // false（不存在）
+println(set.remove("apple"))   // true
+println(set.remove("grape"))   // false（不存在）
 ```
 
 ### 6.2 批量删除
 
-```cangjie
+```text
 func remove(all!: Collection<T>): Unit
 ```
 
-```cangjie
+```text
 set.remove(all: ["banana", "orange"])
 ```
 
 ### 6.3 条件删除
 
-```cangjie
+```text
 func removeIf(predicate: (T) -> Bool): Unit
 ```
 
@@ -176,11 +176,11 @@ set.removeIf { v => v % 2 == 0 }  // 删除偶数 → {1, 3, 5}
 
 ### 6.4 清空
 
-```cangjie
+```text
 func clear(): Unit
 ```
 
-```cangjie
+```text
 set.clear()  // size = 0
 ```
 
@@ -192,7 +192,7 @@ HashSet 支持集合的交集、并集、差集运算，返回新的 HashSet。
 
 ### 7.1 交集 `&`
 
-```cangjie
+```text
 operator func &(other: ReadOnlySet<T>): HashSet<T>
 ```
 
@@ -204,7 +204,7 @@ let intersection = a & b  // {3, 4}
 
 ### 7.2 并集 `|`
 
-```cangjie
+```text
 operator func |(other: ReadOnlySet<T>): HashSet<T>
 ```
 
@@ -216,7 +216,7 @@ let union = a | b  // {1, 2, 3, 4, 5}
 
 ### 7.3 差集 `-`
 
-```cangjie
+```text
 operator func -(other: ReadOnlySet<T>): HashSet<T>
 ```
 
@@ -228,20 +228,20 @@ let diff = a - b  // {1, 2}
 
 ### 7.4 子集判断
 
-```cangjie
+```text
 func subsetOf(other: ReadOnlySet<T>): Bool
 ```
 
 ```cangjie
 let a = HashSet<Int64>([1, 2])
 let b = HashSet<Int64>([1, 2, 3, 4])
-a.subsetOf(b)  // true
-b.subsetOf(a)  // false
+println(a.subsetOf(b))  // true
+println(b.subsetOf(a))  // false
 ```
 
 ### 7.5 保留交集元素 `retain`
 
-```cangjie
+```text
 func retain(all!: Set<T>): Unit
 ```
 
@@ -255,7 +255,7 @@ a.retain(all: b)  // a = {2, 4}（原地修改）
 
 ## 8. 遍历
 
-```cangjie
+```text
 func iterator(): Iterator<T>
 ```
 
@@ -274,11 +274,11 @@ for (item in set) {
 
 ## 9. 容量管理
 
-```cangjie
+```text
 func reserve(additional: Int64): Unit
 ```
 
-```cangjie
+```text
 set.reserve(100)  // 扩容以容纳更多元素
 ```
 
@@ -290,11 +290,11 @@ set.reserve(100)  // 扩容以容纳更多元素
 
 ## 10. 判空
 
-```cangjie
+```text
 func isEmpty(): Bool
 ```
 
-```cangjie
+```text
 HashSet<String>().isEmpty()  // true
 ```
 
@@ -302,7 +302,7 @@ HashSet<String>().isEmpty()  // true
 
 ## 11. 拷贝
 
-```cangjie
+```text
 func clone(): HashSet<T>
 ```
 
@@ -322,19 +322,19 @@ let a = HashSet<Int64>([1, 2, 3])
 let b = HashSet<Int64>([3, 2, 1])
 let c = HashSet<Int64>([1, 2, 4])
 
-a == b  // true（元素完全相同，不关心顺序）
-a != c  // true
+println(a == b)  // true（元素完全相同，不关心顺序）
+println(a != c)  // true
 ```
 
 ---
 
 ## 13. 转为字符串（需要 T <: ToString）
 
-```cangjie
+```text
 func toString(): String
 ```
 
-```cangjie
+```text
 HashSet<Int64>([1, 2, 3]).toString()
 // "[1, 2, 3]"（顺序不保证）
 ```
@@ -343,7 +343,7 @@ HashSet<Int64>([1, 2, 3]).toString()
 
 ## 14. 常见用法总结
 
-```cangjie
+```text
 import std.collection.*
 
 // 1. 去重

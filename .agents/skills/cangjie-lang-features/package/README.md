@@ -31,7 +31,7 @@ src
 |   |-- util.cj          // package default.network
 |-- main.cj              // 可省略包声明，默认为 default 包
 ```
-```cangjie
+```text
 // client.cj — 包声明须匹配相对于 src/ 的路径
 package default.network.http
 
@@ -72,11 +72,11 @@ main(args: Array<String>): Unit {
     }
 }
 ```
-```cangjie
+```text
 // ❌ 错误：返回类型不能是 String
 main(): String { return "" }
 ```
-```cangjie
+```text
 // ❌ 错误：参数类型只能是 Array<String>
 main(args: Array<Int8>): Int64 { return 0 }
 ```
@@ -86,7 +86,7 @@ main(args: Array<Int8>): Int64 { return 0 }
 ## 4. 包导入
 
 ### 4.1 语法
-```cangjie
+```text
 import fullPkg.item           // 导入单个声明
 import fullPkg.{a, b}         // 导入多个声明
 import fullPkg.*              // 导入所有可见声明
@@ -109,7 +109,7 @@ public struct R {}
 public func f(a: Int32) {}
 public func f(a: Bool) {}
 ```
-```cangjie
+```text
 // package pkgb
 package pkgb
 import pkga.*
@@ -132,7 +132,7 @@ func bar() {
 - 重命名后原名不可用
 - 不重命名时，冲突名称在使用处报错（非导入处）
 - 也可 `import fullPkg` 用作命名空间限定符
-```cangjie
+```text
 // 用 import as 解决名称冲突
 import p1.C as C1
 import p2.C as C2
@@ -142,7 +142,7 @@ main() {
     let _ = C2()  // 使用 p2 的 C
 }
 ```
-```cangjie
+```text
 // 用包名作为命名空间限定符
 import p1
 import p2
@@ -157,24 +157,24 @@ main() {
 - `public import`、`protected import`、`internal import` 重新导出导入的成员
 - `private import`（默认）将导入限制为文件内可见
 - 包本身不能被重新导出
-```cangjie
+```text
 // package a — 重新导出子包的声明
 package a
 public import a.b.f   // 将 a.b 中的 f 重新导出
 
 public let x = 0
 ```
-```cangjie
+```text
 // package a.b
 internal package a.b
 public func f(): Int64 { 0 }
 ```
-```cangjie
+```text
 // 外部包可直接通过 package a 访问 f
 import a.f  // OK
 let _ = f() // OK
 ```
-```cangjie
+```text
 // ❌ 错误：包不能被重新导出
 public import a.b  // Error
 ```
@@ -201,7 +201,7 @@ public import a.b  // Error
 - 但 `public` 声明可在内部（函数体、初始化表达式中）使用非 public 类型
 - 内置类型如 `Int64` 为 `public`
 - 同包中同名的 `private` 声明在导出时可能导致错误
-```cangjie
+```text
 package a
 
 private func f1() { 1 }   // 仅当前文件可见
@@ -209,7 +209,7 @@ func f2() { 2 }           // internal：当前包及子包可见
 protected func f3() { 3 } // 当前模块可见
 public func f4() { 4 }    // 全局可见
 ```
-```cangjie
+```text
 // ❌ 错误：public 声明不能使用 internal 类型作为参数/返回值
 class C {}  // 默认 internal
 public func f1(a: C): Int64 { 0 }  // Error
