@@ -139,6 +139,10 @@ match (p) {
 |------|------|
 | `ConcurrentModificationException` | 并发修改错误 |
 | `IllegalArgumentException` | 非法或不正确的参数 |
+| `IllegalStateException` | 对象状态不合法 |
+| `IndexOutOfBoundsException` | 索引越界 |
 | `NegativeArraySizeException` | 以负数大小创建数组 |
-| `NoneValueException` | 值不存在 |
-| `OverflowException` | 算术溢出 |
+| `NoneValueException` | 值不存在（如 `getOrThrow()` 对 `None` 调用） |
+| `OverflowException` | 算术溢出（`<: ArithmeticException`） |
+| `TimeoutException` | 操作超时（如 `Future.get(timeout)` 超时） |
+| `IllegalSynchronizationStateException` | 同步操作非法（如未持锁调用 `unlock()`），需 `import std.sync.*` |

@@ -4,11 +4,11 @@
 
 ### 1.1 语法
 ```cangjie
-for (item in sequence) {
-    exprs
+for (item in [1, 2, 3]) {
+    println(item)
 }
 ```
-- `sequence` 须实现 `Iterable<T>` 接口
+- 迭代对象须实现 `Iterable<T>` 接口
 - `sequence` 表达式**仅在首次迭代前求值一次**
 - 循环表达式类型为 `Unit`，值为 `()`
 
@@ -78,10 +78,12 @@ interface Iterator<T> <: Iterable<T> {
 
 ### 3.2 for-in 脱糖
 ```cangjie
+let list = [10, 20, 30]
 for (i in list) { println(i) }
 ```
 等价于：
 ```cangjie
+let list = [10, 20, 30]
 var it = list.iterator()
 while (let Some(i) <- it.next()) {
     println(i)
@@ -223,12 +225,13 @@ main() {
 ### 6.2 Range 计数循环
 - 固定次数循环优先用 Range，无需手动维护计数器：
   ```cangjie
+  let n = 3
   // ✅ 推荐
-  for (_ in 0..n) { doSomething() }
+  for (_ in 0..n) { println("hello") }
 
   // ❌ 不推荐
   var i = 0
-  while (i < n) { doSomething(); i++ }
+  while (i < n) { println("hello"); i++ }
   ```
 
 ### 6.3 where 替代 if

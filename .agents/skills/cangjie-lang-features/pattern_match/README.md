@@ -5,11 +5,13 @@
 ### 1.1 有匹配值的 match
 
 ```cangjie
-match (expr) {
-    case pattern1 => exprs // 不需要用 {} 包裹
-    case pattern2 => exprs // 不需要用 {} 包裹
-    case _ => exprs // 不需要用 {} 包裹
+let x = 2
+let result = match (x) {
+    case 1 => "one"
+    case 2 => "two"
+    case _ => "other"
 }
+println(result)  // "two"
 ```
 
 **规则：**
@@ -36,6 +38,7 @@ main() {
 ```
 
 ```cangjie
+let x = 1
 // ❌ 错误：case 分支不使用 {} 包裹
 // match (x) {
 //     case 1 => { println("one"); 1 }
@@ -123,21 +126,24 @@ println(level) // B
 - **不能与 `|`** 连接使用；若 `id` 是枚举构造器名则视为枚举模式
 
 ```cangjie
-match (x) {
+let x = 5
+let result = match (x) {
     case 0 => "zero"
     case n => "x = ${n}"  // n 绑定 x 的值
 }
+println(result)  // "x = 5"
 ```
 
 ### 2.4 元组模式
 `(p_1, p_2, ..., p_n)`（`n ≥ 2`），每个位置匹配时整体匹配。同一模式内不允许重复绑定名。
 
 ```cangjie
-match (("Alice", 24)) {
+let result = match (("Alice", 24)) {
     case ("Bob", age) => "Bob is ${age}"
     case ("Alice", age) => "Alice is ${age}"  // 匹配
     case (_, _) => "someone"
 }
+println(result)  // "Alice is 24"
 ```
 
 ### 2.5 类型模式

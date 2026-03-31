@@ -4,8 +4,8 @@
 
 ### 1.1 基本语法
 ```cangjie
-func functionName(param1: Type1, param2: Type2): ReturnType {
-    // 函数体
+func add(a: Int64, b: Int64): Int64 {
+    a + b
 }
 ```
 - 关键字 `func` 开头
@@ -23,13 +23,15 @@ func functionName(param1: Type1, param2: Type2): ReturnType {
 - **命名参数完整示例**：
   ```cangjie
   // 函数定义，其中 indent 是命名参数，默认值为 2
-  func serializePretty(value: JsonValue, indent!: Int64 = 2): String { ... }
+  func formatNumber(value: Int64, indent!: Int64 = 2): String {
+      " ".repeat(indent) + value.toString()
+  }
 
   // 函数调用，命名参数 indent 使用前缀传值（注意不带 ! 符号）
-  serializePretty(value, indent: 4)
+  println(formatNumber(42, indent: 4))  // "    42"
 
   // 省略命名参数时使用默认值
-  serializePretty(value)  // indent 使用默认值 2
+  println(formatNumber(42))  // "  42"（indent 使用默认值 2）
   ```
 
 ### 1.3 返回类型
@@ -50,9 +52,7 @@ func functionName(param1: Type1, param2: Type2): ReturnType {
 ## 2. 函数调用
 
 ### 2.1 基本调用语法
-```cangjie
-f(arg1, arg2, ..., argn)
-```
+- 调用函数：`f(arg1, arg2)`
 - 每个实参的类型须为对应形参类型的子类型
 
 ### 2.2 非命名参数调用
@@ -87,7 +87,9 @@ f(arg1, arg2, ..., argn)
 - 函数名本身是该函数类型的表达式
 - 若函数名**重载**且有歧义，直接赋给无类型标注的变量会报错。显式类型标注可消除歧义：
   ```cangjie
+  func add(a: Int64, b: Int64): Int64 { a + b }
   var plus: (Int64, Int64) -> Int64 = add  // 消除歧义
+  println(plus(1, 2))  // 3
   ```
 
 ---
@@ -96,9 +98,10 @@ f(arg1, arg2, ..., argn)
 
 ### 4.1 Lambda 语法
 ```cangjie
-{ p1: T1, p2: T2 =>
-    exprs
+let add = { a: Int64, b: Int64 =>
+    a + b
 }
+println(add(3, 4))  // 7
 ```
 - `=>` 分隔参数和函数体，**不可省略**（尾随 Lambda 除外）
 - 函数体是 **exprs**（1~N 个表达式/定义），多个时各占一行
@@ -187,8 +190,13 @@ f(arg1, arg2, ..., argn)
 
 ### 8.1 语法
 ```cangjie
-public operator func +(right: Point): Point { ... }
-public operator func -(): Point { ... }  // 一元运算符
+struct Point {
+    let x: Float64
+    let y: Float64
+    Point(let x: Float64, let y: Float64) {}
+    public operator func +(right: Point): Point { Point(x + right.x, y + right.y) }
+    public operator func -(): Point { Point(-x, -y) }  // 一元运算符
+}
 ```
 - 在 `func` 前使用 `operator` 修饰符
 - 一元运算符：**无参数**（操作 `this`）
@@ -223,11 +231,17 @@ public operator func -(): Point { ... }  // 一元运算符
 ### 9.1 尾随 Lambda
 - 当**最后一个参数**为函数类型且实参为 Lambda 时，Lambda 可置于括号**外部**：
   ```cangjie
-  myIf(true) { 100 }
+  func myIf(cond: Bool, body: () -> Int64): Int64 {
+      if (cond) { body() } else { 0 }
+  }
+  let result = myIf(true) { 100 }
+  println(result)  // 100
   ```
 - 若函数**仅有一个参数**（Lambda），括号可完全省略：
   ```cangjie
-  f { i => i * i }
+  func apply(f: (Int64) -> Int64): Int64 { f(5) }
+  let result = apply { i => i * i }
+  println(result)  // 25
   ```
 - 在尾随 Lambda 位置，`=>` 可省略
 
@@ -245,8 +259,12 @@ public operator func -(): Point { ... }  // 一元运算符
 ### 9.4 变长参数
 - 当**最后一个非命名参数**为 `Array<T>` 时，调用者可直接传递 **0 个或多个**值（而非数组字面量）：
   ```cangjie
-  func sum(arr: Array<Int64>) { ... }
-  sum(1, 2, 3)  // 脱糖为 sum([1, 2, 3])
+  func sum(arr: Array<Int64>): Int64 {
+      var total = 0
+      for (v in arr) { total += v }
+      total
+  }
+  println(sum(1, 2, 3))  // 脱糖为 sum([1, 2, 3])，输出 6
   ```
 - 仅**最后一个非命名**参数可变长。命名参数**不能**使用此语法糖
 - 适用于：全局函数、静态/实例成员函数、局部函数、构造函数、Lambda、函数调用运算符重载、索引运算符重载
