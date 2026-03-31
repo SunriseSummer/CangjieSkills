@@ -41,10 +41,11 @@
 ### 1.6 数值类型转换
 - 仓颉使用**类型构造函数**语法进行数值转换，没有 `.toInt64()` 等方法：
   ```cangjie
-  let n = Int64(value)           // 将其他数值类型转换为 Int64
-  let u = UInt32(runeValue)      // 将 Rune 转换为 UInt32
-  let f = Float64(intValue)      // 将整数转换为 Float64
-  let r = Rune(intValue)         // 将整数转换为 Rune
+  let a: Int32 = 42
+  let n = Int64(a)               // 将 Int32 转换为 Int64
+  let u = UInt32(r'A')           // 将 Rune 转换为 UInt32 → 65
+  let f = Float64(n)             // 将整数转换为 Float64
+  let r = Rune(65)               // 将整数转换为 Rune → 'A'
   ```
 - 字符串解析为数值使用 `parse` 静态方法（需导入 `std.convert.*`）：
   ```cangjie
@@ -108,6 +109,7 @@
 - `Rune` → `UInt32` 转换；任意整数类型 → `Rune` 转换
 - **`Rune` 不支持算术运算**（`+`、`-`、`*`、`/` 等均不可用），需要先转换为整数类型再计算：
   ```cangjie
+  let c = r'5'
   // 错误：Rune 不支持减法
   // let diff = c - r'0'  // 编译错误
 
@@ -116,6 +118,8 @@
 
   // 计算结果可通过 Rune(intValue) 转换回 Rune
   let nextChar = Rune(UInt32(c) + 1)
+  println(diff)      // 5
+  println(nextChar)  // '6'
   ```
 
 ---
@@ -148,10 +152,10 @@
 - 这与大多数编程语言的行为不同，需要特别注意：
   ```cangjie
   // c 是 UInt8 类型（字节）
-  for (c in "你好") { ... }
+  for (c in "你好") { println(c) }    // 输出 UTF-8 字节值
 
   // c 是 Rune 类型（Unicode 字符）
-  for (c in "你好".runes()) { ... }
+  for (c in "你好".runes()) { println(c) }  // 输出: 你  好
   ```
 - `toRuneArray()` 方法可将字符串转换为 `Array<Rune>`
 
@@ -311,10 +315,10 @@ let opt: ?Int64 = 42
 let value = 10
 
 // ❌ 错误：?? 优先级低于 !=，实际解析为 opt ?? (default != value)
-// if (opt ?? default != value) { ... }
+// if (opt ?? default != value) { println("not equal") }
 
 // ✅ 正确：使用括号明确优先级
-if ((opt ?? 0) != value) { ... }
+if ((opt ?? 0) != value) { println("not equal") }
 ```
 
 ### 11.9 区间运算符
