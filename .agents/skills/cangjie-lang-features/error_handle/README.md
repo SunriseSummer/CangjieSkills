@@ -120,7 +120,7 @@ main() {
 
 ### 3.1 四种解构/使用方式
 
-#### (a) 模式匹配（`match`）
+#### (a) 模式匹配
 ```cangjie
 let p: ?Int64 = Some(42)
 let result = match (p) {
