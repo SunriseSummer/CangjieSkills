@@ -9,3 +9,5 @@
 *.cjo
 *.so
 *.o
+*.zip
+*.tar.gz

@@ -3,12 +3,13 @@
 ## 1. 基本排序
 
 - 来自 `std.sort.*`
-- `sort(arr)` — 对 `Array<T>` 排序，要求 `T <: Comparable`
-- 支持 `Array<T>`、`ArrayList<T>`、`List<T>`
+- `sort(data)` — 对集合排序，要求 `T <: Comparable`
+- **支持 `Array<T>`、`ArrayList<T>`、`List<T>` 三种集合类型，所有重载形式均适用**
 
 | 函数 | 说明 |
 |------|------|
 | `sort<T>(data: Array<T>)` | 默认升序排序（`T <: Comparable`） |
+| `sort<T>(data: ArrayList<T>)` | 对 `ArrayList` 升序排序 |
 | `sort<T>(data: Array<T>, descending!: Bool)` | 降序排序 |
 
 ---
@@ -17,9 +18,11 @@
 
 | 函数 | 说明 |
 |------|------|
-| `sort<T>(data: Array<T>, by!: (T, T) -> Ordering)` | 使用比较器排序 |
+| `sort<T>(data: Array<T>, by!: (T, T) -> Ordering)` | 使用比较器排序（返回 `Ordering` 枚举） |
 | `sort<T>(data: Array<T>, lessThan!: (T, T) -> Bool)` | 使用比较函数排序 |
 | `sort<T, K>(data: Array<T>, key!: (T) -> K)` | 按键提取函数排序（`K <: Comparable`） |
+
+以上 `Array<T>` 参数位置均可替换为 `ArrayList<T>` 或 `List<T>`，签名一致。
 
 - 可选命名参数：`stable: Bool = false`、`descending: Bool = false`
 
@@ -70,6 +73,13 @@ main() {
     let key = {i: Student => i.age}
     sort(d, key: key, stable: true)
     println(d)
+
+    // ArrayList 排序
+    let al = ArrayList<Int64>([5, 3, 1, 4, 2])
+    sort(al)
+    println(al)  // [1, 2, 3, 4, 5]
+    sort(al, descending: true)
+    println(al)  // [5, 4, 3, 2, 1]
     return 0
 }
 ```

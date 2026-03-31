@@ -181,7 +181,6 @@ main(args: Array<String>): Unit {
 ```cangjie
 import std.argopt.*
 import std.fs.*
-import std.io.*
 import std.env.*
 
 main(args: Array<String>): Unit {
