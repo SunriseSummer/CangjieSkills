@@ -85,11 +85,11 @@ list[1] = 99       // [10, 99, 30]
 
 ### 4.2 安全访问 `get`
 
-```text
+```cangjie
 func get(index: Int64): ?T
 ```
 
-```text
+```cangjie
 list.get(1)   // Some(99)
 list.get(10)  // None（不抛异常）
 ```
@@ -107,7 +107,7 @@ let sub = list[1..4]  // ArrayList [1, 2, 3]
 
 ### 5.1 尾部追加
 
-```text
+```cangjie
 func add(element: T): Unit
 func add(all!: Collection<T>): Unit
 ```
@@ -123,7 +123,7 @@ list.add(all: other)                 // [1, 2, 3, 4, 5, 6, 7]
 
 ### 5.2 在指定位置插入
 
-```text
+```cangjie
 func add(element: T, at!: Int64): Unit
 func add(all!: Collection<T>, at!: Int64): Unit
 ```
@@ -142,7 +142,7 @@ list.add(all: [77, 88], at: 0)      // [77, 88, 1, 99, 2, 3]
 
 ### 6.1 按索引删除
 
-```text
+```cangjie
 func remove(at!: Int64): T
 ```
 
@@ -155,7 +155,7 @@ let removed = list.remove(at: 1)  // removed = 20, list = [10, 30, 40]
 
 ### 6.2 按范围删除
 
-```text
+```cangjie
 func remove(range: Range<Int64>): Unit
 ```
 
@@ -168,7 +168,7 @@ list.remove(1..3)  // [0, 3, 4]
 
 ### 6.3 按条件删除
 
-```text
+```cangjie
 func removeIf(predicate: (T) -> Bool): Unit
 ```
 
@@ -181,11 +181,11 @@ list.removeIf { v => v % 2 == 0 }  // [1, 3, 5]
 
 ### 6.4 清空
 
-```text
+```cangjie
 func clear(): Unit
 ```
 
-```text
+```cangjie
 list.clear()  // size = 0
 ```
 
@@ -203,11 +203,11 @@ let list = ArrayList<Int64>(1000)  // 预分配容量 1000
 
 ### 7.2 运行时扩容
 
-```text
+```cangjie
 func reserve(additional: Int64): Unit
 ```
 
-```text
+```cangjie
 list.reserve(500)  // 额外增加 500 的容量
 ```
 
@@ -217,7 +217,7 @@ list.reserve(500)  // 额外增加 500 的容量
 
 ## 8. 切片
 
-```text
+```cangjie
 func slice(range: Range<Int64>): ArrayList<T>
 ```
 
@@ -233,7 +233,7 @@ let sub = list.slice(1..=3)  // [1, 2, 3]（新 ArrayList）
 
 ## 9. 反转
 
-```text
+```cangjie
 func reverse(): Unit
 ```
 
@@ -246,7 +246,7 @@ list.reverse()  // [3, 2, 1]
 
 ## 10. 拷贝
 
-```text
+```cangjie
 func clone(): ArrayList<T>
 ```
 
@@ -263,7 +263,7 @@ println(list[0])  // 1（不受影响，浅拷贝但各自独立存储）
 
 ### 11.1 转为 Array
 
-```text
+```cangjie
 func toArray(): Array<T>
 ```
 
@@ -274,11 +274,11 @@ let arr: Array<Int64> = list.toArray()  // [1, 2, 3]
 
 ### 11.2 转为字符串（需要 T <: ToString）
 
-```text
+```cangjie
 func toString(): String
 ```
 
-```text
+```cangjie
 ArrayList<Int64>([1, 2, 3]).toString()  // "[1, 2, 3]"
 ```
 
@@ -286,17 +286,17 @@ ArrayList<Int64>([1, 2, 3]).toString()  // "[1, 2, 3]"
 
 ## 12. 判空与包含
 
-```text
+```cangjie
 func isEmpty(): Bool
 ```
 
-```text
+```cangjie
 ArrayList<Int64>().isEmpty()  // true
 ```
 
 ### 12.1 `contains`（需要 T <: Equatable<T>）
 
-```text
+```cangjie
 func contains(element: T): Bool
 ```
 
@@ -322,7 +322,7 @@ println(a != c)  // true
 
 ## 14. 迭代
 
-```text
+```cangjie
 func iterator(): Iterator<T>
 ```
 
@@ -360,7 +360,7 @@ sort(list)  // [1, 1, 3, 4, 5]
 
 ### 15.2 内置排序方法（已废弃）
 
-```text
+```cangjie
 // 以下方法已废弃，建议使用 std.sort
 list.sort()                                          // 升序（T 须 <: Comparable）
 list.sortDescending()                                // 降序

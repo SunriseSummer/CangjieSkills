@@ -35,7 +35,7 @@
 ### 2.1 `throw` 关键字
 - `throw <expr>` 其中 `<expr>` 须为 `Exception` 子类型（不能抛出 `Error`）
 - 未处理的异常调用默认处理器，或通过以下方式注册自定义处理器：
-  ```text
+  ```cangjie
   Thread.handleUncaughtExceptionBy(exHandler: (Thread, Exception) -> Unit): Unit
   ```
 

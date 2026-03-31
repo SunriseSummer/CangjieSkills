@@ -187,7 +187,7 @@ class MyVisitor <: Visitor {
 ### 6.5 非属性宏：自动生成 toString
 
 宏定义（`macros/src/my_macros.cj`）：
-```text
+```cangjie
 macro package macros
 
 import std.ast.*
@@ -238,7 +238,7 @@ public macro AutoToString(input: Tokens): Tokens {
 ```
 
 调用处（`src/main.cj`）：
-```text
+```cangjie
 import macros.*
 
 @AutoToString
@@ -260,7 +260,7 @@ main() {
 
 ### 6.6 属性宏：条件日志
 
-```text
+```cangjie
 macro package macros
 
 import std.ast.*
@@ -287,7 +287,7 @@ public macro Log(attrTokens: Tokens, inputTokens: Tokens): Tokens {
 ```
 
 调用处：
-```text
+```cangjie
 import macros.*
 
 @Log[DEBUG]

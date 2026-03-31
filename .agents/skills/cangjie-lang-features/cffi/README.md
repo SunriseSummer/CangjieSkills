@@ -32,7 +32,7 @@ main() {
 
 可使用 `foreign` 块批量声明多个外部函数：
 
-```text
+```cangjie
 foreign {
     func rand(): Int32
     func printf(fmt: CString, ...): Int32
@@ -45,7 +45,7 @@ foreign {
 
 `CFunc` 类型用来映射 C 的函数指针，函数实体可能在 C 侧或仓颉侧定义，但两侧都能调用这类函数，有三种方式声明/定义：
 
-```text
+```cangjie
 // 形式 1：@C foreign 声明的外部 C 函数，定义在 C 侧
 foreign func free(ptr: CPointer<Int8>): Unit
 
@@ -67,7 +67,7 @@ let f1: CFunc<(CPointer<Int8>) -> Unit> = { ptr =>
 
 CFunc 和 CPointer 互转：
 
-```text
+```cangjie
 // CPointer<T> → CFunc 其中 T <: CType
 var ptr: CPointer<Int8> = getXXCFuncPtr()
 var f = CFunc<() -> Unit>(ptr) // 须确保指针指向有效函数地址
@@ -81,7 +81,7 @@ var p = CPointer<Int8>(rand) // 安全，但不应对转换后的指针 read/wri
 
 调用 `CFunc` 时，用 `inout` 修饰实参变量，自动取变量地址转为 `CPointer<T>` 传递：
 
-```text
+```cangjie
 @C
 struct Point {
     var x: Int32 = 0
@@ -156,7 +156,7 @@ main() {
 
 适用于 `foreign` 块、单个 `foreign` 函数和顶层 `CFunc` 函数：
 
-```text
+```cangjie
 @CallingConv[STDCALL]
 foreign func MessageBoxA(hwnd: CPointer<Unit>, text: CString, caption: CString, uType: UInt32): Int32
 ```
@@ -285,7 +285,7 @@ var pUInt8 = CPointer<UInt8>(pInt8)  // CPointer<Int8> → CPointer<UInt8>
 void processArray(int a[3]);
 ```
 
-```text
+```cangjie
 // 仓颉侧
 foreign func processArray(a: VArray<Int32, $3>): Unit
 
@@ -361,7 +361,7 @@ char *getCString() { return str; }
 void printCString(char *s) { printf("%s\n", s); }
 ```
 
-```text
+```cangjie
 foreign func getCString(): CString
 foreign func printCString(s: CString): Unit
 
@@ -487,13 +487,13 @@ main() {
 
 将仓颉 `Array<T>` 的底层数据暴露为 `CPointer<T>` 传递给 C 函数，无需拷贝：
 
-```text
+```cangjie
 // 函数签名
 public unsafe func acquireArrayRawData<T>(arr: Array<T>): CPointerHandle<T> where T <: CType
 public unsafe func releaseArrayRawData<T>(handle: CPointerHandle<T>): Unit where T <: CType
 ```
 
-```text
+```cangjie
 foreign func processBuffer(buf: CPointer<Int64>, len: Int32): Unit
 
 main() {
@@ -520,7 +520,7 @@ typedef void (*callback)(int);
 void set_callback(callback cb);
 ```
 
-```text
+```cangjie
 // 仓颉侧声明
 foreign func set_callback(cb: CFunc<(Int32) -> Unit>): Unit
 
@@ -573,7 +573,7 @@ void drawPoint(Point* point) {
 }
 ```
 
-```text
+```cangjie
 // main.cj
 @C
 struct Point {
@@ -610,7 +610,7 @@ void initCube(Cube* cube) {
 }
 ```
 
-```text
+```cangjie
 // main.cj
 @C
 struct Cube {
@@ -652,7 +652,7 @@ void apply(int* arr, int len, transform_fn fn) {
 }
 ```
 
-```text
+```cangjie
 // main.cj
 foreign func apply(arr: CPointer<Int32>, len: Int32, fn: CFunc<(Int32) -> Int32>): Unit
 

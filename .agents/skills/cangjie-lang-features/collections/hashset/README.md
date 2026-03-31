@@ -70,7 +70,7 @@ println(set.capacity)  // >= 3
 
 ### 4.1 `add` — 添加单个元素
 
-```text
+```cangjie
 func add(element: T): Bool
 ```
 
@@ -87,11 +87,11 @@ println(set.size)   // 2
 
 ### 4.2 `add` — 批量添加
 
-```text
+```cangjie
 func add(all!: Collection<T>): Unit
 ```
 
-```text
+```cangjie
 set.add(all: ["orange", "peach"])
 set.add(all: otherSet)
 ```
@@ -104,7 +104,7 @@ set.add(all: otherSet)
 
 ### 5.1 `contains` — 元素是否存在
 
-```text
+```cangjie
 func contains(element: T): Bool
 func contains(all!: Collection<T>): Bool
 ```
@@ -119,7 +119,7 @@ println(set.contains(all: ["apple", "grape"]))   // false（grape 不存在）
 
 ### 5.2 `toArray` — 转为数组
 
-```text
+```cangjie
 func toArray(): Array<T>
 ```
 
@@ -138,7 +138,7 @@ HashSet 是无序集合，**不支持下标访问**（无索引概念）。
 
 ### 6.1 按元素删除
 
-```text
+```cangjie
 func remove(element: T): Bool
 ```
 
@@ -153,17 +153,17 @@ println(set.remove("grape"))   // false（不存在）
 
 ### 6.2 批量删除
 
-```text
+```cangjie
 func remove(all!: Collection<T>): Unit
 ```
 
-```text
+```cangjie
 set.remove(all: ["banana", "orange"])
 ```
 
 ### 6.3 条件删除
 
-```text
+```cangjie
 func removeIf(predicate: (T) -> Bool): Unit
 ```
 
@@ -176,11 +176,11 @@ set.removeIf { v => v % 2 == 0 }  // 删除偶数 → {1, 3, 5}
 
 ### 6.4 清空
 
-```text
+```cangjie
 func clear(): Unit
 ```
 
-```text
+```cangjie
 set.clear()  // size = 0
 ```
 
@@ -192,7 +192,7 @@ HashSet 支持集合的交集、并集、差集运算，返回新的 HashSet。
 
 ### 7.1 交集 `&`
 
-```text
+```cangjie
 operator func &(other: ReadOnlySet<T>): HashSet<T>
 ```
 
@@ -204,7 +204,7 @@ let intersection = a & b  // {3, 4}
 
 ### 7.2 并集 `|`
 
-```text
+```cangjie
 operator func |(other: ReadOnlySet<T>): HashSet<T>
 ```
 
@@ -216,7 +216,7 @@ let union = a | b  // {1, 2, 3, 4, 5}
 
 ### 7.3 差集 `-`
 
-```text
+```cangjie
 operator func -(other: ReadOnlySet<T>): HashSet<T>
 ```
 
@@ -228,7 +228,7 @@ let diff = a - b  // {1, 2}
 
 ### 7.4 子集判断
 
-```text
+```cangjie
 func subsetOf(other: ReadOnlySet<T>): Bool
 ```
 
@@ -241,7 +241,7 @@ println(b.subsetOf(a))  // false
 
 ### 7.5 保留交集元素 `retain`
 
-```text
+```cangjie
 func retain(all!: Set<T>): Unit
 ```
 
@@ -255,7 +255,7 @@ a.retain(all: b)  // a = {2, 4}（原地修改）
 
 ## 8. 遍历
 
-```text
+```cangjie
 func iterator(): Iterator<T>
 ```
 
@@ -274,11 +274,11 @@ for (item in set) {
 
 ## 9. 容量管理
 
-```text
+```cangjie
 func reserve(additional: Int64): Unit
 ```
 
-```text
+```cangjie
 set.reserve(100)  // 扩容以容纳更多元素
 ```
 
@@ -290,11 +290,11 @@ set.reserve(100)  // 扩容以容纳更多元素
 
 ## 10. 判空
 
-```text
+```cangjie
 func isEmpty(): Bool
 ```
 
-```text
+```cangjie
 HashSet<String>().isEmpty()  // true
 ```
 
@@ -302,7 +302,7 @@ HashSet<String>().isEmpty()  // true
 
 ## 11. 拷贝
 
-```text
+```cangjie
 func clone(): HashSet<T>
 ```
 
@@ -330,11 +330,11 @@ println(a != c)  // true
 
 ## 13. 转为字符串（需要 T <: ToString）
 
-```text
+```cangjie
 func toString(): String
 ```
 
-```text
+```cangjie
 HashSet<Int64>([1, 2, 3]).toString()
 // "[1, 2, 3]"（顺序不保证）
 ```
@@ -343,7 +343,7 @@ HashSet<Int64>([1, 2, 3]).toString()
 
 ## 14. 常见用法总结
 
-```text
+```cangjie
 import std.collection.*
 
 // 1. 去重

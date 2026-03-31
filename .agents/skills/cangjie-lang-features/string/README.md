@@ -63,7 +63,7 @@ println(s2.size)    // 6（每个汉字 3 字节 UTF-8）
 
 ### 4.1 `join` — 拼接字符串数组
 
-```text
+```cangjie
 static func join(strArr: Array<String>, delimiter!: String = String.empty): String
 ```
 
@@ -78,7 +78,7 @@ println(csv) // "a,b,c"
 
 ### 4.2 `fromUtf8` — 从 UTF-8 字节数组构造
 
-```text
+```cangjie
 static func fromUtf8(utf8Data: Array<UInt8>): String
 ```
 
@@ -91,7 +91,7 @@ let s = String.fromUtf8(bytes) // "Hello"
 
 ### 4.3 `fromUtf8Unchecked` — 不校验构造（unsafe）
 
-```text
+```cangjie
 static func fromUtf8Unchecked(utf8Data: Array<UInt8>): String
 ```
 
@@ -99,7 +99,7 @@ static func fromUtf8Unchecked(utf8Data: Array<UInt8>): String
 
 ### 4.4 `checkUtf8Encoding` — 校验 UTF-8 合法性
 
-```text
+```cangjie
 static func checkUtf8Encoding(data: Array<UInt8>): Bool
 ```
 
@@ -114,30 +114,30 @@ let invalid = String.checkUtf8Encoding([0xFF, 0xFE]) // false
 
 ### 5.1 `contains` — 包含子串
 
-```text
+```cangjie
 func contains(str: String): Bool
 ```
 
-```text
+```cangjie
 "Hello World".contains("World") // true
 "Hello World".contains("world") // false（大小写敏感）
 ```
 
 ### 5.2 `startsWith` / `endsWith` — 前缀/后缀检查
 
-```text
+```cangjie
 func startsWith(prefix: String): Bool
 func endsWith(suffix: String): Bool
 ```
 
-```text
+```cangjie
 "hello.cj".startsWith("hello") // true
 "hello.cj".endsWith(".cj")     // true
 ```
 
 ### 5.3 `indexOf` — 查找首次出现位置
 
-```text
+```cangjie
 func indexOf(b: Byte): Option<Int64>
 func indexOf(b: Byte, fromIndex: Int64): Option<Int64>
 func indexOf(str: String): Option<Int64>
@@ -154,30 +154,30 @@ println(s.indexOf("l", 3))      // Some(3)  — 从索引 3 开始搜索
 
 ### 5.4 `lastIndexOf` — 查找最后出现位置
 
-```text
+```cangjie
 func lastIndexOf(b: Byte): Option<Int64>
 func lastIndexOf(b: Byte, fromIndex: Int64): Option<Int64>
 func lastIndexOf(str: String): Option<Int64>
 func lastIndexOf(str: String, fromIndex: Int64): Option<Int64>
 ```
 
-```text
+```cangjie
 "abcabc".lastIndexOf("abc") // Some(3)
 ```
 
 ### 5.5 `count` — 统计子串出现次数
 
-```text
+```cangjie
 func count(str: String): Int64
 ```
 
-```text
+```cangjie
 "abababab".count("ab") // 4
 ```
 
 ### 5.6 `isEmpty` / `isAscii` / `isAsciiBlank`
 
-```text
+```cangjie
 func isEmpty(): Bool        // 是否为空串
 func isAscii(): Bool        // 是否全为 ASCII 字符
 func isAsciiBlank(): Bool   // 是否为空串或仅含 ASCII 空白字符
@@ -189,25 +189,25 @@ func isAsciiBlank(): Bool   // 是否为空串或仅含 ASCII 空白字符
 
 ### 6.1 `replace` — 替换所有匹配子串
 
-```text
+```cangjie
 func replace(old: String, new: String): String
 ```
 
-```text
+```cangjie
 "aabbcc".replace("bb", "XX") // "aaXXcc"
 "aaa".replace("a", "bb")     // "bbbbbb"
 ```
 
 ### 6.2 `removePrefix` / `removeSuffix` — 删除前缀/后缀
 
-```text
+```cangjie
 func removePrefix(prefix: String): String
 func removeSuffix(suffix: String): String
 ```
 
 - 如果字符串不以指定前缀/后缀开头/结尾，返回原字符串
 
-```text
+```cangjie
 "HelloWorld".removePrefix("Hello") // "World"
 "HelloWorld".removeSuffix("World") // "Hello"
 "HelloWorld".removePrefix("xyz")   // "HelloWorld"
@@ -219,12 +219,12 @@ func removeSuffix(suffix: String): String
 
 ### 7.1 `split` — 按分隔符分割
 
-```text
+```cangjie
 func split(str: String, removeEmpty!: Bool = false): Array<String>
 func split(str: String, maxSplits: Int64, removeEmpty!: Bool = false): Array<String>
 ```
 
-```text
+```cangjie
 "a,b,,c".split(",")                    // ["a", "b", "", "c"]
 "a,b,,c".split(",", removeEmpty: true) // ["a", "b", "c"]
 "a,b,c,d".split(",", 2)               // ["a", "b", "c,d"]  — 最多分割 2 次
@@ -232,7 +232,7 @@ func split(str: String, maxSplits: Int64, removeEmpty!: Bool = false): Array<Str
 
 ### 7.2 `lazySplit` — 惰性分割（返回迭代器）
 
-```text
+```cangjie
 func lazySplit(str: String, removeEmpty!: Bool = false): Iterator<String>
 func lazySplit(str: String, maxSplits: Int64, removeEmpty!: Bool = false): Iterator<String>
 ```
@@ -241,7 +241,7 @@ func lazySplit(str: String, maxSplits: Int64, removeEmpty!: Bool = false): Itera
 
 ### 7.3 `lines` — 按行分割
 
-```text
+```cangjie
 func lines(): Iterator<String>
 ```
 
@@ -262,13 +262,13 @@ for (line in text.lines()) {
 
 ### 8.1 ASCII 空白裁剪
 
-```text
+```cangjie
 func trimAscii(): String       // 两端裁剪 ASCII 空白
 func trimAsciiStart(): String  // 裁剪前导 ASCII 空白
 func trimAsciiEnd(): String    // 裁剪尾部 ASCII 空白
 ```
 
-```text
+```cangjie
 "  hello  ".trimAscii()      // "hello"
 "  hello  ".trimAsciiStart() // "hello  "
 "  hello  ".trimAsciiEnd()   // "  hello"
@@ -276,7 +276,7 @@ func trimAsciiEnd(): String    // 裁剪尾部 ASCII 空白
 
 ### 8.2 自定义裁剪
 
-```text
+```cangjie
 // 按 Rune 数组裁剪（移除集合中的任意字符）
 func trimStart(chars: Array<Rune>): String
 func trimEnd(chars: Array<Rune>): String
@@ -290,7 +290,7 @@ func trimStart(predicate: (Rune) -> Bool): String
 func trimEnd(predicate: (Rune) -> Bool): String
 ```
 
-```text
+```cangjie
 "xxxHelloxxx".trimStart([r'x'])              // "Helloxxx"
 "xxxHelloxxx".trimEnd([r'x'])                // "xxxHello"
 "123abc456".trimStart { r => r >= r'0' && r <= r'9' } // "abc456"
@@ -300,7 +300,7 @@ func trimEnd(predicate: (Rune) -> Bool): String
 
 ## 9. 填充（Pad）
 
-```text
+```cangjie
 func padStart(totalWidth: Int64, padding!: String = " "): String
 func padEnd(totalWidth: Int64, padding!: String = " "): String
 ```
@@ -308,7 +308,7 @@ func padEnd(totalWidth: Int64, padding!: String = " "): String
 - `totalWidth` 为目标字节宽度
 - 如果原字符串长度已 ≥ `totalWidth`，返回原字符串
 
-```text
+```cangjie
 "42".padStart(6)           // "    42"
 "42".padStart(6, padding: "0") // "000042"
 "42".padEnd(6)             // "42    "
@@ -319,13 +319,13 @@ func padEnd(totalWidth: Int64, padding!: String = " "): String
 
 ## 10. 大小写转换
 
-```text
+```cangjie
 func toAsciiLower(): String   // 转小写（仅 ASCII 字母）
 func toAsciiUpper(): String   // 转大写（仅 ASCII 字母）
 func toAsciiTitle(): String   // 首字母大写（仅 ASCII 字母）
 ```
 
-```text
+```cangjie
 "Hello World".toAsciiLower() // "hello world"
 "Hello World".toAsciiUpper() // "HELLO WORLD"
 "hello world".toAsciiTitle() // "Hello World"
@@ -335,19 +335,19 @@ func toAsciiTitle(): String   // 首字母大写（仅 ASCII 字母）
 
 ## 11. 比较
 
-```text
+```cangjie
 func compare(other: String): Ordering   // 字典序比较，返回 Ordering.LT/EQ/GT
 func equalsIgnoreAsciiCase(other: String): Bool  // 忽略 ASCII 大小写比较
 ```
 
-```text
+```cangjie
 "abc".compare("abd")                     // Ordering.LT
 "Hello".equalsIgnoreAsciiCase("hello")   // true
 ```
 
 ### 运算符比较
 
-```text
+```cangjie
 "abc" == "abc"  // true
 "abc" != "def"  // true
 "abc" < "abd"   // true（字典序）
@@ -406,7 +406,7 @@ let result = sb.toString() // "Hello, World!"
 
 ### 13.1 转为字节数组
 
-```text
+```cangjie
 func toArray(): Array<Byte>      // 返回 UTF-8 字节数组（拷贝）
 func rawData(): Array<Byte>      // 返回内部原始数据引用（unsafe）
 ```
@@ -417,7 +417,7 @@ let bytes = "Hi".toArray()   // [72, 105]
 
 ### 13.2 转为 Rune 数组
 
-```text
+```cangjie
 func toRuneArray(): Array<Rune>
 ```
 
@@ -427,12 +427,12 @@ let runes = "Hi你".toRuneArray() // [r'H', r'i', r'你']
 
 ### 13.3 迭代
 
-```text
+```cangjie
 func iterator(): Iterator<Byte>   // 按字节迭代
 func runes(): Iterator<Rune>      // 按字符（Rune）迭代
 ```
 
-```text
+```cangjie
 // 按字符迭代
 for (r in "Hello 仓颉".runes()) {
     print(r)
@@ -446,13 +446,13 @@ for (b in "Hello") {
 
 ### 13.4 `toString`
 
-```text
+```cangjie
 func toString(): String  // 返回自身
 ```
 
 ### 13.5 `hashCode`
 
-```text
+```cangjie
 func hashCode(): Int64  // 返回哈希值，可用于 HashMap 等
 ```
 
@@ -484,7 +484,7 @@ let sub2 = s[6..11] // "World"
 
 ## 15. `clone`
 
-```text
+```cangjie
 func clone(): String
 ```
 

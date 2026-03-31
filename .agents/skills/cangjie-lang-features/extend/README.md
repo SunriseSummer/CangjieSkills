@@ -76,7 +76,7 @@ extend<T> MyList<T> {
 }
 ```
 - `extend` 后声明的每个类型参数**须**在被扩展类型中使用
-```text
+```cangjie
 // ❌ 错误示例
 extend MyList {}              // Error: 泛型类型须带类型实参
 extend<T, R> MyList<T> {}     // Error: R 未被使用
@@ -209,7 +209,7 @@ extend<T1, T2> Pair<T1, T2> <: Eq<Pair<T1, T2>> where T1 <: Eq<T1>, T2 <: Eq<T2>
 
 ### 4.1 扩展级修饰符
 - **扩展本身不能有修饰符**
-```text
+```cangjie
 public class A {}
 public extend A {}  // ❌ Error: 扩展前不能有修饰符
 ```
@@ -257,7 +257,7 @@ public class Foo {}
 // package b
 public interface Bar {}
 ```
-```text
+```cangjie
 // package c
 import a.Foo
 import b.Bar
@@ -282,7 +282,7 @@ extend A {
 
 ### 4.6 不能访问 `private` 成员
 扩展不能读写被扩展类型的 `private` 成员。`protected` 及以上可访问
-```text
+```cangjie
 class A {
     private var v1 = 0
     protected var v2 = 0
@@ -298,7 +298,7 @@ extend A {
 ### 4.7 不能遮蔽
 - 扩展**不能**重定义类型上已有的成员
 - 扩展**不能**重定义同一类型的另一个扩展中的成员
-```text
+```cangjie
 class A {
     func f() {}
 }
@@ -385,7 +385,7 @@ extend Foo {
     public func f() {}
 }
 ```
-```text
+```cangjie
 // package b
 package b
 import a.Foo
@@ -394,7 +394,7 @@ extend Foo <: I {
     public func g() { this.f() }  // OK
 }
 ```
-```text
+```cangjie
 // package c — 使用扩展
 package c
 import a.Foo

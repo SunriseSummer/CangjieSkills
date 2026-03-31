@@ -68,7 +68,7 @@ struct Rectangle {
 
 ### 1.8 禁止递归结构体
 - 直接和间接递归均**不合法**（编译错误）：
-```text
+```cangjie
 struct R1 { let other: R1 }         // 错误：自引用
 struct R2 { let other: R3 }         // 错误：相互引用
 struct R3 { let other: R2 }
@@ -111,7 +111,7 @@ struct Foo {
 - **不能用于 `class`**（类是引用类型，实例函数本身就能修改成员）
 
 ### 3.4 `mut` 不能修饰静态函数
-```text
+```cangjie
 public mut static func g(): Unit {} // 错误
 ```
 
