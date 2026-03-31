@@ -78,7 +78,7 @@ main(): Int64 {
 ### 4.2 可重入互斥锁（`Mutex`）
 
 #### 类声明
-```cangjie
+```text
 public class Mutex <: UniqueLock {
     public init()
     public func lock(): Unit
@@ -190,8 +190,14 @@ main() {
 
 #### 语法
 ```cangjie
-synchronized(lockInstance) {
-    // 临界区 — 自动加锁/解锁
+import std.sync.*
+
+main() {
+    let mtx = Mutex()
+    synchronized(mtx) {
+        // 临界区 — 自动加锁/解锁
+        println("in critical section")
+    }
 }
 ```
 
@@ -204,7 +210,7 @@ synchronized(lockInstance) {
 ### 4.5 线程局部变量（`ThreadLocal<T>`）
 
 #### 类声明
-```cangjie
+```text
 public class ThreadLocal<T> {
     public init()
     public func get(): Option<T>   // 未设置时返回 None
@@ -249,7 +255,7 @@ main() {
 ### 6.1 `Future<T>` — 线程句柄
 
 #### 类声明
-```cangjie
+```text
 public class Future<T> {
     public prop thread: Thread               // 获取关联的 Thread 对象
     public func get(): T
@@ -277,7 +283,7 @@ public class Future<T> {
 ### 6.2 `Thread` 类
 
 #### 声明
-```cangjie
+```text
 class Thread {
     static prop currentThread: Thread
     prop id: Int64

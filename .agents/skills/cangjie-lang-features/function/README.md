@@ -104,7 +104,7 @@ let add = { a: Int64, b: Int64 =>
 println(add(3, 4))  // 7
 ```
 - `=>` 分隔参数和函数体，**不可省略**（尾随 Lambda 除外）
-- 函数体是 **exprs**（1~N 个表达式/定义），多个时各占一行
+- 函数体可以是 0~N 个表达式，多个时各占一行
 - Lambda 的值/类型 = 函数体最后一个表达式的值/类型
 - 无参 Lambda：`{ => exprs }`
 - 参数类型可**省略**（当可从上下文推断时）
@@ -191,8 +191,6 @@ println(add(3, 4))  // 7
 ### 8.1 语法
 ```cangjie
 struct Point {
-    let x: Float64
-    let y: Float64
     Point(let x: Float64, let y: Float64) {}
     public operator func +(right: Point): Point { Point(x + right.x, y + right.y) }
     public operator func -(): Point { Point(-x, -y) }  // 一元运算符

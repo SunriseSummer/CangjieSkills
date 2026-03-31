@@ -68,7 +68,7 @@ struct Rectangle {
 
 ### 1.8 禁止递归结构体
 - 直接和间接递归均**不合法**（编译错误）：
-```cangjie
+```text
 struct R1 { let other: R1 }         // 错误：自引用
 struct R2 { let other: R3 }         // 错误：相互引用
 struct R3 { let other: R2 }
@@ -111,13 +111,16 @@ struct Foo {
 - **不能用于 `class`**（类是引用类型，实例函数本身就能修改成员）
 
 ### 3.4 `mut` 不能修饰静态函数
-```cangjie
+```text
 public mut static func g(): Unit {} // 错误
 ```
 
 ### 3.5 `mut` 也可修饰运算符函数
 ```cangjie
-public mut operator func +(rhs: A): A { A() }  // 合法
+struct A {
+    var x = 0
+    public mut operator func +(rhs: A): A { A() }  // 合法
+}
 ```
 
 ### 3.6 `mut` 函数中 `this` 的限制
@@ -135,20 +138,40 @@ public mut operator func +(rhs: A): A { A() }  // 合法
 
 #### 规则 1：`let` 声明的结构体变量不能调用 `mut` 函数
 ```cangjie
-let a = Foo()
-a.f()    // 错误：a 是 let 声明的结构体
-var b = Foo()
-b.f()    // 正确：b 是 var
-let c: I = Foo()
-c.f()    // 正确：c 是接口类型，非结构体类型
+interface I {
+    mut func f(): Unit
+}
+struct Foo <: I {
+    var x = 0
+    public mut func f(): Unit { x += 1 }
+}
+
+main() {
+    // let a = Foo()
+    // a.f()    // 错误：a 是 let 声明的结构体
+    var b = Foo()
+    b.f()    // 正确：b 是 var
+    let c: I = Foo()
+    c.f()    // 正确：c 是接口类型，非结构体类型
+}
 ```
 
 #### 规则 2：结构体类型变量上的 `mut` 函数不能作为一等公民使用
 ```cangjie
-var a = Foo()
-var fn = a.f    // 错误：不能将 mut 函数作为一等公民使用
-var b: I = Foo()
-fn = b.f        // 正确：b 是接口类型
+interface I {
+    mut func f(): Unit
+}
+struct Foo <: I {
+    var x = 0
+    public mut func f(): Unit { x += 1 }
+}
+
+main() {
+    // var a = Foo()
+    // var fn = a.f    // 错误：不能将 mut 函数作为一等公民使用
+    var b: I = Foo()
+    var fn = b.f       // 正确：b 是接口类型
+}
 ```
 
 #### 规则 3：非 `mut` 实例成员函数不能调用 `mut` 函数；`mut` 函数**可以**调用非 `mut` 函数
@@ -160,7 +183,7 @@ struct Foo {
         g()     // 正确：mut 可调用非 mut
     }
     public func g(): Unit {
-        f()     // 错误：非 mut 不能调用 mut
+        // f()  // 错误：非 mut 不能调用 mut
     }
 }
 ```

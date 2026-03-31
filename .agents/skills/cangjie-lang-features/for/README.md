@@ -53,7 +53,7 @@ for (i in 10..0 : -3) { print(i) } // 输出：10741
 - `step < 0 && start <= end`（半开）或 `step < 0 && start < end`（闭）→ 空区间
 
 ### 2.4 Range 类型签名
-```cangjie
+```text
 public struct Range<T> <: Iterable<T> where T <: Countable<T> & Comparable<T> & Equatable<T>
 ```
 - `start: T`、`end: T`、`step: Int64`

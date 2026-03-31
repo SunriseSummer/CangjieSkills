@@ -71,9 +71,11 @@
 open class Base {}
 class Derived <: Base {}
 
-let b: Base = Derived()
-println(b is Derived)  // true
-println(b is Base)     // true
+main() {
+    let b: Base = Derived()
+    println(b is Derived)  // true
+    println(b is Base)     // true
+}
 ```
 
 ### 4.5 `as` 运算符
@@ -83,9 +85,11 @@ println(b is Base)     // true
 open class Base {}
 class Derived <: Base {}
 
-let b: Base = Derived()
-println(b as Derived)  // Some(...)
-println(b as String)   // None
+main() {
+    let b: Base = Derived()
+    println((b as Derived).isSome())   // true
+    println((b as String).isSome())    // false
+}
 ```
 
 ---

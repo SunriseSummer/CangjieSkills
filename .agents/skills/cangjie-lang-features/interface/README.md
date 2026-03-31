@@ -346,7 +346,12 @@ interface I {
     func f(): Unit
 }
 
+// 以下代码编译会报错：实现接口成员须使用 public
+// open class C <: I {
+//     protected func f() {}  // ❌ Error: 须为 public
+// }
+
 open class C <: I {
-    protected func f() {}  // ❌ Error: 须为 public
+    public func f() {}  // ✅ 正确: public 修饰
 }
 ```

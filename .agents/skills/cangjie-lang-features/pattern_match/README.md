@@ -159,9 +159,12 @@ class Derived <: Base {
     public init() { a = 20 }
 }
 
-match (Derived()) {
-    case b: Base => b.a    // 匹配：Derived 是 Base 子类型，r = 20
-    case _ => 0
+main() {
+    let r = match (Derived()) {
+        case b: Base => b.a    // 匹配：Derived 是 Base 子类型，r = 20
+        case _ => 0
+    }
+    println(r)  // 20
 }
 ```
 
@@ -175,9 +178,12 @@ enum TimeUnit {
     | Year(UInt64) | Month(UInt64)
 }
 
-match (Year(2)) {
-    case Year(n) => "${n * 12} months"   // 匹配
-    case Month(n) => "${n} months"
+main() {
+    let r = match (Year(2)) {
+        case Year(n) => "${n * 12} months"   // 匹配
+        case Month(n) => "${n} months"
+    }
+    println(r)  // "24 months"
 }
 ```
 
@@ -188,9 +194,11 @@ match (Year(2)) {
 enum TimeUnit { | Year(UInt64) | Month(UInt64) }
 enum Command  { | SetTimeUnit(TimeUnit) | Quit }
 
-match ((SetTimeUnit(Year(2024)), true)) {
-    case (SetTimeUnit(Year(y)), true) => println("year ${y}")  // 匹配
-    case _ => ()
+main() {
+    match ((SetTimeUnit(Year(2024)), true)) {
+        case (SetTimeUnit(Year(y)), true) => println("year ${y}")  // 匹配
+        case _ => ()
+    }
 }
 ```
 
@@ -271,10 +279,14 @@ main() {
 `||` 连接时，模式中**不能有变量绑定**，只能使用通配符 `_`：
 
 ```cangjie
-let a = Num(1)
-let b: Expr = Error
-if (let Num(_) <- a || let Num(_) <- b) {
-    println("至少一个是 Num")  // 匹配
+enum Expr { | Num(Int64) | Err }
+
+main() {
+    let a = Num(1)
+    let b: Expr = Err
+    if (let Num(_) <- a || let Num(_) <- b) {
+        println("至少一个是 Num")  // 匹配
+    }
 }
 ```
 
@@ -319,12 +331,19 @@ main() {
 
 等价的 match 解糖形态：
 ```cangjie
-while (true) {
-    match (s) {
-        case Active(n) =>
-            println(n)
-            s = if (n < 3) { Active(n + 1) } else { Done }
-        case _ => break
+enum State {
+    | Active(Int64) | Done
+}
+
+main() {
+    var s: State = Active(1)
+    while (true) {
+        match (s) {
+            case Active(n) =>
+                println(n)
+                s = if (n < 3) { Active(n + 1) } else { Done }
+            case _ => break
+        }
     }
 }
 ```
