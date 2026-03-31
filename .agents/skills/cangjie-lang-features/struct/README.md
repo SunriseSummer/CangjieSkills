@@ -138,10 +138,7 @@ struct A {
 
 #### 规则 1：`let` 声明的结构体变量不能调用 `mut` 函数
 ```cangjie
-interface I {
-    mut func f(): Unit
-}
-struct Foo <: I {
+struct Foo {
     var x = 0
     public mut func f(): Unit { x += 1 }
 }
@@ -151,8 +148,6 @@ main() {
     // a.f()    // 错误：a 是 let 声明的结构体
     var b = Foo()
     b.f()    // 正确：b 是 var
-    let c: I = Foo()
-    c.f()    // 正确：c 是接口类型，非结构体类型
 }
 ```
 
