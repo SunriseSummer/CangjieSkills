@@ -34,7 +34,7 @@ let runes: Array<Rune> = [r'H', r'i']
 let s6 = String(runes)          // "Hi"
 
 // 从 Rune 集合构造
-let s7 = String(someRuneCollection)
+let s7 = String(runes)              // 与 Rune 数组构造相同
 
 // 从 UTF-8 字节数组构造
 let bytes: Array<UInt8> = [72, 101, 108, 108, 111]
@@ -496,7 +496,8 @@ func clone(): String
 
 ```cangjie
 // 1. 判断空字符串
-if (s.isEmpty()) { ... }
+let s = "hello"
+if (s.isEmpty()) { println("empty") }
 
 // 2. 安全搜索
 if (let Some(idx) <- s.indexOf("key")) {
@@ -514,20 +515,10 @@ let input = "  user@example.com  ".trimAscii()
 let filename = "path/to/file.cj"
 if (filename.endsWith(".cj")) {
     let name = filename.removeSuffix(".cj")
+    println(name)  // "path/to/file"
 }
 
-// 6. 按行处理文本
-for (line in text.lines()) {
-    if (!line.isEmpty()) {
-        processLine(line)
-    }
-}
-
-// 7. 字符串重复
+// 6. 字符串重复
 let separator = "=" * 40  // "========================================"
-
-// 8. 大小写不敏感比较
-if (cmd.equalsIgnoreAsciiCase("quit")) {
-    exit(0)
-}
+println(separator)
 ```

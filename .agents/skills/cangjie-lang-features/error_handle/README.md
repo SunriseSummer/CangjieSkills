@@ -87,10 +87,20 @@ try {
 
 #### 语法
 ```cangjie
-try (r = Worker("Tom")) {
-    r.getTools()
-    r.work()
-}  // 若 r.isClosed() == false 则自动调用 r.close()
+class Worker <: Resource {
+    let name: String
+    var closed = false
+    init(name: String) { this.name = name }
+    func work() { println("${name} working") }
+    public func isClosed(): Bool { closed }
+    public func close(): Unit { closed = true; println("${name} closed") }
+}
+
+main() {
+    try (r = Worker("Tom")) {
+        r.work()
+    }  // 若 r.isClosed() == false 则自动调用 r.close()
+}
 ```
 
 ### 2.4 CatchPattern
@@ -112,10 +122,12 @@ try (r = Worker("Tom")) {
 
 #### (a) 模式匹配（`match`）
 ```cangjie
-match (p) {
+let p: ?Int64 = Some(42)
+let result = match (p) {
     case Some(x) => "${x}"
     case None => "none"
 }
+println(result)  // "42"
 ```
 
 #### (b) 合并运算符 `??`

@@ -24,7 +24,7 @@ func add(a: Int64, b: Int64): Int64 {
   ```cangjie
   // 函数定义，其中 indent 是命名参数，默认值为 2
   func formatNumber(value: Int64, indent!: Int64 = 2): String {
-      " ".repeat(indent) + value.toString()
+      " " * indent + value.toString()
   }
 
   // 函数调用，命名参数 indent 使用前缀传值（注意不带 ! 符号）
