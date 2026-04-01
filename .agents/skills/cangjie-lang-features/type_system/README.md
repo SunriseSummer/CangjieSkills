@@ -92,6 +92,29 @@ main() {
 }
 ```
 
+### 4.6 子类型赋值 ≠ 显式类型转换
+- `Dog <: Animal` 时，`Dog` 值可直接传给 `Animal` 形参或变量；这属于**子类型赋值**
+- `as` 只在你需要**运行时检查并向下转型**时使用，并且返回值是 `Option<T>`，需要显式解包
+
+<!-- verify -->
+
+```cangjie
+open class Animal {}
+class Dog <: Animal {}
+
+func acceptAnimal(a: Animal): Unit {}
+
+main() {
+    let dog = Dog()
+    acceptAnimal(dog)      // 子类型赋值，不需要显式转换
+    let animal: Animal = dog
+
+    if (let Some(d) <- (animal as Dog)) {
+        println(d is Dog)  // true
+    }
+}
+```
+
 ---
 
 ## 5. 类型别名
