@@ -11,3 +11,7 @@
 *.o
 *.zip
 *.tar.gz
+
+# Python 缓存
+__pycache__/
+*.pyc
