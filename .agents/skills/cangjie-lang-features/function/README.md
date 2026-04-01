@@ -154,7 +154,7 @@ func badCounter() {
         n += 1
         n
     }
-    next // 错误：捕获了局部 var，闭包不能逃逸
+    next // 编译错误：捕获了局部 var 的闭包不能逃逸
 }
 ```
 

@@ -10,6 +10,7 @@ Supported markers immediately before a ```cangjie fence:
 from __future__ import annotations
 
 import argparse
+import os
 import pathlib
 import re
 import shutil
@@ -22,14 +23,19 @@ BLOCK_RE = re.compile(
     r"<!--\s*(run|verify|compile\.error)\b[^>]*-->\s*```cangjie\n(.*?)\n```",
     re.S,
 )
+PACKAGE_RE = re.compile(
+    r"^\s*package\s+[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\s*$",
+    re.M,
+)
 
 
 def resolve_cjc(explicit: str | None) -> str:
     if explicit:
         return explicit
+    cangjie_home = os.environ.get("CANGJIE_HOME")
     for candidate in (
         shutil.which("cjc"),
-        str(pathlib.Path("/tmp/cangjie/bin/cjc")),
+        str(pathlib.Path(cangjie_home) / "bin" / "cjc") if cangjie_home else None,
     ):
         if candidate and pathlib.Path(candidate).exists():
             return candidate
@@ -37,7 +43,7 @@ def resolve_cjc(explicit: str | None) -> str:
 
 
 def ensure_package(code: str, package_name: str) -> str:
-    if re.search(r"^\s*package\s+[A-Za-z_][A-Za-z0-9_.]*", code, re.M):
+    if PACKAGE_RE.search(code):
         return code
     return f"package {package_name}\n\n{code}"
 
@@ -56,7 +62,7 @@ def validate_block(cjc: str, markdown: pathlib.Path, mode: str, code: str, block
             command = [cjc, str(src_path), "-o", str(out_path)]
         else:
             out_path = td_path / "libcheck.a"
-            command = [cjc, "--output-type=staticlib", "-Woff", "unused", "-o", str(out_path), str(src_path)]
+            command = [cjc, "--output-type=staticlib", "-o", str(out_path), str(src_path)]
 
         result = subprocess.run(command, capture_output=True, text=True)
 
