@@ -45,6 +45,9 @@
 - 带终结器的类不能为 `open`。每个类最多一个。不能在扩展中定义
 - 触发时机不确定；可能在任意线程上运行
 - 终结器向外抛出未捕获异常属于未定义行为
+- 不要在终结器中**创建线程**或使用**线程同步原语**；这同样属于未定义行为
+- 不要依赖多个终结器的执行顺序，也不要通过轮询共享状态“等待终结器完成”
+- 终结器执行结束后若对象仍被继续访问，属于未定义行为
 - 未完整初始化的对象（初始化时抛异常）的终结器不会执行
 
 ### 1.7 成员函数
@@ -104,6 +107,41 @@
 - **重定义（静态函数）**：子类使用 `redef`（可选）。基于类型名的静态分派
 - 命名参数须在父类与重写之间匹配
 - 泛型重写时子类约束须**等于或宽松于**父类
+
+### 3.5 `This`、`override` 与 `redef` 联合理解
+- 返回 `This` 的实例方法在子类中仍能保持“返回当前动态类型”的能力
+- `override` 影响实例调用的动态分派
+- `redef` 影响通过类型名访问的静态成员解析
+
+<!-- verify -->
+
+```cangjie
+open class Animal {
+    public open func rename(name: String): This {
+        this
+    }
+
+    public open func speak(): String { "..." }
+    public static func kingdom(): String { "animal" }
+}
+
+class Dog <: Animal {
+    public override func rename(name: String): This {
+        this
+    }
+
+    public override func speak(): String { "wang" }
+    public redef static func kingdom(): String { "dog" }
+}
+
+main() {
+    let dog = Dog()
+    let sameDog: Dog = dog.rename("Lucky")
+    println(sameDog.speak())   // 动态分派：wang
+    println(Animal.kingdom())  // 静态分派：animal
+    println(Dog.kingdom())     // 静态分派：dog
+}
+```
 
 ---
 

@@ -143,6 +143,48 @@ println(add(3, 4))  // 7
 5. **传递性捕获**：若函数 `f` 调用捕获了 `var` 变量的函数 `g`（该 `var` 非 `f` 的局部变量），则 `f` 也被视为捕获了 `var`，不能逃逸
 6. **静态/全局 `var` 变量**不算捕获 — 访问它们的函数仍为一等值
 
+### 5.5 `var` 捕获不能逃逸（反例）
+
+<!-- compile.error -->
+
+```cangjie
+func badCounter() {
+    var n = 0
+    func next(): Int64 {
+        n += 1
+        n
+    }
+    next // 错误：捕获了局部 var，闭包不能逃逸
+}
+```
+
+### 5.6 推荐写法：把可变状态放进引用对象
+- 若确实需要“返回一个可多次调用、且内部状态可变的闭包”，可把状态放进 `class` 等引用对象，再捕获该引用
+- 这样闭包捕获的是 `let counter` 绑定，而不是局部 `var`
+
+<!-- verify -->
+
+```cangjie
+class Counter {
+    var value = 0
+}
+
+func makeCounter(): () -> Int64 {
+    let counter = Counter()
+    func next(): Int64 {
+        counter.value += 1
+        counter.value
+    }
+    next
+}
+
+main() {
+    let next = makeCounter()
+    println(next()) // 1
+    println(next()) // 2
+}
+```
+
 ---
 
 ## 6. 嵌套函数
