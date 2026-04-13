@@ -326,22 +326,29 @@ HashMap<String, Int64>([("a", 1), ("b", 2)]).toString()
 ```cangjie
 import std.collection.*
 
+func process(value: String): Unit {
+    println("process ${value}")
+}
+
 // 1. 基本键值存储
 let config = HashMap<String, String>()
 config["host"] = "127.0.0.1"
 config["port"] = "8080"
 
 // 2. 安全取值
+let map = HashMap<String, Int64>([("key", 1), ("other", 2)])
 if (let Some(v) <- map.get("key")) {
-    process(v)
+    println(v)
 }
 
 // 3. 先检查再操作
 if (map.contains("key")) {
     let v = map["key"]  // 安全，已确认键存在
+    println(v)
 }
 
 // 4. 统计词频
+let words = ["apple", "banana", "apple", "orange"]
 let freq = HashMap<String, Int64>()
 for (word in words) {
     let count = freq.get(word) ?? 0
@@ -353,7 +360,8 @@ let entries = ArrayList<String>()
 for ((k, v) in map) {
     entries.add("${k}=${v}")
 }
-let result = String.join(entries.toArray(), delimiter: "&")
+let result = collectString<String>(delimiter: "&")(entries)
+process(result)
 
 // 6. 从键值对数组批量构建
 let headers = HashMap<String, String>([
@@ -365,6 +373,8 @@ let headers = HashMap<String, String>([
 map.removeIf { k, v => v == 0 }
 
 // 8. 合并两个 Map
+let map1 = HashMap<String, Int64>([("a", 1), ("b", 2)])
+let map2 = HashMap<String, Int64>([("b", 20), ("c", 3)])
 let merged = map1.clone()
 merged.add(all: map2)  // map2 中的键覆盖 map1
 ```

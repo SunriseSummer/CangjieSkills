@@ -78,9 +78,14 @@ func get(index: Int64): Option<T>
 ```
 
 ```cangjie
+func outOfRange(): Int64 {
+    10
+}
+
 let arr = [10, 20, 30]
 println(arr.get(1))   // Some(20)
-println(arr.get(10))  // None（不抛异常）
+let idx = outOfRange()
+println(arr.get(idx))  // None（不抛异常）
 ```
 
 ### 4.3 交换元素 `swap`
@@ -184,14 +189,14 @@ let partial = arr.clone(1..3) // [2, 3]
 
 ```cangjie
 func copyTo(dst: Array<T>): Unit
-func copyTo(dst: Array<T>, srcStart: Int64, srcLen: Int64, dstStart: Int64): Unit
+func copyTo(dst: Array<T>, srcStart: Int64, dstStart: Int64, copyLen: Int64): Unit
 ```
 
 ```cangjie
 let src = [1, 2, 3]
 let dst = Array<Int64>(5, repeat: 0)
 src.copyTo(dst)                    // dst = [1, 2, 3, 0, 0]
-src.copyTo(dst, 0, 2, 3)          // dst = [1, 2, 3, 1, 2]（从 src[0] 取 2 个放到 dst[3]）
+src.copyTo(dst, 0, 3, 2)          // dst = [1, 2, 3, 1, 2]（从 src[0] 起复制 2 个到 dst[3]）
 ```
 
 ---
@@ -382,7 +387,8 @@ import std.sort.*
 
 var arr = [3, 1, 4, 1, 5, 9]
 sort(arr)                        // 原地升序：[1, 1, 3, 4, 5, 9]
-sort(arr) { a, b => b - a }     // 自定义降序
+sort(arr, descending: true)      // 原地降序：[9, 5, 4, 3, 1, 1]
+sort(arr, lessThan: { a, b => a > b }) // 自定义比较规则，同样得到降序结果
 ```
 
 ---
@@ -390,6 +396,12 @@ sort(arr) { a, b => b - a }     // 自定义降序
 ## 15. 常见用法总结
 
 ```cangjie
+let arr = [10, 20, 30, 40]
+let target = 30
+let arr1 = [1, 2]
+let arr2 = [3, 4]
+let data = [0, 1, 2, 3, 4, 5]
+
 // 1. 创建固定大小数组
 let buffer = Array<Byte>(1024, repeat: 0)
 

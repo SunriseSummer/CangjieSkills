@@ -346,6 +346,10 @@ HashSet<Int64>([1, 2, 3]).toString()
 ```cangjie
 import std.collection.*
 
+let username = "alice"
+func grant(): Unit {}
+func allow(): Unit {}
+
 // 1. 去重
 let nums = [1, 2, 2, 3, 3, 3]
 let unique = HashSet<Int64>(nums)  // {1, 2, 3}

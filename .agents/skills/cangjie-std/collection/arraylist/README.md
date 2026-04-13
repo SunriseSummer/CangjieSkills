@@ -337,10 +337,11 @@ for (item in list) {
 }
 
 // 函数式操作（通过迭代器）
-let result = list
-    |> filter { s => s != "b" }
-    |> map { s => s.toAsciiUpper() }
-    |> collectArrayList
+let result = collectArrayList<String>(
+    list.iterator()
+        .filter({ s => s != "b" })
+        .map({ s => s.toAsciiUpper() })
+)
 // result = ["A", "C"]
 ```
 
@@ -362,10 +363,20 @@ sort(list)  // [1, 1, 3, 4, 5]
 
 ```cangjie
 // 以下方法已废弃，建议使用 std.sort
+let ordering = { a: Int64, b: Int64 =>
+    if (a < b) {
+        Ordering.LT
+    } else if (a > b) {
+        Ordering.GT
+    } else {
+        Ordering.EQ
+    }
+}
+
 list.sort()                                          // 升序（T 须 <: Comparable）
 list.sortDescending()                                // 降序
-list.sortBy(comparator: { a, b => b - a })          // 自定义比较器
-list.sortBy(stable: true, comparator: { a, b => a - b }) // 稳定排序
+list.sortBy(comparator: ordering)
+list.sortBy(stable: true, comparator: ordering) // 稳定排序
 ```
 
 ---
