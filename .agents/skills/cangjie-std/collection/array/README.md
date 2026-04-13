@@ -78,9 +78,13 @@ func get(index: Int64): Option<T>
 ```
 
 ```cangjie
+func outOfRange(): Int64 {
+    10
+}
+
 let arr = [10, 20, 30]
 println(arr.get(1))   // Some(20)
-let idx = [10][0]
+let idx = outOfRange()
 println(arr.get(idx))  // None（不抛异常）
 ```
 
@@ -384,7 +388,7 @@ import std.sort.*
 var arr = [3, 1, 4, 1, 5, 9]
 sort(arr)                        // 原地升序：[1, 1, 3, 4, 5, 9]
 sort(arr, descending: true)      // 原地降序：[9, 5, 4, 3, 1, 1]
-sort(arr, lessThan: { a, b => a > b }) // 自定义比较规则
+sort(arr, lessThan: { a, b => a > b }) // 自定义比较规则，同样得到降序结果
 ```
 
 ---
