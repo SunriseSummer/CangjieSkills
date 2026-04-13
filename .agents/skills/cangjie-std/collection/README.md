@@ -6,138 +6,18 @@
 
 **导入**：`import std.collection.*`
 
+详细文档请按需查询：
+
+- [Array](./array/README.md)：定长数组（`std.core` 包，无需导入）
+- [ArrayList](./arraylist/README.md)：可变长动态数组
+- [HashMap](./hashmap/README.md)：哈希表/键值映射
+- [HashSet](./hashset/README.md)：哈希集合
+
 ---
 
-## 2. 集合类型
+## 2. 其他集合类型
 
-### 2.1 ArrayList — 动态数组
-
-最常用的线性集合，基于数组实现，支持随机访问和动态扩容。
-
-| 方法 / 属性 | 说明 |
-|-------------|------|
-| `ArrayList<T>()` | 创建空列表 |
-| `ArrayList<T>(capacity: Int64)` | 指定初始容量 |
-| `ArrayList<T>(elements: Collection<T>)` | 从集合构造 |
-| `ArrayList<T>(size: Int64, initElement: (Int64) -> T)` | 指定大小和初始化函数 |
-| `add(element: T): Unit` | 尾部追加 |
-| `add(element: T, at!: Int64): Unit` | 指定位置插入 |
-| `get(index: Int64): T` | 按索引读取 |
-| `set(index: Int64, element: T): Unit` | 按索引设置 |
-| `remove(at!: Int64): T` | 删除指定位置元素 |
-| `size: Int64` | 当前元素数量 |
-| `isEmpty(): Bool` | 是否为空 |
-| `contains(element: T): Bool` | 是否包含（需 T <: Equatable） |
-| `operator[](index: Int64)` | 下标访问（读/写） |
-| `iterator(): Iterator<T>` | 获取迭代器 |
-
-```cangjie
-package test_proj
-import std.collection.*
-
-main() {
-    let list = ArrayList<String>()
-    list.add("Alice")
-    list.add("Bob")
-    list.add("Charlie")
-
-    // 下标访问
-    println(list[0])  // Alice
-
-    // 迭代
-    for (name in list) {
-        print("${name} ")
-    }
-    println("")  // Alice Bob Charlie
-
-    // 插入和删除
-    list.add("Dave", at: 1)   // 在索引1插入
-    list.remove(at: 2)        // 删除索引2的元素(Bob)
-    println("size: ${list.size}")  // size: 3
-
-    // 从数组构造
-    let nums = ArrayList<Int64>([1, 2, 3, 4, 5])
-    println(nums[2])  // 3
-}
-```
-
-### 2.2 HashMap — 哈希映射
-
-基于哈希表的键值映射，要求 `K <: Hashable & Equatable<K>`。
-
-| 方法 / 属性 | 说明 |
-|-------------|------|
-| `HashMap<K, V>()` | 创建空映射 |
-| `HashMap<K, V>(capacity: Int64)` | 指定初始容量 |
-| `HashMap<K, V>(elements: Array<(K, V)>)` | 从键值对数组构造 |
-| `add(key: K, value: V): ?V` | 添加或更新，返回旧值 |
-| `get(key: K): ?V` | 获取值，不存在返回 None |
-| `contains(key: K): Bool` | 判断键是否存在 |
-| `remove(key: K): ?V` | 删除键值对，返回旧值 |
-| `size: Int64` | 当前元素数量 |
-| `operator[](key: K)` | 下标访问（读/写） |
-
-```cangjie
-package test_proj
-import std.collection.*
-
-main() {
-    let map = HashMap<String, Int64>()
-    map["Alice"] = 90
-    map["Bob"] = 85
-    map["Charlie"] = 95
-
-    // 读取
-    println(map["Alice"])  // 90
-
-    // 安全读取
-    match (map.get("Dave")) {
-        case Some(score) => println("Dave: ${score}")
-        case None => println("Dave not found")
-    }
-
-    // 遍历
-    for ((name, score) in map) {
-        print("${name}=${score} ")
-    }
-    println("")
-
-    // 从数组构造
-    let m2 = HashMap<String, Int64>([("x", 1), ("y", 2)])
-    println("contains x: ${m2.contains("x")}")  // true
-}
-```
-
-### 2.3 HashSet — 哈希集合
-
-基于哈希表的集合，要求 `T <: Hashable & Equatable<T>`，元素不重复。
-
-```cangjie
-package test_proj
-import std.collection.*
-
-main() {
-    let set = HashSet<Int64>()
-    set.add(1)
-    set.add(2)
-    set.add(3)
-    set.add(2)  // 重复元素不会添加
-
-    println("size: ${set.size}")  // size: 3
-    println("contains 2: ${set.contains(2)}")  // true
-
-    // 集合运算
-    let setA = HashSet<Int64>([1, 2, 3])
-    let setB = HashSet<Int64>([2, 3, 4])
-    // 遍历
-    for (v in setA) {
-        print("${v} ")
-    }
-    println("")
-}
-```
-
-### 2.4 TreeMap — 有序映射
+### 2.1 TreeMap — 有序映射
 
 基于红黑树的有序映射，要求 `K <: Comparable<K>`，按键有序。
 
@@ -158,7 +38,7 @@ main() {
 }
 ```
 
-### 2.5 TreeSet — 有序集合
+### 2.2 TreeSet — 有序集合
 
 基于红黑树的有序集合，要求 `T <: Comparable<T>`，元素有序不重复。
 
@@ -179,7 +59,7 @@ main() {
 }
 ```
 
-### 2.6 LinkedList — 双向链表
+### 2.3 LinkedList — 双向链表
 
 双向链表，支持高效的头尾插入删除。核心方法是 `addFirst`/`addLast`/`removeFirst`/`removeLast`，以及基于 `LinkedListNode` 的精确位置操作。
 
@@ -209,7 +89,7 @@ main() {
 }
 ```
 
-### 2.7 ArrayDeque / ArrayQueue / ArrayStack
+### 2.4 ArrayDeque / ArrayQueue / ArrayStack
 
 | 类型 | 接口 | 核心操作 |
 |------|------|----------|
@@ -371,7 +251,7 @@ main() {
 | `collectArrayList<T>(Iterable<T>): ArrayList<T>` | 收集为 ArrayList |
 | `collectHashMap<K, V>(Iterable<(K, V)>): HashMap<K, V>` | 收集为 HashMap |
 | `collectHashSet<T>(Iterable<T>): HashSet<T>` | 收集为 HashSet |
-| `collectString(Iterable<String>): String` | 连接为 String |
+| `collectString<T>(String): String` where T <: ToString | 连接为 String |
 
 ---
 

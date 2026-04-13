@@ -381,8 +381,9 @@ Array 本身不提供排序方法，需导入 `std.sort`：
 import std.sort.*
 
 var arr = [3, 1, 4, 1, 5, 9]
-sort(arr)                        // 原地升序：[1, 1, 3, 4, 5, 9]
-sort(arr) { a, b => b - a }     // 自定义降序
+sort(arr)                                      // 原地升序：[1, 1, 3, 4, 5, 9]
+sort(arr, descending: true)                    // 降序排序
+sort(arr, lessThan: { a, b => a < b })         // 自定义比较函数（lessThan 返回 Bool）
 ```
 
 ---

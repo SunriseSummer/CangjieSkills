@@ -362,10 +362,10 @@ sort(list)  // [1, 1, 3, 4, 5]
 
 ```cangjie
 // 以下方法已废弃，建议使用 std.sort
-list.sort()                                          // 升序（T 须 <: Comparable）
-list.sortDescending()                                // 降序
-list.sortBy(comparator: { a, b => b - a })          // 自定义比较器
-list.sortBy(stable: true, comparator: { a, b => a - b }) // 稳定排序
+list.sort()                                                                     // 升序（T 须 <: Comparable）
+list.sortDescending()                                                           // 降序
+list.sortBy(comparator: { a, b => if (a > b) { Ordering.GT } else { if (a < b) { Ordering.LT } else { Ordering.EQ } } })  // 自定义比较器（返回 Ordering）
+list.sortBy(stable: true, comparator: { a, b => if (a < b) { Ordering.LT } else { if (a > b) { Ordering.GT } else { Ordering.EQ } } }) // 稳定排序
 ```
 
 ---
