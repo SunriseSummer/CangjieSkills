@@ -366,7 +366,9 @@ let backendSkills = HashSet<String>(["Java", "SQL", "JavaScript"])
 let common = frontendSkills & backendSkills    // {"JavaScript"}
 let allSkills = frontendSkills | backendSkills  // {"HTML", "CSS", "JavaScript", "Java", "SQL"}
 let onlyFrontend = frontendSkills - backendSkills  // {"HTML", "CSS"}
-println("common: ${common.size}, all: ${allSkills.size}, frontend only: ${onlyFrontend.size}")
+println("common: ${common.size}")
+println("all: ${allSkills.size}")
+println("frontend only: ${onlyFrontend.size}")
 
 // 4. 条件过滤
 let scores = HashSet<Int64>([55, 60, 75, 80, 95])

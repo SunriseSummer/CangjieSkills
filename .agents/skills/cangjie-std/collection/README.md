@@ -251,7 +251,7 @@ main() {
 | `collectArrayList<T>(Iterable<T>): ArrayList<T>` | 收集为 ArrayList |
 | `collectHashMap<K, V>(Iterable<(K, V)>): HashMap<K, V>` | 收集为 HashMap |
 | `collectHashSet<T>(Iterable<T>): HashSet<T>` | 收集为 HashSet |
-| `collectString<T>(String): String` where T <: ToString | 连接为 String |
+| `collectString<T>(delimiter!: String): (Iterable<T>) -> String` where T <: ToString | 连接为 String |
 
 ---
 
