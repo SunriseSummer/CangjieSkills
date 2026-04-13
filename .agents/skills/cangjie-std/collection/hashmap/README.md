@@ -360,7 +360,7 @@ let entries = ArrayList<String>()
 for ((k, v) in map) {
     entries.add("${k}=${v}")
 }
-let result = collectString(entries, delimiter: "&")
+let result = collectString<String>(delimiter: "&")(entries)
 process(result)
 
 // 6. 从键值对数组批量构建

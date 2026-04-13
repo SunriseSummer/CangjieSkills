@@ -80,7 +80,8 @@ func get(index: Int64): Option<T>
 ```cangjie
 let arr = [10, 20, 30]
 println(arr.get(1))   // Some(20)
-println(arr.get(10))  // None（不抛异常）
+let idx = [10][0]
+println(arr.get(idx))  // None（不抛异常）
 ```
 
 ### 4.3 交换元素 `swap`
