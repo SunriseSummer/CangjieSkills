@@ -295,7 +295,8 @@ func isEmpty(): Bool
 ```
 
 ```cangjie
-HashSet<String>().isEmpty()  // true
+import std.collection.*
+println(HashSet<String>().isEmpty())  // true
 ```
 
 ---
@@ -335,7 +336,8 @@ func toString(): String
 ```
 
 ```cangjie
-HashSet<Int64>([1, 2, 3]).toString()
+import std.collection.*
+println(HashSet<Int64>([1, 2, 3]).toString())
 // "[1, 2, 3]"（顺序不保证）
 ```
 
@@ -349,11 +351,13 @@ import std.collection.*
 // 1. 去重
 let nums = [1, 2, 2, 3, 3, 3]
 let unique = HashSet<Int64>(nums)  // {1, 2, 3}
+println("unique size: ${unique.size}")
 
 // 2. 成员检查
 let allowedUsers = HashSet<String>(["alice", "bob", "charlie"])
+let username = "alice"
 if (allowedUsers.contains(username)) {
-    grant()
+    println("${username} is allowed")
 }
 
 // 3. 集合运算
@@ -362,6 +366,7 @@ let backendSkills = HashSet<String>(["Java", "SQL", "JavaScript"])
 let common = frontendSkills & backendSkills    // {"JavaScript"}
 let allSkills = frontendSkills | backendSkills  // {"HTML", "CSS", "JavaScript", "Java", "SQL"}
 let onlyFrontend = frontendSkills - backendSkills  // {"HTML", "CSS"}
+println("common: ${common.size}, all: ${allSkills.size}, frontend only: ${onlyFrontend.size}")
 
 // 4. 条件过滤
 let scores = HashSet<Int64>([55, 60, 75, 80, 95])
@@ -376,7 +381,7 @@ set.remove(all: ["a", "c"])  // {"b"}
 let required = HashSet<String>(["read", "write"])
 let granted = HashSet<String>(["read", "write", "execute"])
 if (required.subsetOf(granted)) {
-    allow()
+    println("all required permissions granted")
 }
 
 // 7. 遍历
@@ -386,6 +391,7 @@ for (item in set) {
 
 // 8. 转为数组
 let arr = set.toArray()
+println(arr)
 ```
 
 ---

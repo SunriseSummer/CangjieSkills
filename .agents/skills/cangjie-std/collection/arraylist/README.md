@@ -279,7 +279,8 @@ func toString(): String
 ```
 
 ```cangjie
-ArrayList<Int64>([1, 2, 3]).toString()  // "[1, 2, 3]"
+import std.collection.*
+println(ArrayList<Int64>([1, 2, 3]).toString())  // [1, 2, 3]
 ```
 
 ---
@@ -291,7 +292,8 @@ func isEmpty(): Bool
 ```
 
 ```cangjie
-ArrayList<Int64>().isEmpty()  // true
+import std.collection.*
+println(ArrayList<Int64>().isEmpty())  // true
 ```
 
 ### 12.1 `contains`（需要 T <: Equatable<T>）
@@ -361,7 +363,10 @@ sort(list)  // [1, 1, 3, 4, 5]
 ### 15.2 内置排序方法（已废弃）
 
 ```cangjie
+import std.collection.*
+
 // 以下方法已废弃，建议使用 std.sort
+let list = ArrayList<Int64>([3, 1, 4, 1, 5])
 list.sort()                                                                     // 升序（T 须 <: Comparable）
 list.sortDescending()                                                           // 降序
 list.sortBy(comparator: { a, b => if (a > b) { Ordering.GT } else { if (a < b) { Ordering.LT } else { Ordering.EQ } } })  // 自定义比较器（返回 Ordering）
