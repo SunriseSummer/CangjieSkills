@@ -97,7 +97,9 @@ map.add(all: otherMap)
 ### 4.3 下标赋值
 
 ```cangjie
-map["key"] = value   // 键存在则更新，不存在则新增
+import std.collection.*
+let map = HashMap<String, Int64>()
+map["key"] = 42   // 键存在则更新，不存在则新增
 ```
 
 ```cangjie
@@ -275,7 +277,8 @@ func isEmpty(): Bool
 ```
 
 ```cangjie
-HashMap<String, Int64>().isEmpty()  // true
+import std.collection.*
+println(HashMap<String, Int64>().isEmpty())  // true
 ```
 
 ---
@@ -315,7 +318,8 @@ func toString(): String
 ```
 
 ```cangjie
-HashMap<String, Int64>([("a", 1), ("b", 2)]).toString()
+import std.collection.*
+println(HashMap<String, Int64>([("a", 1), ("b", 2)]).toString())
 // "[(a, 1), (b, 2)]"（顺序不保证）
 ```
 
@@ -332,28 +336,32 @@ config["host"] = "127.0.0.1"
 config["port"] = "8080"
 
 // 2. 安全取值
-if (let Some(v) <- map.get("key")) {
-    process(v)
+if (let Some(v) <- config.get("host")) {
+    println(v)
 }
 
 // 3. 先检查再操作
-if (map.contains("key")) {
-    let v = map["key"]  // 安全，已确认键存在
+if (config.contains("port")) {
+    let v = config["port"]  // 安全，已确认键存在
+    println(v)
 }
 
 // 4. 统计词频
+let words = ["hello", "world", "hello"]
 let freq = HashMap<String, Int64>()
 for (word in words) {
     let count = freq.get(word) ?? 0
     freq[word] = count + 1
 }
+println(freq)
 
 // 5. 遍历并收集
 let entries = ArrayList<String>()
-for ((k, v) in map) {
+for ((k, v) in config) {
     entries.add("${k}=${v}")
 }
 let result = String.join(entries.toArray(), delimiter: "&")
+println(result)
 
 // 6. 从键值对数组批量构建
 let headers = HashMap<String, String>([
@@ -362,11 +370,16 @@ let headers = HashMap<String, String>([
 ])
 
 // 7. 条件过滤
-map.removeIf { k, v => v == 0 }
+let scores = HashMap<String, Int64>([("a", 0), ("b", 5), ("c", 0)])
+scores.removeIf { k, v => v == 0 }
+println(scores)
 
 // 8. 合并两个 Map
+let map1 = HashMap<String, Int64>([("x", 1)])
+let map2 = HashMap<String, Int64>([("y", 2)])
 let merged = map1.clone()
 merged.add(all: map2)  // map2 中的键覆盖 map1
+println(merged)
 ```
 
 ---

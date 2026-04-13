@@ -78,9 +78,14 @@ func get(index: Int64): Option<T>
 ```
 
 ```cangjie
+import std.collection.*
+
+let list = ArrayList<Int64>([10, 20, 30])
+println(list.get(1))    // Some(20)
+println(list.get(10))   // None（不抛异常）
+// Array 也有同样的 get 方法，索引越界时安全返回 None
 let arr = [10, 20, 30]
-println(arr.get(1))   // Some(20)
-println(arr.get(10))  // None（不抛异常）
+println(arr.get(1))     // Some(20)
 ```
 
 ### 4.3 交换元素 `swap`
@@ -261,8 +266,8 @@ func contains(element: T): Bool
 ```
 
 ```cangjie
-[1, 2, 3].contains(2)  // true
-[1, 2, 3].contains(5)  // false
+println([1, 2, 3].contains(2))  // true
+println([1, 2, 3].contains(5))  // false
 ```
 
 ### 10.2 `indexOf` — 查找元素/子数组位置
@@ -274,10 +279,10 @@ func indexOf(subArray: Array<T>): Option<Int64>
 ```
 
 ```cangjie
-[10, 20, 30, 20].indexOf(20)      // Some(1)
-[10, 20, 30, 20].indexOf(20, 2)   // Some(3)  — 从索引 2 开始搜索
-[1, 2, 3, 4].indexOf([2, 3])      // Some(1)  — 子数组位置
-[1, 2, 3].indexOf(99)             // None
+println([10, 20, 30, 20].indexOf(20))      // Some(1)
+println([10, 20, 30, 20].indexOf(20, 2))   // Some(3)  — 从索引 2 开始搜索
+println([1, 2, 3, 4].indexOf([2, 3]))      // Some(1)  — 子数组位置
+println([1, 2, 3].indexOf(99))             // None
 ```
 
 ### 10.3 `lastIndexOf` — 查找最后出现位置
@@ -288,7 +293,7 @@ func lastIndexOf(subArray: Array<T>): Option<Int64>
 ```
 
 ```cangjie
-[1, 2, 3, 2, 1].lastIndexOf(2) // Some(3)
+println([1, 2, 3, 2, 1].lastIndexOf(2)) // Some(3)
 ```
 
 ### 10.4 `removePrefix` / `removeSuffix`
@@ -299,9 +304,9 @@ func removeSuffix(suffix: Array<T>): Array<T>
 ```
 
 ```cangjie
-[1, 2, 3, 4].removePrefix([1, 2]) // [3, 4]
-[1, 2, 3, 4].removeSuffix([3, 4]) // [1, 2]
-[1, 2, 3].removePrefix([9, 8])    // [1, 2, 3]（无匹配，返回原数组）
+println([1, 2, 3, 4].removePrefix([1, 2])) // [3, 4]
+println([1, 2, 3, 4].removeSuffix([3, 4])) // [1, 2]
+println([1, 2, 3].removePrefix([9, 8]))    // [1, 2, 3]（无匹配，返回原数组）
 ```
 
 ### 10.5 `trimStart` / `trimEnd`
@@ -314,9 +319,9 @@ func trimEnd(predicate: (T) -> Bool): Array<T>
 ```
 
 ```cangjie
-[0, 0, 1, 2, 0].trimStart([0])           // [1, 2, 0]
-[0, 0, 1, 2, 0].trimEnd([0])             // [0, 0, 1, 2]
-[0, 1, 2, 3].trimStart { v => v < 2 }    // [2, 3]
+println([0, 0, 1, 2, 0].trimStart([0]))           // [1, 2, 0]
+println([0, 0, 1, 2, 0].trimEnd([0]))             // [0, 0, 1, 2]
+println([0, 1, 2, 3].trimStart { v => v < 2 })    // [2, 3]
 ```
 
 ---
@@ -340,7 +345,7 @@ func toString(): String
 ```
 
 ```cangjie
-[1, 2, 3].toString() // "[1, 2, 3]"
+println([1, 2, 3].toString()) // [1, 2, 3]
 ```
 
 ---
@@ -381,8 +386,9 @@ Array 本身不提供排序方法，需导入 `std.sort`：
 import std.sort.*
 
 var arr = [3, 1, 4, 1, 5, 9]
-sort(arr)                        // 原地升序：[1, 1, 3, 4, 5, 9]
-sort(arr) { a, b => b - a }     // 自定义降序
+sort(arr)                                      // 原地升序：[1, 1, 3, 4, 5, 9]
+sort(arr, descending: true)                    // 降序排序
+sort(arr, lessThan: { a, b => a < b })         // 自定义比较函数（lessThan 返回 Bool）
 ```
 
 ---
@@ -400,13 +406,18 @@ scores[1] = 95
 // 3. 遍历并映射
 let names = ["Alice", "Bob"]
 let upper = names.map { n => n.toAsciiUpper() }
+println(upper)
 
 // 4. 查找元素
+let arr = [10, 20, 30, 40]
+let target = 30
 if (let Some(idx) <- arr.indexOf(target)) {
     println("Found at ${idx}")
 }
 
 // 5. 拼接数组
+let arr1 = [1, 2]
+let arr2 = [3, 4]
 let combined = arr1.concat(arr2)
 
 // 6. 二维数组扁平化
@@ -418,5 +429,6 @@ let copy = arr.clone()
 copy[0] = 999  // 不影响原数组
 
 // 8. 分割数组
+let data = [0, 1, 2, 3, 4, 5]
 let (head, tail) = data.splitAt(3)
 ```
