@@ -490,6 +490,7 @@ damage intact=ok
 ```text
 python <skill>/scripts/setup_stdx.py --project <工程根>
 cjpm clean && cjpm build && cjpm test && cjpm run
+python accept.py --project <工程根> --skill-root <skill-root>
 ```
 
 - 冻结测试 `event_ledger_archive_test.cj` 全部用例通过，`cjpm test` 在 90 秒内完成。

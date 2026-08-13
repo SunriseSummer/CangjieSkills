@@ -520,13 +520,14 @@ class TestTargetTracker {
     }
 
     /**
-     * 跟踪收敛：后期的平均位置误差应小于前期。
+     * 跟踪收敛：在显著偏离的初始估计下，后期平均位置误差应小于前期。
+     * 初始偏差需明显大于稳态测量噪声，避免把固定噪声样本的自然波动误判为不收敛。
      */
     @TestCase
     func testTrackingConvergence() {
         let tracker = TargetTracker(1.0, 0.5, 10.0)
         let trueInitial = TargetState(0.0, 0.0, 10.0, 5.0)
-        let initEstimate = TargetState(5.0, -3.0, 8.0, 6.0)
+        let initEstimate = TargetState(500.0, -500.0, 0.0, 0.0)
         tracker.initialize(initEstimate, 20.0, 5.0)
         let results = tracker.simulate(trueInitial, 50, 42)
 

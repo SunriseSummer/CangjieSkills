@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guard the zero-enumeration Skill bootstrap contract."""
+"""Guard the compact, progressive-disclosure Skill entrypoint contract."""
 
 from __future__ import annotations
 
@@ -19,10 +19,11 @@ class SkillEntrypointTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.skill = SKILL_PATH.read_text(encoding="utf-8-sig")
 
-    def test_frontmatter_exposes_zero_enumeration_rule_before_activation(self) -> None:
+    def test_frontmatter_is_concise_and_routes_to_on_demand_knowledge(self) -> None:
         frontmatter = self.skill.split("---", 2)[1]
-        self.assertIn("scripts/search_docs.py", frontmatter)
-        self.assertIn("禁止递归枚举", frontmatter)
+        self.assertIn("渐进披露", frontmatter)
+        self.assertIn("按需查询", frontmatter)
+        self.assertNotIn("SQLite", frontmatter)
 
     def test_development_and_release_entrypoints_are_identical(self) -> None:
         self.assertEqual(DEV_SKILL_PATH.read_bytes(), SKILL_PATH.read_bytes())
@@ -32,21 +33,17 @@ class SkillEntrypointTests(unittest.TestCase):
         self.assertFalse((SKILL_ROOT / "agents").exists())
 
     def test_bootstrap_guard_precedes_workflow(self) -> None:
-        guard = self.skill.index("## 启动约束（必须遵守）")
+        guard = self.skill.index("## 必须遵守")
         workflow = self.skill.index("## 工作流")
         self.assertLess(guard, workflow)
         bootstrap = self.skill[guard:workflow]
         for required in (
             "当前已加载的 `SKILL.md` 所在目录",
             "<skill-root>/scripts/search_docs.py",
-            "Get-ChildItem",
-            "find",
-            "rg --files",
-            "Glob",
             "第一次知识访问",
             "一个脚本进程中的批量查询",
             "每个独立符号或意图各写一个 `--query`",
-            "不得退化为全树枚举",
+            "不要绕过脚本直接读取知识库文件",
         ):
             with self.subTest(required=required):
                 self.assertIn(required, bootstrap)
@@ -60,10 +57,10 @@ class SkillEntrypointTests(unittest.TestCase):
 
     def test_database_is_an_internal_implementation_detail(self) -> None:
         bootstrap = self.skill[
-            self.skill.index("## 启动约束（必须遵守）") : self.skill.index("## 工作流")
+            self.skill.index("## 必须遵守") : self.skill.index("## 工作流")
         ]
-        self.assertIn("开发态 Markdown 或发布态 SQLite", bootstrap)
-        self.assertIn("不要绕过脚本直接读取后端", bootstrap)
+        self.assertIn("不要绕过脚本直接读取知识库文件", bootstrap)
+        self.assertNotIn("SQLite", self.skill)
         self.assertNotIn("](references/index.md)", self.skill)
 
     def test_workflow_stays_generic_and_compact(self) -> None:

@@ -6,5 +6,5 @@
 
 - 先建立 `cjpm.toml`，然后通过当前 Skill 的 `setup_stdx.py` 配置依赖；不得手写或猜测 stdx 二进制路径。
 - 把配置解析封装到独立源文件，`main.cj` 只负责 I/O 与退出状态。
-- 编写正常、字段缺失、类型错误、非法 JSON 的自动化测试。
+- 将已给定且不可修改的 `json_config_test.cj` 逐字节复制到项目 `src/`，可在其基础上补充正常、字段缺失、类型错误和非法 JSON 测试。
 - 执行 `cjpm test`，并用临时输入文件实际执行 `cjpm run --run-args '<file>'`。

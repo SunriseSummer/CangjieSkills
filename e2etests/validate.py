@@ -7,6 +7,7 @@ import ast
 import hashlib
 import json
 from pathlib import Path
+import re
 import sys
 
 FORBIDDEN_DIRECTORIES = {
@@ -76,6 +77,25 @@ def main() -> int:
             errors.append(f"README entry missing: {task.name}")
         if task.name.endswith(("_incremental", "_repair", "_fix")) and not (task / "seed").is_dir():
             errors.append(f"increment/repair seed missing: {task.name}")
+        task_text = (task / "task.md").read_text(encoding="utf-8-sig") if (task / "task.md").is_file() else ""
+        if task_text.count("```") % 2:
+            errors.append(f"unbalanced Markdown fences: {task.name}/task.md")
+        root_tests = list(task.glob("*test.cj"))
+        if task.name not in {"auditor_incremental", "auditor_repair", "macro_native_source_auditor"}:
+            if len(root_tests) != 1:
+                errors.append(f"expected one root frozen test: {task.name}, found {len(root_tests)}")
+        available_tests = {path.name for path in root_tests}
+        available_tests.update(path.name for path in (task / "frozen" / "tests").glob("*.cj"))
+        mentioned_tests = set(re.findall(r"`([A-Za-z0-9_-]+_test\.cj)`", task_text))
+        for missing in sorted(mentioned_tests - available_tests):
+            errors.append(f"task references missing test: {task.name}/{missing}")
+        if (task / "accept.py").is_file() and "accept.py" not in task_text:
+            errors.append(f"accept.py is not documented in task: {task.name}")
+        has_test_command = "cjpm test" in task_text or bool(
+            re.search(r"(?:cjpm\s+)?(?:clean/)?build/test(?:/run)?", task_text)
+        ) or "所有 cjpm 命令成功" in task_text
+        if not has_test_command and "accept.py" not in task_text:
+            errors.append(f"task has no concrete test or acceptance command: {task.name}")
     for path in root.rglob("*"):
         relative = path.relative_to(root)
         if FORBIDDEN_DIRECTORIES.intersection(relative.parts):

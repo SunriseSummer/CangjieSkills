@@ -236,6 +236,8 @@ released=true
 
 ## 5. 验收
 
+最终运行 `python accept.py --project oracle --skill-root <skill-root>`；该跨平台脚本校验冻结哈希、配置 stdx，并执行下列门禁：
+
 1. `cjpm clean && cjpm build` 成功，输出无 `warning`。
 2. `cjpm test` 全部通过（冻结测试共 52 个用例），120 秒内结束。
 3. `cjpm run` 逐字节匹配 4.8 的 14 行输出，退出码 0。
