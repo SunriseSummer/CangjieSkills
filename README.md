@@ -80,3 +80,9 @@ python e2etests/validate.py
 `build.py` 会生成确定性的路由索引，同步发布运行时，构建并校验 SQLite 数据库。`--check` 只检查工作区和发布件是否一致，不修改文件。
 
 `e2etests/` 中有几十个经过 Agent 开发验证的标准测试任务，可用于当前 Skill 的功能验证和对比测评等。它只包含题面、冻结测试、fixture、故障 seed 和跨平台验收脚本，不包含参考实现、历史运行结果或构建产物。
+
+## 相比上一代 CangjieSkills 的效能优化
+
+<img width="1751" height="1316" alt="test1" src="https://github.com/user-attachments/assets/16bbf359-6d2b-47ba-8c7e-8e9c6decf8c0" />
+
+<img width="1599" height="1718" alt="test2" src="https://github.com/user-attachments/assets/3d5598ce-92cd-4a79-88b4-5b8231ba4789" />
