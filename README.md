@@ -12,6 +12,10 @@
 - **stdx 自动配置**：执行涉及扩展标准库的开发任务时，Agent 可调用脚本自主下载和配置兼容的 `stdx` 版本。
 - **紧凑标准发布**：发布件只携带 Skill 指令、工具脚本和只读 SQLite 数据库。
 
+相比上一代 CangjieSkills 的效能优化情况（表中 v4 对应当前版本）：
+
+<img width="1751" height="1316" alt="test1" src="https://github.com/user-attachments/assets/16bbf359-6d2b-47ba-8c7e-8e9c6decf8c0" />
+
 ## 快速使用
 
 `.agents/skills/cangjie-coding` 是 Skill 发布件，将该目录复制到所用 AI Coding 环境支持的 Skill 位置，即可体验仓颉 AI 编码自由🎉。如果系统已安装 node/npx，也可以执行以下命令一键安装配置：
@@ -81,8 +85,4 @@ python e2etests/validate.py
 
 `e2etests/` 中有几十个经过 Agent 开发验证的标准测试任务，可用于当前 Skill 的功能验证和对比测评等。它只包含题面、冻结测试、fixture、故障 seed 和跨平台验收脚本，不包含参考实现、历史运行结果或构建产物。
 
-## 相比上一代 CangjieSkills 的效能优化
 
-<img width="1751" height="1316" alt="test1" src="https://github.com/user-attachments/assets/16bbf359-6d2b-47ba-8c7e-8e9c6decf8c0" />
-
-<img width="1599" height="1718" alt="test2" src="https://github.com/user-attachments/assets/3d5598ce-92cd-4a79-88b4-5b8231ba4789" />
