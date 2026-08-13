@@ -1,8 +1,8 @@
 # Cangjie Coding Skill
 
-本项目提供高效赋能[仓颉编程语言](https://cangjie-lang.cn/) AI Coding 的技能库，核心是一套精炼的渐进披露知识库及查询引擎，覆盖仓颉语言特性、标准库、扩展标准库、工具链与典型应用实践。
+在大模型对[仓颉编程语言](https://cangjie-lang.cn/) 训练支持还不够充分的阶段，本项目为仓颉 AI Coding 提供一套高效的技能库，以极低额外开销实现仓颉编码自由，相比上一代 Skills 平均开销降低 40%。
 
-这套知识库在开发态是 6000+ markdown 文件（[references/index.md](references/index.md)），便于编辑和校验，也可以作为开发者的学习资料；在构建发布 Skill 时，知识库将被压缩为单个 SQLite 数据库文件，分发和查询更高效。开发态与发布态共用一套查询脚本。
+项目核心是一套精炼的渐进披露知识库及查询引擎，覆盖仓颉语言特性、标准库、扩展标准库、工具链与典型应用实践。这套知识库在开发态是 6000+ markdown 文件（[references/index.md](references/index.md)），便于编辑和校验，也可以作为开发者的学习资料；在构建发布 Skill 时，知识库将被压缩为单个 SQLite 数据库文件，分发和查询更高效。开发态与发布态共用一套查询脚本。
 
 ## Skill 特点
 
@@ -12,9 +12,9 @@
 - **stdx 自动配置**：执行涉及扩展标准库的开发任务时，Agent 可调用脚本自主下载和配置兼容的 `stdx` 版本。
 - **紧凑标准发布**：发布件只携带 Skill 指令、工具脚本和只读 SQLite 数据库。
 
-相比上一代 CangjieSkills 的效能优化情况（表中 v4 对应当前版本）：
+相比上一代 CangjieSkills 的效能优化情况：
 
-<img width="1751" height="1316" alt="test1" src="https://github.com/user-attachments/assets/16bbf359-6d2b-47ba-8c7e-8e9c6decf8c0" />
+<img width="1852" height="1386" alt="result" src="https://github.com/user-attachments/assets/d702093e-d9ed-4c8b-a817-0160721d76ec" />
 
 ## 快速使用
 
