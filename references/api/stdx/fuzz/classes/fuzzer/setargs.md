@@ -1,0 +1,18 @@
+<!-- cj-doc kind="api-member" level="6" id="stdx.fuzz.fuzz.class.fuzzer.setargs" parent="stdx.fuzz.fuzz.class.fuzzer" -->
+# Fuzzer.setArgs
+
+[← Fuzzer](index.md)
+
+## 签名
+
+```cangjie role=signature
+public func setArgs(args: Array<String>): Unit
+```
+
+设置 Fuzz 运行参数。
+
+## 契约
+
+参数：
+
+- args: Array\<String> - Fuzz 运行参数。

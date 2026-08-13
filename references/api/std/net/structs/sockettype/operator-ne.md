@@ -1,0 +1,22 @@
+<!-- cj-doc kind="api-member" level="6" id="std.net.struct.sockettype.operator-ne" parent="std.net.struct.sockettype" -->
+# SocketType.!=
+
+[← SocketType](index.md)
+
+## 签名
+
+```cangjie role=signature
+public operator func !=(r: SocketType): Bool
+```
+
+判断两个 SocketType 实例是否不等。
+
+## 契约
+
+参数：
+
+- r: SocketType - 参与比较的 SocketType 实例。
+
+返回值：
+
+- Bool - 当二者代表的 Int32 值不等时，返回 `true`；否则，返回 `false`。

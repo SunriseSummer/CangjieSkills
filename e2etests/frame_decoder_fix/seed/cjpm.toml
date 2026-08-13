@@ -1,0 +1,8 @@
+[package]
+  cjc-version = "1.0.5"
+  name = "frame_decoder_fix"
+  description = "Incremental binary frame decoder repair task"
+  version = "1.0.0"
+  output-type = "executable"
+
+[dependencies]

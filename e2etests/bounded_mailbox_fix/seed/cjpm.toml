@@ -1,0 +1,9 @@
+[package]
+  cjc-version = "1.0.5"
+  name = "bounded_mailbox_fix"
+  description = "bounded mailbox repair task"
+  version = "1.0.0"
+  output-type = "executable"
+  src-dir = "src"
+
+[dependencies]

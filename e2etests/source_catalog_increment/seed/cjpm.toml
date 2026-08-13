@@ -1,0 +1,9 @@
+[package]
+  cjc-version = "1.0.5"
+  name = "source_catalog_increment"
+  description = "incremental source catalog task"
+  version = "1.0.0"
+  output-type = "executable"
+  src-dir = "src"
+
+[dependencies]

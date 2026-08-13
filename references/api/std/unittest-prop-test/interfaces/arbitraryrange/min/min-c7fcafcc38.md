@@ -1,0 +1,18 @@
+<!-- cj-doc kind="api-member" level="7" id="std.unittest.prop_test.interface.arbitraryrange.min.min-c7fcafcc38" parent="std.unittest.prop_test.interface.arbitraryrange.min" -->
+# ArbitraryRange<T>.func min()
+
+[← ArbitraryRange<T>.min](index.md)
+
+## 签名
+
+```cangjie role=signature
+func min(): T
+```
+
+返回最小值。
+
+## 契约
+
+返回值：
+
+- T - 最小值。

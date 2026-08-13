@@ -1,0 +1,13 @@
+**/target/
+**/.cangjie/
+**/reports/
+**/__pycache__/
+*.py[cod]
+*.tmp
+*.log
+*.jsonl
+*.dll
+*.dylib
+*.so
+*.a
+*.cjo

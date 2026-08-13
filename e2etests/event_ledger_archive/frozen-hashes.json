@@ -1,0 +1,52 @@
+{
+  "task": "event_ledger_archive",
+  "frozenAt": "2026-08-02",
+  "toolchain": {
+    "cjc": "1.0.5 (cjnative)",
+    "cjpm": "1.0.5",
+    "target": "x86_64-w64-mingw32",
+    "stdx": "1.0.5.1",
+    "stdxPlatform": "windows-x64",
+    "stdxLinkage": "dynamic"
+  },
+  "hashAlgorithm": "SHA-256",
+  "notes": [
+    "File digests are over the exact bytes on disk (UTF-8, no BOM, CRLF as authored).",
+    "expectedStdout is hashed after normalizing CRLF to LF, so it is host-independent.",
+    "The frozen test at the task root must be copied unchanged into the implementation project.",
+    "expectedStdout embeds 'frame bytes=373', a deflate output size. That size is fixed for stdx 1.0.5.1 but is not guaranteed across zlib builds, so expectedStdout is an observed artifact of this toolchain, not a portable requirement. The frozen test never asserts an exact compressed size; it only requires payloadLength < rawLength.",
+    "expectedDomainInvariants entries other than demoFrameBytes and demoFramePayloadBytes are compression-independent and are asserted by the frozen test."
+  ],
+  "files": {
+    "event_ledger_archive_test.cj": {
+      "sha256": "82ba55ec261634364c4ae3517c1f98c79920140f73a1d72a733e0434d74f3269",
+      "bytes": 39561,
+      "role": "frozen acceptance suite, 70 cases"
+    }
+  },
+  "expectedStdout": {
+    "command": "cjpm run",
+    "sha256": "9d62c3efe0161103db39669e00cea643ab96b85cd4ece86f122031fe5d079761",
+    "bytesLf": 900,
+    "lines": 25,
+    "normalization": "CRLF -> LF, trailing newline included"
+  },
+  "expectedTestSummary": {
+    "total": 70,
+    "passed": 70,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0
+  },
+  "expectedDomainInvariants": {
+    "demoJsonBytes": 785,
+    "demoJsonSha256": "8e3c73937aaaeea083ef28e6910fac687ec38833258168af68dac41387b2b163",
+    "demoFrameBytes": 373,
+    "demoFramePayloadBytes": 329,
+    "balanceReport": ["eu:ACC42=100.25", "us:ACC7=-5.00"],
+    "sortedTags": ["eu", "fees", "payroll", "rebalance"],
+    "netBalance": "net=95.25",
+    "kindHistogram": "kinds=credit:1|debit:1|note:1|transfer:1",
+    "grossVolume": "gross=14575"
+  }
+}

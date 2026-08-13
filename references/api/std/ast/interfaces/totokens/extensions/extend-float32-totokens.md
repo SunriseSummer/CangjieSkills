@@ -1,0 +1,14 @@
+<!-- cj-doc kind="api-extension" level="6" id="std.ast.interface.totokens.extension.extend-float32-totokens" parent="std.ast.interface.totokens" -->
+# extend Float32 <: ToTokens
+
+[← ToTokens](../index.md)
+
+`extend Float32 <: ToTokens`
+
+实现 Float32 类型到 Tokens 类型的转换。
+
+## 成员
+
+| 签名 | 功能 |
+|---|---|
+| [`toTokens(): Tokens`](../totokens/index.md) | 实现 Float32 类型到 Tokens 类型的转换。 |

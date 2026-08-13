@@ -1,0 +1,7 @@
+[package]
+name = "binary_frame_fix"
+version = "1.0.0"
+cjc-version = "1.0.5"
+output-type = "executable"
+
+[dependencies]

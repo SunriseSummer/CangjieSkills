@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "task": "secure_local_sync",
+  "cjc_version": "1.0.5",
+  "stdx_version": "1.0.5.1",
+  "target": "x86_64-w64-mingw32",
+  "note": "frozen task inputs must match byte for byte",
+  "frozen": [
+    {
+      "path": "fixtures/sync_ca.pem",
+      "bytes": 1216,
+      "sha256": "e155c2787e6c3302fa6f1ddc9b8710a54786e76fdd9037f337658f16d0e0d657"
+    },
+    {
+      "path": "fixtures/rogue_ca.pem",
+      "bytes": 1212,
+      "sha256": "e5cf40f9d31ea7e707ce0c52d956b7ac3f7e5114971cab01eaf953e4da9118e0"
+    },
+    {
+      "path": "fixtures/sync_server.pem",
+      "bytes": 1281,
+      "sha256": "3ac88409d7e931710c73a390dc3c78b53f5a3f8ff219e4cc577ffa5a62e76ae8"
+    },
+    {
+      "path": "fixtures/sync_server_key.pem",
+      "bytes": 1675,
+      "sha256": "ff50c0d93890dd989ebff6e552e92c4962e00eebb6ff28652590e80b6a0e092e"
+    },
+    {
+      "path": "fixtures/stale_server.pem",
+      "bytes": 1281,
+      "sha256": "b50655db088187b501fb00e80156ce7b6720af1595901c2327a1896a846dce14"
+    },
+    {
+      "path": "secure_local_sync_test.cj",
+      "bytes": 21868,
+      "sha256": "afb8911f1ab39821a656a0d39b7c7ab9d474ee7b56c6e390625db1d8e5aed580"
+    },
+    {
+      "path": "fixtures.cj",
+      "bytes": 7497,
+      "sha256": "e703f96de213782b3b8db134c35e0a169040e8cbb23d0d8c1020d694e033d90d"
+    }
+  ]
+}

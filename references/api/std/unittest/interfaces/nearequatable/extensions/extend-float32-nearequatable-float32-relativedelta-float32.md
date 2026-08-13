@@ -1,0 +1,14 @@
+<!-- cj-doc kind="api-extension" level="6" id="std.unittest.interface.nearequatable.extension.extend-float32-nearequatable-float32-relativedelta-float32" parent="std.unittest.interface.nearequatable" -->
+# extend Float32 <: NearEquatable<Float32, RelativeDelta<Float32>>
+
+[← NearEquatable<CT, D>](../index.md)
+
+`extend Float32 <: NearEquatable<Float32, RelativeDelta<Float32>>`
+
+对类型 Float32 扩展接口 NearEquatable，且使用 RelativeDelta 做近似计算。
+
+## 成员
+
+| 签名 | 功能 |
+|---|---|
+| [`isNear(obj: Float32, delta!: RelativeDelta<Float32>): Bool`](../isnear.md) | 判断某个对象是否基于这个 delta 近似相等。 |

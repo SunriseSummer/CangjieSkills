@@ -1,0 +1,26 @@
+<!-- cj-doc kind="api-member" level="6" id="stdx.fuzz.fuzz.class.fuzzdataprovider.consumebools" parent="stdx.fuzz.fuzz.class.fuzzdataprovider" -->
+# FuzzDataProvider.consumeBools
+
+[← FuzzDataProvider](index.md)
+
+## 签名
+
+```cangjie role=signature
+public open func consumeBools(count: Int64): Array<Bool>
+```
+
+将指定数量的数据转换成 Bool 类型数组。
+
+## 契约
+
+参数：
+
+- count: Int64 - 指定转换的数据量。
+
+返回值：
+
+- Array\<Bool> - Bool 类型数组。
+
+异常：
+
+- IllegalArgumentException - 如果 count 为负数，则抛出异常。

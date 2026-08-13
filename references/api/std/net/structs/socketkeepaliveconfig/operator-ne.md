@@ -1,0 +1,22 @@
+<!-- cj-doc kind="api-member" level="6" id="std.net.struct.socketkeepaliveconfig.operator-ne" parent="std.net.struct.socketkeepaliveconfig" -->
+# SocketKeepAliveConfig.!=
+
+[← SocketKeepAliveConfig](index.md)
+
+## 签名
+
+```cangjie role=signature
+public override operator func !=(other: SocketKeepAliveConfig): Bool
+```
+
+判断两个 SocketKeepAliveConfig 实例是否不等。
+
+## 契约
+
+参数：
+
+- other: SocketKeepAliveConfig - 参与比较的 SocketKeepAliveConfig 实例。
+
+返回值：
+
+- Bool - 如果不等，则返回 `true`；否则，返回 `false`。

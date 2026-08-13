@@ -1,0 +1,6 @@
+[package]
+cjc-version = "1.0.5"
+name = "auditor_macros"
+version = "1.0.0"
+output-type = "static"
+compile-option = "--compile-macro"

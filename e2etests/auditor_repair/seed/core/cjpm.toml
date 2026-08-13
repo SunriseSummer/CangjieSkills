@@ -1,0 +1,11 @@
+[package]
+cjc-version = "1.0.5"
+name = "auditor_core"
+version = "1.0.0"
+output-type = "static"
+
+[dependencies]
+auditor_macros = { path = "../macros" }
+
+[ffi.c]
+auditor_native = { path = "../libs/" }

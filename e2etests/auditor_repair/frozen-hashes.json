@@ -1,0 +1,117 @@
+{
+    "schema":  1,
+    "task":  "auditor_repair",
+    "toolchain":  {
+                      "cjc":  "1.0.5",
+                      "backend":  "cjnative",
+                      "target":  "x86_64-w64-mingw32",
+                      "os":  "windows-x64"
+                  },
+    "counts":  {
+                   "behaviorTests":  59,
+                   "frozenTestFiles":  7,
+                   "frozenFixtures":  7,
+                   "toolArtifactAssertions":  7,
+                   "minimumBehaviorTests":  28
+               },
+    "mapping":  [
+                    {
+                        "frozen":  "frozen/tests/model_test.cj",
+                        "target":  "oracle/core/src/model/model_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/tests/native_test.cj",
+                        "target":  "oracle/core/src/native/native_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/tests/syntax_test.cj",
+                        "target":  "oracle/core/src/syntax/syntax_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/tests/rules_test.cj",
+                        "target":  "oracle/core/src/rules/rules_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/tests/scan_test.cj",
+                        "target":  "oracle/core/src/scan/scan_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/tests/facade_test.cj",
+                        "target":  "oracle/core/src/auditor_core_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/tests/app_test.cj",
+                        "target":  "oracle/app/src/main_test.cj",
+                        "kind":  "test"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/native/auditor_native.c",
+                        "target":  "oracle/native/auditor_native.c",
+                        "kind":  "fixture"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/sources/alpha_service.cj",
+                        "target":  "oracle/fixtures/sources/alpha_service.cj",
+                        "kind":  "fixture"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/sources/beta_helper.cj",
+                        "target":  "oracle/fixtures/sources/beta_helper.cj",
+                        "kind":  "fixture"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/sources/epsilon_clean.cj",
+                        "target":  "oracle/fixtures/sources/epsilon_clean.cj",
+                        "kind":  "fixture"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/sources/gamma_legacy.cj",
+                        "target":  "oracle/fixtures/sources/gamma_legacy.cj",
+                        "kind":  "fixture"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/sources/delta_notes.txt",
+                        "target":  "oracle/fixtures/sources/delta_notes.txt",
+                        "kind":  "fixture"
+                    },
+                    {
+                        "frozen":  "frozen/fixtures/expected/report.txt",
+                        "target":  "oracle/fixtures/expected/report.txt",
+                        "kind":  "fixture"
+                    }
+                ],
+    "files":  {
+                  "seed/app/cjpm.toml":  "e03c91729d2667a421089857d41985d8f21893a8e4243abf0505b8b4e0554fa7",
+                  "seed/app/src/main.cj":  "969f74e84421eb21280eea712acb083da6d8b500682810dc6b77545c0b0e3782",
+                  "seed/cjpm.toml":  "e4a124669cafe0da68ee70b7d97d4290765bd8771e8b5ec29a769c004f3541e3",
+                  "seed/core/cjpm.toml":  "31d4941fd3a198fdd5b16fb8fb2f72493b0211055ad6c083ba6b5a8592fb7299",
+                  "seed/core/src/auditor_core.cj":  "6b203fc46b603ab7ade7ab6d72cd9a8f44c757ec74575e487cdb37f2cea407fa",
+                  "seed/core/src/model/model.cj":  "680e7e7d58dc8f789d4f1ff51e3e7dda921b39347088d5afc06b9933fbabb65c",
+                  "seed/core/src/native/native.cj":  "9e21f8b7ef0a57dc1d704a0122991572119b7e9dbf8f3f8862de9eb14ba21641",
+                  "seed/core/src/rules/rules.cj":  "e72c0e30e51cde302e8d43ef542ee2d9e00ee9aff57aa5dd201626cd501cfc96",
+                  "seed/core/src/scan/scan.cj":  "3ad5fac5bc862fe27bd80d8d33e41b2d05fd7c7ddae19142a71b7da9246da9ba",
+                  "seed/core/src/syntax/syntax.cj":  "ac28b38971ffe46d1854e982f5adf9f7f4e92907376bc7a9697bd2c979be3add",
+                  "seed/macros/cjpm.toml":  "cd255abd28f99d1e5187dac2862cfa54dd10ef80a35ec5f8300ea985c2bb9dd5",
+                  "seed/macros/src/auditor_macros.cj":  "a2052eed4b1c5ca47bc64d9aaa30846cefe2d38c7b9e7bde74675fc01cf97aaf",
+                  "frozen/tests/model_test.cj":  "82793de07a341afb3f5c90600f966b88b7ce9d3efa6e99353e2b4b57497f85bf",
+                  "frozen/tests/native_test.cj":  "f06a63293fce7187939e23d0377f3e290a9f150ce3582be064ea40158cf497d4",
+                  "frozen/tests/syntax_test.cj":  "09741433a2ed86006303f5b2be0b7ca518fe7075a3fba1508748ad8db37fd2c4",
+                  "frozen/tests/rules_test.cj":  "138b17c6635784b4b99501688ee392325a147edd07f7dc11c227d0b1930e75bd",
+                  "frozen/tests/scan_test.cj":  "f647670a799cdba49f915e65cd9b02707d930df5b13242249cf48ef56291f47a",
+                  "frozen/tests/facade_test.cj":  "a666ed032ba4891ce1c3718a4eea86d1a87f358fe800c6c792fd08f6defe5a2c",
+                  "frozen/tests/app_test.cj":  "77118805f3da4c15edcd623600c677ab4700eabc1fdb5d146d908416daac57d6",
+                  "frozen/fixtures/native/auditor_native.c":  "e5b2ac96a5b99c2f3fa7622f108d7febe9849a90b695eb8855d9052b74263a1d",
+                  "frozen/fixtures/sources/alpha_service.cj":  "b4bcfbfba94d6837df774621f64176c08e5f8f3dd8c04d4c56d375f8e106a6be",
+                  "frozen/fixtures/sources/beta_helper.cj":  "c5c637ac736bae8aa5ed6fd4d7e9c8889e7a600909fd1bac106bffe9f52069d5",
+                  "frozen/fixtures/sources/epsilon_clean.cj":  "59dfc3aea773c9a8c72385d55a1926c395a734c6c0c2ae32c19dda52085d3553",
+                  "frozen/fixtures/sources/gamma_legacy.cj":  "0a07898b30f7f10b36529b2aebb3934e91059a33f16420767554ed5d61861e5b",
+                  "frozen/fixtures/sources/delta_notes.txt":  "12d0e10615ca0f3ebafd3270dbe2af447ccd68ab0e5f5811df49e11be41f6921",
+                  "frozen/fixtures/expected/report.txt":  "a4dafedc95172407651231badb1daaf3440c5ddf4ef5ea96e28321246a8166f7"
+              }
+}

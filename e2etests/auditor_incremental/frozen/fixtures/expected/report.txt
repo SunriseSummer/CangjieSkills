@@ -1,0 +1,16 @@
+auditor 1.0.5 windows-x64-cjnative
+abi 10005
+rules R.NAM.01,R.SIZE.01,R.TODO.01
+units 4
+unit alpha_service.cj digest=540626055 lex=63 funcs=2 vars=2 classes=1 decls=5
+unit beta_helper.cj digest=878608438 lex=54 funcs=2 vars=1 classes=0 decls=3
+unit epsilon_clean.cj digest=97582583 lex=19 funcs=1 vars=0 classes=0 decls=1
+unit gamma_legacy.cj digest=293321898 lex=82 funcs=3 vars=3 classes=1 decls=7
+finding warn|R.NAM.01|beta_helper.cj|Beta_helper|expected lowerCamelCase
+finding fatal|R.SIZE.01|gamma_legacy.cj|unit|declaration budget exceeded
+finding info|R.TODO.01|alpha_service.cj|PERF|unresolved marker
+finding info|R.TODO.01|beta_helper.cj|DOC|unresolved marker
+finding info|R.TODO.01|beta_helper.cj|PERF|unresolved marker
+marker DOC=1
+marker PERF=2
+summary total=5 fatal=1 warn=1 info=3 weight=10
