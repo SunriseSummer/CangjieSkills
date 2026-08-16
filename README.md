@@ -32,7 +32,7 @@ npx skills add SunriseSummer/CangjieSkills
 ├── .agents/skills/cangjie-coding/   # Skill 发布件
 ├── README.md
 ├── build.py                         # 用于构建 Skill 发布件
-├── SKILL.md                         # 开发态与发布态共用的 Agent 指令
+├── SKILL                            # 开发态与发布态共用的 Agent 指令
 ├── references/                      # 仓颉编程语言知识库
 │   ├── language/                    # 语言特性
 │   ├── api/                         # std/stdx API

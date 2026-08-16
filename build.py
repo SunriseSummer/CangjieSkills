@@ -22,7 +22,7 @@ DATABASE = SKILL_ROOT / "references" / "knowledge.sqlite3"
 ROUTING_INDEX = REFERENCE_ROOT / "search-content.json.gz"
 
 RELEASE_FILES = {
-    PROJECT_ROOT / "SKILL.md": SKILL_ROOT / "SKILL.md",
+    PROJECT_ROOT / "SKILL": SKILL_ROOT / "SKILL.md",
     SCRIPT_ROOT / "setup_stdx.py": SKILL_ROOT / "scripts" / "setup_stdx.py",
     SCRIPT_ROOT / "cj_ast.py": SKILL_ROOT / "scripts" / "cj_ast.py",
     SCRIPT_ROOT / "doc_search" / "sqlite_entry.py": SKILL_ROOT / "scripts" / "search_docs.py",
@@ -124,8 +124,8 @@ def publish_runtime(check: bool) -> None:
 
 def main() -> int:
     args = parse_args()
-    if not (PROJECT_ROOT / "SKILL.md").is_file():
-        raise ValueError(f"development Skill entry is missing: {PROJECT_ROOT / 'SKILL.md'}")
+    if not (PROJECT_ROOT / "SKILL").is_file():
+        raise ValueError(f"development Skill entry is missing: {PROJECT_ROOT / 'SKILL'}")
 
     expected_index = build_search_index.encoded_payload()
     if args.check:
