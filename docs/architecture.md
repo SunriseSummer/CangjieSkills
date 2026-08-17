@@ -106,14 +106,13 @@ SKILL.md + 运行脚本 ─────── build.py ──────┴─�
     ├── doc_search/
     ├── setup_stdx.py
     ├── stdx_setup/
-    └── cj_ast.py
 ```
 
 Markdown 知识树、构建器、验证器、测试数据、报告、README 和缓存均不进入发布件。相关回归测试持续看护该边界。
 
 ## 解析与编译验证
 
-`cj_ast.py` 使用 tree-sitter-cangjie 提取 import、声明及 `ERROR/MISSING` 节点。此类节点表示解析器发生了错误恢复，适合快速发现简单片段的结构问题；宏 token、DSL 或语法树文法与编译器之间的差异可能产生假阳性，所以它不判断代码能否编译。
+文档中标记为 `cjtest=syntax` 的简单片段由示例验证器使用 tree-sitter-cangjie 检查 `ERROR/MISSING` 恢复节点；宏 token、DSL 或文法与编译器之间的差异可能产生假阳性，因此这类检查不判断代码能否编译。
 
 完整程序、类型解析、重载选择、宏展开、依赖配置、C FFI 和链接始终由 `cjc/cjpm` 验证。测试框架据此把简单行级示例与需要真实工程上下文的示例分开执行。
 

@@ -24,7 +24,6 @@ ROUTING_INDEX = REFERENCE_ROOT / "search-content.json.gz"
 RELEASE_FILES = {
     PROJECT_ROOT / "SKILL": SKILL_ROOT / "SKILL.md",
     SCRIPT_ROOT / "setup_stdx.py": SKILL_ROOT / "scripts" / "setup_stdx.py",
-    SCRIPT_ROOT / "cj_ast.py": SKILL_ROOT / "scripts" / "cj_ast.py",
     SCRIPT_ROOT / "doc_search" / "sqlite_entry.py": SKILL_ROOT / "scripts" / "search_docs.py",
 }
 RELEASE_SEARCH_MODULES = {

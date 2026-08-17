@@ -77,7 +77,6 @@ class KnowledgeDatabaseTests(unittest.TestCase):
         expected = {
                 "SKILL.md",
                 "references/knowledge.sqlite3",
-                "scripts/cj_ast.py",
                 "scripts/search_docs.py",
                 "scripts/setup_stdx.py",
         }
