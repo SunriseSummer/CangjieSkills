@@ -15,9 +15,11 @@
 | [`hasPendingCancellation: Bool`](prop-haspendingcancellation.md) | 线程是否存在取消请求，即是否通过 future.cancel() 发送过取消请求，常见使用方为 Thread.currentThread.hasPendingCancellation。 |
 | [`id: Int64`](prop-id.md) | 获取当前执行线程的标识，以 Int64 表示，所有存活的线程都有不同标识，但不保证当线程执行结束后复用它的标识。 |
 | [`mut name: String`](prop-name.md) | 获取或设置线程的名称，获取设置都具有原子性。 |
+| [`prop state: ThreadState`](prop-state.md) | 获取线程的状态。 |
 
 ## 方法
 
 | 签名 | 功能 |
 |---|---|
 | [`static handleUncaughtExceptionBy(exHandler: (Thread, Exception) -> Unit): Unit`](handleuncaughtexceptionby.md) | 注册线程未处理异常的处理函数。 |
+| [`static func handleUncaughtErrorBy(erHandler: (Error) -> Unit): Unit`](handleuncaughterrorby.md) | 注册线程未处理错误的处理函数。 |

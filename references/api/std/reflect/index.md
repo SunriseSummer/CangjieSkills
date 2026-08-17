@@ -34,6 +34,10 @@
 | [`InvocationTargetException <: ReflectException`](classes/invocationtargetexception/index.md) | InvocationTargetException 为调用函数包装异常。 |
 | [`MisMatchException <: ReflectException`](classes/mismatchexception/index.md) | MisMatchException 为调用对应函数抛出异常。 |
 | [`open ReflectException <: Exception`](classes/reflectexception/index.md) | ReflectException 为 Reflect 包的基异常类。 |
+| [`EnumConstructorInfo`](classes/enumconstructorinfo/index.md) | 描述枚举构造子信息，可用于查询构造子参数类型、注解，并根据构造子进行构造/拆解枚举实例。 |
+| [`EnumTypeInfo`](classes/enumtypeinfo/index.md) | `Enum` 类型的类型信息。 |
+| [`FunctionTypeInfo`](classes/functiontypeinfo/index.md) | 描述函数类型（函数值/闭包）的类型信息，可用于获取参数与返回值的类型信息。 |
+| [`TupleTypeInfo`](classes/tupletypeinfo/index.md) | 描述元组类型的类型信息。 |
 
 ## 枚举
 

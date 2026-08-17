@@ -20,6 +20,7 @@
 | [`subPackages: Collection<PackageInfo>`](prop-subpackages.md) | 获取该 PackageInfo 对应的所有子包的 PackageInfo 集合。 |
 | [`typeInfos: Collection<TypeInfo>`](prop-typeinfos.md) | 获取该 PackageInfo 对应的包中所有全局定义的 `public` 类型的类型信息，返回对应集合。 |
 | [`version: String`](prop-version.md) | 获取该 PackageInfo 对应的包的版本号。 |
+| [`prop organizationName: String`](prop-organizationname.md) | 获取该包信息所对应的包的组织名称。 |
 
 ## 方法
 

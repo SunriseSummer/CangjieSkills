@@ -17,3 +17,4 @@
 | [2.10 交叉编译](2-10-交叉编译.md) | 命令：`cjc hello.cj --target=x86_64-windows-gnu`。 |
 | [2.11 其他常用选项](2-11-其他常用选项.md) | 速查`--trimpath <prefix>`：移除调试信息中的路径前缀；`-s`, `--strip-all`：删除输出文件中的符号表；`--set-runtime-rpath`：写入运行时库路径到 RPATH；另含更多表项。 |
 | [2.12 警告控制与零警告验收](2-12-警告控制与零警告验收.md) | `-Won` 与 `-Woff` 顺序敏感，同一警告组以后出现的选项为准。 |
+| [2.13 实验性效应处理器](2-13-实验性效应处理器.md) | 1.1.3 同时使用 `--experimental --enable-eh` 启用 perform、handle 与 resume。 |

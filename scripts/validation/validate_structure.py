@@ -360,11 +360,11 @@ def main() -> int:
         errors.append(f"{macro_power.relative_to(REFERENCES)}: macro invocation syntax was rewritten")
 
     coverage = json.loads((REFERENCES / "api" / "coverage.json").read_text(encoding="utf-8"))
-    # Recommended 1.0.5 surface after removing deprecated packages and declarations.
-    if coverage.get("packages") != 53:
-        errors.append(f"API coverage package count changed: {coverage.get('packages')} != 53")
-    if coverage.get("entities") != 1100:
-        errors.append(f"API coverage entity count changed: {coverage.get('entities')} != 1100")
+    # Curated 1.1.3 surface after removing deprecated packages and declarations.
+    if coverage.get("packages") != 61:
+        errors.append(f"API coverage package count changed: {coverage.get('packages')} != 61")
+    if coverage.get("entities") != 1168:
+        errors.append(f"API coverage entity count changed: {coverage.get('entities')} != 1168")
     if coverage.get("ignored_h2"):
         errors.append(f"API coverage has ignored headings: {len(coverage['ignored_h2'])}")
     api_manifest_count = len(json.loads((REFERENCES / "api" / "manifest.json").read_text(encoding="utf-8")))

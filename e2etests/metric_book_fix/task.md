@@ -1,6 +1,6 @@
 # 修复并发指标簿
 
-当前目录已有仓颉 `1.0.5 (cjnative)` 可执行包 `metric_book_fix`。它使用 `ConcurrentHashMap<String, AtomicInt64>` 保存按名称计数器，但现有实现把增量写入了错误的原子对象，快照也不满足稳定顺序。请定位并修复生产代码，不要重写或绕过公开 API。
+当前目录已有仓颉 `1.1.3 (cjnative)` 可执行包 `metric_book_fix`。它使用 `ConcurrentHashMap<String, AtomicInt64>` 保存按名称计数器，但现有实现把增量写入了错误的原子对象，快照也不满足稳定顺序。请定位并修复生产代码，不要重写或绕过公开 API。
 
 ## 必须保持的公开 API
 

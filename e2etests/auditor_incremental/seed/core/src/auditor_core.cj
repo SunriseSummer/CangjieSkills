@@ -35,7 +35,7 @@ public import auditor_core.syntax.indexSource
 public import auditor_core.syntax.lexemeCount
 
 public func auditorVersion(): String {
-    return "1.0.5"
+    return "1.1.3"
 }
 
 public func auditorTarget(): String {

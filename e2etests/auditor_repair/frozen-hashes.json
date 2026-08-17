@@ -2,7 +2,7 @@
     "schema":  1,
     "task":  "auditor_repair",
     "toolchain":  {
-                      "cjc":  "1.0.5",
+                      "cjc":  "1.1.3",
                       "backend":  "cjnative",
                       "target":  "x86_64-w64-mingw32",
                       "os":  "windows-x64"
@@ -87,24 +87,24 @@
                     }
                 ],
     "files":  {
-                  "seed/app/cjpm.toml":  "e03c91729d2667a421089857d41985d8f21893a8e4243abf0505b8b4e0554fa7",
+                  "seed/app/cjpm.toml":  "ed2a7428e7480ae9145305996818b3d8affbd1b6f2eee2756394f3dc281ef754",
                   "seed/app/src/main.cj":  "969f74e84421eb21280eea712acb083da6d8b500682810dc6b77545c0b0e3782",
                   "seed/cjpm.toml":  "e4a124669cafe0da68ee70b7d97d4290765bd8771e8b5ec29a769c004f3541e3",
-                  "seed/core/cjpm.toml":  "31d4941fd3a198fdd5b16fb8fb2f72493b0211055ad6c083ba6b5a8592fb7299",
-                  "seed/core/src/auditor_core.cj":  "6b203fc46b603ab7ade7ab6d72cd9a8f44c757ec74575e487cdb37f2cea407fa",
+                  "seed/core/cjpm.toml":  "95f74dd18d1732cfa2b0b842258f3f5e3a1f7a07589afdd28bc5b6ca4d101466",
+                  "seed/core/src/auditor_core.cj":  "6547434c0377c3bdabdd735a2576e612598efe1f5211dfb35b53f70a4d5c3423",
                   "seed/core/src/model/model.cj":  "680e7e7d58dc8f789d4f1ff51e3e7dda921b39347088d5afc06b9933fbabb65c",
                   "seed/core/src/native/native.cj":  "9e21f8b7ef0a57dc1d704a0122991572119b7e9dbf8f3f8862de9eb14ba21641",
                   "seed/core/src/rules/rules.cj":  "e72c0e30e51cde302e8d43ef542ee2d9e00ee9aff57aa5dd201626cd501cfc96",
                   "seed/core/src/scan/scan.cj":  "3ad5fac5bc862fe27bd80d8d33e41b2d05fd7c7ddae19142a71b7da9246da9ba",
-                  "seed/core/src/syntax/syntax.cj":  "ac28b38971ffe46d1854e982f5adf9f7f4e92907376bc7a9697bd2c979be3add",
-                  "seed/macros/cjpm.toml":  "cd255abd28f99d1e5187dac2862cfa54dd10ef80a35ec5f8300ea985c2bb9dd5",
+                  "seed/core/src/syntax/syntax.cj":  "b5c6479544692049f8b114fade9513d91823e034f2c22795f07302e06b6b1d1c",
+                  "seed/macros/cjpm.toml":  "868d42b4227bd53d6268f8afeb9c9abedb988bf77d8b3fb92d200871bce3bca5",
                   "seed/macros/src/auditor_macros.cj":  "a2052eed4b1c5ca47bc64d9aaa30846cefe2d38c7b9e7bde74675fc01cf97aaf",
                   "frozen/tests/model_test.cj":  "82793de07a341afb3f5c90600f966b88b7ce9d3efa6e99353e2b4b57497f85bf",
                   "frozen/tests/native_test.cj":  "f06a63293fce7187939e23d0377f3e290a9f150ce3582be064ea40158cf497d4",
                   "frozen/tests/syntax_test.cj":  "09741433a2ed86006303f5b2be0b7ca518fe7075a3fba1508748ad8db37fd2c4",
                   "frozen/tests/rules_test.cj":  "138b17c6635784b4b99501688ee392325a147edd07f7dc11c227d0b1930e75bd",
-                  "frozen/tests/scan_test.cj":  "f647670a799cdba49f915e65cd9b02707d930df5b13242249cf48ef56291f47a",
-                  "frozen/tests/facade_test.cj":  "a666ed032ba4891ce1c3718a4eea86d1a87f358fe800c6c792fd08f6defe5a2c",
+                  "frozen/tests/scan_test.cj":  "0462424d565a716233dd2cb6a36fa6368cfa9347d7540446d8b3d1cc00ec4da6",
+                  "frozen/tests/facade_test.cj":  "81c0ad61fb7bec378b5cc9ac084401f726bf61c47aac2d0b976b7d0087b94643",
                   "frozen/tests/app_test.cj":  "77118805f3da4c15edcd623600c677ab4700eabc1fdb5d146d908416daac57d6",
                   "frozen/fixtures/native/auditor_native.c":  "e5b2ac96a5b99c2f3fa7622f108d7febe9849a90b695eb8855d9052b74263a1d",
                   "frozen/fixtures/sources/alpha_service.cj":  "b4bcfbfba94d6837df774621f64176c08e5f8f3dd8c04d4c56d375f8e106a6be",
@@ -112,6 +112,6 @@
                   "frozen/fixtures/sources/epsilon_clean.cj":  "59dfc3aea773c9a8c72385d55a1926c395a734c6c0c2ae32c19dda52085d3553",
                   "frozen/fixtures/sources/gamma_legacy.cj":  "0a07898b30f7f10b36529b2aebb3934e91059a33f16420767554ed5d61861e5b",
                   "frozen/fixtures/sources/delta_notes.txt":  "12d0e10615ca0f3ebafd3270dbe2af447ccd68ab0e5f5811df49e11be41f6921",
-                  "frozen/fixtures/expected/report.txt":  "a4dafedc95172407651231badb1daaf3440c5ddf4ef5ea96e28321246a8166f7"
+                  "frozen/fixtures/expected/report.txt":  "cd0ed8016a428f5a835b836bc2aadc6ce7e4f5ae6159e5676b5b1874f5a4c0fe"
               }
 }

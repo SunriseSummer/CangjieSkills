@@ -2,7 +2,7 @@
 
 ## 目标
 
-使用仓颉 1.0.5 实现包 `exact_share_allocator`：将十进制金额按指定标度和舍入规则转换为任意精度最小单位，再用最大余数法按权重精确分配；同时提供整数溢出策略对照和以自动派生值类型为键的聚合。
+使用仓颉 1.1.3 实现包 `exact_share_allocator`：将十进制金额按指定标度和舍入规则转换为任意精度最小单位，再用最大余数法按权重精确分配；同时提供整数溢出策略对照和以自动派生值类型为键的聚合。
 
 实现必须直接使用 `std.math.numeric` 的 `Decimal`/`BigInt`、`std.math.RoundingMode`、`std.overflow`、`std.deriving` 和 `HashMap`。禁止 Float、随机数、时钟、文件与网络。将 `exact_share_allocator_test.cj` 原样复制到 `src/`，测试不可修改。
 

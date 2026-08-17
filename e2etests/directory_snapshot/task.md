@@ -1,6 +1,6 @@
 # 递归目录快照
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `directory_snapshot`。使用 `std.fs.Path`、`Directory.readFrom`、`FileInfo` 和 `File` 对真实目录建立确定性快照。必须递归读取子目录；不得把非递归的 `Directory.walk` 误当递归 API，也不得调用 shell 命令枚举文件。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `directory_snapshot`。使用 `std.fs.Path`、`Directory.readFrom`、`FileInfo` 和 `File` 对真实目录建立确定性快照。必须递归读取子目录；不得把非递归的 `Directory.walk` 误当递归 API，也不得调用 shell 命令枚举文件。
 
 ## 公开 API
 

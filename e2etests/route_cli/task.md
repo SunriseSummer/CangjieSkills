@@ -1,6 +1,6 @@
 # 多规则文本路由 CLI
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `route_cli`。使用 `std.argopt.parseArguments` 解析选项，使用 `std.regex.Regex` 判断规则；不得手写扫描 `--option`/`-o` 字符串替代 argopt，也不得用普通字符串包含判断替代正则。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `route_cli`。使用 `std.argopt.parseArguments` 解析选项，使用 `std.regex.Regex` 判断规则；不得手写扫描 `--option`/`-o` 字符串替代 argopt，也不得用普通字符串包含判断替代正则。
 
 ## 公开 API
 

@@ -19,7 +19,7 @@ public func isInf(): Bool
 
 ## 正确判断浮点数是否有限
 
-仓颉 1.0.5 的 `Float64` 没有 `isFinite()` 成员。有限值包含零和次正规数，因此不能用 `isNormal()` 替代；应同时排除 NaN 和正负无穷。测试特殊值时可导入 `std.math`，使用该扩展提供的 `getInf()` 与 `getNaN()`。
+仓颉 1.1.3 的 `Float64` 没有 `isFinite()` 成员。有限值包含零和次正规数，因此不能用 `isNormal()` 替代；应同时排除 NaN 和正负无穷。测试特殊值时可导入 `std.math`，使用该扩展提供的 `getInf()` 与 `getNaN()`。
 
 ```cangjie cjtest=run id=api.float64.finite-check.run form=unit timeout=20s
 package float64_finite_check_example

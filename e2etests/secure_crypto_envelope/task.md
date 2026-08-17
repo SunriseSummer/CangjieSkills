@@ -2,9 +2,9 @@
 
 ## 目标
 
-在仓颉 `1.0.5 (cjnative)` 中实现包 `secure_crypto_envelope`：用 RSA-OAEP 加密短负载，用 RSA/SHA-256/PKCS#1 对密文签名，并支持 RSA PEM 导入导出与加密安全随机数。实现必须直接使用 `stdx.crypto.crypto.SecureRandom`、`stdx.crypto.keys`、`stdx.crypto.digest`、`std.crypto.digest`、`std.io` 和 `stdx.encoding.hex`。
+在仓颉 `1.1.3 (cjnative)` 中实现包 `secure_crypto_envelope`：用 RSA-OAEP 加密短负载，用 RSA/SHA-256/PKCS#1 对密文签名，并支持 RSA PEM 导入导出与加密安全随机数。实现必须直接使用 `stdx.crypto.crypto.SecureRandom`、`stdx.crypto.keys`、`stdx.crypto.digest`、`std.crypto.digest`、`std.io` 和 `stdx.encoding.hex`。
 
-将 `secure_crypto_envelope_test.cj` 原样复制到项目 `src/`，并把 `fixtures/` 原样放在项目根目录；测试与 fixture 不可修改。stdx 固定为 `1.0.5.1`。
+将 `secure_crypto_envelope_test.cj` 原样复制到项目 `src/`，并把 `fixtures/` 原样放在项目根目录；测试与 fixture 不可修改。stdx 固定为 `1.1.3.1`。
 
 ## 公开 API
 

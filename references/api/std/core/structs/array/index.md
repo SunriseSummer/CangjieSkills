@@ -39,6 +39,19 @@
 | [`slice(start: Int64, len: Int64): Array<T>`](slice.md) | 获取数组切片。 |
 | [`splitAt(mid: Int64): (Array<T>, Array<T>)`](splitat.md) | 从指定位置 mid 处分割数组。 |
 | [`swap(index1: Int64, index2: Int64): Unit`](swap.md) | 交换指定位置的两个元素。 |
+| [`func all(predicate: (T) -> Bool): Bool`](all.md) | 判断数组所有元素是否都满足条件。 |
+| [`func any(predicate: (T) -> Bool): Bool`](any.md) | 判断数组是否存在任意一个满足条件的元素。 |
+| [`func filter(predicate: (T) -> Bool): Array<T>`](filter.md) | 返回一个满足筛选条件的元素的新数组。 |
+| [`func filterMap<R>(transform: (T) -> ?R): Array<R>`](filtermap.md) | 同时进行筛选操作和映射操作，返回一个新数组。 |
+| [`func flatMap<R>(transform: (T) -> Array<R>): Array<R>`](flatmap.md) | 对数组中的每个元素应用一个转换闭包（transform），该闭包返回一个数组，然后将所有返回的数组“压平”（flatten）并连接成一个单一的结果数组。 |
+| [`func fold<R>(initial: R, operation: (R, T) -> R): R`](fold.md) | 使用指定初始值，从左向右计算。 |
+| [`func forEach(action: (T) -> Unit): Unit`](foreach.md) | 遍历所有元素，执行给定的操作。 |
+| [`func intersperse(separator: T): Array<T>`](intersperse.md) | 返回每两个元素之间插入一个给定的新元素后的新数组 |
+| [`func none(predicate: (T) -> Bool): Bool`](none.md) | 判断数组中所有元素是否都不满足条件。 |
+| [`func reduce(operation: (T, T) -> T): Option<T>`](reduce.md) | 使用第一个元素作为初始值，从左向右计算。 |
+| [`func skip(count: Int64): Array<T>`](skip.md) | 跳过特定个数元素并返回一个新数组。 |
+| [`func step(count: Int64): Array<T>`](step.md) | 以指定的间隔从数组中提取元素，并返回一个新数组。 |
+| [`func take(count: Int64): Array<T>`](take.md) | 从数组取出特定个数元素并返回一个新数组。 |
 
 ## 操作符
 
@@ -57,3 +70,4 @@
 | [`extend<T> Array<T> <: Collection<T>`](extensions/extend-t-array-t-collection-t.md) | 为 Array<T> 类型实现 Collection 接口。 |
 | [`extend<T> Array<T> <: Equatable<Array<T>> where T <: Equatable<T>`](extensions/extend-t-array-t-equatable-array-t-where-t-equatable-t.md) | 为 Array<T> 类型扩展 Equatable<Array<T>> 接口实现，支持判等操作。 |
 | [`extend<T> Array<T> <: ToString where T <: ToString`](extensions/extend-t-array-t-where-t-tostring.md) | 为 Array<T> 类型扩展 ToString 接口，支持转字符串操作。 |
+| [`extend<T> Array<T>`](extensions/extend-t-array-t.md) | 为 Array<T> 类型进行拓展 |

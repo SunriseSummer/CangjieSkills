@@ -12,8 +12,10 @@
 ```cangjie cjtest=run id=stdx.websocket-local-roundtrip.run form=unit requires=stdx timeout=90s
 package websocket_local_roundtrip
 
+import std.collection.ArrayList
 import std.sync.SyncCounter
 import stdx.encoding.url.URL
+import stdx.crypto.kit.DefaultCryptoKit
 import stdx.log.NoopLogger
 import stdx.net.http.*
 
@@ -24,6 +26,8 @@ func verify(condition: Bool, label: String): Unit {
 }
 
 main(): Unit {
+    // WebSocket 握手需要全局加密套件；构造默认实现会完成注册。
+    let _ = DefaultCryptoKit()
     let ready = SyncCounter(1)
     let handlerDone = SyncCounter(1)
     let stopped = SyncCounter(1)
@@ -36,7 +40,8 @@ main(): Unit {
 
     server.distributor.register("/ws", {
         context =>
-        let ws = WebSocket.upgradeFromServer(context)
+        let allowedOrigins = ArrayList<String>(["http://local.test"])
+        let ws = WebSocket.upgradeFromServer(context, origins: allowedOrigins)
         try {
             let request = ws.read()
             verify(request.frameType == TextWebFrame, "server text frame")
@@ -56,9 +61,12 @@ main(): Unit {
 
     let client = ClientBuilder().noProxy().logger(logger).build()
     try {
+        let headers = HttpHeaders()
+        headers.add("Origin", "http://local.test")
         let (ws, _) = WebSocket.upgradeFromClient(
             client,
-            URL.parse("ws://127.0.0.1:${server.port}/ws")
+            URL.parse("ws://127.0.0.1:${server.port}/ws"),
+            headers: headers
         )
         try {
             ws.write(TextWebFrame, "ping".toArray())

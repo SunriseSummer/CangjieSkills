@@ -2,7 +2,7 @@
 
 ## 1. 目标
 
-使用仓颉 1.0.5 实现一个只监听本机回环地址的 TCP 客户端/服务端。项目必须覆盖 `std.net`、`std.io`、并发、同步、超时和 `Resource` 关闭语义，并通过随任务提供的不可修改测试。
+使用仓颉 1.1.3 实现一个只监听本机回环地址的 TCP 客户端/服务端。项目必须覆盖 `std.net`、`std.io`、并发、同步、超时和 `Resource` 关闭语义，并通过随任务提供的不可修改测试。
 
 不得使用固定端口：服务端必须以端口 `0` 绑定，由操作系统分配空闲端口，再通过 `localAddress` 暴露实际端口。不得以 `sleep` 猜测服务端是否就绪。
 
@@ -21,7 +21,7 @@ tcp_line_store/
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "tcp_line_store"
   version = "1.0.0"
   output-type = "executable"
@@ -129,4 +129,3 @@ cjpm run
 ```
 
 四条命令均须成功，26/26 测试通过，编译器 warning 为 0。不得访问设计目录中的 oracle。
-

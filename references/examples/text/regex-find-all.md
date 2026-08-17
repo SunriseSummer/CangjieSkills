@@ -8,7 +8,7 @@
 ## 典型示例
 
 `findAll` 返回所有不重叠匹配。读取捕获组时传入 `group: true`；模式或输入可能包含非 ASCII 字符时，
-仓颉 1.0.5 应显式启用 `RegexFlag.Unicode`，避免捕获组边界按字节切分后形成无效 UTF-8。
+仓颉 1.1.3 应显式启用 `RegexFlag.Unicode`，避免捕获组边界按字节切分后形成无效 UTF-8。
 
 ```cangjie cjtest=run id=examples.text.regex-find-all.api.regex.findall.run form=unit timeout=20s
 package regex_findall_example

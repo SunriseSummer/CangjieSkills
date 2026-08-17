@@ -25,7 +25,7 @@ public func write(inBuf: Array<Byte>): Unit
 
 `CompressOutputStream` 绑定任意 `OutputStream`；写完后必须调用 `close()`，压缩尾部信息才完整。压缩端和解压端必须使用相同的包装格式，本例演示无 Gzip 头的 `DeflateFormat`。解压端持续读取到 EOF，并同样关闭流以释放原生压缩资源。
 
-仓颉/stdx 1.0.5.1 中 `DeflateFormat` 不能从 `stdx.compress.zlib` 单独精确导入，因此这里保留包通配导入；这是版本可访问性限制，不是推荐普遍使用通配导入。
+仓颉/stdx 1.1.3.1 中 `DeflateFormat` 不能从 `stdx.compress.zlib` 单独精确导入，因此这里保留包通配导入；这是版本可访问性限制，不是推荐普遍使用通配导入。
 
 ```cangjie cjtest=run id=api.stdx.zlib.roundtrip.run form=unit requires=stdx timeout=60s
 package stdx_zlib_roundtrip_example

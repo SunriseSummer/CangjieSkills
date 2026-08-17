@@ -1,6 +1,6 @@
 # 仓颉 AI Coding 端到端测试集
 
-本目录收录 56 个经过实际 Agent 开发和仓颉工具链验证的任务，用于持续观察 Skill 对开发正确性、知识查询效率、修正轮次、工具调用和 token 开销的影响。任务覆盖从零开发、增量开发和问题修复，知识面横跨语言特性、std/stdx API、宏、AST、反射、并发、网络、文件、二进制、密码学、C FFI 与工具链。
+本目录收录 62 个经过实际 Agent 开发和仓颉工具链验证的任务，用于持续观察 Skill 对开发正确性、知识查询效率、修正轮次、工具调用和 token 开销的影响。任务覆盖从零开发、增量开发和问题修复，知识面横跨语言特性、std/stdx API、宏、AST、反射、并发、网络、文件、二进制、密码学、C FFI 与工具链。
 
 ## 使用方法
 
@@ -36,6 +36,8 @@
 | `scoreboard` | 解析构建记录，按项目聚合并生成稳定质量排行榜。 |
 | `event_rollup` | 使用枚举、模式匹配、HashMap 和自定义排序汇总事件。 |
 | `layered_config` | 合并分层类型化配置，覆盖元组解构、集合遍历和优先级。 |
+| `effect_handler_113` | 使用 1.1.3 实验性 Command、perform、handle、resume 与默认实现构建可恢复配置读取。 |
+| `reflection_shape_codec_113` | 使用新增枚举构造子、元组与函数 TypeInfo 完成动态构造、拆解和调用。 |
 
 ### 集合、并发与资源生命周期
 
@@ -47,6 +49,7 @@
 | `deque_scheduler` | 使用 ArrayDeque、优先级与公平策略构建调度器。 |
 | `parallel_ledger` | 并发聚合账户变更，覆盖共享状态、原子计数和稳定快照。 |
 | `sharded_word_index` | 使用 spawn/Future、Mutex 和原子提交实现分片索引。 |
+| `collection_runtime_113` | 使用 1.1.3 容器直连 filter/map/fold 与 ThreadSnapshot 构建可验证流水线。 |
 
 ### 数值、二进制与数据格式
 
@@ -61,6 +64,7 @@
 | `json_config` | 用 stdx JSON 解析并归一化配置，覆盖缺失、类型和语法错误。 |
 | `sha256_lines` | 逐行计算 SHA-256 并输出小写十六进制清单。 |
 | `zlib_roundtrip` | 使用 zlib 内存流压缩、解压并验证二进制往返。 |
+| `tar_intern_bundle_113` | 使用 1.1.3 TarGzip 与字符串驻留完成目录归档和稳定标签处理。 |
 
 ### CLI、文件系统与工具链
 
@@ -73,6 +77,7 @@
 | `tool_probe` | 探测环境变量、外部进程、源码目录和工具可用性。 |
 | `ranked_notes` | 解析 CLI 和文本输入，稳定排序并输出便签。 |
 | `route_cli` | 组合 argopt 与 Regex 实现多规则文本路由。 |
+| `multiplatform_dispatch_113` | 使用 common/specific、feature 与 source-set 构建并测试 Windows 产品源码集。 |
 
 ### 网络、安全与综合工程
 
@@ -89,6 +94,7 @@
 | `event_ledger_archive` | 综合覆盖建模、集合、Decimal、并发、流式 JSON、压缩、摘要和端序。 |
 | `secure_local_sync` | 综合覆盖本机 HTTPS、TLS/X.509、JSON、压缩、摘要、并发和资源关闭。 |
 | `macro_native_source_auditor` | 多模块综合任务：声明宏、AST、反射、C FFI、工具链和确定性报告。 |
+| `interop_handle_registry_113` | 使用 std.interop 的 ExportedRef、InteropContext 与 ExportTable 管理不透明跨语言句柄。 |
 
 ## 增量开发
 

@@ -11,7 +11,7 @@
 
 构造与赋值：
 
-- 仓颉 1.0.5 / stdx 1.0.5.1 仅支持零参构造 `var option = VerifyOption()`，不支持 `VerifyOption(roots: ..., time: ...)` 这类命名参数构造。
+- 仓颉 1.1.3 / stdx 1.1.3.1 仅支持零参构造 `var option = VerifyOption()`，不支持 `VerifyOption(roots: ..., time: ...)` 这类命名参数构造。
 - 构造后逐项给 `roots`、`intermediates`、`dnsName`、`time` 赋值；未赋值时分别使用本页列出的默认值。
 - 自定义信任或可重复验证应显式设置 `roots` 与 `time`，避免隐式使用系统根证书和当前时间。
 

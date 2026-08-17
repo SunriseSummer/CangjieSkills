@@ -1,6 +1,6 @@
 # 任务：`macro_native_source_auditor`
 
-用仓颉 `1.0.5 (cjnative)` 在 **Windows x64** 上实现一个 **仓颉源码审计器** workspace。
+用仓颉 `1.1.3 (cjnative)` 在 **Windows x64** 上实现一个 **仓颉源码审计器** workspace。
 审计器读取一组仓颉样例源文件，用 `std.ast` 解析并统计声明、用正则抽取遗留标记、
 通过 C 动态库计算摘要，最后按规则集产出一份**完全确定**的文本报告。
 
@@ -12,7 +12,7 @@
 
 | 项 | 要求 |
 |---|---|
-| 工具链 | `cjc`/`cjpm` **1.0.5**，`cjnative`，`x86_64-w64-mingw32` |
+| 工具链 | `cjc`/`cjpm` **1.1.3**，`cjnative`，`x86_64-w64-mingw32` |
 | 平台 | Windows x64（本任务不要求跨平台产物） |
 | 依赖 | **仅** `std.*`；不使用 `stdx`、不访问公网 |
 | 确定性 | 不依赖时间、随机数、环境变量、目录遍历顺序、反射集合顺序 |
@@ -259,7 +259,7 @@ public func renderReport(root: String): String             // §5.6 报告
 用 `public import` 把 §4.1–§4.5 的公开符号重导出到根包（测试会 `import auditor_core.<name>`），并提供：
 
 ```cangjie
-public func auditorVersion(): String   // "1.0.5"
+public func auditorVersion(): String   // "1.1.3"
 public func auditorTarget(): String    // "windows-x64-cjnative"
 ```
 
@@ -367,7 +367,7 @@ summary total=<n> fatal=<n> warn=<n> info=<n> weight=<n>
 4. `cjpm clean`；
 5. `cjpm build`，**断言 warning 数为 0**；
 6. `cjpm test`，断言全部通过且用例数 ≥ 28；
-7. `cjpm run --name auditor_app --run-args="fixtures/sources"` 冒烟通过；
+7. `cjpm run --name auditor_app -- fixtures/sources` 冒烟通过；
 8. 直接启动当前平台下 `target/release/bin/auditor_app` 对应的可执行文件：
    - `fixtures/sources` → stdout 与黄金报告逐字节一致（LF 归一后），退出码 `4`；
    - 无参 → 退出码 `2`；

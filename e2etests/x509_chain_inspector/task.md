@@ -2,7 +2,7 @@
 
 ## 目标
 
-在仓颉 `1.0.5 (cjnative)` 中实现包 `x509_chain_inspector`：解析冻结的根证书、中间证书、叶证书和 CSR，提取名称/SAN/算法信息，完成 PEM/DER 往返，并用显式根、中间链、DNS 与固定时间验证叶证书。实现必须直接使用 `stdx.crypto.x509`。
+在仓颉 `1.1.3 (cjnative)` 中实现包 `x509_chain_inspector`：解析冻结的根证书、中间证书、叶证书和 CSR，提取名称/SAN/算法信息，完成 PEM/DER 往返，并用显式根、中间链、DNS 与固定时间验证叶证书。实现必须直接使用 `stdx.crypto.x509`。
 
 将 `x509_chain_inspector_test.cj` 原样复制到项目 `src/`，并把 `fixtures/` 原样放在项目根目录；不可修改。fixture 已冻结，不依赖系统根证书，运行时禁止调用当前时间。
 

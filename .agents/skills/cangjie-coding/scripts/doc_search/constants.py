@@ -49,7 +49,7 @@ QUERY_TERM_ALIASES = {
     "directory": ("目录",),
     "environment": ("环境",),
     "variable": ("变量",),
-    # The 1.0.5 API type is named Server; developers often search HttpServer.
+    # The 1.1.3 API type is named Server; developers often search HttpServer.
     "httpserver": ("http 服务端",),
     "httpserverbuilder": ("serverbuilder",),
     "named": ("命名",),
@@ -76,7 +76,7 @@ QUERY_TERM_ALIASES = {
     "unwrapping": ("getorthrow", "解构", "解包"),
     "uppercase": ("toasciiupper", "toupper", "大写"),
     "lowercase": ("toasciilower", "tolower", "小写"),
-    # Translate familiar names from adjacent ecosystems to the exact 1.0.5
+    # Translate familiar names from adjacent ecosystems to the exact 1.1.3
     # vocabulary.  These remain query-time aliases; the result still exposes
     # the real Cangjie symbol so an agent cannot copy a non-existent API.
     "isdigit": ("isnumber",),

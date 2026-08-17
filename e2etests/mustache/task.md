@@ -26,7 +26,7 @@ mustache/
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "mustache"
   description = "nothing here"
   version = "1.0.0"

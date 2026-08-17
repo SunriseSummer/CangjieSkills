@@ -3,7 +3,7 @@
 
 [← JSON 与对象序列化](index.md)
 
-自定义 `JsonSerializable`/`JsonDeserializable` 时显式维护对象状态；Windows cjnative 1.0.5.1 的复合数组按元素读写，避免直接调用泛型数组接口。
+自定义 `JsonSerializable`/`JsonDeserializable` 时显式维护对象状态；Windows cjnative 1.1.3.1 的复合数组按元素读写，避免直接调用泛型数组接口。
 
 ## 已验证示例
 

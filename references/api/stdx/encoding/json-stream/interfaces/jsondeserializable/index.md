@@ -9,7 +9,7 @@
 
 ## 关键契约
 
-Windows x86_64 cjnative 1.0.5 + stdx 1.0.5.1 限制：
+Windows x86_64 cjnative 1.1.3 + stdx 1.1.3.1 限制：
 
 - 发布 API 声明 `Array<T>` 和 `Option<T>` 实现本接口，但直接调用 `readValue<Array<T>>()` 或 `readValue<Option<T>>()` 实测可能因接口函数表缺失而崩溃。
 - 在该组合下，Option 先用 `peek()` 判断 `JsonToken.JsonNull`；数组用 `startArray()`、循环读取元素直到 `EndArray`、再 `endArray()`。
@@ -46,3 +46,11 @@ Windows x86_64 cjnative 1.0.5 + stdx 1.0.5.1 限制：
 | [`extend<T> ArrayList<T> <: JsonDeserializable<ArrayList<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-arraylist-t-jsondeserializable-arraylist-t-where-t-jso-9a74c610.md) | 为 ArrayList 类型实现 JsonDeserializable 接口。 |
 | [`extend<T> Option<T> <: JsonDeserializable<Option<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-option-t-jsondeserializable-option-t-where-t-jsondeser-e7c1069a.md) | 为 Option 类型实现 JsonDeserializable 接口。 |
 | [`extend<T> HashMap<String, T> <: JsonDeserializable<HashMap<String, T>> where T <: JsonDeserializable<T>`](extensions/extend-t-hashmap-string-t-jsondeserializable-hashmap-string-t-w-ead83c91.md) | 为 HashMap 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> ArrayDeque<T> <: JsonDeserializable<ArrayDeque<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-arraydeque-t-jsondeserializable-arraydeque-t-where-t-jsondeserializable-t.md) | 为 ArrayDeque 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> ArrayQueue<T> <: JsonDeserializable<ArrayQueue<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-arrayqueue-t-jsondeserializable-arrayqueue-t-where-t-jsondeserializable-t.md) | 为 ArrayQueue 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> ArrayStack<T> <: JsonDeserializable<ArrayStack<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-arraystack-t-jsondeserializable-arraystack-t-where-t-jsondeserializable-t.md) | 为 ArrayStack 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> ConcurrentHashMap<String, T> <: JsonDeserializable<ConcurrentHashMap<String, T>> where T <: JsonDeserializable<T>`](extensions/extend-t-concurrenthashmap-string-t-jsondeserializable-concurrenthashmap-string-t-where-t-jsondeserializable-t.md) | 为 ConcurrentHashMap 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> HashSet<T> <: JsonDeserializable<HashSet<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-hashset-t-jsondeserializable-hashset-t-where-t-jsondeserializable-t.md) | 为 HashSet 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> LinkedList<T> <: JsonDeserializable<LinkedList<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-linkedlist-t-jsondeserializable-linkedlist-t-where-t-jsondeserializable-t.md) | 为 LinkedList 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> TreeMap<String, T> <: JsonDeserializable<TreeMap<String, T>> where T <: JsonDeserializable<T>`](extensions/extend-t-treemap-string-t-jsondeserializable-treemap-string-t-where-t-jsondeserializable-t.md) | 为 TreeMap 类型实现 JsonDeserializable 接口。 |
+| [`extend<T> TreeSet<T> <: JsonDeserializable<TreeSet<T>> where T <: JsonDeserializable<T>`](extensions/extend-t-treeset-t-jsondeserializable-treeset-t-where-t-jsondeserializable-t.md) | 为 TreeSet 类型实现 JsonDeserializable 接口。 |

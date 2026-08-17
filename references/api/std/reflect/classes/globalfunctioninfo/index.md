@@ -26,6 +26,8 @@
 | [`findAnnotation<T>(): Option<T> where T <: Annotation`](findannotation.md) | 尝试获取拥有给定限定名称且作用于该对象的注解。 |
 | [`hashCode(): Int64`](hashcode.md) | 获取该全局函数信息的哈希值。 |
 | [`toString(): String`](tostring.md) | 获取字符串形式的该全局函数信息。 |
+| [`func findAllAnnotations<T>(): Array<T> where T <: Annotation`](findallannotations.md) | 获取所有指定注解名称的自定义注解（通过泛型筛选）。 |
+| [`func getAllAnnotations(): Array<Annotation>`](getallannotations.md) | 获取作用于该全局函数的所有自定义注解。 |
 
 ## 操作符
 

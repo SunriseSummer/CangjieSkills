@@ -101,7 +101,7 @@ func renderReportGoldenTest(): Unit {
 @Test
 func renderReportShapeTest(): Unit {
     let lines = renderReport(fixtureRoot).split("\n", removeEmpty: true)
-    @Expect(lines[0], "auditor 1.0.5 windows-x64-cjnative")
+    @Expect(lines[0], "auditor 1.1.3 windows-x64-cjnative")
     @Expect(lines[1], "abi 10005")
     @Expect(lines[2], "rules R.NAM.01,R.SIZE.01,R.TODO.01")
     @Expect(lines[3], "units 4")

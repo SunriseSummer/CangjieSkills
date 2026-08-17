@@ -57,7 +57,7 @@ match (x) {
 
 ## 已验证反例
 
-有返回值的 `match` 必须覆盖选择器的全部可能值；以下程序应被 1.0.5 编译器拒绝。
+有返回值的 `match` 必须覆盖选择器的全部可能值；以下程序应被 1.1.3 编译器拒绝。
 
 ```cangjie cjtest=compile id=language-non-exhaustive-match-invalid exit=1
 package example

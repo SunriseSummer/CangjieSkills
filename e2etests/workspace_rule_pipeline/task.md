@@ -1,6 +1,6 @@
 # 多模块规则流水线工作区
 
-使用仓颉 1.0.5 创建一个 `workspace_rule_pipeline` 工作区，包含 `core`、`builtins`、`facade`、`app` 四个成员模块。不得修改给定测试。
+使用仓颉 1.1.3 创建一个 `workspace_rule_pipeline` 工作区，包含 `core`、`builtins`、`facade`、`app` 四个成员模块。不得修改给定测试。
 
 ## 工程约束
 

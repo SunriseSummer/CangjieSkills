@@ -46,6 +46,15 @@
 | [`retain(all!: Set<T>): Unit`](retain.md) | 从此 TreeSet 中保留 Set 中的元素，其他元素将被移除。 |
 | [`subsetOf(other: ReadOnlySet<T>): Bool`](subsetof.md) | 检查该集合是否为其他 ReadOnlySet 的子集。 |
 | [`toArray(): Array<T>`](toarray.md) | 返回一个包含容器内所有元素的数组。 |
+| [`func all(predicate: (T) -> Bool): Bool`](all.md) | 判断 TreeSet 中所有元素是否都满足条件。 |
+| [`func any(predicate: (T) -> Bool): Bool`](any.md) | 判断 TreeSet 是否存在任意一个满足条件的元素。 |
+| [`func filter(predicate: (T) -> Bool): TreeSet<T>`](filter.md) | 返回一个满足筛选条件的元素的新 TreeSet<T>。 |
+| [`func filterMap<R>(transform: (T) -> Option<R>): TreeSet<R> where R <: Comparable<R>`](filtermap.md) | 同时进行筛选操作和映射操作，返回一个新 TreeSet。 |
+| [`func fold<R>(initial: R, operation: (R, T) -> R): R`](fold.md) | 使用指定初始值，从左向右计算。 |
+| [`func forEach(action: (T) -> Unit): Unit`](foreach.md) | 遍历所有元素，执行给定的操作。 |
+| [`func map<R>(transform: (T) -> R): TreeSet<R> where R <: Comparable<R>`](map.md) | 将当前 TreeSet 内所有 T 类型元素根据 transform 映射为 R 类型的元素，组成新的 TreeSet。 |
+| [`func none(predicate: (T) -> Bool): Bool`](none.md) | 判断 TreeSet 中所有元素是否都不满足条件。 |
+| [`func reduce(operation: (T, T) -> T): Option<T>`](reduce.md) | 使用第一个元素作为初始值，从左向右计算。 |
 
 ## 操作符
 

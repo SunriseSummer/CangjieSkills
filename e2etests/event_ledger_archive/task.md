@@ -2,7 +2,7 @@
 
 ## 1. 目标
 
-用仓颉 `1.0.5 (cjnative)` 实现一个可执行 cjpm 工程 `event_ledger_archive`：一个**确定性事件台账**，
+用仓颉 `1.1.3 (cjnative)` 实现一个可执行 cjpm 工程 `event_ledger_archive`：一个**确定性事件台账**，
 把账目事件规范化、聚合、以流式 JSON 编码，再压缩、加校验和写入自描述二进制归档，并能读回、
 校验完整性、精确分类损坏原因。
 
@@ -11,10 +11,10 @@
 
 ## 2. 工程与环境
 
-- 包名 `event_ledger_archive`，`output-type = "executable"`，`cjc-version = "1.0.5"`。
+- 包名 `event_ledger_archive`，`output-type = "executable"`，`cjc-version = "1.1.3"`。
 - 源码位于 `src/`，冻结测试文件放在 `src/event_ledger_archive_test.cj`。
-- stdx 固定 `1.0.5.1`，用 Skill 的 `scripts/setup_stdx.py --project <工程根>` 安装并配置。
-- 只导入实际使用的符号；1.0.5 不会因 `_` 前缀免除未使用告警。
+- stdx 固定 `1.1.3.1`，用 Skill 的 `scripts/setup_stdx.py --project <工程根>` 安装并配置。
+- 只导入实际使用的符号；1.1.3 不会因 `_` 前缀免除未使用告警。
 - **禁止**：随机数、当前时间/日期、公网访问、依赖哈希遍历顺序的输出、修改冻结测试。
 - 所有对外输出必须完全确定：同一输入在任意主机、任意次运行产生相同字节。
 
@@ -236,7 +236,7 @@ BatchNote    {"author":"oracle","comment":"deterministic demo batch"}
 - `EventKind` 先收集全部已识别字段再按 `type` 派发，因此 `type` 可以出现在对象任意位置。
 - `memo` / `annotation` 的 JSON `null` 读成 `None`，非 null 读成 `Some(...)`。
 - **数组与 `Option` 走逐元素路径**：`tags`、`events` 用 `startArray` / `peek` / `endArray`
-  逐项 `readValue<T>()`，不调用泛型数组反序列化。这是 Windows cjnative 1.0.5.1 的可移植写法。
+  逐项 `readValue<T>()`，不调用泛型数组反序列化。这是 Windows cjnative 1.1.3.1 的可移植写法。
 - 缺失必填字段抛 `LedgerException`：`"event is missing '<name>'"`、
   `"kind '<k>' is missing 'amount'"`、`"kind 'transfer' is missing 'counterparty'"`、
   `"kind 'note' is missing 'text'"`、`"unknown kind '<k>'"`、`"bad amount '<t>': <reason>"`。
@@ -418,7 +418,7 @@ public class ConcurrentTally {
 - 一个 `Mutex` 保护第二份由工作线程直接合并的统计。
 - 一个 `AtomicInt64` 统计访问过的事件数。
 
-主线程按分片号升序合并各分片映射。注意 1.0.5 的 `ConcurrentHashMap` **没有** CAS 形式的
+主线程按分片号升序合并各分片映射。注意 1.1.3 的 `ConcurrentHashMap` **没有** CAS 形式的
 `replace(key, old, new)`，因此不要用"读-改-写"循环累加同一个键。
 
 `visitedEvents` 必须等于 `size`；`isConsistent()` 必须为 `true`；`report()` 与串行统计一致。
@@ -455,7 +455,7 @@ public func demoReport(): Array<String>
 - `net=95.25`，`kinds=credit:1|debit:1|note:1|transfer:1`，`gross=14575`。
 
 `main` 必须逐行输出以下黄金文本（末尾保留换行）。其中压缩后长度是本题固定的
-stdx 1.0.5.1 / Windows x64 环境产物；不得从隐藏哈希猜测措辞：
+stdx 1.1.3.1 / Windows x64 环境产物；不得从隐藏哈希猜测措辞：
 
 ```text
 events=4

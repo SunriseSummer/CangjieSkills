@@ -30,6 +30,7 @@
 | 签名 | 功能 |
 |---|---|
 | [`iterator(): Iterator<T>`](iterator.md) | 获取当前区间的迭代器。 |
+| [`const func isEmpty(): Bool`](isempty.md) | 判断该区间是否为空。 |
 
 ## 扩展实现
 

@@ -1,6 +1,6 @@
 # 可组合规则注册表
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `rule_registry`。实现一组可组合文本规则，并以类型安全的注册表维护同类规则。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `rule_registry`。实现一组可组合文本规则，并以类型安全的注册表维护同类规则。
 
 实现必须自然使用抽象类与抽象函数、`override`、只读 `prop`、泛型 `where` 约束、直接扩展、自定义 `Iterable/Iterator` 和 `operator func []`。不得用字符串类型码或 `Any` 规避多态。
 

@@ -13,7 +13,7 @@
 
 ```toml cjtest=project id=examples.macros.macro-package.language.macro-project file=cjpm.toml command=run timeout=90s
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "macro_project"
 version = "0.1.0"
 output-type = "executable"
@@ -26,7 +26,7 @@ macro_defs = { path = "./macros" }
 
 ```toml cjtest=file project=examples.macros.macro-package.language.macro-project file=macros/cjpm.toml
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "macro_defs"
 version = "0.1.0"
 output-type = "static"

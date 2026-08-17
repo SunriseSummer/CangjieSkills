@@ -1,5 +1,5 @@
 <!-- cj-doc kind="index" level="1" id="references" parent="skill" -->
-# 仓颉 1.0.5 知识库
+# 仓颉 1.1.3 知识库
 
 从最窄入口开始。每个父页都可作为速查终点；只有当前信息不足时才进入下一层。
 

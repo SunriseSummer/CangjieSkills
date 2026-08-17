@@ -9,7 +9,7 @@
 
 ## 关键契约
 
-Windows x86_64 cjnative 1.0.5 + stdx 1.0.5.1 限制：
+Windows x86_64 cjnative 1.1.3 + stdx 1.1.3.1 限制：
 
 - 发布 API 声明 `Array<T>` 和 `Option<T>` 实现本接口，但直接把这些复合值传给 `JsonWriter.writeValue` 的运行路径实测可能因接口函数表缺失而崩溃。
 - 在该组合下，对 Option 用 `match` 后调用 `writeValue` 或 `writeNullValue`；对数组使用 `startArray()`、逐元素 `writeValue`、`endArray()`。标量扩展和自定义类型接口仍可正常使用。
@@ -46,3 +46,11 @@ Windows x86_64 cjnative 1.0.5 + stdx 1.0.5.1 限制：
 | [`extend<T> ArrayList<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-arraylist-t-jsonserializable-where-t-jsonserializable.md) | 为 ArrayList<T> 类型提供序列化到 JSON 数据流的接口。 |
 | [`extend<T> Option<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-option-t-jsonserializable-where-t-jsonserializable.md) | 为 Option<T> 类型提供序列化到 JSON 数据流的接口。 |
 | [`extend<V> HashMap<String, V> <: JsonSerializable where V <: JsonSerializable`](extensions/extend-v-hashmap-string-v-jsonserializable-where-v-jsonserializable.md) | 为 HashMap<String, T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<T> ArrayDeque<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-arraydeque-t-jsonserializable-where-t-jsonserializable.md) | 为 ArrayDeque<T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<T> ArrayQueue<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-arrayqueue-t-jsonserializable-where-t-jsonserializable.md) | 为 ArrayQueue<T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<T> ArrayStack<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-arraystack-t-jsonserializable-where-t-jsonserializable.md) | 为 ArrayStack<T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<T> HashSet<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-hashset-t-jsonserializable-where-t-jsonserializable.md) | 为 HashSet<T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<T> LinkedList<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-linkedlist-t-jsonserializable-where-t-jsonserializable.md) | 为 LinkedList<T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<T> TreeSet<T> <: JsonSerializable where T <: JsonSerializable`](extensions/extend-t-treeset-t-jsonserializable-where-t-jsonserializable.md) | 为 TreeSet<T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<V> ConcurrentHashMap<String, V> <: JsonSerializable where V <: JsonSerializable`](extensions/extend-v-concurrenthashmap-string-v-jsonserializable-where-v-jsonserializable.md) | 为 ConcurrentHashMap<String, T> 类型提供序列化到 JSON 数据流的接口。 |
+| [`extend<V> TreeMap<String, V> <: JsonSerializable where V <: JsonSerializable`](extensions/extend-v-treemap-string-v-jsonserializable-where-v-jsonserializable.md) | 为 TreeMap<String, T> 类型提供序列化到 JSON 数据流的接口。 |

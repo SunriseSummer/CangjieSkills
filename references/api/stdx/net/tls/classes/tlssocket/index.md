@@ -24,6 +24,8 @@ TlsSocket 用于在客户端及服务端间创建加密传输通道。
 | [`socket: StreamingSocket`](prop-socket.md) | TlsSocket 创建所使用的 StreamingSocket。 |
 | [`tlsVersion: TlsVersion`](prop-tlsversion.md) | 读取协商到的 TLS 版本。 |
 | [`override mut writeTimeout: ?Duration`](prop-writetimeout.md) | 读写 TlsSocket 的写超时时间。 |
+| [`prop certificate: Array<X509Certificate>`](prop-certificate.md) | 获取本端证书。 |
+| [`prop handshakeResult: ?TlsHandshakeResult`](prop-handshakeresult.md) | 获取 TLS 握手结果。 |
 
 ## 方法
 

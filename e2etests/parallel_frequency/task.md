@@ -1,6 +1,6 @@
 # 并行词频聚合器
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `parallel_frequency`。把输入数组按索引分片并行统计词频，输出与调度顺序无关的确定性结果。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `parallel_frequency`。把输入数组按索引分片并行统计词频，输出与调度顺序无关的确定性结果。
 
 实现必须自然使用 `spawn/Future`、`AtomicInt64`、`Mutex`/`synchronized`、`ConcurrentHashMap<String, AtomicInt64>`、普通 `HashMap` 和 `std.sort`。每个输入元素只处理一次；不得先顺序计算结果再启动无意义线程。
 

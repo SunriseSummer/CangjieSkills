@@ -21,3 +21,5 @@
 | [`kind(): JsonKind`](kind.md) | 返回当前 JsonBool 所属的 JsonKind 类型（JsBool）。 |
 | [`toJsonString(): String`](tojsonstring.md) | 将 JsonBool 转换为 JSON 格式的 (带有空格换行符) 字符串。 |
 | [`toString(): String`](tostring.md) | 将 JsonBool 转换为字符串。 |
+| [`func toJsonStringWithoutEscaping(): String`](tojsonstringwithoutescaping.md) | 等同 toJsonString()。 |
+| [`func toStringWithoutEscaping(): String`](tostringwithoutescaping.md) | 等同 toString()。 |

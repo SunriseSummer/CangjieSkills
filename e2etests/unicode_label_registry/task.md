@@ -2,7 +2,7 @@
 
 ## 目标
 
-使用仓颉 1.0.5 实现包 `unicode_label_registry`，提供按 Unicode 字符而不是 UTF-8 字节工作的标签规范化、标识符校验、分类统计和稳定去重。实现必须直接使用 `std.unicode.*`、`String.runes()`、`StringBuilder` 和 `std.collection`；禁止用正则表达式替代 Rune 分类。
+使用仓颉 1.1.3 实现包 `unicode_label_registry`，提供按 Unicode 字符而不是 UTF-8 字节工作的标签规范化、标识符校验、分类统计和稳定去重。实现必须直接使用 `std.unicode.*`、`String.runes()`、`StringBuilder` 和 `std.collection`；禁止用正则表达式替代 Rune 分类。
 
 将随题提供的 `unicode_label_registry_test.cj` 原样复制到项目 `src/`，测试不可修改。
 

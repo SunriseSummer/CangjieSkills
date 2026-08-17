@@ -17,7 +17,7 @@ from .resolve import resolve_query_batch_tolerant
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Search layered Cangjie 1.0.5 docs.")
+    parser = argparse.ArgumentParser(description="Search layered Cangjie 1.1.3 docs.")
     parser.add_argument("query", nargs="*", help="Words, qualified symbol, or subtree name")
     parser.add_argument(
         "--query",

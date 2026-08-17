@@ -5,7 +5,7 @@
 
 `JsonArray <: JsonValue`
 
-JSON 数组容器；1.0.5.1 未实现 `Iterable`，遍历时使用 `getItems()`，或按 `0..size()` 生成索引并用 `operator []` 取值。
+JSON 数组容器；1.1.3.1 未实现 `Iterable`，遍历时使用 `getItems()`，或按 `0..size()` 生成索引并用 `operator []` 取值。
 
 ## 构造函数
 
@@ -27,6 +27,8 @@ JSON 数组容器；1.0.5.1 未实现 `Iterable`，遍历时使用 `getItems()`�
 | [`toJsonString(): String`](tojsonstring.md) | 将 JsonArray 转换为 JSON 格式的 (带有空格换行符) 的字符串。 |
 | [`toJsonString(depth: Int64, bracketInNewLine!: Bool = false, indent!: String = " "): String`](tojsonstring.md) | 将 JsonArray 转换为 JSON 格式的字符串。 |
 | [`toString(): String`](tostring.md) | 将 JsonString 转换为字符串。 |
+| [`func toJsonStringWithoutEscaping(): String（2 个重载）`](tojsonstringwithoutescaping.md) | 将 JsonArray 转换为 JSON 格式的 (带有空格换行符) 的字符串，不对 html 特殊字符 `&` 转义。 |
+| [`func toStringWithoutEscaping(): String`](tostringwithoutescaping.md) | 将 JsonArray 转换为字符串，不对 html 特殊字符 `&` 转义。 |
 
 ## 操作符
 

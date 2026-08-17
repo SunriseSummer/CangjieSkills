@@ -62,4 +62,4 @@ python scripts/search_docs.py --query "ArrayList reverse" --query "HashMap tuple
 
 - `python <skill-root>/scripts/cj_ast.py <path>` 可查看 import、声明和 Tree-sitter 解析恢复点。`ERROR/MISSING` 只是语法恢复信号，宏 token/DSL 可能产生假阳性。
 - 类型、重载、宏展开、依赖和链接以 `cjc/cjpm` 为准。
-- 仓颉工具链默认版本为 `1.0.5 (cjnative)`，对应的 stdx 为 `1.0.5.1`。
+- 仓颉工具链默认版本为 `1.1.3 (cjnative)`，对应的 stdx 为 `1.1.3.1`。切换过 SDK 或 stdx 版本后先执行 `cjpm clean`，避免复用二进制不兼容的旧产物。

@@ -7,13 +7,13 @@
 
 ## 核心做法
 
-`cjfmt` 1.0.5 没有 check/dry-run 模式。质量门禁应把格式化结果写到独立目录，再与源码逐文件比较；`cjlint` 则要同时检查诊断文本和报告产物。两种工具都不能只看退出码：还要确认输入文件均被处理，并拒绝 `unknown start of token`、`error`、`Fail` 等诊断。
+`cjfmt` 1.1.3 没有 check/dry-run 模式。质量门禁应把格式化结果写到独立目录，再与源码逐文件比较；`cjlint` 则要同时检查诊断文本和报告产物。两种工具都不能只看退出码：还要确认输入文件均被处理，并拒绝 `unknown start of token`、`error`、`Fail` 等诊断。
 
 下面的最小工程由示例框架实际构建并运行，后续质量命令以它为操作对象。
 
 ```toml cjtest=project id=tools.format-lint-gate.project file=cjpm.toml command=run timeout=60s
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "quality_gate_example"
   description = "cjfmt and cjlint quality gate fixture"
   version = "1.0.0"
@@ -53,6 +53,6 @@ cjlint -f src -o target/cjlint.json -r json
 - `src` 与 `target/cjfmt/src` 的 `.cj` 相对路径集合完全相同，输出文件均非空；差异表示源码尚未格式化。
 - 捕获并检查 `cjfmt`、`cjlint` 的 stdout/stderr；即使退出码为 0，只要出现跳过文件或错误诊断也应失败。
 - `target/cjlint.json` 必须存在、可解析且确由本次运行生成；按团队策略判断其中告警是否允许。
-- Windows 1.0.5 下尤其要排除 UTF-8 BOM：它可能触发 `unknown start of token`、跳过文件而仍返回成功。
+- Windows 1.1.3 下尤其要排除 UTF-8 BOM：它可能触发 `unknown start of token`、跳过文件而仍返回成功。
 
 若仓库不使用 Git，可由 CI 脚本逐文件比较内容；不要为了检查格式直接覆盖工作区源码。

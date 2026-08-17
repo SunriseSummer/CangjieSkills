@@ -39,7 +39,7 @@ cjpm init --name kalman --type=executable
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "kalman"
   version = "1.0.0"
   output-type = "executable"

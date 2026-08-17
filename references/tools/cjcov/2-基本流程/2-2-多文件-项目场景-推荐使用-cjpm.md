@@ -9,7 +9,7 @@ cjpm test --coverage        # 测试带覆盖率
 cjcov -o output --html-details
 ```
 
-Windows cjnative 1.0.5 的稳健做法是把需要报告的 `.gcda`/`.gcno` 复制到项目根附近的短目录，再把该目录传给 `--root`。`cjpm test --coverage` 生成的 `$test` 图可能只记录无法解析的裸源码名；长项目路径还会使 llvm-cov 中间文件超过 Windows MAX_PATH，导致 cjcov 崩溃或后续 `cjpm clean` 失败。若只统计生产源码，可排除文件名含 `$test` 的图并平铺到 `.cov/`：
+Windows cjnative 1.1.3 的稳健做法是把需要报告的 `.gcda`/`.gcno` 复制到项目根附近的短目录，再把该目录传给 `--root`。`cjpm test --coverage` 生成的 `$test` 图可能只记录无法解析的裸源码名；长项目路径还会使 llvm-cov 中间文件超过 Windows MAX_PATH，导致 cjcov 崩溃或后续 `cjpm clean` 失败。若只统计生产源码，可排除文件名含 `$test` 的图并平铺到 `.cov/`：
 
 ```powershell
 $stage = Join-Path $PWD '.cov'

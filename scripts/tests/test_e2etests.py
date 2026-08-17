@@ -25,7 +25,7 @@ class EndToEndCorpusTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(result.returncode, 0, result.stdout)
-        self.assertIn("PASS tasks=56", result.stdout)
+        self.assertIn("PASS tasks=62", result.stdout)
 
     def test_repository_task_mirror_when_available(self) -> None:
         source = PROJECT_ROOT.parents[1] / ".task"

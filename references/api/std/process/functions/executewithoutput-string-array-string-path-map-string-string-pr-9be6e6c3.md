@@ -63,7 +63,7 @@ main(): Unit {
     let (exitCode, stdout, stderr) = executeWithOutput("cjc", ["-v"])
     let output = String.fromUtf8(stdout) + String.fromUtf8(stderr)
     println(exitCode)
-    println(output.contains("Cangjie Compiler: 1.0.5"))
+    println(output.contains("Cangjie Compiler: 1.1.3"))
 }
 ```
 

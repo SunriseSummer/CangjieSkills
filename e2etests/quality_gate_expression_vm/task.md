@@ -1,6 +1,6 @@
 # 表达式虚拟机与仓颉质量门禁
 
-使用仓颉 1.0.5 创建名为 `quality_gate_expression_vm` 的可执行 cjpm 项目，实现下列 API，并提供可重复执行的跨平台 `quality.py`。不得修改给定 `.cj` 测试或 `accept.py`。
+使用仓颉 1.1.3 创建名为 `quality_gate_expression_vm` 的可执行 cjpm 项目，实现下列 API，并提供可重复执行的跨平台 `quality.py`。不得修改给定 `.cj` 测试或 `accept.py`。
 
 ## 公开 API
 

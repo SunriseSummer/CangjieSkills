@@ -29,6 +29,8 @@
 | [`isAbstract(): Bool`](isabstract.md) | 判断 InstanceFunctionInfo 所对应的实例成员函数是否拥有 `abstract` 语义。 |
 | [`isOpen(): Bool`](isopen.md) | 判断该 InstanceFunctionInfo 对应的实例成员函数是否拥有 `open` 语义。 |
 | [`toString(): String`](tostring.md) | 获取字符串形式的该实例成员函数信息。 |
+| [`func findAllAnnotations<T>(): Array<T> where T <: Annotation`](findallannotations.md) | 获取所有指定注解名称的自定义注解（通过泛型筛选）。 |
+| [`func getAllAnnotations(): Array<Annotation>`](getallannotations.md) | 获取作用于该对象的所有自定义注解。 |
 
 ## 操作符
 

@@ -1,6 +1,6 @@
 # 混合端序遥测日志
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `endian_journal`，实现确定性的遥测记录二进制编码。实现必须直接使用 `std.binary` 的具体数值扩展和 `std.io.ByteBuffer`，不可手写移位替代端序 API。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `endian_journal`，实现确定性的遥测记录二进制编码。实现必须直接使用 `std.binary` 的具体数值扩展和 `std.io.ByteBuffer`，不可手写移位替代端序 API。
 
 ## 公开 API
 

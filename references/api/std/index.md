@@ -19,6 +19,7 @@
 | [std.env](env/index.md) | 访问环境变量、命令行、标准流、进程信息与退出回调。 | 18 |
 | [std.fs](fs/index.md) | 操作文件、目录、路径和文件元数据。 | 21 |
 | [std.io](io/index.md) | 提供程序与外部设备进行数据交换的能力。 | 18 |
+| [std.interop](interop/index.md) | 为跨语言互操作库提供对象导出、句柄生命周期管理与跨运行时循环引用协同能力；当前用于 ArkTS 互操作。 | 4 |
 | [std.math](math/index.md) | 提供数学常量与数值函数；自然对数使用 `log`（没有 `ln`）；常用 Float64 签名包括 `sqrt(x: Float64)`、`log(x: Float64)`、`sin(x: Float64)`、`cos(x: Float64)`，返回值均为 Float64。 | 159 |
 | [std.math.numeric](math-numeric/index.md) | 对基础类型可表达范围之外提供扩展能力。 | 12 |
 | [std.net](net/index.md) | 提供 TCP、UDP、Unix Domain Socket 及 IP/Socket 地址类型。 | 29 |

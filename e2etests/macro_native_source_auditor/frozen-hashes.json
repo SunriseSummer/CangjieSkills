@@ -2,7 +2,7 @@
     "schema":  1,
     "task":  "macro_native_source_auditor",
     "toolchain":  {
-                      "cjc":  "1.0.5",
+                      "cjc":  "1.1.3",
                       "backend":  "cjnative",
                       "target":  "x86_64-w64-mingw32",
                       "os":  "windows-x64"
@@ -91,8 +91,8 @@
                   "frozen/tests/native_test.cj":  "f06a63293fce7187939e23d0377f3e290a9f150ce3582be064ea40158cf497d4",
                   "frozen/tests/syntax_test.cj":  "09741433a2ed86006303f5b2be0b7ca518fe7075a3fba1508748ad8db37fd2c4",
                   "frozen/tests/rules_test.cj":  "138b17c6635784b4b99501688ee392325a147edd07f7dc11c227d0b1930e75bd",
-                  "frozen/tests/scan_test.cj":  "f647670a799cdba49f915e65cd9b02707d930df5b13242249cf48ef56291f47a",
-                  "frozen/tests/facade_test.cj":  "a666ed032ba4891ce1c3718a4eea86d1a87f358fe800c6c792fd08f6defe5a2c",
+                  "frozen/tests/scan_test.cj":  "0462424d565a716233dd2cb6a36fa6368cfa9347d7540446d8b3d1cc00ec4da6",
+                  "frozen/tests/facade_test.cj":  "81c0ad61fb7bec378b5cc9ac084401f726bf61c47aac2d0b976b7d0087b94643",
                   "frozen/tests/app_test.cj":  "77118805f3da4c15edcd623600c677ab4700eabc1fdb5d146d908416daac57d6",
                   "frozen/fixtures/native/auditor_native.c":  "e5b2ac96a5b99c2f3fa7622f108d7febe9849a90b695eb8855d9052b74263a1d",
                   "frozen/fixtures/sources/alpha_service.cj":  "b4bcfbfba94d6837df774621f64176c08e5f8f3dd8c04d4c56d375f8e106a6be",
@@ -100,6 +100,6 @@
                   "frozen/fixtures/sources/epsilon_clean.cj":  "59dfc3aea773c9a8c72385d55a1926c395a734c6c0c2ae32c19dda52085d3553",
                   "frozen/fixtures/sources/gamma_legacy.cj":  "0a07898b30f7f10b36529b2aebb3934e91059a33f16420767554ed5d61861e5b",
                   "frozen/fixtures/sources/delta_notes.txt":  "12d0e10615ca0f3ebafd3270dbe2af447ccd68ab0e5f5811df49e11be41f6921",
-                  "frozen/fixtures/expected/report.txt":  "a4dafedc95172407651231badb1daaf3440c5ddf4ef5ea96e28321246a8166f7"
+                  "frozen/fixtures/expected/report.txt":  "cd0ed8016a428f5a835b836bc2aadc6ce7e4f5ae6159e5676b5b1874f5a4c0fe"
               }
 }

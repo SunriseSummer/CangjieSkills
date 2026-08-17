@@ -13,22 +13,25 @@
 package stdx_tls_custom_ca
 
 import stdx.crypto.x509.X509Certificate
+import stdx.crypto.common.Certificate
 import stdx.net.http.Client
 import stdx.net.http.ClientBuilder
-import stdx.net.tls.CertificateVerifyMode
+import stdx.net.tls.common.CertificateVerifyMode
 import stdx.net.tls.TlsClientConfig
 
 public func clientWithCustomCA(pem: String): Client {
-    let certificates = X509Certificate.decodeFromPem(pem)
+    let decoded = X509Certificate.decodeFromPem(pem)
+    let certificates = Array<Certificate>(decoded.size, { index => decoded[index] })
     var tls = TlsClientConfig()
     tls.verifyMode = CertificateVerifyMode.CustomCA(certificates)
     return ClientBuilder().tlsConfig(tls).build()
 }
 
 main(): Unit {
+    let _ = clientWithCustomCA
     var tls = TlsClientConfig()
     // 空数组只让离线测试检查装配链；真实连接调用 clientWithCustomCA(caPem)。
-    tls.verifyMode = CertificateVerifyMode.CustomCA(Array<X509Certificate>())
+    tls.verifyMode = CertificateVerifyMode.CustomCA(Array<Certificate>())
     let client = ClientBuilder().tlsConfig(tls).build()
 
     match (client.getTlsConfig()) {

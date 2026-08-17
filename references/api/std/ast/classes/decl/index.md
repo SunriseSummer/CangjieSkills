@@ -23,6 +23,7 @@
 | [`mut isGenericDecl: Bool`](prop-isgenericdecl.md) | 判断是否是一个泛型节点。 |
 | [`mut keyword: Token`](prop-keyword.md) | 获取或设置声明节点的关键字。 |
 | [`mut modifiers: ArrayList<Modifier>`](prop-modifiers.md) | 获取或设置节点的修饰符列表。 |
+| [`protected var annotations_: ArrayList<Annotation> = ArrayList<Annotation>()`](field-annotations_.md) | 获取或设置作用于 Decl 节点的注解列表。 |
 
 ## 方法
 

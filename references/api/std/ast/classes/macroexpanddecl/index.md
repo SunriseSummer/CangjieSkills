@@ -19,6 +19,7 @@
 | [`mut macroInputs: Tokens`](prop-macroinputs.md) | 获取或设置 MacroExpandDecl 宏调用的输入。 |
 | [`mut rParen: Token`](prop-rparen.md) | 获取或设置 MacroExpandDecl 宏调用的 ")"。 |
 | [`mut rSquare: Token`](prop-rsquare.md) | 获取或设置 MacroExpandDecl 属性宏调用的 "]"。 |
+| [`override mut prop identifier: Token`](prop-identifier.md) | 该属性继承自 Decl 节点，表示宏调用节点的标识符，如 `@pkg.m class a{}` 中的 `m`。 |
 
 ## 构造函数
 

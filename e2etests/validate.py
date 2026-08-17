@@ -30,7 +30,7 @@ FORBIDDEN_SUFFIXES = {
     ".log",
     ".tmp",
 }
-EXPECTED_TASKS = 56
+EXPECTED_TASKS = 62
 
 
 def load_manifest(path: Path) -> list[tuple[str, str]]:

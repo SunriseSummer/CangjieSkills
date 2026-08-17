@@ -1,21 +1,21 @@
 {
-  "packages": 53,
-  "entities": 1100,
+  "packages": 61,
+  "entities": 1168,
   "entities_by_kind": {
-    "enum": 51,
-    "class": 402,
-    "func": 365,
-    "struct": 113,
-    "interface": 109,
+    "enum": 54,
+    "class": 441,
+    "func": 373,
+    "struct": 115,
+    "interface": 122,
     "intrinsic": 18,
-    "type": 7,
+    "type": 10,
     "macro": 32,
     "let": 2,
     "var": 1
   },
-  "member_signatures": 6250,
-  "generated_pages": 6638,
-  "member_detail_pages": 5368,
+  "member_signatures": 6845,
+  "generated_pages": 7154,
+  "member_detail_pages": 5797,
   "pruned_unillustrated_leaves": 0,
   "ignored_h2": []
 }

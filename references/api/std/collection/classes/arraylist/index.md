@@ -47,6 +47,20 @@
 | [`reverse(): Unit`](reverse.md) | 反转此 ArrayList 中元素的顺序。 |
 | [`slice(range: Range<Int64>): ArrayList<T>`](slice.md) | 以传入参数 range 作为索引，返回索引对应的 ArrayList<T>。 |
 | [`toArray(): Array<T>`](toarray.md) | 返回一个数组，其中包含此列表中按正确顺序排列的所有元素。 |
+| [`func all(predicate: (T) -> Bool): Bool`](all.md) | 判断 ArrayList 中所有元素是否都满足条件。 |
+| [`func any(predicate: (T) -> Bool): Bool`](any.md) | 判断 ArrayList 是否存在任意一个满足条件的元素。 |
+| [`func filter(predicate: (T) -> Bool): ArrayList<T>`](filter.md) | 返回一个满足筛选条件的元素的新 ArrayList<T>。 |
+| [`func filterMap<R>(transform: (T) -> ?R): ArrayList<R>`](filtermap.md) | 同时进行筛选操作和映射操作，返回一个新 ArrayList。 |
+| [`func flatMap<R>(transform: (T) -> ArrayList<R>): ArrayList<R>`](flatmap.md) | 对 ArrayList 中的每个元素应用一个转换闭包（transform），该闭包返回一个新的 ArrayList，然后将所有返回的 ArrayList“压平”（flatten）并连接成一个单一的结果 ArrayList。 |
+| [`func fold<R>(initial: R, operation: (R, T) -> R): R`](fold.md) | 使用指定初始值，从左向右计算。 |
+| [`func forEach(action: (T) -> Unit): Unit`](foreach.md) | 遍历所有元素，执行给定的操作。 |
+| [`func intersperse(separator: T): ArrayList<T>`](intersperse.md) | 返回每两个元素之间插入一个给定的新元素后的新 ArrayList 。 |
+| [`func map<R>(transform: (T) -> R): ArrayList<R>`](map.md) | 对此 ArrayList 进行映射并返回一个新 ArrayList。 |
+| [`func none(predicate: (T) -> Bool): Bool`](none.md) | 判断 ArrayList 中所有元素是否都不满足条件。 |
+| [`func reduce(operation: (T, T) -> T): Option<T>`](reduce.md) | 使用第一个元素作为初始值，从左向右计算。 |
+| [`func skip(count: Int64): ArrayList<T>`](skip.md) | 跳过特定个数元素并返回一个新 ArrayList。 |
+| [`func step(count: Int64): ArrayList<T>`](step.md) | 以指定的间隔从 ArrayList 中提取元素，并返回一个新 ArrayList。 |
+| [`func take(count: Int64): ArrayList<T>`](take.md) | 从数组取出特定个数元素并返回一个新数组。 |
 
 ## 操作符
 
@@ -62,3 +76,4 @@
 |---|---|
 | [`extend<T> ArrayList<T> <: Equatable<ArrayList<T>> where T <: Equatable<T>`](extensions/extend-t-arraylist-t-equatable-arraylist-t-where-t-equatable-t.md) | 为 ArrayList<T> 类型扩展 Equatable<ArrayList<T>> 接口，支持判等操作。 |
 | [`extend<T> ArrayList<T> <: ToString where T <: ToString`](extensions/extend-t-arraylist-t-tostring-where-t-tostring.md) | 为 ArrayList<T> 扩展 ToString 接口，支持转字符串操作。 |
+| [`extend<T> ArrayList<T>`](extensions/extend-t-arraylist-t.md) | 为 ArrayList<T> 类型进行拓展 |

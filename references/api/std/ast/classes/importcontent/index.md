@@ -20,6 +20,8 @@ Node
 | [`mut prefixPaths: Tokens`](prop-prefixpaths.md) | 获取或设置 ImportContent 节点中完整包名的前缀部分的词法单元序列，可能为空。 |
 | [`mut prefixDots: Tokens`](prop-prefixdots.md) | 获取或设置 ImportContent 节点中完整包名中用于分隔每层子包的词法单元序列，可能为空。 |
 | [`mut rBrace: Token`](prop-rbrace.md) | 获取或设置 ImportContent 节点中的 `}` 操作符词法单元，只有 `importKind` 为 `ImportKind.Multi` 时非空。 |
+| [`mut prop orgName: Token`](prop-orgname.md) | 获取或设置 ImportContent 节点中代表组织名的词法单元，setter 会检查 orgSeparator 是否为 "::" 词法单元，若为空则同时设置其为 "::" 词法单元。 |
+| [`mut prop orgSeparator: Token`](prop-orgseparator.md) | 获取或设置 ImportContent 节点中的 "::" 词法单元，setter 会检查 orgName 内容是否为空字符串，若有则抛异常。 |
 
 ## 构造函数
 

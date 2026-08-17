@@ -1,6 +1,6 @@
 # 并发分片词语索引
 
-使用仓颉 `1.0.5 (cjnative)` 创建可执行 cjpm 项目 `sharded_word_index`，仅使用标准库，实现线程安全、可并行批量构建的 Unicode 词语倒排索引。不得修改给定测试。
+使用仓颉 `1.1.3 (cjnative)` 创建可执行 cjpm 项目 `sharded_word_index`，仅使用标准库，实现线程安全、可并行批量构建的 Unicode 词语倒排索引。不得修改给定测试。
 
 ## 公开 API
 

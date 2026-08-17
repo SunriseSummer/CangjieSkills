@@ -105,6 +105,13 @@
 | [`ASTException <: Exception`](classes/astexception/index.md) | ast 库的异常类，在 ast 库调用过程中发生异常时使用。 |
 | [`MacroContextException <: Exception`](classes/macrocontextexception/index.md) | ast 库的上下文宏异常类，在上下文宏的相关接口中发生异常时使用。 |
 | [`ParseASTException <: Exception`](classes/parseastexception/index.md) | ast 库的解析异常类，在节点解析过程中发生异常时使用。 |
+| [`CommandTypePattern`](classes/commandtypepattern/index.md) | 表示一个带有类型注解的命令模式，例如：`pattern: Type1 \| Type2 \| ...`。 |
+| [`FeatureId`](classes/featureid/index.md) | 表示一个 feature id。 |
+| [`FeaturesDirective`](classes/featuresdirective/index.md) | feature directive 节点对象。 |
+| [`FeaturesSet`](classes/featuresset/index.md) | 一组 features 名称。 |
+| [`Handler`](classes/handler/index.md) | 表示一个 `handle` 子句，其中包含一个命令模式和要执行的代码块。 |
+| [`PerformExpr`](classes/performexpr/index.md) | 表示一个 `perform` 表达式节点。 |
+| [`ResumeExpr`](classes/resumeexpr/index.md) | 表示一个 `resume` 表达式节点，可选包含 `with` 和 `throwing` 子句。 |
 
 ## 接口
 

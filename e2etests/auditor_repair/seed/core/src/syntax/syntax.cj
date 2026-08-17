@@ -22,7 +22,7 @@ protected func extractTodoMarkers(text: String): Array<String> {
 }
 
 protected func auditorVersionText(): String {
-    return "1.0.5"
+    return "1.1.3"
 }
 
 protected func auditorTargetText(): String {

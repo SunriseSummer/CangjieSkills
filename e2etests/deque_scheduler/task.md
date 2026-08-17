@@ -1,6 +1,6 @@
 # 分级双端队列调度器
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `deque_scheduler`。用 `TreeMap<Int64, ArrayDeque<Job>>` 实现按优先级分桶、桶内双端插入的稳定调度器。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `deque_scheduler`。用 `TreeMap<Int64, ArrayDeque<Job>>` 实现按优先级分桶、桶内双端插入的稳定调度器。
 
 ## 公开 API
 

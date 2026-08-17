@@ -13,7 +13,7 @@
 
 ```toml cjtest=project id=examples.cffi.native-array.language.cffi-native-array file=cjpm.toml command=run timeout=120s requires=native-c
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "cffi_native_array"
 version = "0.1.0"
 output-type = "executable"

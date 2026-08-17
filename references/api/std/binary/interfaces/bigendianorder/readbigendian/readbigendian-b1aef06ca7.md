@@ -25,11 +25,11 @@ public static func readBigEndian(buffer: Array<UInt8>): Int64
 
 异常：
 
-- IndexOutOfBoundsException - 仓颉 1.0.5 实测在 buffer 少于 8 字节时抛出。发布件原始 API 将此处记为 IllegalArgumentException，与运行时行为不一致。
+- IndexOutOfBoundsException - 仓颉 1.1.3 实测在 buffer 少于 8 字节时抛出。发布件原始 API 将此处记为 IllegalArgumentException，与运行时行为不一致。
 
 ## 典型示例
 
-`Int64.readBigEndian` 将数组开头的 8 个字节按高位在前还原为整数；仓颉 1.0.5 实测缓冲区不足 8 字节时抛出 `IndexOutOfBoundsException`。
+`Int64.readBigEndian` 将数组开头的 8 个字节按高位在前还原为整数；仓颉 1.1.3 实测缓冲区不足 8 字节时抛出 `IndexOutOfBoundsException`。
 
 ```cangjie cjtest=run id=api.int64.read-big-endian.run form=unit timeout=20s
 package int64_read_big_endian_example

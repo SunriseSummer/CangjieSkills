@@ -21,3 +21,5 @@
 | [`kind(): JsonKind`](kind.md) | 返回当前 JsonString 所属的 JsonKind 类型（JsString）。 |
 | [`toJsonString(): String`](tojsonstring.md) | 将 JsonString 转换为 JSON 格式的 (带有空格换行符) 字符串。 |
 | [`toString(): String`](tostring.md) | 将 JsonString 转换为字符串。 |
+| [`func toJsonStringWithoutEscaping(): String`](tojsonstringwithoutescaping.md) | 将 JsonString 转换为 JSON 格式的 (带有空格换行符) 字符串，不对 html 特殊字符 `&` 转义。 |
+| [`func toStringWithoutEscaping(): String`](tostringwithoutescaping.md) | 将 JsonString 转换为字符串，不对 html 特殊字符 `&` 转义。 |

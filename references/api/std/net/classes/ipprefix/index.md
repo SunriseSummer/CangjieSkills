@@ -9,7 +9,7 @@
 
 ## 关键契约
 
-1.0.5 边界：
+1.1.3 边界：
 
 - `tryParse` 对多数格式错误返回 `None`，但前缀长度越界时会抛 `IllegalArgumentException`，例如 IPv4 `/99`；若输入不可信，应同时处理 `None` 和异常。
 - `broadcast()` 对 IPv6 仍返回主机位全 1 的地址，不会以异常表示“IPv6 无广播”。应用若只接受 IPv4 广播，应先检查 `prefix.address.isIPv4()`。

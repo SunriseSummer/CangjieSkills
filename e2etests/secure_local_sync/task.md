@@ -1,6 +1,6 @@
 # 任务：secure_local_sync
 
-用仓颉 `1.0.5 (cjnative)` 与 stdx `1.0.5.1` 实现一个**本机加密同步服务**的可执行 cjpm 工程。
+用仓颉 `1.1.3 (cjnative)` 与 stdx `1.1.3.1` 实现一个**本机加密同步服务**的可执行 cjpm 工程。
 服务把 JSON 记录经 TLS 推送到同一台机器上的 HTTPS 服务端，落入线程安全存储，并用 SHA-256 校验完整性。
 
 工程必须通过：`cjpm clean` → `cjpm build` → `cjpm test` → `cjpm run`，**全过程 0 warning、0 error**。
@@ -18,7 +18,7 @@ oracle/
 
 - `src/fixtures.cj` 与 `src/secure_local_sync_test.cj` 是**冻结件**。它们的 SHA-256 记录在 `frozen-hashes.json`；提交前必须逐字节一致。
 - 所有源码同属 `package secure_local_sync`。
-- 用 `python <skill>/scripts/setup_stdx.py --project oracle` 安装并配置 stdx `1.0.5.1`；不要手写 `path-option`。
+- 用 `python <skill>/scripts/setup_stdx.py --project oracle` 安装并配置 stdx `1.1.3.1`；不要手写 `path-option`。
 
 ## 2. 硬性约束
 
@@ -203,7 +203,7 @@ public class SyncClient <: Resource {
 `main(): Unit` 必须**完全确定**地输出下面 14 行，然后退出码 0。不得打印端口号、耗时或任何随机内容。
 
 ```
-secure_local_sync 1.0.5/stdx-1.0.5.1
+secure_local_sync 1.1.3/stdx-1.1.3.1
 frozen-stamp=2030-06-15T12:00:00Z
 trust:sync-leaf-under-sync-ca=trusted
 trust:sync-leaf-under-rogue-ca=untrusted-issuer

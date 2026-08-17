@@ -1,6 +1,6 @@
 # 任务 A：仓颉源码静态指标分析器
 
-请在仓颉 `1.0.5 (cjnative)` 中实现一个名为 `source_metrics` 的 `cjpm` 可执行工程。程序接收内存中的仓颉源码字符串，使用 `std.ast` 完成解析和指标分析；不得通过正则表达式或逐行文本匹配伪造 AST 结果。
+请在仓颉 `1.1.3 (cjnative)` 中实现一个名为 `source_metrics` 的 `cjpm` 可执行工程。程序接收内存中的仓颉源码字符串，使用 `std.ast` 完成解析和指标分析；不得通过正则表达式或逐行文本匹配伪造 AST 结果。
 
 不可修改测试文件 `source_metrics_test.cj`。评测时会把该文件复制到工程的 `src` 目录，并执行 `cjpm clean`、`cjpm build`、`cjpm test`、`cjpm run`；四条命令都必须成功且编译器 warning 为 0。不得访问同级 `oracle` 目录，其中的参考工程只用于题目设计验证。
 
@@ -69,4 +69,3 @@ public func findRecursiveFunctions(source: String): NameList
 - `cjpm run` 的标准输出必须精确为 `demo:1` 加换行。
 
 结果必须完全确定，不得依赖文件系统、网络、时钟、随机数或反射集合顺序。
-

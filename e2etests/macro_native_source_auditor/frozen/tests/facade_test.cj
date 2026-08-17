@@ -2,7 +2,7 @@ package auditor_core
 
 @Test
 func facadeVersionTest(): Unit {
-    @Expect(auditorVersion(), "1.0.5")
+    @Expect(auditorVersion(), "1.1.3")
     @Expect(auditorTarget(), "windows-x64-cjnative")
 }
 

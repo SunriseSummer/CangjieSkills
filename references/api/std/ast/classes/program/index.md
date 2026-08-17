@@ -14,6 +14,7 @@
 | [`mut decls: ArrayList<Decl>`](prop-decls.md) | 获取或设置仓颉源码文件中 TopLevel 作用域内定义的声明节点列表。 |
 | [`mut importLists: ArrayList<ImportList>`](prop-importlists.md) | 获取或设置仓颉源码文件中包导入节点 ImportList 的列表。 |
 | [`mut packageHeader: PackageHeader`](prop-packageheader.md) | 获取或设置仓颉源码文件中包的声明节点 PackageHeader。 |
+| [`mut prop featuresDirective: Option<FeaturesDirective>`](prop-featuresdirective.md) | 获取或设置仓颉源码文件中 TopLevel 作用域内定义的 `features` 声明节点。 |
 
 ## 构造函数
 

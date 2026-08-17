@@ -41,6 +41,8 @@
 | [`AssertIntermediateException <: Exception`](classes/assertintermediateexception/index.md) | @PowerAssert 检查失败时所抛出的异常。 |
 | [`UnittestCliOptionsFormatException <: UnittestException`](classes/unittestclioptionsformatexception.md) | 控制台选项格式错误抛出的异常。 |
 | [`open UnittestException <: Exception`](classes/unittestexception/index.md) | 框架通用异常。 |
+| [`XmlPerPackageReporter`](classes/xmlperpackagereporter/index.md) | 打印单元测试用例结果数据到 Xml 文件上。 |
+| [`UnittestTimeoutException`](classes/unittesttimeoutexception/index.md) | 运行超时时抛出的异常。仅可被框架使用。 |
 
 ## 接口
 

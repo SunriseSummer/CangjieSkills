@@ -13,7 +13,7 @@
 
 - `Decimal.parse`/`Decimal.tryParse` 由 `extend Decimal <: Parsable<Decimal>` 提供；前者对非法文本抛异常，后者返回 `None`。
 - `reScale(newScale, roundingMode: ...)` 改变标度并按指定模式舍入；`value` 返回结果的无标度 `BigInt`，适合转换成最小货币单位。
-- `shiftPoint(n)` 的 1.0.5 方向容易误读：正数向左移动小数点（`Decimal.parse("25").shiftPoint(1)` 为 `2.5`），负数向右移动。
+- `shiftPoint(n)` 的 1.1.3 方向容易误读：正数向左移动小数点（`Decimal.parse("25").shiftPoint(1)` 为 `2.5`），负数向右移动。
 
 ## 属性与字段
 

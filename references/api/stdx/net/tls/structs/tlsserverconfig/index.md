@@ -22,6 +22,9 @@
 | [`mut securityLevel: Int32`](prop-securitylevel.md) | 指定服务端的安全级别，默认值为 2，可选参数值在 [0,5] 内，参数值含义参见 openssl-SSL_CTX_set_security_level 说明。 |
 | [`mut serverCertificate(Array<X509Certificate>, PrivateKey)`](prop-servercertificate.md) | 服务端证书和对应的私钥文件。 |
 | [`mut supportedAlpnProtocols: Array<String>`](prop-supportedalpnprotocols.md) | 应用层协商协议，若客户端尝试协商该协议，服务端将与选取其中相交的协议名称。 |
+| [`mut prop certificate: ?(Array<Certificate>, PrivateKey)`](prop-certificate.md) | 设置或获取服务端证书和对应的私钥文件。其中证书必须为 X509Certificate 类型。不可设置为 None。 |
+| [`mut prop supportedCipherSuites: Map<TlsVersion, Array<String>>`](prop-supportedciphersuites.md) | 设置或获取每个 TLS 版本对应的密码套件。 |
+| [`mut prop supportedVersions: Array<TlsVersion>`](prop-supportedversions.md) | 设置或获取支持的 TLS 版本。 |
 
 ## 构造函数
 

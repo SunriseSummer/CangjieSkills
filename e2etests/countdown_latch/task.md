@@ -1,6 +1,6 @@
 # Condition 倒计时门闩
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `countdown_latch`。使用 `std.sync.Mutex` 及其 `Condition` 实现一次性倒计时门闩，并通过 `spawn/Future` 验证。不得用轮询、sleep 循环、Atomic 替代 Condition 等待。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `countdown_latch`。使用 `std.sync.Mutex` 及其 `Condition` 实现一次性倒计时门闩，并通过 `spawn/Future` 验证。不得用轮询、sleep 循环、Atomic 替代 Condition 等待。
 
 ## 公开 API
 

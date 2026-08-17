@@ -22,7 +22,7 @@ SKILL_ROOT = DEV_ROOT / ".agents" / "skills" / "cangjie-coding"
 DATABASE = SKILL_ROOT / "references" / "knowledge.sqlite3"
 RELEASE_SEARCH = SKILL_ROOT / "scripts" / "search_docs.py"
 EVALUATION_QUERIES = SCRIPT_DIR / "data" / "retrieval-evaluation-queries.json"
-DOCUMENT_COUNT = 7605
+DOCUMENT_COUNT = 8136
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(SKILL_ROOT / "scripts"))
@@ -108,8 +108,8 @@ class KnowledgeDatabaseTests(unittest.TestCase):
             self.assertEqual(connection.execute("PRAGMA user_version").fetchone()[0], 2)
             self.assertEqual(connection.execute("PRAGMA quick_check").fetchone()[0], "ok")
             metadata = dict(connection.execute("SELECT key,value FROM meta"))
-            self.assertEqual(metadata["cangjie_version"], "1.0.5")
-            self.assertEqual(metadata["stdx_version"], "1.0.5.1")
+            self.assertEqual(metadata["cangjie_version"], "1.1.3")
+            self.assertEqual(metadata["stdx_version"], "1.1.3.1")
             self.assertEqual(int(metadata["document_count"]), DOCUMENT_COUNT)
             self.assertNotIn("source_document_count", metadata)
             self.assertEqual(

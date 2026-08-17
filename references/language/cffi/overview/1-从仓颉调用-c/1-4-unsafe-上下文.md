@@ -29,15 +29,15 @@ main() {
 
 > **注意：** Lambda 中的危险调用必须位于词法 `unsafe` 上下文。优先在 Lambda 内用最小的 `unsafe {}` 块包住调用，便于定位和审计。
 >
-> 仓颉 1.0.5 也接受在包围 Lambda 定义的 `unsafe func` 或 `unsafe {}` 中直接调用；该 Lambda 即使随后逃逸到安全代码中也能被调用。因此“Lambda 内层 `unsafe {}`”是推荐的局部边界，不是唯一可编译形式。
+> 仓颉 1.1.3 也接受在包围 Lambda 定义的 `unsafe func` 或 `unsafe {}` 中直接调用；该 Lambda 即使随后逃逸到安全代码中也能被调用。因此“Lambda 内层 `unsafe {}`”是推荐的局部边界，不是唯一可编译形式。
 
 ## 已验证的 Lambda `unsafe` 词法边界
 
-Lambda 体内的 `foreign` 调用必须位于词法 `unsafe` 上下文中。最清晰的写法是在 Lambda 内只包住危险调用；仓颉 1.0.5 也允许由包围 Lambda 定义的 `unsafe func` 提供该上下文，即使 Lambda 之后逃逸并在安全代码中调用。下面同时验证两种形式，前者更利于审计。
+Lambda 体内的 `foreign` 调用必须位于词法 `unsafe` 上下文中。最清晰的写法是在 Lambda 内只包住危险调用；仓颉 1.1.3 也允许由包围 Lambda 定义的 `unsafe func` 提供该上下文，即使 Lambda 之后逃逸并在安全代码中调用。下面同时验证两种形式，前者更利于审计。
 
 ```toml cjtest=project id=language.cffi-unsafe-lambda file=cjpm.toml command=run timeout=120s requires=native-c
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "cffi_unsafe_lambda"
 version = "0.1.0"
 output-type = "executable"

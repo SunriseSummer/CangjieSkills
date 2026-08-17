@@ -2,7 +2,7 @@
 
 ## 目标
 
-使用仓颉 1.0.5 实现包 `cidr_udp_router`，提供 IPv4/IPv6 前缀信息、包含/重叠判断、最长前缀路由选择和两种本机 UDP 回环。实现必须直接使用 `std.net` 的 `IPAddress`、`IPPrefix`、`IPSocketAddress`、`UdpSocket`，并用 `Resource` 自动关闭。禁止 DNS、公网、固定端口、随机数和当前时间。
+使用仓颉 1.1.3 实现包 `cidr_udp_router`，提供 IPv4/IPv6 前缀信息、包含/重叠判断、最长前缀路由选择和两种本机 UDP 回环。实现必须直接使用 `std.net` 的 `IPAddress`、`IPPrefix`、`IPSocketAddress`、`UdpSocket`，并用 `Resource` 自动关闭。禁止 DNS、公网、固定端口、随机数和当前时间。
 
 将 `cidr_udp_router_test.cj` 原样复制到 `src/`，测试不可修改。
 

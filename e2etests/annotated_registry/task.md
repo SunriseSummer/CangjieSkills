@@ -1,6 +1,6 @@
 # 注解驱动的弱引用注册表
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `annotated_registry`。用自定义成员变量注解、`std.reflect.ClassTypeInfo`、`std.ref.WeakRef` 和 `HashMap` 建立可清理注册表。不得以硬编码字段名替代 describe 中的反射发现。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `annotated_registry`。用自定义成员变量注解、`std.reflect.ClassTypeInfo`、`std.ref.WeakRef` 和 `HashMap` 建立可清理注册表。不得以硬编码字段名替代 describe 中的反射发现。
 
 ## 公开 API
 

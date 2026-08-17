@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "task": "secure_local_sync",
-  "cjc_version": "1.0.5",
-  "stdx_version": "1.0.5.1",
+  "cjc_version": "1.1.3",
+  "stdx_version": "1.1.3.1",
   "target": "x86_64-w64-mingw32",
   "note": "frozen task inputs must match byte for byte",
   "frozen": [

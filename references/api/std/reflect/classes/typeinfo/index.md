@@ -38,6 +38,8 @@ TypeInfo 提供了所有数据类型通用的操作接口。
 | [`hashCode(): Int64`](hashcode.md) | 获取该类型信息的哈希值。 |
 | [`isSubtypeOf(supertype: TypeInfo): Bool`](issubtypeof.md) | 判断当前 TypeInfo 实例对应的类型是否是参数中指定的 TypeInfo 实例表示的类型的子类型。 |
 | [`toString(): String`](tostring.md) | 获取字符串形式的该类型信息。 |
+| [`func findAllAnnotations<T>(): Array<T> where T <: Annotation`](findallannotations.md) | 获取所有指定注解名称的自定义注解（通过泛型筛选）。 |
+| [`func getAllAnnotations(): Array<Annotation>`](getallannotations.md) | 获取作用于该对象的所有自定义注解。 |
 
 ## 操作符
 

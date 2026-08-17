@@ -161,7 +161,7 @@ class SearchDocsTests(unittest.TestCase):
         selected = search_docs.compact_routing_hits(hits, query, 3)
         by_id = {hit.record["id"]: hit.record for hit in selected}
         self.assertIn(expected, by_id)
-        self.assertIn("拆成两个实参", by_id[expected]["summary"])
+        self.assertIn("会拆分 `=`", by_id[expected]["summary"])
 
     def test_adjacent_ecosystem_names_route_to_exact_cangjie_symbols(self) -> None:
         cases = {
@@ -537,6 +537,38 @@ class SearchDocsTests(unittest.TestCase):
             "JsonValue strict JSON": {"stdx.encoding.json.class.jsonvalue.fromstr"},
             "File.readFrom exceptions": {"std.fs.class.file.readfrom"},
             "getGlobalLogger setGlobalLogger Attr": {"stdx.log"},
+            "TarGzip archive extract": {"stdx.compress.class.targzip"},
+            "String configInternPool intern": {
+                "stdx.string_intern.interface.internable.extension.extend-string-internable",
+                "stdx.string_intern.interface.internable.configinternpool",
+            },
+            "ThreadSnapshot dump current thread": {"std.core.class.threadsnapshot"},
+            "common specific feature source-set": {
+                "language.multiplatform.2-feature-与-source-set-构建",
+                "tools.cjpm.6-高级配置.6-7-多平台-feature-与-source-set",
+            },
+            "CertificateVerifyMode CustomCA Certificate": {
+                "stdx.net.tls.common.enum.certificateverifymode",
+                "stdx.net.tls.common.enum.certificateverifymode.init",
+            },
+            "DefaultCryptoKit WebSocket": {
+                "stdx.crypto.kit.class.defaultcryptokit",
+                "examples.network.websocket-local-roundtrip",
+            },
+            "Effect Handler Command defaultImpl resume": {
+                "stdx.effect.class.command.defaultimpl",
+                "stdx.effect.class.command",
+                "stdx.effect",
+            },
+            "ExportTable opaque handle zero getExportedRef": {
+                "std.interop.class.exporttable.getexportedref",
+                "std.interop.class.exporttable.createexporthandle",
+            },
+            "EnumTypeInfo TupleTypeInfo FunctionTypeInfo apply": {
+                "std.reflect",
+                "std.reflect.class.enumtypeinfo",
+                "std.reflect.class.functiontypeinfo.apply",
+            },
             "cjlint rules": {
                 "tools.cjlint",
                 "tools.cjlint.4-告警屏蔽.4-1-规则级屏蔽",

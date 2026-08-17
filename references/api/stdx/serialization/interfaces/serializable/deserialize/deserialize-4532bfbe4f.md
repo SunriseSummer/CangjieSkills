@@ -23,42 +23,22 @@ public static func deserialize(dm: DataModel): Array<T>
 
 - Array<T> - 逐项反序列化后的数组。
 
-版本限制：
+前置条件：
 
-- Windows x86_64 cjnative 1.0.5 + stdx 1.0.5.1 实测中，该扩展会通过编译，但直接运行可在 runtime 因 Serializable<Array<T>> 接口函数表缺失而崩溃。在该组合下不要直接调用；应显式遍历 DataModelSeq，逐项反序列化到 ArrayList<T>，再调用 toArray()。
+- `dm` 应由元素类型相同的 `Array<T>.serialize()` 产生，或是元素均可反序列化为 `T` 的 `DataModelSeq`；中间表示类型不匹配时抛出 `DataModelException`。
 
-## 1.0.5 Windows cjnative 兼容写法
+## 数组往返
 
-发布件声明了 `Array<T>` 的 `Serializable` 扩展，但 Windows x86_64 cjnative 1.0.5 配合 stdx 1.0.5.1 时，直接调用 `field<Array<T>>` 或 `Array<T>.deserialize` 可能在运行期（runtime）因接口函数表缺失而崩溃。显式使用 `DataModelSeq`，逐项调用元素类型的 `deserialize`，最后由 `ArrayList<T>.toArray()` 转回数组。
+仓颉 1.1.3 配合 stdx 1.1.3.1 可直接序列化并反序列化 `Array<T>`；下面的 Windows x86_64 cjnative 示例也已实际执行验证。
 
 ```cangjie cjtest=run id=api.stdx.array-serialization-workaround.run form=unit requires=stdx timeout=60s
-package stdx_array_serialization_workaround
+package stdx_array_serialization
 
-import std.collection.ArrayList
 import stdx.serialization.serialization.*
 
-func serializeStrings(values: Array<String>): DataModelSeq {
-    let result = DataModelSeq()
-    for (value in values) {
-        result.add(DataModelString(value))
-    }
-    return result
-}
-
-func deserializeStrings(model: DataModel): Array<String> {
-    let sequence = match (model) {
-        case value: DataModelSeq => value
-        case _ => throw DataModelException("expected string array")
-    }
-    let result = ArrayList<String>()
-    for (item in sequence.getItems()) {
-        result.add(String.deserialize(item))
-    }
-    return result.toArray()
-}
-
 main(): Unit {
-    let restored = deserializeStrings(serializeStrings(["north", "east"]))
+    let model = ["north", "east"].serialize()
+    let restored = Array<String>.deserialize(model)
     println("${restored.size}|${restored[0]}|${restored[1]}")
 }
 ```

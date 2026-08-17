@@ -31,7 +31,7 @@ macro_dsl/
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "macro_dsl"
   version = "1.0.0"
   output-type = "executable"
@@ -44,7 +44,7 @@ macro_dsl/
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "macros"
   version = "1.0.0"
   output-type = "static"

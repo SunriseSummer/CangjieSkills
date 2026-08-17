@@ -40,7 +40,7 @@ class ToolProbeTests {
     @TestCase func capturesCompilerOutput() {
         let result = ToolProbe.compilerVersion()
         @Assert(result.exitCode, 0)
-        @Assert(result.combined().contains("1.0.5"))
+        @Assert(result.combined().contains("1.1.3"))
     }
 
     @TestCase func countsDeclarationsButNotComments() {

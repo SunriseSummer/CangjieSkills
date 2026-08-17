@@ -3,7 +3,7 @@
 
 [← std.core](../../index.md)
 
-64 位浮点类型；数值转换用 `Float64(value)`。仓颉 1.0.5 没有 `isFinite()` 成员，有限值判断使用 `!value.isNaN() && !value.isInf()`。
+64 位浮点类型；数值转换用 `Float64(value)`。仓颉 1.1.3 没有 `isFinite()` 成员，有限值判断使用 `!value.isNaN() && !value.isInf()`。
 
 ## 关键契约
 

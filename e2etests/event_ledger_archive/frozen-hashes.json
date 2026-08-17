@@ -2,10 +2,10 @@
   "task": "event_ledger_archive",
   "frozenAt": "2026-08-02",
   "toolchain": {
-    "cjc": "1.0.5 (cjnative)",
-    "cjpm": "1.0.5",
+    "cjc": "1.1.3 (cjnative)",
+    "cjpm": "1.1.3",
     "target": "x86_64-w64-mingw32",
-    "stdx": "1.0.5.1",
+    "stdx": "1.1.3.1",
     "stdxPlatform": "windows-x64",
     "stdxLinkage": "dynamic"
   },
@@ -14,7 +14,7 @@
     "File digests are over the exact bytes on disk (UTF-8, no BOM, CRLF as authored).",
     "expectedStdout is hashed after normalizing CRLF to LF, so it is host-independent.",
     "The frozen test at the task root must be copied unchanged into the implementation project.",
-    "expectedStdout embeds 'frame bytes=373', a deflate output size. That size is fixed for stdx 1.0.5.1 but is not guaranteed across zlib builds, so expectedStdout is an observed artifact of this toolchain, not a portable requirement. The frozen test never asserts an exact compressed size; it only requires payloadLength < rawLength.",
+    "expectedStdout embeds 'frame bytes=373', a deflate output size. That size is fixed for stdx 1.1.3.1 but is not guaranteed across zlib builds, so expectedStdout is an observed artifact of this toolchain, not a portable requirement. The frozen test never asserts an exact compressed size; it only requires payloadLength < rawLength.",
     "expectedDomainInvariants entries other than demoFrameBytes and demoFramePayloadBytes are compression-independent and are asserted by the frozen test."
   ],
   "files": {

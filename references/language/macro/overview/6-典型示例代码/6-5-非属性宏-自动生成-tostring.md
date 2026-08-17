@@ -34,7 +34,7 @@ main() {
 
 ```toml cjtest=project id=language.macro-auto-to-string file=cjpm.toml command=run timeout=120s
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "auto_to_string"
 version = "0.1.0"
 output-type = "executable"
@@ -47,7 +47,7 @@ auto_to_string_macros = { path = "./macros" }
 
 ```toml cjtest=file project=language.macro-auto-to-string file=macros/cjpm.toml
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "auto_to_string_macros"
 version = "0.1.0"
 output-type = "static"

@@ -36,7 +36,7 @@ web/
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "web"
   version = "1.0.0"
   output-type = "executable"

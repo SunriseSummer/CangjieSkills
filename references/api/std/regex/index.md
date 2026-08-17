@@ -25,4 +25,4 @@
 
 | 声明 | 功能 |
 |---|---|
-| [`RegexFlag`](enums/regexflag/index.md) | 正则模式标志；处理非 ASCII 模式、输入或捕获组时显式使用 `RegexFlag.Unicode`，仓颉 1.0.5 未启用时捕获组边界可能产生无效 UTF-8。 |
+| [`RegexFlag`](enums/regexflag/index.md) | 正则模式标志；处理非 ASCII 模式、输入或捕获组时显式使用 `RegexFlag.Unicode`，仓颉 1.1.3 未启用时捕获组边界可能产生无效 UTF-8。 |

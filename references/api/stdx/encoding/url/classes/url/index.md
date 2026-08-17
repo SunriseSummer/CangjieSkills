@@ -42,3 +42,7 @@
 | [`replace(scheme!: Option<String> = None, userInfo!: Option<String> = None, hostName!: Option<String> = None, port!: Option<String> = None, path!: Option<String> = None, query!: Option<String> = None, fragment!: Option<String> = None): URL`](replace.md) | 替换 URL 对象的各组件，并且返回一个新的 URL 对象。 |
 | [`resolveURL(ref: URL): URL`](resolveurl.md) | 以当前 URL 实例为基础 URL，以传入的 URL 为参考 URL，根据 RFC 3986 协议生成一个新的 URL 实例。 |
 | [`toString(): String`](tostring.md) | 获取当前 URL 实例的字符串值。 |
+| [`static func decode(url: String): String`](decode.md) | 对经过 `URL` 编码（也就是 `%` 编码）的字符串进行解码操作，将编码后的字符串还原成原始的字符串。 |
+| [`static func decodeComponent(component: String): String`](decodecomponent.md) | 对经过 `URL` 编码（也就是 `%` 编码）的字符串进行解码操作，将编码后的字符串还原成原始的字符串。 |
+| [`static func encode(url: String): String`](encode.md) | 对普通字符串进行 `URL` 编码（也称为 `%` 编码）。`URL` 编码的目的是将字符串中的特殊字符、非 `ASCII` 字符等转换为符合 `URL` 规范的格式，以确保这些字符串能在 `URL` 中安全地传输和使用。 |
+| [`static func encodeComponent(component: String): String`](encodecomponent.md) | 对普通字符串进行 `URL` 编码（也称为 `%` 编码）。`URL` 编码的目的是将字符串中的特殊字符、非 `ASCII` 字符等转换为符合 `URL` 规范的格式，以确保这些字符串能在 `URL` 中安全地传输和使用。 |

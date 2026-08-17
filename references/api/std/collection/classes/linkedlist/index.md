@@ -47,6 +47,20 @@
 | [`reverse(): Unit`](reverse.md) | 反转此链表中的元素顺序。 |
 | [`splitOff(node: LinkedListNode<T>): LinkedList<T>`](splitoff.md) | 从指定的节点 node 开始，将链表分割为两个链表，如果分割成功，node 不在当前的链表内，而是作为首个节点存在于新的链表内部。 |
 | [`toArray(): Array<T>`](toarray.md) | 返回一个数组，数组包含该链表中的所有元素，并且顺序与链表的顺序相同。 |
+| [`func all(predicate: (T) -> Bool): Bool`](all.md) | 判断链表中所有元素是否都满足条件。 |
+| [`func any(predicate: (T) -> Bool): Bool`](any.md) | 判断此链表是否存在任意一个满足条件的元素。 |
+| [`func filter(predicate: (T) -> Bool): LinkedList<T>`](filter.md) | 返回一个满足筛选条件的元素的新链表。 |
+| [`func filterMap<R>(transform: (T) -> ?R): LinkedList<R>`](filtermap.md) | 同时进行筛选操作和映射操作，返回一个新 LinkedList。 |
+| [`func flatMap<R>(transform: (T) -> LinkedList<R>): LinkedList<R>`](flatmap.md) | 对链表中的每个元素应用一个转换闭包（transform），该闭包返回一个新的链表，然后将所有返回的链表“压平”（flatten）并连接成一个单一的结果链表。 |
+| [`func fold<R>(initial: R, operation: (R, T) -> R): R`](fold.md) | 使用指定初始值，从左向右计算。 |
+| [`func forEach(action: (T) -> Unit): Unit`](foreach.md) | 遍历所有元素，执行给定的操作。 |
+| [`func intersperse(separator: T): LinkedList<T>`](intersperse.md) | 返回每两个元素之间插入一个给定的新元素后的新 LinkedList 。 |
+| [`func map<R>(transform: (T) -> R): LinkedList<R>`](map.md) | 对此 LinkedList 进行映射并返回一个新 LinkedList。 |
+| [`func none(predicate: (T) -> Bool): Bool`](none.md) | 判断此链表中所有元素是否都不满足条件。 |
+| [`func reduce(operation: (T, T) -> T): Option<T>`](reduce.md) | 使用第一个元素作为初始值，从左向右计算。 |
+| [`func skip(count: Int64): LinkedList<T>`](skip.md) | 跳过特定个数元素并返回一个新链表。 |
+| [`func step(count: Int64): LinkedList<T>`](step.md) | 以指定的间隔从链表中提取元素，并返回一个新链表。 |
+| [`func take(count: Int64): LinkedList<T>`](take.md) | 从链表取出特定个数元素并返回一个新链表。 |
 
 ## 扩展实现
 
@@ -54,3 +68,4 @@
 |---|---|
 | [`extend<T> LinkedList<T> <: Equatable<LinkedList<T>> where T <: Equatable<T>`](extensions/extend-t-linkedlist-t-equatable-linkedlist-t-where-t-equatable-t.md) | 为 LinkedList<T> 类型扩展 Equatable<LinkedList<T>> 接口，支持判等操作。 |
 | [`extend<T> LinkedList<T> <: ToString where T <: ToString`](extensions/extend-t-linkedlist-t-tostring-where-t-tostring.md) | 为 LinkedList<T> 扩展 ToString 接口，支持转字符串操作。 |
+| [`extend<T> LinkedList<T>`](extensions/extend-t-linkedlist-t.md) | 为 LinkedList<T> 类型进行拓展 |

@@ -2,7 +2,7 @@
 
 ## 1. 目标
 
-使用仓颉 1.0.5 实现一个固定 worker 数的并发任务调度器、强缓存、显式可控的弱引用缓存和有界对象复用池，并提供稳定的运行时快照接口。
+使用仓颉 1.1.3 实现一个固定 worker 数的并发任务调度器、强缓存、显式可控的弱引用缓存和有界对象复用池，并提供稳定的运行时快照接口。
 
 核心实现应覆盖：
 
@@ -12,7 +12,7 @@
 - `std.runtime` 的非 deprecated 统计函数、`blackBox` 和 `gc`；
 - 类、接口、`Option`、自定义异常与 `Resource`。
 
-`std.objectpool.ObjectPool` 在 1.0.5 已标记 deprecated，直接使用会产生编译 warning，与本任务 0 warning 门禁冲突。因此不得屏蔽 deprecated warning；本任务以 `ArrayBlockingQueue` 实现 `ReusableBufferPool`，验证相邻且可长期使用的对象复用能力。
+`std.objectpool.ObjectPool` 在 1.1.3 已标记 deprecated，直接使用会产生编译 warning，与本任务 0 warning 门禁冲突。因此不得屏蔽 deprecated warning；本任务以 `ArrayBlockingQueue` 实现 `ReusableBufferPool`，验证相邻且可长期使用的对象复用能力。
 
 ## 2. 工程结构
 
@@ -25,7 +25,7 @@ concurrent_cache_scheduler/
     └── concurrent_cache_scheduler_test.cj  # 已给定，不可修改
 ```
 
-包名与项目名均为 `concurrent_cache_scheduler`，`cjc-version = "1.0.5"`，输出类型为 `executable`。
+包名与项目名均为 `concurrent_cache_scheduler`，`cjc-version = "1.1.3"`，输出类型为 `executable`。
 
 ## 3. 调度器公开 API
 
@@ -149,7 +149,7 @@ public func runtimeIdentity<T>(value: T): T
 public func requestGc(heavy: Bool): Unit
 ```
 
-- 分别调用 1.0.5 的 `getProcessorCount/getThreadCount/getNativeThreadCount/getBlockingThreadCount/getAllocatedHeapSize/getUsedHeapSize/getMaxHeapSize/getGCCount`。
+- 分别调用 1.1.3 的 `getProcessorCount/getThreadCount/getNativeThreadCount/getBlockingThreadCount/getAllocatedHeapSize/getUsedHeapSize/getMaxHeapSize/getGCCount`。
 - `runtimeIdentity` 通过 `blackBox` 返回原值。
 - `requestGc` 调用小写、非 deprecated 的 `gc(heavy: ...)`。
 - 测试只检查跨平台稳定的不变量，不断言瞬时线程数、堆大小或 GC 增量的精确值。
@@ -172,4 +172,3 @@ cjpm run
 ```
 
 四条命令均须成功，32/32 测试通过，编译器 warning 为 0。不得访问设计目录中的 oracle。
-

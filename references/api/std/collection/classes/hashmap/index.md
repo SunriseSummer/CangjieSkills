@@ -45,6 +45,14 @@ Map 接口的哈希表实现。
 | [`reserve(additional: Int64): Unit`](reserve.md) | 扩容当前的 HashMap。 |
 | [`toArray(): Array<(K, V)>`](toarray.md) | 构造一个包含 HashMap 内键值对的数组，并返回。 |
 | [`values(): Collection<V>`](values.md) | 返回 HashMap 中包含的值，并将所有的 value 存储在一个 Values 容器中。 |
+| [`func all(predicate: (K, V) -> Bool): Bool`](all.md) | 判断 HashMap 中所有键值对是否都满足条件。 |
+| [`func any(predicate: (K, V) -> Bool): Bool`](any.md) | 判断 HashMap 是否存在任意一个满足条件的键值对。 |
+| [`func filter(predicate: (K, V) -> Bool): HashMap<K, V>`](filter.md) | 返回一个满足筛选条件的键值对的新 HashMap<K, V>。 |
+| [`func fold<R>(initial: R, operation: (R, K, V) -> R): R`](fold.md) | 使用指定初始值，从左向右计算。 |
+| [`func forEach(action: (K, V) -> Unit): Unit`](foreach.md) | 遍历所有键值对，执行给定的操作。 |
+| [`func mapValues<R>(transform: (K, V) -> R): HashMap<K, R>（2 个重载）`](mapvalues.md) | 对此 HashMap 进行映射并返回一个新 HashMap。 |
+| [`func none(predicate: (K, V) -> Bool): Bool`](none.md) | 判断 HashMap 中所有键值对是否都不满足条件。 |
+| [`func reduce(operation: (V, V) -> V): Option<V>`](reduce.md) | 使用第一个值作为初始值，从左向右计算。 |
 
 ## 操作符
 

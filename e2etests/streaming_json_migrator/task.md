@@ -2,9 +2,9 @@
 
 ## 目标
 
-在仓颉 `1.0.5 (cjnative)` 中实现包 `streaming_json_migrator`。实现必须直接使用 `stdx.encoding.json.stream` 的 `JsonReader`、`JsonWriter`、`JsonSerializable`、`JsonDeserializable`、`JsonToken` 与 `WriteConfig`，以流式方式把旧版用户记录迁移为固定字段顺序的新格式；禁止先解析成 `JsonValue` 或用正则表达式处理 JSON。
+在仓颉 `1.1.3 (cjnative)` 中实现包 `streaming_json_migrator`。实现必须直接使用 `stdx.encoding.json.stream` 的 `JsonReader`、`JsonWriter`、`JsonSerializable`、`JsonDeserializable`、`JsonToken` 与 `WriteConfig`，以流式方式把旧版用户记录迁移为固定字段顺序的新格式；禁止先解析成 `JsonValue` 或用正则表达式处理 JSON。
 
-将随题提供的 `streaming_json_migrator_test.cj` 原样复制到项目 `src/`，测试不可修改。stdx 固定为与 cjc 1.0.5 匹配的 `1.0.5.1`。
+将随题提供的 `streaming_json_migrator_test.cj` 原样复制到项目 `src/`，测试不可修改。stdx 固定为与 cjc 1.1.3 匹配的 `1.1.3.1`。
 
 ## 公开 API
 

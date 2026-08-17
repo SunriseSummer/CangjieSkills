@@ -1,6 +1,6 @@
 # 类型化命令行查询计划
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `cli_query`。使用 `std.argopt.parseArguments` 与 `ArgumentSpec` 把参数解析为可复用查询计划，再对内存文本行执行过滤。不得手写扫描 `--option`/`-o` 字符串替代 argopt。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `cli_query`。使用 `std.argopt.parseArguments` 与 `ArgumentSpec` 把参数解析为可复用查询计划，再对内存文本行执行过滤。不得手写扫描 `--option`/`-o` 字符串替代 argopt。
 
 ## 公开 API
 

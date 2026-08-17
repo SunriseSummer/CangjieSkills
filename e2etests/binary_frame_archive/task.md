@@ -2,11 +2,11 @@
 
 ## 目标
 
-在仓颉 `1.0.5 (cjnative)` 中实现包 `binary_frame_archive`：把多个命名二进制条目编码为一个确定性的帧，支持可选 Deflate 压缩、SHA-256 完整性校验、Hex 文本转换和文件读写。
+在仓颉 `1.1.3 (cjnative)` 中实现包 `binary_frame_archive`：把多个命名二进制条目编码为一个确定性的帧，支持可选 Deflate 压缩、SHA-256 完整性校验、Hex 文本转换和文件读写。
 
 实现必须直接使用 `std.binary`、`std.overflow`、`std.crypto.digest`、`std.io`、`stdx.crypto.digest`、`stdx.encoding.hex`、`stdx.compress.zlib`。禁止网络、随机数、当前时间和平台原生代码。
 
-将随题提供的 `binary_frame_archive_test.cj` 原样复制到项目 `src/`；测试不可修改。stdx 版本固定为与 cjc 1.0.5 匹配的 `1.0.5.1`。
+将随题提供的 `binary_frame_archive_test.cj` 原样复制到项目 `src/`；测试不可修改。stdx 版本固定为与 cjc 1.1.3 匹配的 `1.1.3.1`。
 
 ## 公开 API
 

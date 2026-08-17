@@ -6675,7 +6675,7 @@
     "parent": "tools.cjcov.2-基本流程",
     "path": "tools/cjcov/2-基本流程/2-2-多文件-项目场景-推荐使用-cjpm.md",
     "title": "2.2 多文件/项目场景（推荐使用 cjpm）",
-    "summary": "Windows cjnative 1.0.5 的稳健做法是把需要报告的 `.gcda`/`.gcno` 复制到项目根附近的短目录，再把该目录传给 `--root`。"
+    "summary": "Windows cjnative 1.1.3 的稳健做法是把需要报告的 `.gcda`/`.gcno` 复制到项目根附近的短目录，再把该目录传给 `--root`。"
   },
   {
     "id": "tools.cjcov.2-基本流程",
@@ -6684,7 +6684,7 @@
     "parent": "tools.cjcov",
     "path": "tools/cjcov/2-基本流程/index.md",
     "title": "2. 基本流程",
-    "summary": "Windows cjnative 1.0.5 的稳健做法是把需要报告的 `.gcda`/`.gcno` 复制到项目根附近的短目录，再把该目录传给 `--root`。"
+    "summary": "Windows cjnative 1.1.3 的稳健做法是把需要报告的 `.gcda`/`.gcno` 复制到项目根附近的短目录，再把该目录传给 `--root`。"
   },
   {
     "id": "tools.cjcov.3-命令选项",
@@ -7269,7 +7269,7 @@
     "parent": "tools.cjpm",
     "path": "tools/cjpm/1-基本用法.md",
     "title": "1. 基本用法",
-    "summary": "新模块优先由 `cjpm init --name <合法包名> --type=executable` 生成完整清单和源码骨架，不要手写不完整的 `cjpm.toml`；程序参数用 `cjpm run --run-args=\"...\"` 传递。"
+    "summary": "新模块优先由 `cjpm init --name <合法包名> --type=executable` 生成完整清单和源码骨架，不要手写不完整的 `cjpm.toml`；1.1.3 程序参数用 `cjpm run -- <args...>` 原样传递。"
   },
   {
     "id": "tools.cjpm.2-项目结构与-cjpm-toml.2-1-目录结构",
@@ -7287,7 +7287,7 @@
     "parent": "tools.cjpm.2-项目结构与-cjpm-toml",
     "path": "tools/cjpm/2-项目结构与-cjpm-toml/2-2-基本-cjpm-toml-单模块.md",
     "title": "2.2 基本 cjpm.toml（单模块）",
-    "summary": "单模块 `cjpm.toml` 的 `[package]` 至少给出非空 `cjc-version = \"1.0.5\"`、`name`、`version` 和 `output-type`；可执行项目使用 `output-type = \"executable\"`。"
+    "summary": "单模块 `cjpm.toml` 的 `[package]` 至少给出非空 `cjc-version = \"1.1.3\"`、`name`、`version` 和 `output-type`；可执行项目使用 `output-type = \"executable\"`。"
   },
   {
     "id": "tools.cjpm.2-项目结构与-cjpm-toml.2-3-工作空间-cjpm-toml",
@@ -7332,7 +7332,7 @@
     "parent": "tools.cjpm.3-常用命令选项表",
     "path": "tools/cjpm/3-常用命令选项表/3-2-run-选项.md",
     "title": "3.2 run 选项",
-    "summary": "`cjpm run --run-args=\"...\"` 转发参数，但 1.0.5 会把单个实参中的 `=` 拆成两个实参；OptionalValue 的 `--opt=value` 应改用短附着形式或直接运行构建产物。Windows 上 cjpm 还不透传程序非零状态。"
+    "summary": "1.1.3 推荐 `cjpm run -- <args...>` 原样转发参数；旧 `--run-args` 会拆分 `=` 且已提示未来移除。Windows 上 cjpm 仍不透传程序非零状态。"
   },
   {
     "id": "tools.cjpm.3-常用命令选项表.3-3-test-选项",
@@ -7377,7 +7377,7 @@
     "parent": "tools.cjpm",
     "path": "tools/cjpm/3-常用命令选项表/index.md",
     "title": "3. 常用命令选项表",
-    "summary": "`run-args` 是 1.0.5 的参数透传入口，但会拆分实参内的 `=`，且 Windows 上不透传程序非零状态；子页另列 build/test、锁文件、依赖树和安装选项。"
+    "summary": "1.1.3 使用 `cjpm run -- <args...>` 原样透传参数，旧 `run-args` 仅作兼容且已提示未来移除；子页另列 build/test、锁文件、依赖树和安装选项。"
   },
   {
     "id": "tools.cjpm.4-依赖管理.4-1-源码依赖",
@@ -7755,7 +7755,7 @@
     "parent": "examples.project-build",
     "path": "examples/project-build/cjpm-minimal.md",
     "title": "创建最小可执行工程",
-    "summary": "用 1.0.5 清单、包声明和 main 建立可直接执行的 cjpm 工程骨架。",
+    "summary": "用 1.1.3 清单、包声明和 main 建立可直接执行的 cjpm 工程骨架。",
     "domain": "tools"
   },
   {
@@ -7805,7 +7805,7 @@
     "parent": "examples.cli-process",
     "path": "examples/cli-process/command-line-arguments.md",
     "title": "接收并遍历命令行参数",
-    "summary": "命令行参数由 `main(args: Array<String>)` 直接接收；`cjpm run --run-args` 会拆分单个实参里的 `=`，需保持精确边界或验证退出码时直接运行构建产物。",
+    "summary": "命令行参数由 `main(args: Array<String>)` 直接接收；1.1.3 使用 `cjpm run -- <args...>` 保持实参边界，需验证程序退出码时直接运行构建产物。",
     "domain": "std"
   },
   {
@@ -7825,7 +7825,7 @@
     "parent": "examples.cli-process",
     "path": "examples/cli-process/cli-exit-status.md",
     "title": "报告并验证命令行退出状态",
-    "summary": "`main(args): Int64` 用非零值报告失败；测试退出码时直接运行构建产物，因为 Windows 上 cjpm 1.0.5 不透传该状态。",
+    "summary": "`main(args): Int64` 用非零值报告失败；测试退出码时直接运行构建产物，因为 Windows 上 cjpm 1.1.3 不透传该状态。",
     "domain": "tools"
   },
   {
@@ -8495,7 +8495,7 @@
     "parent": "examples.binary",
     "path": "examples/binary/big-endian.md",
     "title": "按大端序读取 Int64",
-    "summary": "从至少八字节的缓冲区恢复整数，并遵守 1.0.5 的实际异常契约。",
+    "summary": "从至少八字节的缓冲区恢复整数，并遵守 1.1.3 的实际异常契约。",
     "domain": "std"
   },
   {
@@ -8595,7 +8595,7 @@
     "parent": "examples.json",
     "path": "examples/json/json-parse.md",
     "title": "解析 JSON 并识别输入方言",
-    "summary": "用 `JsonValue.fromStr` 解析后按形态取值；1.0.5.1 接受非标准整数前缀，严格协议不能把它当合规性校验器。",
+    "summary": "用 `JsonValue.fromStr` 解析后按形态取值；1.1.3.1 接受非标准整数前缀，严格协议不能把它当合规性校验器。",
     "domain": "stdx"
   },
   {
@@ -8615,7 +8615,7 @@
     "parent": "examples.json",
     "path": "examples/json/json-array-iteration.md",
     "title": "按索引遍历 JsonArray",
-    "summary": "JsonArray 在 1.0.5.1 中不是 Iterable；按 0..size() 生成索引后读取元素。",
+    "summary": "JsonArray 在 1.1.3.1 中不是 Iterable；按 0..size() 生成索引后读取元素。",
     "domain": "stdx"
   },
   {
@@ -8625,7 +8625,7 @@
     "parent": "examples.json",
     "path": "examples/json/streaming-json-record.md",
     "title": "流式读写对象、Option 与数组",
-    "summary": "自定义 `JsonSerializable`/`JsonDeserializable` 时显式维护对象状态；Windows cjnative 1.0.5.1 的复合数组按元素读写，避免直接调用泛型数组接口。",
+    "summary": "自定义 `JsonSerializable`/`JsonDeserializable` 时显式维护对象状态；Windows cjnative 1.1.3.1 的复合数组按元素读写，避免直接调用泛型数组接口。",
     "domain": "stdx"
   },
   {
@@ -8654,8 +8654,8 @@
     "level": 4,
     "parent": "examples.json",
     "path": "examples/json/array-workaround.md",
-    "title": "安全反序列化对象数组",
-    "summary": "序列化需匹配 stdx 版本并检查 `DataModel` 实际类型；Windows cjnative 1.0.5 中避免直接走 `Array<T>` Serializable 运行时路径。",
+    "title": "直接序列化并反序列化数组",
+    "summary": "仓颉 1.1.3 配合 stdx 1.1.3.1 可直接使用 `Array<T>` 的 `Serializable` 扩展；序列化与反序列化元素类型必须一致。",
     "domain": "stdx"
   },
   {
@@ -8797,5 +8797,151 @@
     "title": "应用示例",
     "summary": "按场景分类的完整可运行示例与核心实践。",
     "domain": "all"
+  },
+  {
+    "id": "language.package.2-包声明.2-4-组织名限定包",
+    "kind": "guide-leaf",
+    "level": 5,
+    "parent": "language.package.2-包声明",
+    "path": "language/package/2-包声明/2-4-组织名限定包.md",
+    "title": "2.4 组织名限定包",
+    "summary": "配置 organization 后，包声明与跨模块导入都使用 org::module.package，构建产物以 @org 区分。",
+    "domain": "language"
+  },
+  {
+    "id": "language.multiplatform.1-common-与-specific-声明",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "language.multiplatform",
+    "path": "language/multiplatform/1-common-与-specific-声明.md",
+    "title": "1. common 与 specific 声明",
+    "summary": "公共声明给出跨平台契约，平台声明提供签名匹配的目标实现；该能力在 1.1.3 中仍为实验特性。",
+    "domain": "language"
+  },
+  {
+    "id": "language.multiplatform.2-feature-与-source-set-构建",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "language.multiplatform",
+    "path": "language/multiplatform/2-feature-与-source-set-构建.md",
+    "title": "2. feature 与 source-set 构建",
+    "summary": "在 cjpm 实验模式下声明源码集，并用目标推导或显式 feature 选择产品源码集。",
+    "domain": "tools"
+  },
+  {
+    "id": "language.multiplatform.3-编译流水线与移动端交叉编译",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "language.multiplatform",
+    "path": "language/multiplatform/3-编译流水线与移动端交叉编译.md",
+    "title": "3. 编译流水线与移动端交叉编译",
+    "summary": "直接使用 cjc 时先生成公共 CHIR/CJO，再编译平台部分；Android/iOS 构建还需目标 SDK。",
+    "domain": "tools"
+  },
+  {
+    "id": "language.multiplatform",
+    "kind": "guide-topic",
+    "level": 3,
+    "parent": "language",
+    "path": "language/multiplatform/index.md",
+    "title": "跨平台开发",
+    "summary": "1.1.3 实验性的 common/specific 声明、feature/source-set 构建与 Android/iOS 交叉编译。",
+    "domain": "language"
+  },
+  {
+    "id": "tools.hle.1-安装依赖与公共选项",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "tools.hle",
+    "path": "tools/hle/1-安装依赖与公共选项.md",
+    "title": "1. 安装依赖与公共选项",
+    "summary": "ArkTS 模式依赖 Node.js/TypeScript，C 模式依赖 cjbind；输入可为单文件或目录。",
+    "domain": "tools"
+  },
+  {
+    "id": "tools.hle.2-从-ArkTS-生成绑定",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "tools.hle",
+    "path": "tools/hle/2-从-ArkTS-生成绑定.md",
+    "title": "2. 从 ArkTS 生成绑定",
+    "summary": "解析 .d.ts/.d.ets，生成仓颉互操作代码及描述 ArkTS 声明的 JSON。",
+    "domain": "tools"
+  },
+  {
+    "id": "tools.hle.3-从-C-头文件生成绑定",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "tools.hle",
+    "path": "tools/hle/3-从-C-头文件生成绑定.md",
+    "title": "3. 从 C 头文件生成绑定",
+    "summary": "用 cjbind 解析 C 头文件，并通过 --clang-args 提供自定义 include 路径。",
+    "domain": "tools"
+  },
+  {
+    "id": "tools.hle",
+    "kind": "guide-topic",
+    "level": 3,
+    "parent": "tools",
+    "path": "tools/hle/index.md",
+    "title": "HLE 互操作代码生成",
+    "summary": "从 ArkTS 声明文件或 C 头文件生成仓颉互操作绑定，并明确运行依赖与平台限制。",
+    "domain": "tools"
+  },
+  {
+    "id": "tools.cjpm.6-高级配置.6-6-组织名与中心仓依赖",
+    "kind": "guide-leaf",
+    "level": 5,
+    "parent": "tools.cjpm.6-高级配置",
+    "path": "tools/cjpm/6-高级配置/6-6-组织名与中心仓依赖.md",
+    "title": "6.6 组织名与中心仓依赖",
+    "summary": "用 organization 固化模块身份，并用 org::name 引用中心仓模块。",
+    "domain": "tools"
+  },
+  {
+    "id": "tools.cjpm.6-高级配置.6-7-多平台-feature-与-source-set",
+    "kind": "guide-leaf",
+    "level": 5,
+    "parent": "tools.cjpm.6-高级配置",
+    "path": "tools/cjpm/6-高级配置/6-7-多平台-feature-与-source-set.md",
+    "title": "6.7 多平台 feature 与 source-set",
+    "summary": "在实验模式下建立公共/平台源码集，并用目标推导或显式 feature 选择产品源码集。",
+    "domain": "tools"
+  },
+  {
+    "id": "language.effect-handler",
+    "kind": "guide-topic",
+    "level": 3,
+    "parent": "language",
+    "path": "language/effect-handler/index.md",
+    "title": "效应处理器",
+    "summary": "仓颉 1.1.3 的 Effect Handlers 是实验性、可恢复的非局部控制流：以 `Command<Res>` 描述效应，`perform` 触发，`handle` 处理，`resume` 把结果注入原调用点。"
+  },
+  {
+    "id": "language.effect-handler.1-定义-触发与恢复",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "language.effect-handler",
+    "path": "language/effect-handler/1-定义-触发与恢复.md",
+    "title": "1. 定义、触发与恢复",
+    "summary": "同时启用 `--experimental --enable-eh`，用 `stdx.effect.Command` 建模并以 `resume with` 恢复。"
+  },
+  {
+    "id": "language.effect-handler.2-默认处理与运行边界",
+    "kind": "guide-leaf",
+    "level": 4,
+    "parent": "language.effect-handler",
+    "path": "language/effect-handler/2-默认处理与运行边界.md",
+    "title": "2. 默认处理与运行边界",
+    "summary": "没有匹配 handler 时执行 `defaultImpl`；未重写时抛出 `UnhandledCommandException`，恢复点只能消费一次。"
+  },
+  {
+    "id": "tools.cjc.2-核心选项速查.2-13-实验性效应处理器",
+    "kind": "guide-leaf",
+    "level": 5,
+    "parent": "tools.cjc.2-核心选项速查",
+    "path": "tools/cjc/2-核心选项速查/2-13-实验性效应处理器.md",
+    "title": "2.13 实验性效应处理器",
+    "summary": "仓颉 1.1.3 同时使用 `--experimental --enable-eh` 启用 Effect Handlers。"
   }
 ]

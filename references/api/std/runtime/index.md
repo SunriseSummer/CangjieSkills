@@ -27,3 +27,18 @@
 | [`setGCThreshold(value: UInt64): Unit`](functions/setgcthreshold-uint64.md) | 修改用户期望触发 gc 的内存阈值，当仓颉堆大小超过该值时，触发 gc，单位为 KB。 |
 | [`startCPUProfiling(): Unit`](functions/startcpuprofiling.md) | 启动 CPU profiler 跟踪。 |
 | [`stopCPUProfiling(path: Path): Unit`](functions/stopcpuprofiling-path.md) | 停止 CPU profiler 跟踪，并将记录写入指定路径的文件。 |
+
+## 类
+
+| 声明 | 功能 |
+|---|---|
+| [`Signal`](classes/signal/index.md) | 信号类，用于向操作系统、其他进程或进程自身传递事件的通知。 |
+
+## 类型别名
+
+| 声明 | 功能 |
+|---|---|
+| [`type SignalHandlerFunc = (Int32) -> Bool`](types/type-signalhandlerfunc-int32-bool.md) | 定义一个信号处理函数 (Int32) -> Bool，在注册信号回调函数时，可以同一个信号注册多个回调函数组成函数处理链。函数返回值是 `true` 则停止后续函数的执行，否则继续执行后续函数，直到所有注册的函数执行完。如果该信号的处理的最后一个函数返回值是 `false` 则会继续执行该信号的默认行为，否则不会执行该信号的默认行为。 |
+| [`func registerSignalHandler(sig: Signal, handler: SignalHandlerFunc): Unit`](functions/func-registersignalhandler-signal-signalhandlerfunc.md) | 注册信号的处理函数。同一个信号可以注册多个函数，信号触发时函数按照先进先出策略执行。如果 SignalHandlerFunc 的返回值是 `true` 则停止后续函数的执行，否则继续执行后续函数，直到所有注册的函数执行完。 |
+| [`func resetSignalHandler(sigs: Array<Signal>): Unit`](functions/func-resetsignalhandler-array-signal.md) | 清空注册的信号处理函数，如果输入信号为空，则清空所有信号的注册函数。 |
+| [`func unregisterSignalHandler(sig: Signal, handler: SignalHandlerFunc): Unit`](functions/func-unregistersignalhandler-signal-signalhandlerfunc.md) | 取消注册信号的处理函数。 |

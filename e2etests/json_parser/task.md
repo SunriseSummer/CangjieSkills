@@ -32,7 +32,7 @@ cjpm init --name json_parser --type=executable
 
 ```toml
 [package]
-  cjc-version = "1.0.5"
+  cjc-version = "1.1.3"
   name = "json_parser"
   version = "1.0.0"
   output-type = "executable"

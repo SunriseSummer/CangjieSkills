@@ -1,6 +1,6 @@
 # Unicode 词语索引
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `unicode_concordance`。把多行文本解析为 Unicode 词语，形成可查询、顺序稳定的词语索引。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `unicode_concordance`。把多行文本解析为 Unicode 词语，形成可查询、顺序稳定的词语索引。
 
 实现必须使用 `String.runes()`、`std.unicode` 的 Rune 分类/大小写扩展、`StringBuilder`、`HashMap`、`HashSet` 和 `std.sort`。不得按 UTF-8 Byte 逐字节分类，也不得把逻辑限制在 ASCII；不得使用字符串 `split` 硬编码测试分隔符。
 

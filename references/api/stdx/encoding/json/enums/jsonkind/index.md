@@ -5,7 +5,7 @@
 
 `JsonKind`
 
-`JsonKind` 标识 JsonValue 的七种形态；1.0.5.1 未实现 Equatable，须用 `match` 判别而不能用 `==`/`!=`。
+`JsonKind` 标识 JsonValue 的七种形态；1.1.3.1 未实现 Equatable，须用 `match` 判别而不能用 `==`/`!=`。
 
 ## 枚举值
 

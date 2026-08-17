@@ -1,6 +1,6 @@
 # 并发账户流水账
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `parallel_ledger`，把账户变更记录分片并行聚合为确定性余额快照。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `parallel_ledger`，把账户变更记录分片并行聚合为确定性余额快照。
 
 实现必须自然使用 `spawn/Future`、`ConcurrentHashMap<String, AtomicInt64>`、`AtomicInt64`、`Mutex/synchronized`、普通 `HashMap`、`ArrayList` 和 `std.sort`。每条变更记录只能处理一次；不得先顺序计算结果再启动无意义线程，也不得依赖并发容器的迭代顺序。
 

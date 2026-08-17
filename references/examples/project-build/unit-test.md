@@ -9,11 +9,13 @@
 
 顶层函数加 `@Test` 后会成为一个测试用例，同时仍可作为普通函数调用。测试类也可使用 `@Test`，但必须可无参构造且不能继承其他类。
 
-相等性断言使用 `@Assert(actual, expected)` 或 `@Expect(actual, expected)`；仓颉 1.0.5 的 `std.unittest` 没有 `assertEquals` 函数。`cjpm test` 会在包的 `src` 源码目录中发现这些测试声明。
+相等性断言使用 `@Assert(actual, expected)` 或 `@Expect(actual, expected)`；仓颉 1.1.3 的 `std.unittest` 没有 `assertEquals` 函数。`cjpm test` 会在包的 `src` 源码目录中发现这些测试声明。
+
+`@Assert`/`@Expect` 的相等性重载要求被比较类型实现 `Equatable<T>`。元组虽然在各元素可比较时支持 `==`，但 Tuple 本身不能实现接口，因此不能直接传给相等性断言；应先保存结果，再逐个下标断言元素。
 
 ```toml cjtest=project id=examples.project-build.unit-test.api.test-macro.project file=cjpm.toml command=test timeout=60s
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "test_macro_example"
 version = "0.1.0"
 output-type = "executable"

@@ -12,6 +12,7 @@ Exception 是所有异常类的父类。
 | 签名 | 功能 |
 |---|---|
 | [`open message: String`](prop-message.md) | 获取异常信息。 |
+| [`mut prop causedBy: ?Exception`](prop-causedby.md) | 异常的触发原因。 |
 
 ## 构造函数
 

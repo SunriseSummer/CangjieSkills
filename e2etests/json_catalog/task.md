@@ -1,8 +1,8 @@
 # JSON 图书目录往返
 
-在仓颉 `1.0.5 (cjnative)` 与 stdx `1.0.5.1` 中创建可执行包 `json_catalog`，实现嵌套对象和对象数组的 JSON 编解码。必须使用 `stdx.serialization.serialization` 的 `Serializable`/`DataModel` 与 `stdx.encoding.json`，不得手工拼接或扫描 JSON。
+在仓颉 `1.1.3 (cjnative)` 与 stdx `1.1.3.1` 中创建可执行包 `json_catalog`，实现嵌套对象和对象数组的 JSON 编解码。必须使用 `stdx.serialization.serialization` 的 `Serializable`/`DataModel` 与 `stdx.encoding.json`，不得手工拼接或扫描 JSON。
 
-Windows x86_64 cjnative 1.0.5 环境中，对数组采用与发布件兼容的 `DataModelSeq` 显式逐项序列化/反序列化写法，不得直接依赖已知可能运行时崩溃的 `Array<T>.deserialize` 路径。
+Windows x86_64 cjnative 1.1.3 环境中，对数组采用与发布件兼容的 `DataModelSeq` 显式逐项序列化/反序列化写法，不得直接依赖已知可能运行时崩溃的 `Array<T>.deserialize` 路径。
 
 ## 公开 API
 

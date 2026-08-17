@@ -351,7 +351,7 @@ def create_single_project(root: Path, source: str, test_id: str) -> None:
     name = package_name(source, test_id)
     manifest = (
         "[package]\n"
-        'cjc-version = "1.0.5"\n'
+        'cjc-version = "1.1.3"\n'
         f'name = "{name}"\n'
         'version = "0.1.0"\n'
         'output-type = "executable"\n'
@@ -437,7 +437,7 @@ def configure_project_capabilities(
 
 def normalize_output(text: str) -> str:
     value = text.replace("\r\n", "\n").replace("\r", "\n")
-    # cjpm 1.0.5 appends this launcher banner to stdout after the program exits.
+    # cjpm 1.1.3 appends this launcher banner to stdout after the program exits.
     # Keep raw stdout in the JSON report, but exclude tool-owned noise when an
     # example declares the program's expected output.
     value = re.sub(r"\n*cjpm run finished\n?$", "", value)

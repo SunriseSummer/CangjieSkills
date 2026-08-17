@@ -259,8 +259,8 @@ def build_database(source_root: Path, output: Path) -> dict[str, int | str]:
             metadata = {
                 "schema_version": SCHEMA_VERSION,
                 "generator_version": GENERATOR_VERSION,
-                "cangjie_version": "1.0.5",
-                "stdx_version": "1.0.5.1",
+                "cangjie_version": "1.1.3",
+                "stdx_version": "1.1.3.1",
                 "logical_hash": content_hash,
                 "document_count": str(len(records)),
             }

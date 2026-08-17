@@ -38,6 +38,8 @@
 | [`StackOverflowError <: Error`](classes/stackoverflowerror/index.md) | 表示堆栈溢出错误的错误类，该类不可被继承，不可初始化，但是可以被捕获到。 |
 | [`TimeoutException <: Exception`](classes/timeoutexception/index.md) | 当阻塞操作超时时引发异常。 |
 | [`UnsupportedException <: Exception`](classes/unsupportedexception/index.md) | 表示功能未支持的异常类。 |
+| [`ThreadSnapshot`](classes/threadsnapshot/index.md) | 获取当前线程或者所有线程的信息，包含名称、id、状态、调用栈。 |
+| [`ExclusiveScopeException`](classes/exclusivescopeexception/index.md) | 自定义异常类，用于包装在独占作用域中抛出的异常。它保留了原始异常的堆栈信息，不支持主动构造该异常，但是可以被捕获到。 |
 
 ## 接口
 
@@ -84,6 +86,7 @@
 | [`Endian`](enums/endian/index.md) | 枚举类型 Endian 表示运行平台的端序，分为大端序和小端序。 |
 | [`Option<T>`](enums/option/index.md) | 用 `Some`/`None` 表达可能缺失的值；优先用 `match`、`if-let`、`??` 或 `?.` 消费，只在缺失确属异常时调用 `getOrThrow()`，判断状态可用 `isSome()`/`isNone()`。 |
 | [`Ordering`](enums/ordering/index.md) | Ordering 表示比较大小的结果，它包含三种情况：小于，大于和等于。 |
+| [`ThreadState`](enums/threadstate/index.md) | 表示线程的状态。 |
 
 ## 内置类型
 
@@ -136,3 +139,4 @@
 | [`sizeOf<T>(): UIntNative where T <: CType`](functions/sizeof-t-where-t-ctype.md) | 获取类型 T 所占用的内存空间大小。 |
 | [`sleep(dur: Duration): Unit`](functions/sleep-duration.md) | 休眠当前线程。 |
 | [`unsafe zeroValue<T>(): T`](functions/zerovalue-t.md) | 获取一个已全零初始化的 T 类型实例。 |
+| [`func exclusiveScope<T>(fn: () -> T): T`](functions/func-exclusivescope-t-t.md) | 在独占作用域中执行一个闭包，确保闭包在隔离的上下文中运行，并适当地处理任何结果或异常。当执行 fn 时，会发生从仓颉线程栈到操作系统线程栈的切换，并且底层操作系统线程不能被其他仓颉线程抢占。在 fn 返回后，它将切换回仓颉线程栈，并允许进行抢占。 |

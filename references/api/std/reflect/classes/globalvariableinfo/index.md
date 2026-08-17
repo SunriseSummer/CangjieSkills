@@ -25,6 +25,8 @@
 | [`isMutable(): Bool`](ismutable.md) | 判断该 GlobalVariableInfo 对应的全局变量是否可修改。 |
 | [`setValue(newValue: Any): Unit`](setvalue.md) | 设置该 GlobalVariableInfo 对应的全局变量的值。 |
 | [`toString(): String`](tostring.md) | 获取字符串形式的该全局变量信息。 |
+| [`func findAllAnnotations<T>(): Array<T> where T <: Annotation`](findallannotations.md) | 获取所有指定注解名称的自定义注解（通过泛型筛选）。 |
+| [`func getAllAnnotations(): Array<Annotation>`](getallannotations.md) | 获取作用于该对象的所有自定义注解。 |
 
 ## 操作符
 

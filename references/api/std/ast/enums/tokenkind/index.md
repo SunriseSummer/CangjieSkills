@@ -168,6 +168,14 @@
 | [`WHILE`](value-while.md) | 构造一个表示 `while` 的枚举实例。 |
 | [`WILDCARD`](value-wildcard.md) | 构造一个表示 `_` 的枚举实例。 |
 | [`WITH`](value-with.md) | 构造一个表示 `with` 的枚举实例。 |
+| [`COMMON`](value-common.md) | 构造一个表示 `common` 关键字的枚举实例。 |
+| [`DOUBLE_COLON`](value-double_colon.md) | 构造一个表示 `::` 的枚举实例。 |
+| [`FEATURES`](value-features.md) | 构造一个表示 `features` 关键字的枚举实例。 |
+| [`HANDLE`](value-handle.md) | 构造一个表示 `handle` 的枚举实例。 |
+| [`PERFORM`](value-perform.md) | 构造一个表示 `perform` 的枚举实例。 |
+| [`RESUME`](value-resume.md) | 构造一个表示 `resume` 的枚举实例。 |
+| [`SPECIFIC`](value-specific.md) | 构造一个表示 `specific` 的枚举实例。 |
+| [`THROWING`](value-throwing.md) | 构造一个表示 `throwing` 的枚举实例。 |
 
 ## 操作符
 

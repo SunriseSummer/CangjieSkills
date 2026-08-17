@@ -22,3 +22,5 @@ JSON 值基类；先用 `kind()` 判别形态，再调用对应 `asXxx()`，形�
 | [`kind(): JsonKind`](kind.md) | 返回值的 `JsonKind`；显式导入类型并用 `case JsonKind.JsXxx` 匹配，不能用 `==`/`!=` 比较。 |
 | [`toJsonString(): String`](tojsonstring.md) | 将 JsonValue 转换为 JSON 格式的 (带有空格换行符) 字符串。 |
 | [`toString(): String`](tostring.md) | 将 JsonValue 转换为字符串。 |
+| [`func toJsonStringWithoutEscaping(): String`](tojsonstringwithoutescaping.md) | 将 JsonValue 转换为 JSON 格式的 (带有空格换行符) 字符串，不对 html 特殊字符 `&` 转义。 |
+| [`func toStringWithoutEscaping(): String`](tostringwithoutescaping.md) | 将 JsonValue 转换为字符串，不对 html 特殊字符 `&` 转义。 |

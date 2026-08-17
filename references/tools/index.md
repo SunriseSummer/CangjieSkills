@@ -8,6 +8,7 @@
 | 主题 | 范围 |
 |---|---|
 | [Cangjie Language Server](cangjie-language-server/index.md) | `Cangjie Language Server` 是仓颉 IDE 语言服务后端，提供定义跳转、引用查找和代码补全。 |
+| [HLE 互操作代码生成](hle/index.md) | 从 ArkTS 声明文件或 C 头文件生成仓颉互操作绑定，并明确 Node.js/cjbind 依赖与平台限制。 |
 | [chir-dis CHIR 反序列化](chir-dis/index.md) | `chir-dis` 把单个编译器 CHIR 序列化文件转成便于阅读的文本，适合检查已有 `.chir` 中间表示。 |
 | [cjc 编译器](cjc/index.md) | 源码和包编译、输出类型、链接、调试、宏、条件编译、优化与交叉编译。 |
 | [cjcov 覆盖率](cjcov/index.md) | 覆盖率插桩、报告生成、分支统计、文件过滤与 cjpm 集成。 |

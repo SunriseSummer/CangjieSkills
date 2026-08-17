@@ -22,6 +22,11 @@
 | [`mut minVersion: TlsVersion`](prop-minversion.md) | 支持的 TLS 最小版本。 |
 | [`mut securityLevel: Int32`](prop-securitylevel.md) | 指定客户端的安全级别，默认值为 2，可选参数值在 0-5 内，参数值含义参见 openssl-SSL_CTX_set_security_level 说明。 |
 | [`mut signatureAlgorithms: ?Array<SignatureAlgorithm>`](prop-signaturealgorithms.md) | 指定保序的签名和哈希算法。 |
+| [`mut prop certificate: ?(Array<Certificate>, PrivateKey)`](prop-certificate.md) | 设置或获取客户端证书和对应的私钥文件。其中证书必须为 X509Certificate 类型。 |
+| [`mut prop serverName: ?String`](prop-servername.md) | 读写要求的服务端主机地址 (SNI)， `None` 表示不要求。 |
+| [`mut prop supportedAlpnProtocols: Array<String>`](prop-supportedalpnprotocols.md) | 应用层协商协议，若列表为空，则客户端将不协商应用层协议。 |
+| [`mut prop supportedCipherSuites: Map<TlsVersion, Array<String>>`](prop-supportedciphersuites.md) | 设置或获取每个 TLS 版本对应的密码套件。 |
+| [`mut prop supportedVersions: Array<TlsVersion>`](prop-supportedversions.md) | 设置或获取支持的 TLS 版本。 |
 
 ## 构造函数
 

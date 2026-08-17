@@ -1,6 +1,6 @@
 # Decimal 精确账单
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `decimal_invoice`。使用 `std.math.numeric.Decimal` 和 `std.math.RoundingMode` 计算账单，禁止以 Float64 作为金额或税率的中间表示。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `decimal_invoice`。使用 `std.math.numeric.Decimal` 和 `std.math.RoundingMode` 计算账单，禁止以 Float64 作为金额或税率的中间表示。
 
 ## 公开 API
 

@@ -1,6 +1,6 @@
 # Shape Analytics
 
-使用仓颉 1.0.5 新建一个名为 `shape_analytics` 的可执行 cjpm 项目，实现以下公开 API。不要修改给定测试。
+使用仓颉 1.1.3 新建一个名为 `shape_analytics` 的可执行 cjpm 项目，实现以下公开 API。不要修改给定测试。
 
 ## 类型
 
@@ -34,4 +34,3 @@
 - 包名必须为 `shape_analytics`，测试文件放入 `src/shape_analytics_test.cj`。
 - 提供简短 `main` 演示，但不要在库函数中打印。
 - 运行 `cjpm build`、`cjpm test` 和 `cjpm run`；修复全部编译错误、警告和测试失败。
-

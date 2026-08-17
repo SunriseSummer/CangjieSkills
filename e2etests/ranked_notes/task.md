@@ -1,6 +1,6 @@
 # 排序便签 CLI
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `ranked_notes`。使用 `std.argopt.parseArguments` 解析选项，使用 `std.sort.sort` 生成稳定快照；不得手写扫描 `--option`/`-o` 字符串替代 argopt。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `ranked_notes`。使用 `std.argopt.parseArguments` 解析选项，使用 `std.sort.sort` 生成稳定快照；不得手写扫描 `--option`/`-o` 字符串替代 argopt。
 
 ## 公开 API
 

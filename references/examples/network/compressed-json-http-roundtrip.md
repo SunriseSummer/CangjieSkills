@@ -9,7 +9,7 @@
 
 这个端到端示例把三个边界串成一条可验证管线：客户端按 `JSON UTF-8 → Deflate → Base64` 发送，服务端按相反顺序恢复并用 `JsonValue` 规范化。Base64 让二进制压缩数据可以安全承载在文本请求体中；若协议允许二进制 body，则无需这一层。
 
-服务端使用动态端口和 `afterBind` 消除启动竞争；客户端、压缩流和服务端都在确定路径关闭。仓颉/stdx 1.0.5.1 中 `DeflateFormat` 不能单独精确导入，因此唯一保留的通配导入是 `stdx.compress.zlib.*`。
+服务端使用动态端口和 `afterBind` 消除启动竞争；客户端、压缩流和服务端都在确定路径关闭。仓颉/stdx 1.1.3.1 中 `DeflateFormat` 不能单独精确导入，因此唯一保留的通配导入是 `stdx.compress.zlib.*`。
 
 ```cangjie cjtest=run id=app.stdx.compressed.json.http.roundtrip.run form=unit requires=stdx timeout=90s
 package compressed_json_http_roundtrip

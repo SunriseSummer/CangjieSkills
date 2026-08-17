@@ -9,7 +9,7 @@
 
 读取不可信 JSON 时，先用 `JsonObject.get` 区分字段缺失，再用 `JsonValue.kind()` 与 `match` 判别形态，确认后才调用 `asString()` 等窄化方法。`get` 在缺键时返回 `None`；对象下标 `[]` 缺键、或 `asXxx()` 与实际形态不符时会抛 `JsonException`。
 
-stdx 1.0.5.1 的 `JsonKind` 没有实现 `Equatable<JsonKind>`，不能用 `==`/`!=` 比较。显式导入 `JsonKind`，并在模式中写全限定构造器（如 `JsonKind.JsString`）；如果误写成未解析到枚举构造器的裸 `case JsString`，它会成为匹配任意值的变量模式，后续分支可能静默不可达。
+stdx 1.1.3.1 的 `JsonKind` 没有实现 `Equatable<JsonKind>`，不能用 `==`/`!=` 比较。显式导入 `JsonKind`，并在模式中写全限定构造器（如 `JsonKind.JsString`）；如果误写成未解析到枚举构造器的裸 `case JsString`，它会成为匹配任意值的变量模式，后续分支可能静默不可达。
 
 ```cangjie cjtest=run id=examples.json.json-kind-validation.api.stdx.json.kind.validation.run form=unit requires=stdx timeout=60s
 package stdx_json_kind_validation_example
@@ -70,7 +70,7 @@ subscript-throws
 narrowing-throws
 ```
 
-下面的反例固定看护“`JsonKind` 不可直接比较”这一 1.0.5.1 契约：
+下面的反例固定看护“`JsonKind` 不可直接比较”这一 1.1.3.1 契约：
 
 ```cangjie cjtest=compile id=examples.json.json-kind-validation.api.stdx.json.kind.equality.negative form=unit requires=stdx exit=1 timeout=60s
 package stdx_json_kind_equality_negative

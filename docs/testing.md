@@ -23,7 +23,7 @@
 | `cjtest=skip` | 当前环境不可自动验证的示例。 | 必须提供非空 `reason`；不计为通过。 |
 | `role=signature` | API 声明摘录，不是示例。 | 不执行，也不计入示例覆盖率。 |
 
-输出比较会统一换行符，并剔除 cjpm 1.0.5 在程序结束后追加的 `cjpm run finished` 启动器提示；JSON 报告仍保留原始 stdout/stderr。
+输出比较会统一换行符，并剔除 cjpm 1.1.3 在程序结束后追加的 `cjpm run finished` 启动器提示；JSON 报告仍保留原始 stdout/stderr。
 
 ## 代码块上下文
 
@@ -54,7 +54,7 @@ hello
 ````markdown
 ```toml cjtest=project id=project-demo file=cjpm.toml command=run timeout=60s
 [package]
-cjc-version = "1.0.5"
+cjc-version = "1.1.3"
 name = "project_demo"
 version = "0.1.0"
 output-type = "executable"
@@ -75,7 +75,7 @@ project-ok
 
 同一工程的所有文件必须位于同一 Markdown 文件；`file` 只能是安全相对路径。命令只允许 `check/build/run/test`。含 `build.cj` 的工程必须声明 `requires=build-script`，运行时还需显式 `--allow build-script`。C FFI 示例可声明 `requires=native-c`：工程须提供 `native/native.c` 和 `[ffi.c] native = { path = "./libs/" }`；放行后测试器用 PATH 中的 Clang 生成当前平台的 `libnative` 动态库，Windows 还会生成运行期所需的 `native.dll` 副本。
 
-要断言可执行程序自身的退出码，可在 `command=run` 上添加 `launcher=direct` 和可选 `args="..."`。测试器会先执行固定的 `cjpm build`，再直接启动 `target/release/bin/main[.exe]`，不经过 shell，并把 `bin-dependencies.path-option` 加入子进程 PATH。该模式用于避开仓颉 1.0.5 `cjpm run` 不透传程序非零退出码的问题；仍可用根块的 `exit=N` 及 `cjtest=expect stream=stderr` 同时断言状态和诊断。
+要断言可执行程序自身的退出码，可在 `command=run` 上添加 `launcher=direct` 和可选 `args="..."`。测试器会先执行固定的 `cjpm build`，再直接启动 `target/release/bin/main[.exe]`，不经过 shell，并把 `bin-dependencies.path-option` 加入子进程 PATH。该模式用于避开仓颉 1.1.3 `cjpm run` 不透传程序非零退出码的问题；仍可用根块的 `exit=N` 及 `cjtest=expect stream=stderr` 同时断言状态和诊断。
 
 ## 环境、跳过与失败
 
@@ -90,10 +90,10 @@ project-ok
 ```text
 python scripts/validation/test_examples.py references --list --strict --json reports/example-inventory.json
 python scripts/validation/test_examples.py references --mode syntax --strict --min-pass 417 --json reports/example-syntax.json
-python scripts/validation/test_examples.py references --mode compile,run,project --strict --allow stdx --allow network --allow native-c --allow build-script --min-pass 172 --max-compiler-warnings 0 --json reports/example-execution.json
+python scripts/validation/test_examples.py references --mode compile,run,project --strict --allow stdx --allow network --allow native-c --allow build-script --min-pass 174 --max-compiler-warnings 0 --json reports/example-execution.json
 python scripts/validation/test_examples.py references --id project-demo
 ```
 
-当前整库清单包含 590 项：417 项简单语法验证、172 项真实编译/运行/工程验证和 1 项显式说明的跳过。已验证示例不能减少，成功编译或运行的示例不得产生编译器 warning。预期编译失败的反例不计 warning，但仍须用 `exit=1` 和稳定诊断断言明确标记。API 只保留带 `cjtest` 的精选示例；语言与工具链片段能无恢复解析时按 `syntax` 看护。各 `--allow` 只放行对应的受控能力；只有 `--allow network` 表示允许测试访问网络。提高覆盖后应同步收紧数值。
+当前整库清单包含 592 项：417 项简单语法验证、174 项真实编译/运行/工程验证和 1 项显式说明的跳过。已验证示例不能减少，成功编译或运行的示例不得产生编译器 warning。预期编译失败的反例不计 warning，但仍须用 `exit=1` 和稳定诊断断言明确标记。API 只保留带 `cjtest` 的精选示例；语言与工具链片段能无恢复解析时按 `syntax` 看护。各 `--allow` 只放行对应的受控能力；只有 `--allow network` 表示允许测试访问网络。提高覆盖后应同步收紧数值。
 
 直接修改 `references/` 中的权威 Markdown 及对应 manifest；随后运行 `python build.py` 刷新路由索引和 `.agents/skills/cangjie-coding/references/knowledge.sqlite3`。以上命令均以项目根目录为当前目录。`reports/` 会按需创建且已被 Git 忽略。

@@ -1,6 +1,6 @@
 # Unicode Rune 词法器
 
-在仓颉 `1.0.5 (cjnative)` 中创建可执行包 `unicode_lexer`。使用 `String.runes()`、`std.unicode` 的 Rune 扩展和 `StringBuilder` 把文本切分为 Unicode 单词与数字。不得按 UTF-8 Byte 逐字节分类，也不得只处理 ASCII 范围。
+在仓颉 `1.1.3 (cjnative)` 中创建可执行包 `unicode_lexer`。使用 `String.runes()`、`std.unicode` 的 Rune 扩展和 `StringBuilder` 把文本切分为 Unicode 单词与数字。不得按 UTF-8 Byte 逐字节分类，也不得只处理 ASCII 范围。
 
 ## 公开 API
 

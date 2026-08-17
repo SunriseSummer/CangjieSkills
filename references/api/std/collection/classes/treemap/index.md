@@ -47,6 +47,14 @@
 | [`removeIf(predicate: (K, V) -> Bool): Unit`](removeif.md) | 传入 lambda 表达式，如果满足条件，则删除对应的键值。 |
 | [`removeLast(): ?(K, V)`](removelast.md) | 删除 TreeMap 的最后一个元素。 |
 | [`values(): Collection<V>`](values.md) | 返回 TreeMap 中包含的值，并将所有的 value 存储在一个容器中。 |
+| [`func all(predicate: (K, V) -> Bool): Bool`](all.md) | 判断 TreeMap 中所有键值对是否都满足条件。 |
+| [`func any(predicate: (K, V) -> Bool): Bool`](any.md) | 判断 TreeMap 是否存在任意一个满足条件的键值对。 |
+| [`func filter(predicate: (K, V) -> Bool): TreeMap<K, V>`](filter.md) | 返回一个满足筛选条件的键值对的新 TreeMap<K, V>。 |
+| [`func fold<R>(initial: R, operation: (R, K, V) -> R): R`](fold.md) | 使用指定初始值，从左向右计算。 |
+| [`func forEach(action: (K, V) -> Unit): Unit`](foreach.md) | 遍历所有键值对，执行给定的操作。 |
+| [`func mapValues<R>(transform: (K, V) -> R): TreeMap<K, R>（2 个重载）`](mapvalues.md) | 对此 TreeMap 进行映射并返回一个新 TreeMap。 |
+| [`func none(predicate: (K, V) -> Bool): Bool`](none.md) | 判断 TreeMap 中所有键值对是否都不满足条件。 |
+| [`func reduce(operation: (V, V) -> V): Option<V>`](reduce.md) | 使用第一个值作为初始值，从左向右计算。 |
 
 ## 操作符
 

@@ -1,6 +1,6 @@
 # 任务 B：注解与反射驱动的数据映射/校验器
 
-请在仓颉 `1.0.5 (cjnative)` 中实现一个名为 `reflect_mapper` 的 `cjpm` 可执行工程。它把 `HashMap<String, String>` 映射到用户提供的 class 实例：字段是否参与映射、外部键名、必填和整数范围均由注解驱动；字段发现与赋值必须使用 `std.reflect`，不得为测试模型硬编码字段名。
+请在仓颉 `1.1.3 (cjnative)` 中实现一个名为 `reflect_mapper` 的 `cjpm` 可执行工程。它把 `HashMap<String, String>` 映射到用户提供的 class 实例：字段是否参与映射、外部键名、必填和整数范围均由注解驱动；字段发现与赋值必须使用 `std.reflect`，不得为测试模型硬编码字段名。
 
 不可修改测试文件 `reflect_mapper_test.cj`。评测时会把该文件复制到工程的 `src` 目录，并执行 `cjpm clean`、`cjpm build`、`cjpm test`、`cjpm run`；四条命令都必须成功且编译器 warning 为 0。不得访问同级 `oracle` 目录，其中的参考工程只用于题目设计验证。
 
@@ -84,4 +84,3 @@ public class ReflectMapper<T> where T <: Object {
 - `cjpm run` 标准输出必须精确为 `Ada:true` 加换行。
 
 结果必须完全确定，不得依赖文件系统、网络、时钟、随机数或反射集合的原始遍历顺序。
-

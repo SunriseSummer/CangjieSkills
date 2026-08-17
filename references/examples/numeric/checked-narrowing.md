@@ -7,7 +7,7 @@
 
 ## 已验证的窄化转换
 
-仓颉 1.0.5 没有把任意 `Int64` 安全窄化为 `UInt32` 并返回 Option 的专用 API。先显式检查目标类型范围，再调用转换构造器；`std.overflow` 的 `checked*` 只保护算术运算，不保护后续类型转换。
+仓颉 1.1.3 没有把任意 `Int64` 安全窄化为 `UInt32` 并返回 Option 的专用 API。先显式检查目标类型范围，再调用转换构造器；`std.overflow` 的 `checked*` 只保护算术运算，不保护后续类型转换。
 
 ```cangjie cjtest=run id=std.checked-narrowing.run form=unit
 package checked_narrowing_example
