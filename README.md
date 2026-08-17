@@ -43,7 +43,6 @@ npx skills add SunriseSummer/CangjieSkills
 │   ├── doc_search/                  # 查询引擎实现
 │   ├── setup_stdx.py                # stdx 下载和配置
 │   ├── stdx_setup/
-│   ├── cj_ast.py                    # 基于 tree-sitter-cangjie 的语法检查工具
 │   ├── maintenance/                 # 索引与数据库构建
 │   ├── validation/                  # 知识与示例验证
 │   ├── tests/                       # 单元测试及测试数据
@@ -84,5 +83,4 @@ python e2etests/validate.py
 `build.py` 会生成确定性的路由索引，同步发布运行时，构建并校验 SQLite 数据库。`--check` 只检查工作区和发布件是否一致，不修改文件。
 
 `e2etests/` 中有几十个经过 Agent 开发验证的标准测试任务，可用于当前 Skill 的功能验证和对比测评等。它只包含题面、冻结测试、fixture、故障 seed 和跨平台验收脚本，不包含参考实现、历史运行结果或构建产物。
-
 

@@ -11,7 +11,7 @@ from pathlib import Path
 DEV_ROOT = Path(__file__).resolve().parents[2]
 SKILL_ROOT = DEV_ROOT / ".agents" / "skills" / "cangjie-coding"
 SKILL_PATH = SKILL_ROOT / "SKILL.md"
-DEV_SKILL_PATH = DEV_ROOT / "SKILL.md"
+DEV_SKILL_PATH = DEV_ROOT / "SKILL"
 
 
 class SkillEntrypointTests(unittest.TestCase):
