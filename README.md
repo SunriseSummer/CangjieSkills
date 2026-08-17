@@ -71,16 +71,3 @@ python scripts/search_docs.py --query "HashMap tuple iteration" --view leaves
 python build.py
 ```
 
-完整示例验证还需仓颉工具链、`markdown-it-py`、`tree-sitter`/`tree-sitter-cangjie`，部分能力测试按需使用网络和 Clang 等工具。各种验证操作：
-
-```powershell
-python build.py --check
-python scripts/validation/validate_structure.py
-python -m unittest discover -s scripts/tests -p "test_*.py" -q
-python e2etests/validate.py
-```
-
-`build.py` 会生成确定性的路由索引，同步发布运行时，构建并校验 SQLite 数据库。`--check` 只检查工作区和发布件是否一致，不修改文件。
-
-`e2etests/` 中有几十个经过 Agent 开发验证的标准测试任务，可用于当前 Skill 的功能验证和对比测评等。它只包含题面、冻结测试、fixture、故障 seed 和跨平台验收脚本，不包含参考实现、历史运行结果或构建产物。
-
