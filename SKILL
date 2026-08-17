@@ -61,4 +61,4 @@ python scripts/search_docs.py --query "ArrayList reverse" --query "HashMap tuple
 冲突时依次采用：当前工具链的可复现实验、活动叶子契约、维护者为本次升级或修复显式提供的官方资料、模型记忆。精确 API 同时确认包、签名、命名参数、返回值、异常与平台限制，不套用其他语言或版本的相似写法。
 
 - 类型、重载、宏展开、依赖和链接以 `cjc/cjpm` 为准。
-- 仓颉工具链默认版本为 `1.0.5 (cjnative)`，对应的 stdx 为 `1.0.5.1`。
+- 仓颉工具链默认版本为 `1.0.5 (cjnative)`，对应的 stdx 为 `1.0.5.1`。切换过 SDK 或 stdx 版本后先执行 `cjpm clean`，避免复用二进制不兼容的旧产物。

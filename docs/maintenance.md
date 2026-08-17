@@ -59,7 +59,7 @@ python build.py
 python build.py --check
 ```
 
-首次命令重新生成路由索引、同步发布脚本并构建数据库；第二条命令验证工作区没有陈旧生成物。不要手工编辑 `.agents/skills/cangjie-coding/`，其中所有内容都由根目录的 `SKILL.md`、`scripts/` 和 `references/` 构建产生。
+首次命令重新生成路由索引、同步发布脚本并构建数据库；第二条命令验证工作区没有陈旧生成物。不要手工编辑 `.agents/skills/cangjie-coding/`，其中所有内容都由根目录的 `SKILL`、`scripts/` 和 `references/` 构建产生。
 
 构建后检查发布目录只包含架构文档列出的文件。Markdown、测试、报告、缓存或临时数据库进入发布件均应视为错误。
 
@@ -95,7 +95,7 @@ python scripts/evaluation/benchmark_database_backend.py --output reports/databas
 
 ## 发布检查清单
 
-- README、`SKILL.md`、知识基线和工具行为一致；
+- README、开发态 `SKILL`、发布态 `SKILL.md`、知识基线和工具行为一致；
 - manifest、父索引、页面 ID、路径和链接全部通过结构验证；
 - deprecated API 未进入检索结果；
 - 开发态和发布态查询结果一致；

@@ -536,6 +536,10 @@ class SearchDocsTests(unittest.TestCase):
             },
             "JsonValue strict JSON": {"stdx.encoding.json.class.jsonvalue.fromstr"},
             "File.readFrom exceptions": {"std.fs.class.file.readfrom"},
+            "@Assert tuple Equatable": {
+                "examples.project-build.unit-test",
+                "std.unittest.testmacro.macro.test",
+            },
             "getGlobalLogger setGlobalLogger Attr": {"stdx.log"},
             "cjlint rules": {
                 "tools.cjlint",

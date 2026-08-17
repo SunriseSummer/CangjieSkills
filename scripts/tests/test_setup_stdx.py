@@ -57,6 +57,15 @@ def arguments(project: Path, destination: Path, archive: Path, **overrides: obje
     return argparse.Namespace(**values)
 
 
+class EntrypointTests(unittest.TestCase):
+    def test_bytecode_guard_precedes_package_imports(self) -> None:
+        source = (DEV_ROOT / "scripts" / "setup_stdx.py").read_text(encoding="utf-8")
+        self.assertLess(
+            source.index("sys.dont_write_bytecode = True"),
+            source.index("from stdx_setup.archive import"),
+        )
+
+
 class VersionPolicyTests(unittest.TestCase):
     def test_cjc_ranges_select_requested_stdx_releases(self) -> None:
         cases = {

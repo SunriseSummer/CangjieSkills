@@ -32,6 +32,8 @@
 
 相等性断言使用 `@Assert(actual, expected)` 或 `@Expect(actual, expected)`；仓颉 1.0.5 的 `std.unittest` 没有 `assertEquals` 函数。`cjpm test` 会在包的 `src` 源码目录中发现这些测试声明。
 
+相等性断言最终调用带 `T <: Equatable<T>` 约束的断言函数。Tuple 即使支持逐元素 `==` 也不能实现接口，不能作为整体传入；测试元组结果时应逐项断言元素。
+
 ```toml cjtest=project id=api.test-macro.project file=cjpm.toml command=test timeout=60s
 [package]
 cjc-version = "1.0.5"
@@ -58,5 +60,13 @@ func clampTest(): Unit {
     @Expect(clamp(-3, 0, 10), 0)
     @Expect(clamp(7, 0, 10), 7)
     @Expect(clamp(21, 0, 10), 10)
+}
+
+@Test
+func tupleElementsTest(): Unit {
+    let result = ("ready", 8, true)
+    @Expect(result[0], "ready")
+    @Expect(result[1], 8)
+    @Expect(result[2], true)
 }
 ```

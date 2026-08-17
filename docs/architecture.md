@@ -45,7 +45,7 @@ references/*.md + manifest
           │
           └─ build_knowledge_db.py ──→ knowledge.sqlite3
                                           │
-SKILL.md + 运行脚本 ─────── build.py ──────┴─→ .agents/skills/cangjie-coding/
+SKILL + 运行脚本 ────────── build.py ──────┴─→ .agents/skills/cangjie-coding/
 ```
 
 `build.py` 是唯一构建入口，负责：
