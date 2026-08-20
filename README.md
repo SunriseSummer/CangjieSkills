@@ -1,4 +1,4 @@
-# Cangjie Coding Skill
+# 仓颉通用程序开发 Skills
 
 在大模型对[仓颉编程语言](https://cangjie-lang.cn/)训练支持还不够充分的阶段，本项目为仓颉 AI Coding 提供一套高效辅助技能库，以极低额外开销实现仓颉编码自由，相比上一代 Skills 平均开销降低 40%。
 
@@ -18,13 +18,13 @@
 
 ## 快速使用
 
-`.agents/skills/cangjie-coding` 是 Skill 发布件，将该目录复制到所用 AI Coding 环境支持的 Skill 位置，即可体验仓颉 AI 编码自由🎉。如果系统已安装 node/npx，也可以执行以下命令一键安装配置：
+`.agents/skills/cangjie-coding` 是 Skill 发布件，将此目录复制到所用 Coding Agent 工具支持的 Skills 配置路径即可。如果系统已安装 node/npx，也可以执行如下命令交互式安装配置：
 
 ```shell
 npx skills add SunriseSummer/CangjieSkills
 ```
 
-> 基于这套 Skill 开发仓颉项目之前，请确保系统已全局安装 Cangjie SDK 1.0+ 和 Python 3.11+
+> 基于这套 Skill 开发仓颉项目之前，请确保系统已全局安装 Cangjie SDK 1.1.x 和 Python 3.11+
 
 ## 项目结构
 
