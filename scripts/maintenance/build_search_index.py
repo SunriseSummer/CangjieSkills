@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import io
 import json
 import sys
 from pathlib import Path
@@ -48,14 +49,18 @@ def encoded_payload() -> bytes:
     raw = json.dumps(
         build_payload(), ensure_ascii=False, sort_keys=True, separators=(",", ":")
     ).encode("utf-8")
-    return gzip.compress(raw, compresslevel=9, mtime=0)
+    # GzipFile consistently writes OS=255. gzip.compress(mtime=0) uses the
+    # platform zlib OS byte on Python 3.11/3.12, breaking cross-platform --check.
+    output = io.BytesIO()
+    with gzip.GzipFile(fileobj=output, mode="wb", compresslevel=9, mtime=0) as stream:
+        stream.write(raw)
+    return output.getvalue()
 
 
 def main() -> int:
     args = parse_args()
     payload = build_payload()
-    raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    expected = gzip.compress(raw, compresslevel=9, mtime=0)
+    expected = encoded_payload()
     target = SEARCH_CONTENT_INDEX
     if args.check:
         if not target.is_file() or target.read_bytes() != expected:

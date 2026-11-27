@@ -16,14 +16,14 @@ __pycache__/
 .coverage.*
 coverage.xml
 htmlcov/
-build/
+/build/
 dist/
 *.egg-info/
 
 # Virtual environments
 .venv/
 venv/
-env/
+/env/
 
 # Temporary and diagnostic files
 *.tmp
