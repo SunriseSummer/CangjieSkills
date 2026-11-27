@@ -1,0 +1,222 @@
+{
+  "format": 1,
+  "description": "Author-curated development queries only. Not the hidden evaluation set. Positives are file-level labels, negatives mined from unthresholded native candidate recall. These small labels demonstrate offline fitting; they do not establish broad semantic generalization.",
+  "queries": [
+    {
+      "query": "ArrayList reverse",
+      "relevant_paths": [
+        "references/api/std/collection/classes/arraylist/reverse.md"
+      ]
+    },
+    {
+      "query": "把 ArrayList 中元素反转",
+      "relevant_paths": [
+        "references/api/std/collection/classes/arraylist/reverse.md"
+      ]
+    },
+    {
+      "query": "HashMap get 安全读取键值",
+      "relevant_paths": [
+        "references/api/std/collection/classes/hashmap/get.md"
+      ]
+    },
+    {
+      "query": "HashMap contains 查询键是否存在",
+      "relevant_paths": [
+        "references/api/std/collection/classes/hashmap/contains.md"
+      ]
+    },
+    {
+      "query": "AtomicInt64 fetchAdd",
+      "relevant_paths": [
+        "references/api/std/sync/classes/atomicint64/fetchadd.md"
+      ]
+    },
+    {
+      "query": "原子整数 AtomicInt64 加法",
+      "relevant_paths": [
+        "references/api/std/sync/classes/atomicint64/fetchadd.md"
+      ]
+    },
+    {
+      "query": "File readFrom 读取文件",
+      "relevant_paths": [
+        "references/api/std/fs/classes/file/readfrom.md"
+      ]
+    },
+    {
+      "query": "File writeTo 文件写入",
+      "relevant_paths": [
+        "references/api/std/fs/classes/file/writeto.md"
+      ]
+    },
+    {
+      "query": "Directory walk 递归目录",
+      "relevant_paths": [
+        "references/api/std/fs/classes/directory/walk.md"
+      ]
+    },
+    {
+      "query": "JsonValue fromStr 解析字符串",
+      "relevant_paths": [
+        "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md"
+      ]
+    },
+    {
+      "query": "JsonValue asObject 转对象",
+      "relevant_paths": [
+        "references/api/stdx/encoding/json/classes/jsonvalue/asobject.md"
+      ]
+    },
+    {
+      "query": "JsonValue asString 取字符串",
+      "relevant_paths": [
+        "references/api/stdx/encoding/json/classes/jsonvalue/asstring.md"
+      ]
+    },
+    {
+      "query": "JsonValue toJsonString 序列化",
+      "relevant_paths": [
+        "references/api/stdx/encoding/json/classes/jsonvalue/tojsonstring.md"
+      ]
+    },
+    {
+      "query": "Regex findAll 正则匹配",
+      "relevant_paths": [
+        "references/api/std/regex/classes/regex/findall.md"
+      ]
+    },
+    {
+      "query": "Regex replaceAll 替换所有匹配",
+      "relevant_paths": [
+        "references/api/std/regex/classes/regex/replaceall.md"
+      ]
+    },
+    {
+      "query": "MonoTime now 计时",
+      "relevant_paths": [
+        "references/api/std/time/structs/monotime/now.md"
+      ]
+    },
+    {
+      "query": "Mutex lock 获取互斥锁",
+      "relevant_paths": [
+        "references/api/std/sync/classes/mutex/lock.md"
+      ]
+    },
+    {
+      "query": "Mutex unlock 释放互斥锁",
+      "relevant_paths": [
+        "references/api/std/sync/classes/mutex/unlock.md"
+      ]
+    },
+    {
+      "query": "Decimal reScale 小数位",
+      "relevant_paths": [
+        "references/api/std/math-numeric/structs/decimal/rescale.md"
+      ]
+    },
+    {
+      "query": "Logger info 日志",
+      "relevant_paths": [
+        "references/api/stdx/log/classes/logger/info.md"
+      ]
+    },
+    {
+      "query": "创建最小仓颉可执行工程",
+      "relevant_paths": [
+        "references/examples/project-build/cjpm-minimal.md"
+      ]
+    },
+    {
+      "query": "闭包保存可变状态",
+      "relevant_paths": [
+        "references/examples/functions/closure-state.md"
+      ]
+    },
+    {
+      "query": "组合多个泛型接口约束",
+      "relevant_paths": [
+        "references/examples/abstractions/generic-constraint.md"
+      ]
+    },
+    {
+      "query": "HashMap 统计词频",
+      "relevant_paths": [
+        "references/examples/collections/hashmap-counting.md"
+      ]
+    },
+    {
+      "query": "安全读取 HashMap",
+      "relevant_paths": [
+        "references/examples/collections/hashmap-safe-get.md"
+      ]
+    },
+    {
+      "query": "解构遍历 HashMap 键值",
+      "relevant_paths": [
+        "references/examples/collections/hashmap-tuple-iteration.md"
+      ]
+    },
+    {
+      "query": "自定义应用异常并报告",
+      "relevant_paths": [
+        "references/examples/failure/custom-exception.md"
+      ]
+    },
+    {
+      "query": "cjpm build 选项",
+      "relevant_paths": [
+        "references/tools/cjpm/3-常用命令选项表/3-1-build-选项.md"
+      ]
+    },
+    {
+      "query": "cjpm run 选项",
+      "relevant_paths": [
+        "references/tools/cjpm/3-常用命令选项表/3-2-run-选项.md"
+      ]
+    },
+    {
+      "query": "cjpm test 选项",
+      "relevant_paths": [
+        "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md"
+      ]
+    },
+    {
+      "query": "泛型 where 接口约束",
+      "relevant_paths": [
+        "references/language/generic/7-泛型约束/7-3-接口约束.md"
+      ]
+    },
+    {
+      "query": "struct 值类型引用类型有什么区别",
+      "relevant_paths": [
+        "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md"
+      ]
+    },
+    {
+      "query": "const 变量如何定义",
+      "relevant_paths": [
+        "references/language/basic_concepts/2-程序结构/2-3-const-变量.md"
+      ]
+    },
+    {
+      "query": "使用反引号的原始标识符",
+      "relevant_paths": [
+        "references/language/basic_concepts/1-标识符/1-2-原始标识符.md"
+      ]
+    },
+    {
+      "query": "ArrayList 尾部追加元素",
+      "relevant_paths": [
+        "references/language/collections/arraylist/5-添加元素/5-1-尾部追加.md"
+      ]
+    },
+    {
+      "query": "ArrayList 容量预分配",
+      "relevant_paths": [
+        "references/language/collections/arraylist/7-容量管理/7-1-构造时预分配.md"
+      ]
+    }
+  ]
+}

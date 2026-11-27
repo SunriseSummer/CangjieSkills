@@ -64,6 +64,7 @@ python scripts/search_docs.py --query "HashMap tuple iteration" --view leaves
 - [技术架构](docs/architecture.md)：知识分层、双后端检索、数据库及发布边界。
 - [测试指南](docs/testing.md)：示例标记、执行能力、质量门禁和查询评测。
 - [维护指南](docs/maintenance.md)：知识修改、索引维护、构建发布与升级流程。
+- [CPU 文档决策检索实验](docs/retrieval-model.md)：独立的 C++ 路径召回与小型学习排序器、离线训练和对照评测，不改变当前发布入口。
 
 基础构建仅依赖 Python 3.11+ 及其标准库：
 

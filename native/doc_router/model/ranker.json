@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "type": "pairwise-linear",
+  "description": "Twelve-feature linear ranker fitted offline with pairwise logistic loss and an L2 anchor to interpretable initial coefficients. Bilingual aliases and abstention remain explicit rules, not learned semantic representations.",
+  "feature_names": [
+    "log_bm25",
+    "raw_coverage",
+    "title_coverage",
+    "receiver_match",
+    "member_match",
+    "alias_coverage",
+    "exact_selector",
+    "is_leaf",
+    "broad_root",
+    "symbol_pair",
+    "domain_match",
+    "ascii_coverage"
+  ],
+  "weights": [
+    1.24192396,
+    3.08499315,
+    2.15448058,
+    2.94159397,
+    1.98514173,
+    1.01029688,
+    8.00015235,
+    0.34589063,
+    -2.01484383,
+    3.99771222,
+    1.02301316,
+    1.05269799
+  ],
+  "training": {
+    "data": "native/doc_router/model/training_queries.json",
+    "data_sha256": "d999d68c40144ac971b83feefc848b318ddfddaf63be6902f63cf68bb97a603f",
+    "queries": 36,
+    "pairs": 2268,
+    "negative_mining": "native BM25 top-k plus forced positive labels",
+    "negatives_per_query": 64,
+    "epochs": 400,
+    "learning_rate": 0.25,
+    "l2_anchor": 0.03,
+    "prior_weights": [
+      1.0,
+      3.0,
+      2.0,
+      3.0,
+      2.0,
+      1.0,
+      8.0,
+      0.3,
+      -2.0,
+      4.0,
+      1.0,
+      1.0
+    ],
+    "initial_loss": 0.0210183,
+    "final_loss": 0.01894197
+  }
+}

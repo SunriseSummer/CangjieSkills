@@ -1,0 +1,3399 @@
+{
+  "schema": 1,
+  "created_at_utc": "2026-11-27T03:50:28.767744+00:00",
+  "methodology": {
+    "dataset": "scripts/tests/data/router-queries.json",
+    "dataset_sha256": "87959e2f1e3e072a967d226b47886952918e5f2d448a5aa921c52780bf6362a6",
+    "description": "Independent manually authored synthetic query-holdout, not document-holdout or real-user traffic; not training data.",
+    "label_semantics": "Any listed page is useful; labels are alternatives, not exhaustive set recall.",
+    "scope": "Independent manually authored synthetic query-holdout, not document-holdout or real user traffic. No training is performed here.",
+    "output_contracts": "Native returns compact paths; unchanged Python emits signatures/snippets and metadata. Timings compare end-to-end CLIs, not isolated scorers.",
+    "memory": "Per-child peak RSS from os.wait4 on Linux; no cumulative RUSAGE_CHILDREN maximum.",
+    "top_k": 5,
+    "negative_denominator_separate": true,
+    "native_ranking": "Recommended default: native BM25 with structural/alias recall; --bm25-only is an explicit alias.",
+    "learned_ranking": "Frozen experimental model, enabled only by --learned-ranker. Independent holdout favored BM25; used for algorithm selection, never weight/alias tuning.",
+    "timing": "Cold means a fresh process with index/database load, not a flushed OS filesystem cache. Batch latency is not per-query warm latency. CPU/RSS samples are per child."
+  },
+  "environment": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "logical_cpus": 9,
+    "python": "3.12.14",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "artifacts": {
+    "native_index_sha256": "97de1bd8fefe95d2bc5849be3396d80514841d6542d1b66f0b3b4bea898f1c42",
+    "native_binary_sha256": "34480973a47f134435e5123247326447fcabf8847034d2f975e404b3f9aefc80",
+    "baseline_entrypoint_sha256": "0587b79001922a7ab463e107260c489a656c6e54ab93f3571518aba995ce3d52"
+  },
+  "native": {
+    "positive_queries": {
+      "queries": 58,
+      "hit_at_1": 0.741379,
+      "hit_at_5": 0.844828,
+      "mrr_at_5": 0.787356,
+      "abstentions": 7
+    },
+    "negative_queries": {
+      "queries": 8,
+      "correct_abstentions": 6,
+      "abstention_accuracy": 0.75
+    },
+    "categories": {
+      "exact": {
+        "queries": 12,
+        "hit_at_1": 1.0,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 1.0,
+        "abstentions": 0
+      },
+      "natural": {
+        "queries": 16,
+        "hit_at_1": 0.5625,
+        "hit_at_5": 0.75,
+        "mrr_at_5": 0.65625,
+        "abstentions": 4
+      },
+      "conceptual": {
+        "queries": 12,
+        "hit_at_1": 0.5,
+        "hit_at_5": 0.666667,
+        "mrr_at_5": 0.569444,
+        "abstentions": 3
+      },
+      "mixed": {
+        "queries": 12,
+        "hit_at_1": 0.916667,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 0.944444,
+        "abstentions": 0
+      },
+      "ambiguous": {
+        "queries": 6,
+        "hit_at_1": 0.833333,
+        "hit_at_5": 0.833333,
+        "mrr_at_5": 0.833333,
+        "abstentions": 0
+      }
+    },
+    "invalid_result_paths": [],
+    "details": [
+      {
+        "id": "exact-01",
+        "category": "exact",
+        "query": "ArrayList.reverse",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/collection/classes/arraylist/reverse.md",
+          "references/language/collections/arraylist/9-反转.md",
+          "references/api/std/collection/classes/linkedlist/reverse.md"
+        ],
+        "relevant": [
+          "references/api/std/collection/classes/arraylist/reverse.md",
+          "references/language/collections/arraylist/9-反转.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-02",
+        "category": "exact",
+        "query": "HashMap.get",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/collection/classes/hashmap/get.md",
+          "references/examples/collections/hashmap-safe-get.md",
+          "references/examples/collections/hashmap-counting.md",
+          "references/api/stdx/encoding/json/classes/jsonobject/getfields.md",
+          "references/api/std/collection/classes/hashmap/operator-indexer.md"
+        ],
+        "relevant": [
+          "references/api/std/collection/classes/hashmap/get.md",
+          "references/language/collections/hashmap/5-查询/5-2-安全访问-get.md",
+          "references/examples/collections/hashmap-safe-get.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-03",
+        "category": "exact",
+        "query": "AtomicInt64.fetchAdd",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sync/classes/atomicint64/fetchadd.md"
+        ],
+        "relevant": [
+          "references/api/std/sync/classes/atomicint64/fetchadd.md",
+          "references/examples/concurrency/atomic-counter.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-04",
+        "category": "exact",
+        "query": "DateTime.parse",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/time/structs/datetime/parse.md"
+        ],
+        "relevant": [
+          "references/api/std/time/structs/datetime/parse.md",
+          "references/examples/time/datetime-parse.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-05",
+        "category": "exact",
+        "query": "Directory.walk",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/fs/classes/directory/walk.md"
+        ],
+        "relevant": [
+          "references/api/std/fs/classes/directory/walk.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-06",
+        "category": "exact",
+        "query": "Regex.findAll",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/regex/classes/regex/findall.md"
+        ],
+        "relevant": [
+          "references/api/std/regex/classes/regex/findall.md",
+          "references/examples/text/regex-find-all.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-07",
+        "category": "exact",
+        "query": "String.toAsciiLower",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/core/structs/string/toasciilower.md"
+        ],
+        "relevant": [
+          "references/api/std/core/structs/string/toasciilower.md",
+          "references/language/string/10-大小写转换.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-08",
+        "category": "exact",
+        "query": "SHA256.reset",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md"
+        ],
+        "relevant": [
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-09",
+        "category": "exact",
+        "query": "WeakRef.clear",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/ref/classes/weakref/clear.md",
+          "references/api/std/ref/classes/weakref/index.md",
+          "references/api/std/ref/classes/weakref/prop-value.md",
+          "references/api/std/ref/classes/weakref/prop-cleanuppolicy.md",
+          "references/api/std/ref/classes/weakref/init.md"
+        ],
+        "relevant": [
+          "references/api/std/ref/classes/weakref/clear.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-10",
+        "category": "exact",
+        "query": "HttpRequestBuilder.build",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/net/http/classes/httprequestbuilder/build.md"
+        ],
+        "relevant": [
+          "references/api/stdx/net/http/classes/httprequestbuilder/build.md",
+          "references/examples/network/http-request.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-11",
+        "category": "exact",
+        "query": "TcpSocket.connect",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/net/classes/tcpsocket/connect.md"
+        ],
+        "relevant": [
+          "references/api/std/net/classes/tcpsocket/connect.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-12",
+        "category": "exact",
+        "query": "Condition.waitUntil",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sync/interfaces/condition/waituntil.md"
+        ],
+        "relevant": [
+          "references/api/std/sync/interfaces/condition/waituntil.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-01",
+        "category": "natural",
+        "query": "仓颉里闭包可以带着可变局部变量返回吗",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/language/function/5-闭包/5-2-什么算作变量捕获.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/language/function/5-闭包/index.md",
+          "references/language/function/5-闭包/5-3-什么不算作捕获.md",
+          "references/examples/functions/closure-state.md"
+        ],
+        "relevant": [
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-02",
+        "category": "natural",
+        "query": "怎么把文件里的所有字节读出来再恢复成 UTF-8 字符串",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/examples/files/file-read.md",
+          "references/api/std/fs/classes/file/readfrom.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-03",
+        "category": "natural",
+        "query": "怎样给结构体定义一个会修改自身字段的方法",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/struct/1-结构体定义/1-5-成员函数.md",
+          "references/language/interface/2-接口实现/2-6-mut-函数实现示例.md",
+          "references/language/struct/1-结构体定义/index.md",
+          "references/language/struct/index.md",
+          "references/language/struct/3-mut-函数/3-2-解决方案.md"
+        ],
+        "relevant": [
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/language/struct/3-mut-函数/index.md",
+          "references/examples/data-model/struct-mut.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-04",
+        "category": "natural",
+        "query": "调用函数时哪些参数允许写名称标签",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/function/2-函数调用/2-3-命名参数调用.md",
+          "references/language/function/2-函数调用/index.md"
+        ],
+        "relevant": [
+          "references/language/function/2-函数调用/2-3-命名参数调用.md",
+          "references/language/function/1-函数定义/1-2-参数列表.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-05",
+        "category": "natural",
+        "query": "我想等并发任务做完并拿到返回结果",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/concurrency/spawn-future.md",
+          "references/examples/concurrency/index.md",
+          "references/language/concurrency/2-创建线程/2-2-示例.md",
+          "references/examples/concurrency/concurrent-map-insert.md"
+        ],
+        "relevant": [
+          "references/api/std/core/classes/future/get.md",
+          "references/examples/concurrency/spawn-future.md",
+          "references/language/concurrency/2-创建线程/2-2-示例.md",
+          "references/language/concurrency/6-访问线程/6-1-future-线程句柄.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-06",
+        "category": "natural",
+        "query": "如何在一个函数退出或抛异常时自动关闭资源",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md",
+          "references/examples/failure/try-resource.md",
+          "references/api/std/core/interfaces/resource/close.md",
+          "references/language/concurrency/4-同步机制/4-4-synchronized-关键字.md",
+          "references/api/std/database-sql/classes/pooleddatasource/prop-maxlifetime.md"
+        ],
+        "relevant": [
+          "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md",
+          "references/examples/failure/try-resource.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-07",
+        "category": "natural",
+        "query": "遍历哈希表时怎样同时取出键和值",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/collections/hashmap-tuple-iteration.md",
+          "references/language/collections/hashset/1-概述.md",
+          "references/api/std/collection/classes/hashmap/index.md",
+          "references/language/collections/hashmap/1-概述.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/index.md"
+        ],
+        "relevant": [
+          "references/examples/collections/hashmap-tuple-iteration.md",
+          "references/language/collections/hashmap/7-遍历.md",
+          "references/language/for/4-迭代进阶/4-1-元组解构.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-08",
+        "category": "natural",
+        "query": "怎样给现有类型补充另一个接口的实现",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/extend/3-接口扩展/3-1-基本语法.md",
+          "references/language/extend/3-接口扩展/index.md",
+          "references/language/interface/2-接口实现/2-2-可实现接口的类型.md"
+        ],
+        "relevant": [
+          "references/language/extend/3-接口扩展/3-1-基本语法.md",
+          "references/language/extend/3-接口扩展/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-09",
+        "category": "natural",
+        "query": "单元测试文件应该放在哪里，文件名有什么要求",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/tools/cjpm/5-测试与基准/index.md",
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/tools/cjpm/8-关键规则速查.md",
+          "references/api/std/unittest/classes/xmlreporter/index.md",
+          "references/examples/project-build/unit-test.md"
+        ],
+        "relevant": [
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/examples/project-build/unit-test.md",
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-10",
+        "category": "natural",
+        "query": "怎样一次格式化整个源代码目录",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/tools/cjfmt/index.md",
+          "references/tools/cjfmt/2-基本用法/2-2-目录格式化.md",
+          "references/examples/code-quality/index.md",
+          "references/tools/cjfmt/6-注意事项.md",
+          "references/tools/cjfmt/1-概述.md"
+        ],
+        "relevant": [
+          "references/tools/cjfmt/2-基本用法/2-2-目录格式化.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-11",
+        "category": "natural",
+        "query": "接口里已经有默认实现，多个父接口冲突时怎么办",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/interface/4-默认实现/4-4-菱形继承解决.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-12",
+        "category": "natural",
+        "query": "怎么把字符串变成任意精度十进制金额并控制小数位数",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/math-numeric/structs/decimal/index.md",
+          "references/api/std/math-numeric/structs/decimal/prop-precision.md",
+          "references/api/std/convert/interfaces/formattable/index.md",
+          "references/api/std/core/functions/print/print-float16-bool.md",
+          "references/api/std/core/functions/print/print-float32-bool.md"
+        ],
+        "relevant": [
+          "references/examples/numeric/exact-decimal-value.md",
+          "references/api/std/math-numeric/structs/decimal/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-13",
+        "category": "natural",
+        "query": "动态字符串很多次拼接应该选什么类型",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/string/12-拼接与重复/12-5-stringbuilder-高效拼接.md",
+          "references/api/std/core/classes/stringbuilder/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-14",
+        "category": "natural",
+        "query": "运行外部命令后怎样同时取得退出码、标准输出和错误输出",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/process/functions/executewithoutput-string-array-string-path-map-string-string-pr-9be6e6c3.md",
+          "references/api/std/process/classes/process/terminate.md",
+          "references/examples/cli-process/cli-exit-status.md",
+          "references/api/std/process/classes/subprocess/waitoutput.md",
+          "references/api/std/env/functions/getstdout.md"
+        ],
+        "relevant": [
+          "references/api/std/process/functions/executewithoutput-string-array-string-path-map-string-string-pr-9be6e6c3.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-15",
+        "category": "natural",
+        "query": "自定义异常类应该继承哪个基类",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/error_handle/1-异常层次与定义/1-2-自定义异常规则.md",
+          "references/language/error_handle/1-异常层次与定义/index.md",
+          "references/language/error_handle/1-异常层次与定义/1-1-两种基础异常类型.md"
+        ],
+        "relevant": [
+          "references/language/error_handle/1-异常层次与定义/1-2-自定义异常规则.md",
+          "references/language/error_handle/1-异常层次与定义/index.md",
+          "references/examples/failure/custom-exception.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-16",
+        "category": "natural",
+        "query": "一个集合怎样才能被 for in 循环遍历",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/for/3-iterable-与-iterator-接口/3-1-接口定义.md",
+          "references/language/for/3-iterable-与-iterator-接口/3-2-for-in-脱糖.md",
+          "references/language/for/5-自定义可迭代类型.md",
+          "references/api/std/core/interfaces/iterable/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-01",
+        "category": "conceptual",
+        "query": "Nothing 和 Unit 的区别",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/const/1-const-变量/1-2-与-let-var-的区别.md"
+        ],
+        "relevant": [
+          "references/language/basic_data_type/7-nothing-类型.md",
+          "references/language/basic_data_type/6-unit-类型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-02",
+        "category": "conceptual",
+        "query": "VArray 是值类型还是引用类型",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/basic_data_type/9-数组类型/9-2-varray-值类型.md",
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md"
+        ],
+        "relevant": [
+          "references/language/basic_data_type/9-数组类型/9-2-varray-值类型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-03",
+        "category": "conceptual",
+        "query": "整数转成另一种整数会自动隐式转换吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/type_system/4-类型转换/4-1-无隐式转换.md",
+          "references/language/type_system/4-类型转换/4-2-数值转换.md",
+          "references/language/basic_data_type/1-整数类型/1-6-数值类型转换.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-04",
+        "category": "conceptual",
+        "query": "泛型的多个接口约束怎么写",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/generic/7-泛型约束/7-3-接口约束.md",
+          "references/language/generic/7-泛型约束/7-5-规则.md",
+          "references/language/generic/7-泛型约束/index.md",
+          "references/examples/abstractions/generic-constraint.md",
+          "references/language/extend/3-接口扩展/3-5-接口扩展中的泛型约束.md"
+        ],
+        "relevant": [
+          "references/language/generic/7-泛型约束/7-2-语法.md",
+          "references/language/generic/7-泛型约束/7-3-接口约束.md",
+          "references/examples/abstractions/generic-constraint.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-05",
+        "category": "conceptual",
+        "query": "match case 后面可以加条件守卫吗",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md",
+          "references/language/pattern_match/1-match-表达式/index.md",
+          "references/language/pattern_match/1-match-表达式/1-2-无匹配值的-match.md",
+          "references/language/pattern_match/index.md",
+          "references/language/pattern_match/2-模式类型/2-1-常量模式.md"
+        ],
+        "relevant": [
+          "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-06",
+        "category": "conceptual",
+        "query": "Option 问号链遇到 None 会继续调用吗",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/option/5-解构方式/5-3-问号操作符.md",
+          "references/examples/failure/option-navigation.md"
+        ],
+        "relevant": [
+          "references/language/option/5-解构方式/5-3-问号操作符.md",
+          "references/examples/failure/option-navigation.md",
+          "references/language/option/5-解构方式/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-07",
+        "category": "conceptual",
+        "query": "as 类型转换失败时会抛异常还是返回空值",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/type_system/4-类型转换/4-5-as-运算符.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-08",
+        "category": "conceptual",
+        "query": "class 可以同时继承两个父类吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/class/3-继承/3-1-基本规则.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-09",
+        "category": "conceptual",
+        "query": "执行 let b = a 给 Array 赋值后，修改 b 的元素会影响 a 吗",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/language/collections/arraylist/7-容量管理/index.md",
+          "references/language/collections/arraylist/7-容量管理/overview.md",
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md",
+          "references/language/basic_concepts/2-程序结构/index.md",
+          "references/examples/data-model/struct-mut.md"
+        ],
+        "relevant": [
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md",
+          "references/language/basic_data_type/9-数组类型/9-1-array.md",
+          "references/language/collections/array/1-概述.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-10",
+        "category": "conceptual",
+        "query": "反射如何获取一个对象的 TypeInfo",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/api/std/reflect/classes/typeinfo/findannotation.md",
+          "references/language/reflect_and_annotation/index.md",
+          "references/api/std/reflect/classes/typeinfo/prop-modifiers.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md"
+        ],
+        "relevant": [
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/api/std/reflect/classes/classtypeinfo/of.md",
+          "references/api/std/reflect/classes/typeinfo/of.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-11",
+        "category": "conceptual",
+        "query": "普通函数能够修改 struct 的字段吗",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/language/extend/4-访问规则/4-3-扩展-struct-的-mut-函数.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "relevant": [
+          "references/language/struct/3-mut-函数/3-1-问题.md",
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/examples/data-model/struct-mut.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-12",
+        "category": "conceptual",
+        "query": "for 循环里的 where 和 if 过滤",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/for/4-迭代进阶/4-2-where-子句过滤.md",
+          "references/language/for/6-最优实践/6-3-where-替代-if.md"
+        ],
+        "relevant": [
+          "references/language/for/4-迭代进阶/4-2-where-子句过滤.md",
+          "references/language/for/6-最优实践/6-3-where-替代-if.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-01",
+        "category": "mixed",
+        "query": "sort tuples by two fields using a comparator",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/collections/sort-by-comparator.md",
+          "references/api/std/sort/index.md",
+          "references/api/std/sort/functions/sort/sort-t-list-t-t-t-ordering-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-array-t-t-t-ordering-bool-bool.md",
+          "references/api/std/sort/functions/sort/index.md"
+        ],
+        "relevant": [
+          "references/examples/collections/sort-by-comparator.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-02",
+        "category": "mixed",
+        "query": "reuse SHA256 after finish for another message",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md",
+          "references/api/stdx/crypto/digest/classes/sha256/index.md",
+          "references/examples/digests/sha256.md",
+          "references/api/stdx/crypto/digest/classes/sha256/write.md",
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md"
+        ],
+        "relevant": [
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md",
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md",
+          "references/examples/digests/sha256.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-03",
+        "category": "mixed",
+        "query": "Base64 decode text into bytes",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/encoding/base64.md",
+          "references/api/stdx/encoding/base64/index.md",
+          "references/api/stdx/encoding/base64/functions/tobase64string-array-byte.md",
+          "references/examples/encoding/index.md",
+          "references/api/stdx/encoding/base64/functions/frombase64string-string.md"
+        ],
+        "relevant": [
+          "references/api/stdx/encoding/base64/functions/frombase64string-string.md",
+          "references/examples/encoding/base64.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-04",
+        "category": "mixed",
+        "query": "ConcurrentHashMap AtomicInt64 per-key counter initialization",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/concurrency/concurrent-key-counter.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/replace.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/addifabsent.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/add.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/index.md"
+        ],
+        "relevant": [
+          "references/examples/concurrency/concurrent-key-counter.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-05",
+        "category": "mixed",
+        "query": "C FFI cjpm.toml link a native library",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-2-cjpm-toml-配置.md",
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/index.md",
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-5-不同平台的-cjpm-toml-配置.md",
+          "references/tools/cjpm/6-高级配置/6-2-c-语言-ffi-集成.md",
+          "references/examples/cffi/native-array.md"
+        ],
+        "relevant": [
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-2-cjpm-toml-配置.md",
+          "references/examples/cffi/native-array.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-06",
+        "category": "mixed",
+        "query": "macro package quote compile-macro project",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/macros/macro-package.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md"
+        ],
+        "relevant": [
+          "references/examples/macros/macro-package.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-07",
+        "category": "mixed",
+        "query": "JsonValue.fromStr strict JSON validation",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md",
+          "references/examples/json/json-parse.md",
+          "references/examples/json/json-kind-validation.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/kind.md"
+        ],
+        "relevant": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md",
+          "references/examples/json/json-parse.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-08",
+        "category": "mixed",
+        "query": "ArrayList sort lessThan lambda",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/api/std/sort/index.md",
+          "references/api/std/sort/functions/sort/index.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-bool-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-bool-bool-where-t-comparable-t.md",
+          "references/examples/collections/sort-by-comparator.md"
+        ],
+        "relevant": [
+          "references/examples/collections/sort-by-comparator.md",
+          "references/language/collections/arraylist/15-排序/15-1-使用-std-sort.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-bool-bool-bool.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-09",
+        "category": "mixed",
+        "query": "logger info JSON fields global logger",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/logging/global-logger.md",
+          "references/api/stdx/encoding/json/classes/jsonobject/getfields.md",
+          "references/api/stdx/log/classes/logger/info.md",
+          "references/api/stdx/encoding/json/classes/jsonobject/size.md",
+          "references/api/stdx/logger/classes/jsonlogger/index.md"
+        ],
+        "relevant": [
+          "references/examples/logging/global-logger.md",
+          "references/api/stdx/log/classes/logger/info.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-10",
+        "category": "mixed",
+        "query": "cjpm test succeeds but TOTAL 0 tests",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/api/std/unittest/classes/testsuite/runtests.md",
+          "references/api/std/unittest/classes/testgroup/runtests.md",
+          "references/tools/cjpm/3-常用命令选项表/index.md",
+          "references/language/cffi/build/4-完整示例/4-2-windows-完整编译流程.md"
+        ],
+        "relevant": [
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/examples/project-build/unit-test.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-11",
+        "category": "mixed",
+        "query": "decode bytes with String.fromUtf8 and reject invalid UTF-8",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/string/4-静态方法/4-2-fromutf8-从-utf-8-字节数组构造.md",
+          "references/api/std/core/structs/string/fromutf8.md",
+          "references/api/std/core/intrinsics/rune/fromutf8.md",
+          "references/api/std/core/structs/string/fromutf8unchecked.md",
+          "references/examples/files/file-read.md"
+        ],
+        "relevant": [
+          "references/language/string/4-静态方法/4-2-fromutf8-从-utf-8-字节数组构造.md",
+          "references/api/std/core/structs/string/fromutf8.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-12",
+        "category": "mixed",
+        "query": "Mutex Condition wait notifyAll bounded queue close drain",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/concurrency/bounded-channel-lifecycle.md",
+          "references/language/concurrency/4-同步机制/4-3-条件变量-condition.md",
+          "references/api/std/sync/interfaces/condition/notifyall.md"
+        ],
+        "relevant": [
+          "references/examples/concurrency/bounded-channel-lifecycle.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-01",
+        "category": "ambiguous",
+        "query": "闭包",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/index.md",
+          "references/language/function/5-闭包/5-1-定义.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/language/function/index.md"
+        ],
+        "relevant": [
+          "references/language/function/5-闭包/index.md",
+          "references/language/function/5-闭包/5-1-定义.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-02",
+        "category": "ambiguous",
+        "query": "反射",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md",
+          "references/language/reflect_and_annotation/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/overview.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/examples/reflection/index.md"
+        ],
+        "relevant": [
+          "references/language/reflect_and_annotation/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md",
+          "references/api/std/reflect/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/overview.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-03",
+        "category": "ambiguous",
+        "query": "JSON",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/stdx/encoding/json-stream/classes/jsonwriter/jsonvalue.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/tojsonstring.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asarray.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asbool.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asfloat.md"
+        ],
+        "relevant": [
+          "references/examples/json/index.md",
+          "references/api/stdx/encoding/json/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-04",
+        "category": "ambiguous",
+        "query": "并发",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/concurrency/index.md"
+        ],
+        "relevant": [
+          "references/language/concurrency/index.md",
+          "references/examples/concurrency/index.md",
+          "references/language/concurrency/1-并发概述/index.md",
+          "references/language/concurrency/1-并发概述/1-1-线程模型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-05",
+        "category": "ambiguous",
+        "query": "泛型",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/generic/index.md"
+        ],
+        "relevant": [
+          "references/language/generic/index.md",
+          "references/language/generic/1-泛型概述/index.md",
+          "references/language/generic/1-泛型概述/1-1-核心概念.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-06",
+        "category": "ambiguous",
+        "query": "cjdb 断点",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/tools/cjdb/3-断点/3-2-函数断点.md",
+          "references/tools/cjdb/3-断点/3-1-源码断点.md",
+          "references/tools/cjdb/3-断点/index.md",
+          "references/tools/cjdb/3-断点/3-3-条件断点.md",
+          "references/tools/cjdb/3-断点/3-4-继续执行.md"
+        ],
+        "relevant": [
+          "references/tools/cjdb/index.md",
+          "references/tools/cjdb/3-断点/index.md",
+          "references/tools/cjdb/3-断点/3-1-源码断点.md",
+          "references/tools/cjdb/3-断点/3-2-函数断点.md",
+          "references/tools/cjdb/3-断点/3-3-条件断点.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "negative-01",
+        "category": "negative",
+        "query": "今晚上海会不会下雨",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-02",
+        "category": "negative",
+        "query": "推荐一家附近的火锅店",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/tools/cjcov/2-基本流程/2-2-多文件-项目场景-推荐使用-cjpm.md",
+          "references/tools/cjcov/2-基本流程/index.md"
+        ],
+        "relevant": [],
+        "abstained": false
+      },
+      {
+        "id": "negative-03",
+        "category": "negative",
+        "query": "How many moons does Jupiter have?",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/stdx/net/http/structs/httpstatuscode/field-status_too_many_requests.md"
+        ],
+        "relevant": [],
+        "abstained": false
+      },
+      {
+        "id": "negative-04",
+        "category": "negative",
+        "query": "Python pandas dataframe groupby 使用方法",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-05",
+        "category": "negative",
+        "query": "Rust borrow checker lifetime tutorial",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-06",
+        "category": "negative",
+        "query": "帮我分析这支股票明天涨跌",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-07",
+        "category": "negative",
+        "query": "zqxvplm_nonexistent_symbol_927",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-08",
+        "category": "negative",
+        "query": "我家猫为什么不吃饭",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      }
+    ]
+  },
+  "python_baseline": {
+    "positive_queries": {
+      "queries": 58,
+      "hit_at_1": 0.431034,
+      "hit_at_5": 0.672414,
+      "mrr_at_5": 0.516092,
+      "abstentions": 9
+    },
+    "negative_queries": {
+      "queries": 8,
+      "correct_abstentions": 6,
+      "abstention_accuracy": 0.75
+    },
+    "categories": {
+      "exact": {
+        "queries": 12,
+        "hit_at_1": 1.0,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 1.0,
+        "abstentions": 0
+      },
+      "natural": {
+        "queries": 16,
+        "hit_at_1": 0.125,
+        "hit_at_5": 0.25,
+        "mrr_at_5": 0.171875,
+        "abstentions": 7
+      },
+      "conceptual": {
+        "queries": 12,
+        "hit_at_1": 0.083333,
+        "hit_at_5": 0.666667,
+        "mrr_at_5": 0.2875,
+        "abstentions": 2
+      },
+      "mixed": {
+        "queries": 12,
+        "hit_at_1": 0.5,
+        "hit_at_5": 0.833333,
+        "mrr_at_5": 0.627778,
+        "abstentions": 0
+      },
+      "ambiguous": {
+        "queries": 6,
+        "hit_at_1": 0.666667,
+        "hit_at_5": 0.833333,
+        "mrr_at_5": 0.7,
+        "abstentions": 0
+      }
+    },
+    "invalid_result_paths": [],
+    "details": [
+      {
+        "id": "exact-01",
+        "category": "exact",
+        "query": "ArrayList.reverse",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/collection/classes/arraylist/reverse.md",
+          "references/language/collections/arraylist/index.md",
+          "references/api/std/collection/classes/arraylist/index.md",
+          "references/language/collections/arraylist/9-反转.md",
+          "references/language/collections/arraylist/11-转换/11-1-转为-array.md"
+        ],
+        "relevant": [
+          "references/api/std/collection/classes/arraylist/reverse.md",
+          "references/language/collections/arraylist/9-反转.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-02",
+        "category": "exact",
+        "query": "HashMap.get",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/collection/classes/hashmap/get.md",
+          "references/language/collections/hashmap/index.md",
+          "references/examples/collections/hashmap-safe-get.md",
+          "references/language/collections/hashmap/5-查询/5-2-安全访问-get.md",
+          "references/api/std/collection/classes/hashmap/operator-indexer.md"
+        ],
+        "relevant": [
+          "references/api/std/collection/classes/hashmap/get.md",
+          "references/language/collections/hashmap/5-查询/5-2-安全访问-get.md",
+          "references/examples/collections/hashmap-safe-get.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-03",
+        "category": "exact",
+        "query": "AtomicInt64.fetchAdd",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sync/classes/atomicint64/fetchadd.md",
+          "references/api/std/sync/classes/atomicint64/index.md",
+          "references/examples/concurrency/atomic-counter.md",
+          "references/examples/concurrency/concurrent-key-counter.md",
+          "references/language/concurrency/4-同步机制/4-1-原子操作.md"
+        ],
+        "relevant": [
+          "references/api/std/sync/classes/atomicint64/fetchadd.md",
+          "references/examples/concurrency/atomic-counter.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-04",
+        "category": "exact",
+        "query": "DateTime.parse",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/time/structs/datetime/parse.md",
+          "references/api/std/time/structs/datetime/index.md",
+          "references/examples/time/datetime-parse.md",
+          "references/api/stdx/encoding/json-stream/interfaces/jsondeserializable/fromjson/fromjson-0fbba982a4.md",
+          "references/examples/time/index.md"
+        ],
+        "relevant": [
+          "references/api/std/time/structs/datetime/parse.md",
+          "references/examples/time/datetime-parse.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-05",
+        "category": "exact",
+        "query": "Directory.walk",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/fs/classes/directory/walk.md",
+          "references/api/std/fs/classes/directory/index.md",
+          "references/examples/files/recursive-directory-walk.md",
+          "references/api/std/fs/classes/directory/readfrom.md",
+          "references/examples/files/index.md"
+        ],
+        "relevant": [
+          "references/api/std/fs/classes/directory/walk.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-06",
+        "category": "exact",
+        "query": "Regex.findAll",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/regex/classes/regex/findall.md",
+          "references/api/std/regex/classes/regex/lazyfindall.md",
+          "references/api/std/regex/classes/regex/index.md",
+          "references/examples/text/regex-find-all.md",
+          "references/examples/text/index.md"
+        ],
+        "relevant": [
+          "references/api/std/regex/classes/regex/findall.md",
+          "references/examples/text/regex-find-all.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-07",
+        "category": "exact",
+        "query": "String.toAsciiLower",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/core/structs/string/toasciilower.md",
+          "references/language/string/index.md",
+          "references/api/std/core/structs/string/index.md",
+          "references/language/string/10-大小写转换.md",
+          "references/language/for/4-迭代进阶/4-4-string-迭代.md"
+        ],
+        "relevant": [
+          "references/api/std/core/structs/string/toasciilower.md",
+          "references/language/string/10-大小写转换.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-08",
+        "category": "exact",
+        "query": "SHA256.reset",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md",
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md",
+          "references/api/stdx/crypto/digest/classes/sha256/index.md",
+          "references/examples/digests/sha256.md",
+          "references/examples/digests/index.md"
+        ],
+        "relevant": [
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-09",
+        "category": "exact",
+        "query": "WeakRef.clear",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/ref/classes/weakref/clear.md",
+          "references/api/std/ref/classes/weakref/index.md",
+          "references/api/std/ref/classes/weakref/init.md",
+          "references/api/std/ref/classes/weakref/prop-cleanuppolicy.md",
+          "references/api/std/ref/classes/weakref/prop-value.md"
+        ],
+        "relevant": [
+          "references/api/std/ref/classes/weakref/clear.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-10",
+        "category": "exact",
+        "query": "HttpRequestBuilder.build",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/net/http/classes/httprequestbuilder/build.md",
+          "references/api/stdx/net/http/classes/httprequestbuilder/index.md",
+          "references/examples/network/compressed-json-http-roundtrip.md",
+          "references/examples/network/http-local-roundtrip.md",
+          "references/examples/network/http-request.md"
+        ],
+        "relevant": [
+          "references/api/stdx/net/http/classes/httprequestbuilder/build.md",
+          "references/examples/network/http-request.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-11",
+        "category": "exact",
+        "query": "TcpSocket.connect",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/net/classes/tcpsocket/connect.md",
+          "references/api/std/net/classes/tcpsocket/index.md",
+          "references/api/std/net/classes/tcpsocket/close.md",
+          "references/api/std/net/classes/tcpsocket/getsocketoption.md",
+          "references/api/std/net/classes/tcpsocket/getsocketoptionbool.md"
+        ],
+        "relevant": [
+          "references/api/std/net/classes/tcpsocket/connect.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-12",
+        "category": "exact",
+        "query": "Condition.waitUntil",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sync/interfaces/condition/waituntil.md",
+          "references/api/std/sync/interfaces/condition/index.md",
+          "references/language/concurrency/4-同步机制/4-3-条件变量-condition.md",
+          "references/api/std/ast/classes/annotation/prop-condition.md",
+          "references/api/std/ast/classes/dowhileexpr/prop-condition.md"
+        ],
+        "relevant": [
+          "references/api/std/sync/interfaces/condition/waituntil.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-01",
+        "category": "natural",
+        "query": "仓颉里闭包可以带着可变局部变量返回吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-02",
+        "category": "natural",
+        "query": "怎么把文件里的所有字节读出来再恢复成 UTF-8 字符串",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/basic_data_type/5-字符串类型/5-5-字符串迭代.md",
+          "references/language/basic_data_type/4-字符类型-rune/支持的运算.md",
+          "references/examples/encoding/base64.md",
+          "references/examples/text/rune-code-point.md",
+          "references/language/string/2-构造.md"
+        ],
+        "relevant": [
+          "references/examples/files/file-read.md",
+          "references/api/std/fs/classes/file/readfrom.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-03",
+        "category": "natural",
+        "query": "怎样给结构体定义一个会修改自身字段的方法",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/language/struct/3-mut-函数/index.md",
+          "references/examples/data-model/struct-mut.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-04",
+        "category": "natural",
+        "query": "调用函数时哪些参数允许写名称标签",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/function/1-函数定义/1-2-参数列表.md",
+          "references/language/function/2-函数调用/2-3-命名参数调用.md",
+          "references/language/function/1-函数定义/index.md",
+          "references/language/function/2-函数调用/index.md"
+        ],
+        "relevant": [
+          "references/language/function/2-函数调用/2-3-命名参数调用.md",
+          "references/language/function/1-函数定义/1-2-参数列表.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-05",
+        "category": "natural",
+        "query": "我想等并发任务做完并拿到返回结果",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/api/std/core/classes/future/get.md",
+          "references/examples/concurrency/spawn-future.md",
+          "references/language/concurrency/2-创建线程/2-2-示例.md",
+          "references/language/concurrency/6-访问线程/6-1-future-线程句柄.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-06",
+        "category": "natural",
+        "query": "如何在一个函数退出或抛异常时自动关闭资源",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md",
+          "references/examples/failure/try-resource.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-07",
+        "category": "natural",
+        "query": "遍历哈希表时怎样同时取出键和值",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/collections/hashmap-tuple-iteration.md"
+        ],
+        "relevant": [
+          "references/examples/collections/hashmap-tuple-iteration.md",
+          "references/language/collections/hashmap/7-遍历.md",
+          "references/language/for/4-迭代进阶/4-1-元组解构.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-08",
+        "category": "natural",
+        "query": "怎样给现有类型补充另一个接口的实现",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/extend/3-接口扩展/3-1-基本语法.md",
+          "references/language/extend/3-接口扩展/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-09",
+        "category": "natural",
+        "query": "单元测试文件应该放在哪里，文件名有什么要求",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/cffi/build/0-各平台库文件命名对照.md",
+          "references/api/std/fs/functions/copy.md",
+          "references/api/stdx/net/tls/structs/tlsserverconfig/index.md",
+          "references/api/std/core/index.md",
+          "references/language/cffi/build/index.md"
+        ],
+        "relevant": [
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/examples/project-build/unit-test.md",
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-10",
+        "category": "natural",
+        "query": "怎样一次格式化整个源代码目录",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/tools/cjfmt/2-基本用法/2-2-目录格式化.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-11",
+        "category": "natural",
+        "query": "接口里已经有默认实现，多个父接口冲突时怎么办",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/extend/3-接口扩展/3-2-实现多个接口.md",
+          "references/language/for/3-iterable-与-iterator-接口/3-3-已实现-iterable-的内置类型.md",
+          "references/language/interface/1-接口定义/1-2-接口定义与实现示例.md",
+          "references/language/interface/2-接口实现/2-1-基本实现.md",
+          "references/language/interface/2-接口实现/2-2-可实现接口的类型.md"
+        ],
+        "relevant": [
+          "references/language/interface/4-默认实现/4-4-菱形继承解决.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-12",
+        "category": "natural",
+        "query": "怎么把字符串变成任意精度十进制金额并控制小数位数",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/examples/numeric/exact-decimal-value.md",
+          "references/api/std/math-numeric/structs/decimal/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-13",
+        "category": "natural",
+        "query": "动态字符串很多次拼接应该选什么类型",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/unittest-mock/classes/orderedverifier/index.md",
+          "references/api/std/unittest-mock/classes/unorderedverifier/index.md",
+          "references/api/std/reflect/index.md",
+          "references/language/class/3-继承/3-4-重写与重定义.md",
+          "references/language/collections/arraylist/1-概述.md"
+        ],
+        "relevant": [
+          "references/language/string/12-拼接与重复/12-5-stringbuilder-高效拼接.md",
+          "references/api/std/core/classes/stringbuilder/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-14",
+        "category": "natural",
+        "query": "运行外部命令后怎样同时取得退出码、标准输出和错误输出",
+        "first_relevant_rank": 4,
+        "paths": [
+          "references/examples/cli-process/command-line-arguments.md",
+          "references/examples/code-quality/format-lint-gate.md",
+          "references/api/std/process/functions/execute-string-array-string-path-map-string-string-processredir-d51f810c.md",
+          "references/api/std/process/functions/executewithoutput-string-array-string-path-map-string-string-pr-9be6e6c3.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md"
+        ],
+        "relevant": [
+          "references/api/std/process/functions/executewithoutput-string-array-string-path-map-string-string-pr-9be6e6c3.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-15",
+        "category": "natural",
+        "query": "自定义异常类应该继承哪个基类",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/core/index.md"
+        ],
+        "relevant": [
+          "references/language/error_handle/1-异常层次与定义/1-2-自定义异常规则.md",
+          "references/language/error_handle/1-异常层次与定义/index.md",
+          "references/examples/failure/custom-exception.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-16",
+        "category": "natural",
+        "query": "一个集合怎样才能被 for in 循环遍历",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/language/basic_concepts/3-表达式/3-4-for-in-循环.md",
+          "references/language/for/3-iterable-与-iterator-接口/3-2-for-in-脱糖.md",
+          "references/language/for/6-最优实践/6-1-优先使用-for-in.md",
+          "references/language/pattern_match/4-其他模式匹配语法-场景/4-1-变量定义与-for-in.md",
+          "references/api/std/sync/interfaces/uniquelock/condition.md"
+        ],
+        "relevant": [
+          "references/language/for/3-iterable-与-iterator-接口/3-1-接口定义.md",
+          "references/language/for/3-iterable-与-iterator-接口/3-2-for-in-脱糖.md",
+          "references/language/for/5-自定义可迭代类型.md",
+          "references/api/std/core/interfaces/iterable/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-01",
+        "category": "conceptual",
+        "query": "Nothing 和 Unit 的区别",
+        "first_relevant_rank": 4,
+        "paths": [
+          "references/language/extend/2-直接扩展/2-2-为类型添加属性和运算符.md",
+          "references/examples/failure/nothing-branch.md",
+          "references/language/extend/4-访问规则/4-5-this-和-super.md",
+          "references/language/basic_data_type/7-nothing-类型.md",
+          "references/language/const/1-const-变量/1-2-与-let-var-的区别.md"
+        ],
+        "relevant": [
+          "references/language/basic_data_type/7-nothing-类型.md",
+          "references/language/basic_data_type/6-unit-类型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-02",
+        "category": "conceptual",
+        "query": "VArray 是值类型还是引用类型",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/language/cffi/overview/2-类型映射/2-4-varray-数组.md",
+          "references/language/struct/3-mut-函数/3-1-问题.md",
+          "references/language/basic_data_type/9-数组类型/9-2-varray-值类型.md",
+          "references/api/std/ast/enums/tokenkind/value-varray.md",
+          "references/api/std/ast/classes/visitor/visit/visit-296adf31ed.md"
+        ],
+        "relevant": [
+          "references/language/basic_data_type/9-数组类型/9-2-varray-值类型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-03",
+        "category": "conceptual",
+        "query": "整数转成另一种整数会自动隐式转换吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/type_system/4-类型转换/4-1-无隐式转换.md",
+          "references/language/type_system/4-类型转换/4-2-数值转换.md",
+          "references/language/basic_data_type/1-整数类型/1-6-数值类型转换.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-04",
+        "category": "conceptual",
+        "query": "泛型的多个接口约束怎么写",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/generic/7-泛型约束/7-2-语法.md",
+          "references/language/generic/7-泛型约束/7-3-接口约束.md",
+          "references/examples/abstractions/generic-constraint.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-05",
+        "category": "conceptual",
+        "query": "match case 后面可以加条件守卫吗",
+        "first_relevant_rank": 5,
+        "paths": [
+          "references/language/basic_concepts/3-表达式/3-6-match-模式匹配.md",
+          "references/language/option/5-解构方式/5-1-模式匹配-match.md",
+          "references/language/pattern_match/1-match-表达式/1-1-有匹配值的-match.md",
+          "references/language/pattern_match/1-match-表达式/1-2-无匹配值的-match.md",
+          "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md"
+        ],
+        "relevant": [
+          "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-06",
+        "category": "conceptual",
+        "query": "Option 问号链遇到 None 会继续调用吗",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/option/index.md",
+          "references/api/std/core/enums/option/value-none.md",
+          "references/api/std/core/enums/option/operator-eq.md",
+          "references/api/std/core/enums/option/tostring.md",
+          "references/api/std/core/enums/option/filter.md"
+        ],
+        "relevant": [
+          "references/language/option/5-解构方式/5-3-问号操作符.md",
+          "references/examples/failure/option-navigation.md",
+          "references/language/option/5-解构方式/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-07",
+        "category": "conceptual",
+        "query": "as 类型转换失败时会抛异常还是返回空值",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/language/package/4-包导入/4-5-import-as-重命名导入.md",
+          "references/language/enum/4-option-类型.md",
+          "references/language/type_system/4-类型转换/4-5-as-运算符.md",
+          "references/api/std/ast/enums/tokenkind/value-as.md",
+          "references/language/macro/overview/6-典型示例代码/6-5-非属性宏-自动生成-tostring.md"
+        ],
+        "relevant": [
+          "references/language/type_system/4-类型转换/4-5-as-运算符.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-08",
+        "category": "conceptual",
+        "query": "class 可以同时继承两个父类吗",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/class/index.md",
+          "references/language/class/1-类定义/1-1-基本语法.md",
+          "references/language/class/1-类定义/1-2-抽象类.md",
+          "references/language/class/1-类定义/1-3-成员变量.md",
+          "references/language/class/1-类定义/1-4-静态初始化器.md"
+        ],
+        "relevant": [
+          "references/language/class/3-继承/3-1-基本规则.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-09",
+        "category": "conceptual",
+        "query": "执行 let b = a 给 Array 赋值后，修改 b 的元素会影响 a 吗",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/basic_data_type/9-数组类型/9-1-array.md",
+          "references/language/cffi/build/4-完整示例/4-2-windows-完整编译流程.md",
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md",
+          "references/api/std/core/structs/array/operator-indexer.md",
+          "references/language/collections/arraylist/11-转换/11-1-转为-array.md"
+        ],
+        "relevant": [
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md",
+          "references/language/basic_data_type/9-数组类型/9-1-array.md",
+          "references/language/collections/array/1-概述.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-10",
+        "category": "conceptual",
+        "query": "反射如何获取一个对象的 TypeInfo",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/language/reflect_and_annotation/1-注解/1-3-自定义注解.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-2-访问成员.md",
+          "references/api/std/reflect/classes/classtypeinfo/construct.md",
+          "references/api/std/reflect/classes/classtypeinfo/get.md"
+        ],
+        "relevant": [
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/api/std/reflect/classes/classtypeinfo/of.md",
+          "references/api/std/reflect/classes/typeinfo/of.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-11",
+        "category": "conceptual",
+        "query": "普通函数能够修改 struct 的字段吗",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/language/extend/4-访问规则/4-3-扩展-struct-的-mut-函数.md",
+          "references/language/for/3-iterable-与-iterator-接口/3-1-接口定义.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md",
+          "references/language/struct/3-mut-函数/3-1-问题.md",
+          "references/language/struct/3-mut-函数/3-7-接口中的-mut.md"
+        ],
+        "relevant": [
+          "references/language/struct/3-mut-函数/3-1-问题.md",
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/examples/data-model/struct-mut.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-12",
+        "category": "conceptual",
+        "query": "for 循环里的 where 和 if 过滤",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/language/for/index.md",
+          "references/language/for/4-迭代进阶/4-2-where-子句过滤.md",
+          "references/language/for/6-最优实践/6-3-where-替代-if.md",
+          "references/language/pattern_match/4-其他模式匹配语法-场景/4-2-if-let-条件匹配.md",
+          "references/language/for/6-最优实践/index.md"
+        ],
+        "relevant": [
+          "references/language/for/4-迭代进阶/4-2-where-子句过滤.md",
+          "references/language/for/6-最优实践/6-3-where-替代-if.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-01",
+        "category": "mixed",
+        "query": "sort tuples by two fields using a comparator",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/sort/functions/sort/index.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-bool-bool-where-t-comparable-t.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-bool-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-array-t-t-t-bool-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-array-t-t-t-ordering-bool-bool.md"
+        ],
+        "relevant": [
+          "references/examples/collections/sort-by-comparator.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-02",
+        "category": "mixed",
+        "query": "reuse SHA256 after finish for another message",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/digests/sha256.md",
+          "references/language/concurrency/2-创建线程/2-2-示例.md",
+          "references/language/error_handle/1-异常层次与定义/1-2-自定义异常规则.md",
+          "references/api/std/net/interfaces/serversocket/bind.md",
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md"
+        ],
+        "relevant": [
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md",
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md",
+          "references/examples/digests/sha256.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-03",
+        "category": "mixed",
+        "query": "Base64 decode text into bytes",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/api/stdx/encoding/base64/functions/tobase64string-array-byte.md",
+          "references/examples/json/streaming-json-record.md",
+          "references/examples/encoding/base64.md",
+          "references/api/std/unittest/classes/textreporter/textreporter-pp.md",
+          "references/api/stdx/encoding/base64/functions/frombase64string-string.md"
+        ],
+        "relevant": [
+          "references/api/stdx/encoding/base64/functions/frombase64string-string.md",
+          "references/examples/encoding/base64.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-04",
+        "category": "mixed",
+        "query": "ConcurrentHashMap AtomicInt64 per-key counter initialization",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/init.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/addifabsent.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/index.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/add.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/contains.md"
+        ],
+        "relevant": [
+          "references/examples/concurrency/concurrent-key-counter.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-05",
+        "category": "mixed",
+        "query": "C FFI cjpm.toml link a native library",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-2-cjpm-toml-配置.md",
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-4-其他相关-cjpm-toml-配置项.md",
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-5-不同平台的-cjpm-toml-配置.md",
+          "references/tools/cjpm/2-项目结构与-cjpm-toml/2-2-基本-cjpm-toml-单模块.md",
+          "references/tools/cjpm/2-项目结构与-cjpm-toml/2-3-工作空间-cjpm-toml.md"
+        ],
+        "relevant": [
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-2-cjpm-toml-配置.md",
+          "references/examples/cffi/native-array.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-06",
+        "category": "mixed",
+        "query": "macro package quote compile-macro project",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/macros/macro-package.md",
+          "references/language/macro/index.md",
+          "references/examples/macros/auto-to-string.md",
+          "references/examples/macros/multi-statement-codegen.md",
+          "references/api/std/unittest-testmacro/macros/test.md"
+        ],
+        "relevant": [
+          "references/examples/macros/macro-package.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-07",
+        "category": "mixed",
+        "query": "JsonValue.fromStr strict JSON validation",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/kind.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/index.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asarray.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asbool.md"
+        ],
+        "relevant": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md",
+          "references/examples/json/json-parse.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-08",
+        "category": "mixed",
+        "query": "ArrayList sort lessThan lambda",
+        "first_relevant_rank": 5,
+        "paths": [
+          "references/language/collections/arraylist/index.md",
+          "references/api/std/collection/classes/arraylist/removeif.md",
+          "references/api/std/collection/classes/arraylist/index.md",
+          "references/language/collections/array/14-排序-使用-std-sort.md",
+          "references/language/collections/arraylist/15-排序/15-1-使用-std-sort.md"
+        ],
+        "relevant": [
+          "references/examples/collections/sort-by-comparator.md",
+          "references/language/collections/arraylist/15-排序/15-1-使用-std-sort.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-bool-bool-bool.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-09",
+        "category": "mixed",
+        "query": "logger info JSON fields global logger",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/log/classes/logger/info.md",
+          "references/api/stdx/logger/classes/jsonlogger/index.md",
+          "references/api/stdx/log/classes/logger/index.md",
+          "references/examples/logging/global-logger.md",
+          "references/api/stdx/logger/classes/jsonlogger/close.md"
+        ],
+        "relevant": [
+          "references/examples/logging/global-logger.md",
+          "references/api/stdx/log/classes/logger/info.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-10",
+        "category": "mixed",
+        "query": "cjpm test succeeds but TOTAL 0 tests",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/tools/cjpm/index.md",
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/tools/cjpm/3-常用命令选项表/3-4-依赖检查与锁文件.md",
+          "references/tools/cjpm/3-常用命令选项表/index.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md"
+        ],
+        "relevant": [
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/examples/project-build/unit-test.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-11",
+        "category": "mixed",
+        "query": "decode bytes with String.fromUtf8 and reject invalid UTF-8",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/string/4-静态方法/4-2-fromutf8-从-utf-8-字节数组构造.md",
+          "references/language/string/4-静态方法/4-4-checkutf8encoding-校验-utf-8-合法性.md",
+          "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md",
+          "references/api/stdx/crypto/x509/structs/pem/decode.md",
+          "references/language/string/4-静态方法/4-3-fromutf8unchecked-不校验构造-unsafe.md"
+        ],
+        "relevant": [
+          "references/language/string/4-静态方法/4-2-fromutf8-从-utf-8-字节数组构造.md",
+          "references/api/std/core/structs/string/fromutf8.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-12",
+        "category": "mixed",
+        "query": "Mutex Condition wait notifyAll bounded queue close drain",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/api/std/sync/classes/mutex/condition.md",
+          "references/examples/concurrency/bounded-channel-lifecycle.md",
+          "references/api/std/sync/classes/mutex/index.md",
+          "references/language/concurrency/4-同步机制/4-3-条件变量-condition.md",
+          "references/api/std/collection/classes/arrayqueue/index.md"
+        ],
+        "relevant": [
+          "references/examples/concurrency/bounded-channel-lifecycle.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-01",
+        "category": "ambiguous",
+        "query": "闭包",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/function/5-闭包/index.md",
+          "references/language/function/5-闭包/5-1-定义.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/5-2-什么算作变量捕获.md"
+        ],
+        "relevant": [
+          "references/language/function/5-闭包/index.md",
+          "references/language/function/5-闭包/5-1-定义.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-02",
+        "category": "ambiguous",
+        "query": "反射",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/overview.md",
+          "references/examples/reflection/field-annotation.md",
+          "references/examples/reflection/index.md"
+        ],
+        "relevant": [
+          "references/language/reflect_and_annotation/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md",
+          "references/api/std/reflect/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/overview.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-03",
+        "category": "ambiguous",
+        "query": "JSON",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/stdx/encoding/json-stream/classes/jsonwriter/jsonvalue.md",
+          "references/api/stdx/encoding/json-stream/classes/jsonwriter/writenullvalue.md",
+          "references/api/stdx/encoding/json-stream/enums/jsontoken/value-jsonbool.md",
+          "references/api/stdx/encoding/json-stream/enums/jsontoken/value-jsonnull.md",
+          "references/api/stdx/encoding/json-stream/enums/jsontoken/value-jsonnumber.md"
+        ],
+        "relevant": [
+          "references/examples/json/index.md",
+          "references/api/stdx/encoding/json/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-04",
+        "category": "ambiguous",
+        "query": "并发",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/concurrency/1-并发概述/index.md",
+          "references/language/concurrency/index.md",
+          "references/language/concurrency/1-并发概述/1-1-线程模型.md",
+          "references/examples/concurrency/concurrent-map-insert.md",
+          "references/examples/concurrency/index.md"
+        ],
+        "relevant": [
+          "references/language/concurrency/index.md",
+          "references/examples/concurrency/index.md",
+          "references/language/concurrency/1-并发概述/index.md",
+          "references/language/concurrency/1-并发概述/1-1-线程模型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-05",
+        "category": "ambiguous",
+        "query": "泛型",
+        "first_relevant_rank": 5,
+        "paths": [
+          "references/language/extend/4-访问规则/4-9-泛型扩展可见性规则.md",
+          "references/language/type_system/2-子类型关系/2-2-泛型类型的子类型关系.md",
+          "references/language/type_system/5-类型别名/5-5-泛型类型别名.md",
+          "references/language/interface/5-泛型成员.md",
+          "references/language/generic/1-泛型概述/index.md"
+        ],
+        "relevant": [
+          "references/language/generic/index.md",
+          "references/language/generic/1-泛型概述/index.md",
+          "references/language/generic/1-泛型概述/1-1-核心概念.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-06",
+        "category": "ambiguous",
+        "query": "cjdb 断点",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/tools/cjdb/index.md",
+          "references/tools/cjdb/3-断点/3-1-源码断点.md",
+          "references/tools/cjdb/3-断点/3-2-函数断点.md",
+          "references/tools/cjdb/3-断点/3-3-条件断点.md",
+          "references/tools/cjdb/3-断点/3-4-继续执行.md"
+        ],
+        "relevant": [
+          "references/tools/cjdb/index.md",
+          "references/tools/cjdb/3-断点/index.md",
+          "references/tools/cjdb/3-断点/3-1-源码断点.md",
+          "references/tools/cjdb/3-断点/3-2-函数断点.md",
+          "references/tools/cjdb/3-断点/3-3-条件断点.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "negative-01",
+        "category": "negative",
+        "query": "今晚上海会不会下雨",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-02",
+        "category": "negative",
+        "query": "推荐一家附近的火锅店",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-03",
+        "category": "negative",
+        "query": "How many moons does Jupiter have?",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-04",
+        "category": "negative",
+        "query": "Python pandas dataframe groupby 使用方法",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/language/cffi/overview/2-类型映射/2-5-cstring-字符串.md",
+          "references/tools/stdx-setup/1-安装版本与平台.md",
+          "references/language/collections/arraylist/2-构造/overview.md",
+          "references/language/macro/overview/6-典型示例代码/6-5-非属性宏-自动生成-tostring.md",
+          "references/language/basic_data_type/1-整数类型/1-6-数值类型转换.md"
+        ],
+        "relevant": [],
+        "abstained": false
+      },
+      {
+        "id": "negative-05",
+        "category": "negative",
+        "query": "Rust borrow checker lifetime tutorial",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/database-sql/classes/pooleddatasource/prop-maxlifetime.md"
+        ],
+        "relevant": [],
+        "abstained": false
+      },
+      {
+        "id": "negative-06",
+        "category": "negative",
+        "query": "帮我分析这支股票明天涨跌",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-07",
+        "category": "negative",
+        "query": "zqxvplm_nonexistent_symbol_927",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-08",
+        "category": "negative",
+        "query": "我家猫为什么不吃饭",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      }
+    ]
+  },
+  "cold_batch": {
+    "queries_per_process": 66,
+    "native_samples": [
+      {
+        "max_rss_kib": 34644,
+        "user_seconds": 0.156693,
+        "system_seconds": 0.038763,
+        "wall_ms": 196.321
+      },
+      {
+        "max_rss_kib": 34680,
+        "user_seconds": 0.112787,
+        "system_seconds": 0.052969,
+        "wall_ms": 166.88
+      },
+      {
+        "max_rss_kib": 34644,
+        "user_seconds": 0.127526,
+        "system_seconds": 0.007843,
+        "wall_ms": 136.293
+      }
+    ],
+    "python_samples": [
+      {
+        "max_rss_kib": 55324,
+        "user_seconds": 3.771633,
+        "system_seconds": 0.132514,
+        "wall_ms": 3907.264
+      },
+      {
+        "max_rss_kib": 55324,
+        "user_seconds": 3.755452,
+        "system_seconds": 0.082904,
+        "wall_ms": 3841.196
+      },
+      {
+        "max_rss_kib": 55324,
+        "user_seconds": 3.744392,
+        "system_seconds": 0.057051,
+        "wall_ms": 3805.846
+      }
+    ],
+    "native_median_ms": 166.88,
+    "python_median_ms": 3841.196
+  },
+  "experimental_learned": {
+    "positive_queries": {
+      "queries": 58,
+      "hit_at_1": 0.637931,
+      "hit_at_5": 0.758621,
+      "mrr_at_5": 0.683908,
+      "abstentions": 11
+    },
+    "negative_queries": {
+      "queries": 8,
+      "correct_abstentions": 6,
+      "abstention_accuracy": 0.75
+    },
+    "categories": {
+      "exact": {
+        "queries": 12,
+        "hit_at_1": 1.0,
+        "hit_at_5": 1.0,
+        "mrr_at_5": 1.0,
+        "abstentions": 0
+      },
+      "natural": {
+        "queries": 16,
+        "hit_at_1": 0.5625,
+        "hit_at_5": 0.6875,
+        "mrr_at_5": 0.609375,
+        "abstentions": 5
+      },
+      "conceptual": {
+        "queries": 12,
+        "hit_at_1": 0.333333,
+        "hit_at_5": 0.583333,
+        "mrr_at_5": 0.423611,
+        "abstentions": 5
+      },
+      "mixed": {
+        "queries": 12,
+        "hit_at_1": 0.666667,
+        "hit_at_5": 0.75,
+        "mrr_at_5": 0.708333,
+        "abstentions": 1
+      },
+      "ambiguous": {
+        "queries": 6,
+        "hit_at_1": 0.666667,
+        "hit_at_5": 0.833333,
+        "mrr_at_5": 0.722222,
+        "abstentions": 0
+      }
+    },
+    "invalid_result_paths": [],
+    "details": [
+      {
+        "id": "exact-01",
+        "category": "exact",
+        "query": "ArrayList.reverse",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/collection/classes/arraylist/reverse.md"
+        ],
+        "relevant": [
+          "references/api/std/collection/classes/arraylist/reverse.md",
+          "references/language/collections/arraylist/9-反转.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-02",
+        "category": "exact",
+        "query": "HashMap.get",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/collection/classes/hashmap/get.md",
+          "references/api/std/collection/classes/hashmap/operator-indexer.md"
+        ],
+        "relevant": [
+          "references/api/std/collection/classes/hashmap/get.md",
+          "references/language/collections/hashmap/5-查询/5-2-安全访问-get.md",
+          "references/examples/collections/hashmap-safe-get.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-03",
+        "category": "exact",
+        "query": "AtomicInt64.fetchAdd",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sync/classes/atomicint64/fetchadd.md"
+        ],
+        "relevant": [
+          "references/api/std/sync/classes/atomicint64/fetchadd.md",
+          "references/examples/concurrency/atomic-counter.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-04",
+        "category": "exact",
+        "query": "DateTime.parse",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/time/structs/datetime/parse.md"
+        ],
+        "relevant": [
+          "references/api/std/time/structs/datetime/parse.md",
+          "references/examples/time/datetime-parse.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-05",
+        "category": "exact",
+        "query": "Directory.walk",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/fs/classes/directory/walk.md"
+        ],
+        "relevant": [
+          "references/api/std/fs/classes/directory/walk.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-06",
+        "category": "exact",
+        "query": "Regex.findAll",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/regex/classes/regex/findall.md"
+        ],
+        "relevant": [
+          "references/api/std/regex/classes/regex/findall.md",
+          "references/examples/text/regex-find-all.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-07",
+        "category": "exact",
+        "query": "String.toAsciiLower",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/core/structs/string/toasciilower.md"
+        ],
+        "relevant": [
+          "references/api/std/core/structs/string/toasciilower.md",
+          "references/language/string/10-大小写转换.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-08",
+        "category": "exact",
+        "query": "SHA256.reset",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md"
+        ],
+        "relevant": [
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-09",
+        "category": "exact",
+        "query": "WeakRef.clear",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/ref/classes/weakref/clear.md",
+          "references/api/std/ref/classes/weakref/index.md"
+        ],
+        "relevant": [
+          "references/api/std/ref/classes/weakref/clear.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-10",
+        "category": "exact",
+        "query": "HttpRequestBuilder.build",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/net/http/classes/httprequestbuilder/build.md"
+        ],
+        "relevant": [
+          "references/api/stdx/net/http/classes/httprequestbuilder/build.md",
+          "references/examples/network/http-request.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-11",
+        "category": "exact",
+        "query": "TcpSocket.connect",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/net/classes/tcpsocket/connect.md"
+        ],
+        "relevant": [
+          "references/api/std/net/classes/tcpsocket/connect.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "exact-12",
+        "category": "exact",
+        "query": "Condition.waitUntil",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sync/interfaces/condition/waituntil.md"
+        ],
+        "relevant": [
+          "references/api/std/sync/interfaces/condition/waituntil.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-01",
+        "category": "natural",
+        "query": "仓颉里闭包可以带着可变局部变量返回吗",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/5-2-什么算作变量捕获.md",
+          "references/language/function/5-闭包/5-3-什么不算作捕获.md",
+          "references/language/concurrency/4-同步机制/4-5-线程局部变量-threadlocal.md"
+        ],
+        "relevant": [
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-02",
+        "category": "natural",
+        "query": "怎么把文件里的所有字节读出来再恢复成 UTF-8 字符串",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/examples/files/file-read.md",
+          "references/api/std/fs/classes/file/readfrom.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-03",
+        "category": "natural",
+        "query": "怎样给结构体定义一个会修改自身字段的方法",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/struct/1-结构体定义/1-5-成员函数.md",
+          "references/language/interface/2-接口实现/2-6-mut-函数实现示例.md",
+          "references/language/struct/1-结构体定义/1-8-禁止递归结构体.md",
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/language/struct/1-结构体定义/1-7-访问修饰符.md"
+        ],
+        "relevant": [
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/language/struct/3-mut-函数/index.md",
+          "references/examples/data-model/struct-mut.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-04",
+        "category": "natural",
+        "query": "调用函数时哪些参数允许写名称标签",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/function/2-函数调用/2-3-命名参数调用.md",
+          "references/language/function/1-函数定义/1-2-参数列表.md",
+          "references/language/generic/5-泛型结构体/5-1-声明.md",
+          "references/language/function/2-函数调用/2-1-基本调用语法.md",
+          "references/api/std/database-sql/classes/sqloption/field-tls13ciphersuites.md"
+        ],
+        "relevant": [
+          "references/language/function/2-函数调用/2-3-命名参数调用.md",
+          "references/language/function/1-函数定义/1-2-参数列表.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-05",
+        "category": "natural",
+        "query": "我想等并发任务做完并拿到返回结果",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/concurrency/spawn-future.md",
+          "references/examples/concurrency/index.md",
+          "references/examples/concurrency/concurrent-map-insert.md",
+          "references/language/concurrency/2-创建线程/2-2-示例.md",
+          "references/language/concurrency/1-并发概述/1-1-线程模型.md"
+        ],
+        "relevant": [
+          "references/api/std/core/classes/future/get.md",
+          "references/examples/concurrency/spawn-future.md",
+          "references/language/concurrency/2-创建线程/2-2-示例.md",
+          "references/language/concurrency/6-访问线程/6-1-future-线程句柄.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-06",
+        "category": "natural",
+        "query": "如何在一个函数退出或抛异常时自动关闭资源",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md",
+          "references/examples/failure/try-resource.md",
+          "references/api/std/core/interfaces/resource/close.md",
+          "references/language/concurrency/4-同步机制/4-4-synchronized-关键字.md",
+          "references/examples/failure/index.md"
+        ],
+        "relevant": [
+          "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md",
+          "references/examples/failure/try-resource.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-07",
+        "category": "natural",
+        "query": "遍历哈希表时怎样同时取出键和值",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/examples/collections/hashmap-tuple-iteration.md",
+          "references/language/collections/hashmap/7-遍历.md",
+          "references/language/for/4-迭代进阶/4-1-元组解构.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-08",
+        "category": "natural",
+        "query": "怎样给现有类型补充另一个接口的实现",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/extend/3-接口扩展/3-1-基本语法.md",
+          "references/language/interface/2-接口实现/2-2-可实现接口的类型.md",
+          "references/examples/abstractions/direct-extension.md",
+          "references/language/extend/3-接口扩展/3-2-实现多个接口.md",
+          "references/language/extend/2-直接扩展/2-1-基本语法与示例.md"
+        ],
+        "relevant": [
+          "references/language/extend/3-接口扩展/3-1-基本语法.md",
+          "references/language/extend/3-接口扩展/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-09",
+        "category": "natural",
+        "query": "单元测试文件应该放在哪里，文件名有什么要求",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/tools/cjpm/8-关键规则速查.md",
+          "references/examples/project-build/unit-test.md",
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/api/std/unittest-testmacro/macros/testcase.md"
+        ],
+        "relevant": [
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/examples/project-build/unit-test.md",
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-10",
+        "category": "natural",
+        "query": "怎样一次格式化整个源代码目录",
+        "first_relevant_rank": 4,
+        "paths": [
+          "references/api/std/fs/classes/directory/createtemp.md",
+          "references/api/std/fs/classes/directory/create.md",
+          "references/api/std/fs/classes/directory/isempty.md",
+          "references/tools/cjfmt/2-基本用法/2-2-目录格式化.md",
+          "references/api/std/fs/classes/directory/walk.md"
+        ],
+        "relevant": [
+          "references/tools/cjfmt/2-基本用法/2-2-目录格式化.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-11",
+        "category": "natural",
+        "query": "接口里已经有默认实现，多个父接口冲突时怎么办",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/interface/4-默认实现/4-4-菱形继承解决.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-12",
+        "category": "natural",
+        "query": "怎么把字符串变成任意精度十进制金额并控制小数位数",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/math-numeric/structs/decimal/index.md",
+          "references/api/std/math-numeric/structs/decimal/prop-precision.md",
+          "references/api/std/core/functions/print/print-float16-bool.md",
+          "references/api/std/core/functions/print/print-float32-bool.md",
+          "references/api/std/core/functions/print/print-float64-bool.md"
+        ],
+        "relevant": [
+          "references/examples/numeric/exact-decimal-value.md",
+          "references/api/std/math-numeric/structs/decimal/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-13",
+        "category": "natural",
+        "query": "动态字符串很多次拼接应该选什么类型",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/string/12-拼接与重复/12-5-stringbuilder-高效拼接.md",
+          "references/api/std/core/classes/stringbuilder/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "natural-14",
+        "category": "natural",
+        "query": "运行外部命令后怎样同时取得退出码、标准输出和错误输出",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/api/std/env/functions/getstdout.md",
+          "references/api/std/process/functions/executewithoutput-string-array-string-path-map-string-string-pr-9be6e6c3.md",
+          "references/examples/cli-process/command-line-arguments.md",
+          "references/examples/code-quality/format-lint-gate.md",
+          "references/examples/cli-process/cli-exit-status.md"
+        ],
+        "relevant": [
+          "references/api/std/process/functions/executewithoutput-string-array-string-path-map-string-string-pr-9be6e6c3.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-15",
+        "category": "natural",
+        "query": "自定义异常类应该继承哪个基类",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/error_handle/1-异常层次与定义/1-2-自定义异常规则.md",
+          "references/examples/failure/custom-exception.md",
+          "references/language/error_handle/1-异常层次与定义/1-1-两种基础异常类型.md",
+          "references/api/std/core/classes/exception/index.md",
+          "references/language/error_handle/2-抛出与处理异常/2-1-throw-关键字.md"
+        ],
+        "relevant": [
+          "references/language/error_handle/1-异常层次与定义/1-2-自定义异常规则.md",
+          "references/language/error_handle/1-异常层次与定义/index.md",
+          "references/examples/failure/custom-exception.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "natural-16",
+        "category": "natural",
+        "query": "一个集合怎样才能被 for in 循环遍历",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/for/3-iterable-与-iterator-接口/3-1-接口定义.md",
+          "references/language/for/3-iterable-与-iterator-接口/3-2-for-in-脱糖.md",
+          "references/language/for/5-自定义可迭代类型.md",
+          "references/api/std/core/interfaces/iterable/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-01",
+        "category": "conceptual",
+        "query": "Nothing 和 Unit 的区别",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/language/const/1-const-变量/1-2-与-let-var-的区别.md",
+          "references/api/std/ast/enums/tokenkind/value-nothing.md",
+          "references/language/basic_data_type/7-nothing-类型.md",
+          "references/examples/failure/nothing-branch.md",
+          "references/api/std/core/intrinsics/unit/tostring.md"
+        ],
+        "relevant": [
+          "references/language/basic_data_type/7-nothing-类型.md",
+          "references/language/basic_data_type/6-unit-类型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-02",
+        "category": "conceptual",
+        "query": "VArray 是值类型还是引用类型",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/basic_data_type/9-数组类型/9-2-varray-值类型.md",
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md",
+          "references/api/std/ast/enums/tokenkind/value-varray.md",
+          "references/language/cffi/overview/2-类型映射/2-4-varray-数组.md",
+          "references/api/std/ast/classes/varrayexpr/prop-varraytype.md"
+        ],
+        "relevant": [
+          "references/language/basic_data_type/9-数组类型/9-2-varray-值类型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-03",
+        "category": "conceptual",
+        "query": "整数转成另一种整数会自动隐式转换吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/type_system/4-类型转换/4-1-无隐式转换.md",
+          "references/language/type_system/4-类型转换/4-2-数值转换.md",
+          "references/language/basic_data_type/1-整数类型/1-6-数值类型转换.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-04",
+        "category": "conceptual",
+        "query": "泛型的多个接口约束怎么写",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/abstractions/generic-constraint.md",
+          "references/language/generic/7-泛型约束/7-3-接口约束.md",
+          "references/language/generic/7-泛型约束/7-5-规则.md",
+          "references/language/extend/3-接口扩展/3-5-接口扩展中的泛型约束.md",
+          "references/examples/abstractions/index.md"
+        ],
+        "relevant": [
+          "references/language/generic/7-泛型约束/7-2-语法.md",
+          "references/language/generic/7-泛型约束/7-3-接口约束.md",
+          "references/examples/abstractions/generic-constraint.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-05",
+        "category": "conceptual",
+        "query": "match case 后面可以加条件守卫吗",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md",
+          "references/language/pattern_match/1-match-表达式/1-2-无匹配值的-match.md",
+          "references/language/pattern_match/2-模式类型/2-1-常量模式.md",
+          "references/api/std/ast/enums/tokenkind/value-case.md",
+          "references/language/pattern_match/5-完整可运行示例.md"
+        ],
+        "relevant": [
+          "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-06",
+        "category": "conceptual",
+        "query": "Option 问号链遇到 None 会继续调用吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/option/5-解构方式/5-3-问号操作符.md",
+          "references/examples/failure/option-navigation.md",
+          "references/language/option/5-解构方式/index.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-07",
+        "category": "conceptual",
+        "query": "as 类型转换失败时会抛异常还是返回空值",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/type_system/4-类型转换/4-5-as-运算符.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-08",
+        "category": "conceptual",
+        "query": "class 可以同时继承两个父类吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/class/3-继承/3-1-基本规则.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-09",
+        "category": "conceptual",
+        "query": "执行 let b = a 给 Array 赋值后，修改 b 的元素会影响 a 吗",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/language/basic_concepts/2-程序结构/2-4-值类型与引用类型.md",
+          "references/language/basic_data_type/9-数组类型/9-1-array.md",
+          "references/language/collections/array/1-概述.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "conceptual-10",
+        "category": "conceptual",
+        "query": "反射如何获取一个对象的 TypeInfo",
+        "first_relevant_rank": 4,
+        "paths": [
+          "references/api/std/reflect/classes/typeinfo/findannotation.md",
+          "references/api/std/reflect/classes/typeinfo/prop-modifiers.md",
+          "references/api/std/reflect/classes/typeinfo/index.md",
+          "references/api/std/reflect/classes/typeinfo/of.md",
+          "references/api/std/reflect/classes/typeinfo/get.md"
+        ],
+        "relevant": [
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/api/std/reflect/classes/classtypeinfo/of.md",
+          "references/api/std/reflect/classes/typeinfo/of.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-11",
+        "category": "conceptual",
+        "query": "普通函数能够修改 struct 的字段吗",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/language/extend/4-访问规则/4-3-扩展-struct-的-mut-函数.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md",
+          "references/language/struct/3-mut-函数/3-1-问题.md",
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/api/std/ast/enums/tokenkind/value-struct.md"
+        ],
+        "relevant": [
+          "references/language/struct/3-mut-函数/3-1-问题.md",
+          "references/language/struct/3-mut-函数/3-2-解决方案.md",
+          "references/examples/data-model/struct-mut.md",
+          "references/language/struct/1-结构体定义/1-5-成员函数.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "conceptual-12",
+        "category": "conceptual",
+        "query": "for 循环里的 where 和 if 过滤",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/for/4-迭代进阶/4-2-where-子句过滤.md",
+          "references/language/for/6-最优实践/6-3-where-替代-if.md",
+          "references/api/std/ast/enums/tokenkind/value-if.md",
+          "references/language/basic_concepts/3-表达式/3-4-for-in-循环.md",
+          "references/api/std/collection/classes/treeset/removeif.md"
+        ],
+        "relevant": [
+          "references/language/for/4-迭代进阶/4-2-where-子句过滤.md",
+          "references/language/for/6-最优实践/6-3-where-替代-if.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-01",
+        "category": "mixed",
+        "query": "sort tuples by two fields using a comparator",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/sort/functions/sort/sort-t-list-t-t-t-ordering-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-array-t-t-t-ordering-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-ordering-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-bool-bool-where-t-comparable-t.md",
+          "references/api/std/sort/functions/sort/index.md"
+        ],
+        "relevant": [
+          "references/examples/collections/sort-by-comparator.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-02",
+        "category": "mixed",
+        "query": "reuse SHA256 after finish for another message",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md"
+        ],
+        "relevant": [
+          "references/api/stdx/crypto/digest/classes/sha256/finish.md",
+          "references/api/stdx/crypto/digest/classes/sha256/reset.md",
+          "references/examples/digests/sha256.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-03",
+        "category": "mixed",
+        "query": "Base64 decode text into bytes",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/encoding/base64.md",
+          "references/api/stdx/crypto/x509/structs/pem/decode.md",
+          "references/api/stdx/crypto/x509/interfaces/dhparameters/decodefrompem.md",
+          "references/api/stdx/encoding/base64/functions/tobase64string-array-byte.md",
+          "references/examples/network/compressed-json-http-roundtrip.md"
+        ],
+        "relevant": [
+          "references/api/stdx/encoding/base64/functions/frombase64string-string.md",
+          "references/examples/encoding/base64.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-04",
+        "category": "mixed",
+        "query": "ConcurrentHashMap AtomicInt64 per-key counter initialization",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/addifabsent.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/replace.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/add.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/get.md",
+          "references/api/std/collection-concurrent/classes/concurrenthashmap/remove.md"
+        ],
+        "relevant": [
+          "references/examples/concurrency/concurrent-key-counter.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-05",
+        "category": "mixed",
+        "query": "C FFI cjpm.toml link a native library",
+        "first_relevant_rank": 2,
+        "paths": [
+          "references/tools/cjpm/6-高级配置/6-2-c-语言-ffi-集成.md",
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-2-cjpm-toml-配置.md",
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-5-不同平台的-cjpm-toml-配置.md",
+          "references/tools/cjpm/2-项目结构与-cjpm-toml/2-3-工作空间-cjpm-toml.md",
+          "references/examples/cffi/native-array.md"
+        ],
+        "relevant": [
+          "references/language/cffi/build/3-基于-cjpm-项目编译-推荐/3-2-cjpm-toml-配置.md",
+          "references/examples/cffi/native-array.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-06",
+        "category": "mixed",
+        "query": "macro package quote compile-macro project",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/macros/macro-package.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md",
+          "references/examples/macros/multi-statement-codegen.md",
+          "references/language/macro/overview/4-std-ast-包与语法节点/4-7-辅助工具函数.md",
+          "references/language/macro/overview/6-典型示例代码/6-5-非属性宏-自动生成-tostring.md"
+        ],
+        "relevant": [
+          "references/examples/macros/macro-package.md",
+          "references/language/macro/build/3-使用-cjpm-构建-推荐/3-4-构建与运行.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-07",
+        "category": "mixed",
+        "query": "JsonValue.fromStr strict JSON validation",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/kind.md"
+        ],
+        "relevant": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/fromstr.md",
+          "references/examples/json/json-parse.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-08",
+        "category": "mixed",
+        "query": "ArrayList sort lessThan lambda",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-bool-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-bool-bool-where-t-comparable-t.md",
+          "references/api/std/sort/functions/sort/index.md",
+          "references/api/std/sort/functions/sort/sort-t-list-t-t-t-bool-bool-bool.md",
+          "references/api/std/sort/functions/sort/sort-t-array-t-t-t-bool-bool-bool.md"
+        ],
+        "relevant": [
+          "references/examples/collections/sort-by-comparator.md",
+          "references/language/collections/arraylist/15-排序/15-1-使用-std-sort.md",
+          "references/api/std/sort/functions/sort/sort-t-arraylist-t-t-t-bool-bool-bool.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-09",
+        "category": "mixed",
+        "query": "logger info JSON fields global logger",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/stdx/log/classes/logger/info.md"
+        ],
+        "relevant": [
+          "references/examples/logging/global-logger.md",
+          "references/api/stdx/log/classes/logger/info.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-10",
+        "category": "mixed",
+        "query": "cjpm test succeeds but TOTAL 0 tests",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/tools/cjcov/2-基本流程/2-2-多文件-项目场景-推荐使用-cjpm.md",
+          "references/api/std/unittest/classes/testsuite/runtests.md",
+          "references/api/std/unittest/classes/testgroup/runtests.md",
+          "references/language/cffi/build/4-完整示例/4-2-windows-完整编译流程.md"
+        ],
+        "relevant": [
+          "references/tools/cjpm/3-常用命令选项表/3-3-test-选项.md",
+          "references/tools/cjpm/5-测试与基准/5-1-编写测试.md",
+          "references/examples/project-build/unit-test.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-11",
+        "category": "mixed",
+        "query": "decode bytes with String.fromUtf8 and reject invalid UTF-8",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/api/std/core/structs/string/fromutf8.md"
+        ],
+        "relevant": [
+          "references/language/string/4-静态方法/4-2-fromutf8-从-utf-8-字节数组构造.md",
+          "references/api/std/core/structs/string/fromutf8.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "mixed-12",
+        "category": "mixed",
+        "query": "Mutex Condition wait notifyAll bounded queue close drain",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [
+          "references/examples/concurrency/bounded-channel-lifecycle.md"
+        ],
+        "abstained": true
+      },
+      {
+        "id": "ambiguous-01",
+        "category": "ambiguous",
+        "query": "闭包",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/examples/functions/closure-state.md",
+          "references/examples/functions/index.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md",
+          "references/language/function/5-闭包/5-1-定义.md",
+          "references/api/std/ast/classes/spawnexpr/prop-lambdaexpr.md"
+        ],
+        "relevant": [
+          "references/language/function/5-闭包/index.md",
+          "references/language/function/5-闭包/5-1-定义.md",
+          "references/examples/functions/closure-state.md",
+          "references/language/function/5-闭包/5-4-捕获规则.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-02",
+        "category": "ambiguous",
+        "query": "反射",
+        "first_relevant_rank": 3,
+        "paths": [
+          "references/examples/reflection/field-annotation.md",
+          "references/examples/reflection/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/overview.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md"
+        ],
+        "relevant": [
+          "references/language/reflect_and_annotation/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/index.md",
+          "references/api/std/reflect/index.md",
+          "references/language/reflect_and_annotation/2-反射-动态特性/overview.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-03",
+        "category": "ambiguous",
+        "query": "JSON",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/stdx/encoding/json/classes/jsonvalue/tojsonstring.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asarray.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asbool.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asfloat.md",
+          "references/api/stdx/encoding/json/classes/jsonvalue/asint.md"
+        ],
+        "relevant": [
+          "references/examples/json/index.md",
+          "references/api/stdx/encoding/json/index.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-04",
+        "category": "ambiguous",
+        "query": "并发",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/concurrency/index.md"
+        ],
+        "relevant": [
+          "references/language/concurrency/index.md",
+          "references/examples/concurrency/index.md",
+          "references/language/concurrency/1-并发概述/index.md",
+          "references/language/concurrency/1-并发概述/1-1-线程模型.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-05",
+        "category": "ambiguous",
+        "query": "泛型",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/language/generic/index.md"
+        ],
+        "relevant": [
+          "references/language/generic/index.md",
+          "references/language/generic/1-泛型概述/index.md",
+          "references/language/generic/1-泛型概述/1-1-核心概念.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "ambiguous-06",
+        "category": "ambiguous",
+        "query": "cjdb 断点",
+        "first_relevant_rank": 1,
+        "paths": [
+          "references/tools/cjdb/3-断点/3-2-函数断点.md",
+          "references/tools/cjdb/3-断点/3-1-源码断点.md",
+          "references/tools/cjdb/3-断点/3-3-条件断点.md",
+          "references/tools/cjdb/3-断点/3-4-继续执行.md",
+          "references/tools/cjdb/10-常见问题.md"
+        ],
+        "relevant": [
+          "references/tools/cjdb/index.md",
+          "references/tools/cjdb/3-断点/index.md",
+          "references/tools/cjdb/3-断点/3-1-源码断点.md",
+          "references/tools/cjdb/3-断点/3-2-函数断点.md",
+          "references/tools/cjdb/3-断点/3-3-条件断点.md"
+        ],
+        "abstained": false
+      },
+      {
+        "id": "negative-01",
+        "category": "negative",
+        "query": "今晚上海会不会下雨",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-02",
+        "category": "negative",
+        "query": "推荐一家附近的火锅店",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/tools/cjcov/2-基本流程/2-2-多文件-项目场景-推荐使用-cjpm.md",
+          "references/api/std/math-numeric/functions/round-decimal-roundingmode.md",
+          "references/tools/cjcov/2-基本流程/index.md"
+        ],
+        "relevant": [],
+        "abstained": false
+      },
+      {
+        "id": "negative-03",
+        "category": "negative",
+        "query": "How many moons does Jupiter have?",
+        "first_relevant_rank": null,
+        "paths": [
+          "references/api/stdx/net/http/structs/httpstatuscode/field-status_too_many_requests.md",
+          "references/examples/concurrency/synchronized-value.md"
+        ],
+        "relevant": [],
+        "abstained": false
+      },
+      {
+        "id": "negative-04",
+        "category": "negative",
+        "query": "Python pandas dataframe groupby 使用方法",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-05",
+        "category": "negative",
+        "query": "Rust borrow checker lifetime tutorial",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-06",
+        "category": "negative",
+        "query": "帮我分析这支股票明天涨跌",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-07",
+        "category": "negative",
+        "query": "zqxvplm_nonexistent_symbol_927",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      },
+      {
+        "id": "negative-08",
+        "category": "negative",
+        "query": "我家猫为什么不吃饭",
+        "first_relevant_rank": null,
+        "paths": [],
+        "relevant": [],
+        "abstained": true
+      }
+    ],
+    "cold_batch_usage": {
+      "max_rss_kib": 34644,
+      "user_seconds": 0.145278,
+      "system_seconds": 0.028253,
+      "wall_ms": 174.151
+    }
+  },
+  "latency": {
+    "cold_single_query": {
+      "query_id": "exact-01",
+      "includes": "process startup + index/database load + query + JSON output",
+      "native_samples": [
+        {
+          "max_rss_kib": 24716,
+          "user_seconds": 0.047251,
+          "system_seconds": 0.007917,
+          "wall_ms": 55.58
+        },
+        {
+          "max_rss_kib": 24716,
+          "user_seconds": 0.045754,
+          "system_seconds": 0.019899,
+          "wall_ms": 66.123
+        },
+        {
+          "max_rss_kib": 24716,
+          "user_seconds": 0.046203,
+          "system_seconds": 0.01171,
+          "wall_ms": 58.718
+        }
+      ],
+      "python_samples": [
+        {
+          "max_rss_kib": 52824,
+          "user_seconds": 0.338857,
+          "system_seconds": 0.059954,
+          "wall_ms": 402.459
+        },
+        {
+          "max_rss_kib": 52828,
+          "user_seconds": 0.346408,
+          "system_seconds": 0.080624,
+          "wall_ms": 427.561
+        },
+        {
+          "max_rss_kib": 52820,
+          "user_seconds": 0.367903,
+          "system_seconds": 0.037057,
+          "wall_ms": 406.839
+        }
+      ],
+      "native_median_ms": 58.718,
+      "python_median_ms": 406.839
+    },
+    "warm_native_single_query": {
+      "count": 58,
+      "warmup_requests": 1,
+      "includes": "one query after index load; Python client pipe/JSON overhead included; excludes initial request",
+      "median_ms": 1.222,
+      "p95_ms": 4.867,
+      "max_ms": 6.339
+    }
+  }
+}

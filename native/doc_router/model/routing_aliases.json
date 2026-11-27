@@ -1,0 +1,755 @@
+{
+  "format": 1,
+  "description": "Hand-authored bilingual concept aliases, not learned neural semantics. Applied once to the original query, never recursively.",
+  "rules": [
+    {
+      "trigger": "反转",
+      "expansions": [
+        "reverse",
+        "倒序"
+      ]
+    },
+    {
+      "trigger": "倒序",
+      "expansions": [
+        "reverse",
+        "反转"
+      ]
+    },
+    {
+      "trigger": "追加",
+      "expansions": [
+        "append",
+        "add",
+        "addAll"
+      ]
+    },
+    {
+      "trigger": "插入",
+      "expansions": [
+        "insert"
+      ]
+    },
+    {
+      "trigger": "删除",
+      "expansions": [
+        "remove"
+      ]
+    },
+    {
+      "trigger": "移除",
+      "expansions": [
+        "remove"
+      ]
+    },
+    {
+      "trigger": "清空",
+      "expansions": [
+        "clear"
+      ]
+    },
+    {
+      "trigger": "判空",
+      "expansions": [
+        "isEmpty"
+      ]
+    },
+    {
+      "trigger": "长度",
+      "expansions": [
+        "size",
+        "length"
+      ]
+    },
+    {
+      "trigger": "排序",
+      "expansions": [
+        "sort"
+      ]
+    },
+    {
+      "trigger": "稳定排序",
+      "expansions": [
+        "sort",
+        "stable"
+      ]
+    },
+    {
+      "trigger": "切片",
+      "expansions": [
+        "slice",
+        "range"
+      ]
+    },
+    {
+      "trigger": "遍历",
+      "expansions": [
+        "iterator",
+        "Iterable"
+      ]
+    },
+    {
+      "trigger": "哈希表",
+      "expansions": [
+        "HashMap"
+      ]
+    },
+    {
+      "trigger": "字典",
+      "expansions": [
+        "HashMap"
+      ]
+    },
+    {
+      "trigger": "动态数组",
+      "expansions": [
+        "ArrayList"
+      ]
+    },
+    {
+      "trigger": "可变数组",
+      "expansions": [
+        "ArrayList"
+      ]
+    },
+    {
+      "trigger": "集合",
+      "expansions": [
+        "collection"
+      ]
+    },
+    {
+      "trigger": "键值",
+      "expansions": [
+        "HashMap",
+        "tuple"
+      ]
+    },
+    {
+      "trigger": "安全访问",
+      "expansions": [
+        "get",
+        "Option"
+      ]
+    },
+    {
+      "trigger": "可选值",
+      "expansions": [
+        "Option"
+      ]
+    },
+    {
+      "trigger": "空值",
+      "expansions": [
+        "Option",
+        "None"
+      ]
+    },
+    {
+      "trigger": "问号",
+      "expansions": [
+        "Option",
+        "?."
+      ]
+    },
+    {
+      "trigger": "枚举",
+      "expansions": [
+        "enum"
+      ]
+    },
+    {
+      "trigger": "模式匹配",
+      "expansions": [
+        "match",
+        "case"
+      ]
+    },
+    {
+      "trigger": "闭包",
+      "expansions": [
+        "lambda",
+        "closure"
+      ]
+    },
+    {
+      "trigger": "匿名函数",
+      "expansions": [
+        "lambda"
+      ]
+    },
+    {
+      "trigger": "泛型",
+      "expansions": [
+        "generic",
+        "where"
+      ]
+    },
+    {
+      "trigger": "接口约束",
+      "expansions": [
+        "where",
+        "interface"
+      ]
+    },
+    {
+      "trigger": "继承",
+      "expansions": [
+        "inheritance",
+        "class"
+      ]
+    },
+    {
+      "trigger": "结构体",
+      "expansions": [
+        "struct"
+      ]
+    },
+    {
+      "trigger": "运算符",
+      "expansions": [
+        "operator"
+      ]
+    },
+    {
+      "trigger": "重载",
+      "expansions": [
+        "overload"
+      ]
+    },
+    {
+      "trigger": "异常",
+      "expansions": [
+        "Exception",
+        "try",
+        "catch"
+      ]
+    },
+    {
+      "trigger": "捕获异常",
+      "expansions": [
+        "try",
+        "catch"
+      ]
+    },
+    {
+      "trigger": "抛出",
+      "expansions": [
+        "throw"
+      ]
+    },
+    {
+      "trigger": "宏",
+      "expansions": [
+        "macro",
+        "quote"
+      ]
+    },
+    {
+      "trigger": "注解",
+      "expansions": [
+        "annotation"
+      ]
+    },
+    {
+      "trigger": "反射",
+      "expansions": [
+        "reflect"
+      ]
+    },
+    {
+      "trigger": "外部函数",
+      "expansions": [
+        "CFFI",
+        "unsafe"
+      ]
+    },
+    {
+      "trigger": "动态库",
+      "expansions": [
+        "CFFI",
+        "link"
+      ]
+    },
+    {
+      "trigger": "文件读取",
+      "expansions": [
+        "File",
+        "readFrom"
+      ]
+    },
+    {
+      "trigger": "读取文件",
+      "expansions": [
+        "File",
+        "readFrom"
+      ]
+    },
+    {
+      "trigger": "文件写入",
+      "expansions": [
+        "File",
+        "writeTo"
+      ]
+    },
+    {
+      "trigger": "写入文件",
+      "expansions": [
+        "File",
+        "writeTo"
+      ]
+    },
+    {
+      "trigger": "目录遍历",
+      "expansions": [
+        "Directory",
+        "walk"
+      ]
+    },
+    {
+      "trigger": "遍历目录",
+      "expansions": [
+        "Directory",
+        "walk"
+      ]
+    },
+    {
+      "trigger": "目录",
+      "expansions": [
+        "Directory"
+      ]
+    },
+    {
+      "trigger": "路径",
+      "expansions": [
+        "Path"
+      ]
+    },
+    {
+      "trigger": "标准输出",
+      "expansions": [
+        "stdout",
+        "getStdOut"
+      ]
+    },
+    {
+      "trigger": "标准错误",
+      "expansions": [
+        "stderr",
+        "getStdErr"
+      ]
+    },
+    {
+      "trigger": "环境变量",
+      "expansions": [
+        "environment",
+        "getVariable"
+      ]
+    },
+    {
+      "trigger": "子进程",
+      "expansions": [
+        "Process",
+        "executeWithOutput"
+      ]
+    },
+    {
+      "trigger": "命令行",
+      "expansions": [
+        "argopt",
+        "parseArguments"
+      ]
+    },
+    {
+      "trigger": "线程",
+      "expansions": [
+        "Thread",
+        "spawn"
+      ]
+    },
+    {
+      "trigger": "协程",
+      "expansions": [
+        "spawn"
+      ]
+    },
+    {
+      "trigger": "原子",
+      "expansions": [
+        "AtomicInt64"
+      ]
+    },
+    {
+      "trigger": "原子加",
+      "expansions": [
+        "AtomicInt64",
+        "fetchAdd"
+      ]
+    },
+    {
+      "trigger": "互斥锁",
+      "expansions": [
+        "Mutex"
+      ]
+    },
+    {
+      "trigger": "条件变量",
+      "expansions": [
+        "Condition"
+      ]
+    },
+    {
+      "trigger": "阻塞队列",
+      "expansions": [
+        "ArrayBlockingQueue"
+      ]
+    },
+    {
+      "trigger": "并发字典",
+      "expansions": [
+        "ConcurrentHashMap"
+      ]
+    },
+    {
+      "trigger": "并发哈希表",
+      "expansions": [
+        "ConcurrentHashMap"
+      ]
+    },
+    {
+      "trigger": "正则",
+      "expansions": [
+        "Regex"
+      ]
+    },
+    {
+      "trigger": "随机数",
+      "expansions": [
+        "Random",
+        "nextInt64"
+      ]
+    },
+    {
+      "trigger": "时间",
+      "expansions": [
+        "DateTime",
+        "Duration"
+      ]
+    },
+    {
+      "trigger": "耗时",
+      "expansions": [
+        "MonoTime",
+        "Duration"
+      ]
+    },
+    {
+      "trigger": "时间戳",
+      "expansions": [
+        "DateTime"
+      ]
+    },
+    {
+      "trigger": "解析日期",
+      "expansions": [
+        "DateTime",
+        "parse"
+      ]
+    },
+    {
+      "trigger": "计时",
+      "expansions": [
+        "MonoTime",
+        "now"
+      ]
+    },
+    {
+      "trigger": "解析JSON",
+      "expansions": [
+        "JsonValue",
+        "fromStr"
+      ]
+    },
+    {
+      "trigger": "JSON解析",
+      "expansions": [
+        "JsonValue",
+        "fromStr"
+      ]
+    },
+    {
+      "trigger": "序列化",
+      "expansions": [
+        "Serializable",
+        "DataModel"
+      ]
+    },
+    {
+      "trigger": "反序列化",
+      "expansions": [
+        "Serializable",
+        "deserialize"
+      ]
+    },
+    {
+      "trigger": "压缩",
+      "expansions": [
+        "CompressOutputStream",
+        "zlib"
+      ]
+    },
+    {
+      "trigger": "解压",
+      "expansions": [
+        "DecompressInputStream",
+        "zlib"
+      ]
+    },
+    {
+      "trigger": "日志",
+      "expansions": [
+        "Logger",
+        "getGlobalLogger"
+      ]
+    },
+    {
+      "trigger": "摘要",
+      "expansions": [
+        "SHA256",
+        "Digest"
+      ]
+    },
+    {
+      "trigger": "加密",
+      "expansions": [
+        "crypto"
+      ]
+    },
+    {
+      "trigger": "证书",
+      "expansions": [
+        "X509Certificate"
+      ]
+    },
+    {
+      "trigger": "HTTP服务",
+      "expansions": [
+        "ServerBuilder"
+      ]
+    },
+    {
+      "trigger": "HTTP请求",
+      "expansions": [
+        "HttpRequestBuilder"
+      ]
+    },
+    {
+      "trigger": "网址",
+      "expansions": [
+        "URL"
+      ]
+    },
+    {
+      "trigger": "单元测试",
+      "expansions": [
+        "cjpm",
+        "test",
+        "unittest"
+      ]
+    },
+    {
+      "trigger": "创建工程",
+      "expansions": [
+        "cjpm",
+        "init"
+      ]
+    },
+    {
+      "trigger": "创建项目",
+      "expansions": [
+        "cjpm",
+        "init"
+      ]
+    },
+    {
+      "trigger": "包管理",
+      "expansions": [
+        "cjpm"
+      ]
+    },
+    {
+      "trigger": "交叉编译",
+      "expansions": [
+        "target",
+        "cjpm"
+      ]
+    },
+    {
+      "trigger": "格式化",
+      "expansions": [
+        "cjfmt"
+      ]
+    },
+    {
+      "trigger": "代码检查",
+      "expansions": [
+        "cjlint"
+      ]
+    },
+    {
+      "trigger": "覆盖率",
+      "expansions": [
+        "cjcov"
+      ]
+    },
+    {
+      "trigger": "调试",
+      "expansions": [
+        "cjdb"
+      ]
+    },
+    {
+      "trigger": "reverse",
+      "expansions": [
+        "反转"
+      ]
+    },
+    {
+      "trigger": "append",
+      "expansions": [
+        "追加",
+        "add"
+      ]
+    },
+    {
+      "trigger": "dictionary",
+      "expansions": [
+        "HashMap"
+      ]
+    },
+    {
+      "trigger": "list",
+      "expansions": [
+        "ArrayList"
+      ]
+    },
+    {
+      "trigger": "optional",
+      "expansions": [
+        "Option"
+      ]
+    },
+    {
+      "trigger": "closure",
+      "expansions": [
+        "闭包",
+        "lambda"
+      ]
+    },
+    {
+      "trigger": "generics",
+      "expansions": [
+        "泛型",
+        "where"
+      ]
+    },
+    {
+      "trigger": "pattern matching",
+      "expansions": [
+        "match",
+        "case"
+      ]
+    },
+    {
+      "trigger": "exception handling",
+      "expansions": [
+        "try",
+        "catch"
+      ]
+    },
+    {
+      "trigger": "read file",
+      "expansions": [
+        "File",
+        "readFrom"
+      ]
+    },
+    {
+      "trigger": "write file",
+      "expansions": [
+        "File",
+        "writeTo"
+      ]
+    },
+    {
+      "trigger": "environment variable",
+      "expansions": [
+        "env",
+        "getVariable"
+      ]
+    },
+    {
+      "trigger": "subprocess",
+      "expansions": [
+        "Process",
+        "executeWithOutput"
+      ]
+    },
+    {
+      "trigger": "atomic",
+      "expansions": [
+        "AtomicInt64"
+      ]
+    },
+    {
+      "trigger": "serialization",
+      "expansions": [
+        "Serializable",
+        "DataModel"
+      ]
+    },
+    {
+      "trigger": "formatting",
+      "expansions": [
+        "cjfmt"
+      ]
+    },
+    {
+      "trigger": "lint",
+      "expansions": [
+        "cjlint"
+      ]
+    },
+    {
+      "trigger": "coverage",
+      "expansions": [
+        "cjcov"
+      ]
+    },
+    {
+      "trigger": "debugger",
+      "expansions": [
+        "cjdb"
+      ]
+    },
+    {
+      "trigger": "HttpServerBuilder",
+      "expansions": [
+        "ServerBuilder"
+      ]
+    },
+    {
+      "trigger": "json",
+      "expansions": [
+        "JsonValue"
+      ]
+    },
+    {
+      "trigger": "解析",
+      "expansions": [
+        "parse",
+        "fromStr"
+      ]
+    }
+  ]
+}

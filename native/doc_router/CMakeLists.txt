@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(cangjie_doc_router LANGUAGES CXX)
+add_executable(cj-doc-router main.cpp)
+target_compile_features(cj-doc-router PRIVATE cxx_std_17)
+set_target_properties(cj-doc-router PROPERTIES CXX_EXTENSIONS OFF)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(cj-doc-router PRIVATE -Wall -Wextra -Wpedantic)
+endif()
