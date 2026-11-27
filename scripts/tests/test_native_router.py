@@ -120,9 +120,12 @@ class NativeRouterTests(unittest.TestCase):
 
     def test_default_ranker_and_explicit_flags(self) -> None:
         default = self.query('ArrayList.reverse', '--top-k', '3')
+        hybrid = self.query('ArrayList.reverse', '--top-k', '3', '--strategy', 'hybrid')
         lexical = self.query('ArrayList.reverse', '--top-k', '3', '--bm25-only')
+        legacy = self.query('ArrayList.reverse', '--top-k', '3', '--strategy', 'v1')
         learned = self.query('ArrayList.reverse', '--top-k', '3', '--learned-ranker')
-        self.assertEqual(default['paths'], lexical['paths'])
+        self.assertEqual(default['paths'], hybrid['paths'])
+        self.assertEqual(lexical['paths'], legacy['paths'])
         self.assertTrue(learned['paths'])
         result = self.run_router('--query', 'ArrayList.reverse', '--bm25-only', '--learned-ranker')
         self.assertNotEqual(result.returncode, 0)

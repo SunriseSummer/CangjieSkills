@@ -84,12 +84,15 @@ def encode_index(source_root: Path, model_root: Path = MODEL_ROOT) -> tuple[byte
         raise ValueError("ranker must have 12 finite feature weights")
     rules = aliases["rules"]
     digest = hashlib.sha256()
-    digest.update(b"CJROUT1:index-v1;token-v1;body-chars=12000\0")
+    digest.update(b"CJROUT1:index-v2;token-v1;body-chars=12000;metadata-field-v1\0")
     digest.update(canonical(aliases)); digest.update(canonical(model))
     postings: dict[str, list[tuple[int, float]]] = defaultdict(list)
+    metadata_postings: dict[str, list[tuple[int, float]]] = defaultdict(list)
     documents = []
+    document_metadata = []
     seen_ids, seen_paths = set(), set()
     total_length = 0
+    total_metadata_length = 0
     for docid, record in enumerate(records):
         relative = record["path"]
         path = source_root / relative
@@ -114,12 +117,27 @@ def encode_index(source_root: Path, model_root: Path = MODEL_ROOT) -> tuple[byte
         documents.append((record["id"], "references/" + relative, record["title"], record_domain(record), record["kind"], receiver, member, doclen))
         for token, tf in counts.items():
             postings[token].append((docid, tf))
+        # A separate short metadata lane avoids having the long body length
+        # normalize away an exact heading/contract match. Inherited IDs and
+        # paths deliberately stay out of this lane: they name ownership, not
+        # necessarily the subject explained by this particular page.
+        metadata_counts: dict[str, float] = defaultdict(float)
+        metadata_fields = [(record["title"], 3.0), (signature, 1.5), (record.get("summary", ""), 1.0)]
+        for text, weight in metadata_fields:
+            for token, count in Counter(tokens(text)).items():
+                if len(token.encode("utf-8")) <= 256:
+                    metadata_counts[token] += min(count, 4) * weight
+        metadata_length = max(1, round(sum(metadata_counts.values())))
+        total_metadata_length += metadata_length
+        document_metadata.append((str(record.get("summary", "")), str(record.get("parent", "")), metadata_length))
+        for token, tf in metadata_counts.items():
+            metadata_postings[token].append((docid, tf))
     output = bytearray(MAGIC)
     def u32(value): output.extend(struct.pack("<I", value))
     def f32(value): output.extend(struct.pack("<f", value))
     def string(value):
         encoded = value.encode("utf-8"); u32(len(encoded)); output.extend(encoded)
-    u32(1); string(digest.hexdigest()); u32(len(documents))
+    u32(2); string(digest.hexdigest()); u32(len(documents))
     for document in documents:
         for value in document[:-1]: string(value)
         u32(document[-1])
@@ -133,7 +151,15 @@ def encode_index(source_root: Path, model_root: Path = MODEL_ROOT) -> tuple[byte
         for value in rule["expansions"]: string(value)
     u32(len(weights))
     for value in weights: f32(value)
-    metadata = {"format": 1, "knowledge_baseline": "cangjie-1.0.5", "corpus_hash": digest.hexdigest(), "documents": len(documents), "terms": len(postings), "postings": sum(map(len, postings.values())), "index_bytes": len(output), "average_weighted_document_length": round(total_length / len(documents), 3), "feature_names": FEATURE_NAMES, "weights": weights, "body_character_limit": 12000}
+    metadata_offset = len(output)
+    u32(len(document_metadata))
+    for summary, parent, metadata_length in document_metadata:
+        string(summary); string(parent); u32(metadata_length)
+    u32(len(metadata_postings))
+    for term, posting in sorted(metadata_postings.items()):
+        string(term); u32(len(posting))
+        for docid, tf in posting: u32(docid); f32(tf)
+    metadata = {"format": 2, "knowledge_baseline": "cangjie-1.0.5", "corpus_hash": digest.hexdigest(), "documents": len(documents), "terms": len(postings), "postings": sum(map(len, postings.values())), "index_bytes": len(output), "average_weighted_document_length": round(total_length / len(documents), 3), "feature_names": FEATURE_NAMES, "weights": weights, "body_character_limit": 12000, "metadata_terms": len(metadata_postings), "metadata_postings": sum(map(len, metadata_postings.values())), "metadata_bytes": len(output) - metadata_offset, "average_metadata_length": round(total_metadata_length / len(documents), 3)}
     return bytes(output), metadata
 
 

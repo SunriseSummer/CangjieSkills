@@ -1,0 +1,16 @@
+{
+  "format": 1,
+  "base_model": "BAAI/bge-small-zh-v1.5",
+  "onnx_repository": "Xenova/bge-small-zh-v1.5",
+  "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+  "base_license": "MIT",
+  "pooling": "CLS then L2 normalization",
+  "dimensions": 512,
+  "max_tokens": 256,
+  "query_instruction": "为这个句子生成表示以用于检索相关文章：",
+  "files": [
+    {"remote": "onnx/model_int8.onnx", "local": "model_int8.onnx", "bytes": 23903394, "sha256": "b9837c19ce154ff0726d398ee77abbc03a7faf0476c6f93016c84e531be7ebb5"},
+    {"remote": "tokenizer.json", "local": "tokenizer.json", "bytes": 439125, "sha256": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26"},
+    {"remote": "config.json", "local": "config.json", "bytes": 716, "sha256": "d4193ead3a810fd694fa8a31d7fc72fbaebc0668b603e398734bf2f6538ff42f"}
+  ]
+}

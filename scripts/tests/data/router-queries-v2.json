@@ -1,0 +1,913 @@
+{
+  "schema": 2,
+  "purpose": "Second-round independently authored synthetic query holdout; old66 is development/regression. New queries and relevance labels stay hidden until all candidate algorithms are frozen. Labels are useful direct-answer alternatives, not exhaustive recall.",
+  "knowledge_baseline": "cangjie-1.0.5",
+  "queries": [
+    {
+      "id": "v2-exact-01",
+      "category": "exact",
+      "query": "LinkedList.addAfter",
+      "relevant": [
+        "references/api/std/collection/classes/linkedlist/addafter.md",
+        "references/api/std/collection/classes/linkedlist/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-02",
+      "category": "exact",
+      "query": "StringBuilder.appendFromUtf8",
+      "relevant": [
+        "references/api/std/core/classes/stringbuilder/appendfromutf8.md",
+        "references/api/std/core/classes/stringbuilder/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-03",
+      "category": "exact",
+      "query": "Future.tryGet",
+      "relevant": [
+        "references/api/std/core/classes/future/tryget.md",
+        "references/api/std/core/classes/future/index.md",
+        "references/language/concurrency/6-访问线程/6-1-future-线程句柄.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-04",
+      "category": "exact",
+      "query": "Path.fileNameWithoutExtension",
+      "relevant": [
+        "references/api/std/fs/structs/path/prop-filenamewithoutextension.md",
+        "references/api/std/fs/structs/path/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-05",
+      "category": "exact",
+      "query": "BigInt.modInverse",
+      "relevant": [
+        "references/api/std/math-numeric/structs/bigint/modinverse.md",
+        "references/api/std/math-numeric/structs/bigint/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-06",
+      "category": "exact",
+      "query": "Duration.toNanoseconds",
+      "relevant": [
+        "references/api/std/core/structs/duration/tonanoseconds.md",
+        "references/api/std/core/structs/duration/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-07",
+      "category": "exact",
+      "query": "ThreadLocal.set",
+      "relevant": [
+        "references/api/std/core/classes/threadlocal/set.md",
+        "references/api/std/core/classes/threadlocal/index.md",
+        "references/language/concurrency/4-同步机制/4-5-线程局部变量-threadlocal.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-08",
+      "category": "exact",
+      "query": "Mutex.tryLock",
+      "relevant": [
+        "references/api/std/sync/classes/mutex/trylock.md",
+        "references/api/std/sync/classes/mutex/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-09",
+      "category": "exact",
+      "query": "TimeZone.load",
+      "relevant": [
+        "references/api/std/time/classes/timezone/load.md",
+        "references/api/std/time/classes/timezone/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-10",
+      "category": "exact",
+      "query": "JsonObject.containsKey",
+      "relevant": [
+        "references/api/stdx/encoding/json/classes/jsonobject/containskey.md",
+        "references/api/stdx/encoding/json/classes/jsonobject/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-11",
+      "category": "exact",
+      "query": "HashSet.contains",
+      "relevant": [
+        "references/api/std/collection/classes/hashset/contains.md",
+        "references/api/std/collection/classes/hashset/index.md",
+        "references/language/collections/hashset/5-查询/5-1-contains-元素是否存在.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-12",
+      "category": "exact",
+      "query": "ArrayList.removeIf",
+      "relevant": [
+        "references/api/std/collection/classes/arraylist/removeif.md",
+        "references/api/std/collection/classes/arraylist/index.md",
+        "references/language/collections/arraylist/6-删除元素/6-3-按条件删除.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-13",
+      "category": "exact",
+      "query": "ByteBuffer.readByte",
+      "relevant": [
+        "references/api/std/io/classes/bytebuffer/readbyte.md",
+        "references/api/std/io/classes/bytebuffer/index.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-exact-14",
+      "category": "exact",
+      "query": "URL.parse",
+      "relevant": [
+        "references/api/stdx/encoding/url/classes/url/parse.md",
+        "references/api/stdx/encoding/url/classes/url/index.md",
+        "references/examples/network/url-parse.md"
+      ],
+      "rationale": "精确活动 API 契约；相应类型索引的成员表也可能提供同等契约。"
+    },
+    {
+      "id": "v2-natural-01",
+      "category": "natural",
+      "query": "我拿到了一个汉字字符，如何打印它对应的 Unicode 编码数值",
+      "relevant": [
+        "references/examples/text/rune-code-point.md",
+        "references/language/basic_data_type/4-字符类型-rune/支持的运算.md",
+        "references/language/type_system/4-类型转换/4-3-rune-整数转换.md"
+      ],
+      "rationale": "Rune 到整数的显式转换与示例。"
+    },
+    {
+      "id": "v2-natural-02",
+      "category": "natural",
+      "query": "有很多逗号分隔的数据，不想一下子分配整个字符串数组，能边切分边消费吗",
+      "relevant": [
+        "references/language/string/7-分割/7-2-lazysplit-惰性分割-返回迭代器.md",
+        "references/api/std/core/structs/string/lazysplit.md"
+      ],
+      "rationale": "惰性 split 返回迭代器。"
+    },
+    {
+      "id": "v2-natural-03",
+      "category": "natural",
+      "query": "我要把多个字符串连起来，中间统一放一个分隔符",
+      "relevant": [
+        "references/language/string/4-静态方法/4-1-join-拼接字符串数组.md",
+        "references/language/string/12-拼接与重复/12-4-string-join-拼接数组.md",
+        "references/api/std/core/structs/string/join.md"
+      ],
+      "rationale": "String.join 带分隔符连接。"
+    },
+    {
+      "id": "v2-natural-04",
+      "category": "natural",
+      "query": "同一个随机种子每次运行都要得到一致的随机序列，应该如何创建随机数发生器",
+      "relevant": [
+        "references/examples/random/seeded-range.md",
+        "references/api/std/random/classes/random/init.md"
+      ],
+      "rationale": "带种子构造器及可重复性示例。"
+    },
+    {
+      "id": "v2-natural-05",
+      "category": "natural",
+      "query": "处理未知长度的大整数时，怎么从十进制文本构造数值",
+      "relevant": [
+        "references/api/std/math-numeric/structs/bigint/parse.md",
+        "references/api/std/math-numeric/structs/bigint/tryparse.md"
+      ],
+      "rationale": "BigInt 文本解析。"
+    },
+    {
+      "id": "v2-natural-06",
+      "category": "natural",
+      "query": "需要把带有空格和中文的 URL 拆出路径，同时保留原来百分号编码的样子",
+      "relevant": [
+        "references/examples/network/url-parse.md",
+        "references/api/stdx/encoding/url/classes/url/parse.md"
+      ],
+      "rationale": "URL 同时保存 decoded 与 raw 字段。"
+    },
+    {
+      "id": "v2-natural-07",
+      "category": "natural",
+      "query": "从后台任务读结果时我不想卡住主线程，有没有立即返回的方法",
+      "relevant": [
+        "references/api/std/core/classes/future/tryget.md",
+        "references/language/concurrency/6-访问线程/6-1-future-线程句柄.md"
+      ],
+      "rationale": "Future.tryGet 为非阻塞获取。"
+    },
+    {
+      "id": "v2-natural-08",
+      "category": "natural",
+      "query": "要让每个工作线程各自保存一份上下文，不能被其他线程共享",
+      "relevant": [
+        "references/api/std/core/classes/threadlocal/index.md",
+        "references/language/concurrency/4-同步机制/4-5-线程局部变量-threadlocal.md"
+      ],
+      "rationale": "线程局部变量。"
+    },
+    {
+      "id": "v2-natural-09",
+      "category": "natural",
+      "query": "文件名里带有多个点，我只想拿到不含最后扩展名的名称",
+      "relevant": [
+        "references/api/std/fs/structs/path/prop-filenamewithoutextension.md"
+      ],
+      "rationale": "Path 文件名去扩展名契约。"
+    },
+    {
+      "id": "v2-natural-10",
+      "category": "natural",
+      "query": "想删除列表中所有不满足条件的项，而不是一边遍历一边改下标",
+      "relevant": [
+        "references/api/std/collection/classes/arraylist/removeif.md",
+        "references/api/std/collection/classes/linkedlist/removeif.md",
+        "references/language/collections/arraylist/6-删除元素/6-3-按条件删除.md"
+      ],
+      "rationale": "谓词批量删除。"
+    },
+    {
+      "id": "v2-natural-11",
+      "category": "natural",
+      "query": "我希望把整数写成十六进制，而且宽度不够时左侧补零",
+      "relevant": [
+        "references/api/std/convert/interfaces/formattable/index.md"
+      ],
+      "rationale": "格式控制表含整数进制和零填充。"
+    },
+    {
+      "id": "v2-natural-12",
+      "category": "natural",
+      "query": "运行外部程序后，怎样把它的退出码继续作为我的命令行工具的返回状态",
+      "relevant": [
+        "references/examples/cli-process/cli-exit-status.md",
+        "references/examples/cli-process/process-output.md",
+        "references/api/std/process/functions/execute-string-array-string-path-map-string-string-processredir-d51f810c.md"
+      ],
+      "rationale": "子进程状态传播示例。"
+    },
+    {
+      "id": "v2-natural-13",
+      "category": "natural",
+      "query": "想把自定义对象写成 JSON 字符串，再从 JSON 还原为对象",
+      "relevant": [
+        "references/examples/json/serializable.md",
+        "references/examples/json/json-roundtrip.md"
+      ],
+      "rationale": "序列化与反序列化示例。"
+    },
+    {
+      "id": "v2-natural-14",
+      "category": "natural",
+      "query": "我需要给自己的类实现一个可以像函数一样调用的运算符",
+      "relevant": [
+        "references/language/function/8-运算符重载/8-4-函数调用运算符.md"
+      ],
+      "rationale": "operator () 可调用对象。"
+    },
+    {
+      "id": "v2-natural-15",
+      "category": "natural",
+      "query": "工具链如何生成覆盖率报告，最好是能交给 CI 读取的 XML",
+      "relevant": [
+        "references/tools/cjcov/4-典型使用示例/4-2-生成-xml-报告.md",
+        "references/tools/cjcov/3-命令选项.md"
+      ],
+      "rationale": "XML 输出选项及命令。"
+    },
+    {
+      "id": "v2-natural-16",
+      "category": "natural",
+      "query": "某条静态检查规则在这里是有意违反的，能不能只对这一段代码关闭告警",
+      "relevant": [
+        "references/tools/cjlint/4-告警屏蔽/4-2-源代码注释屏蔽.md"
+      ],
+      "rationale": "注释作用域屏蔽规则。"
+    },
+    {
+      "id": "v2-natural-17",
+      "category": "natural",
+      "query": "如果我知道某个类型的名字，能在运行时查到它的成员和构造器吗",
+      "relevant": [
+        "references/language/reflect_and_annotation/2-反射-动态特性/overview.md",
+        "references/language/reflect_and_annotation/2-反射-动态特性/2-1-获取-typeinfo.md",
+        "references/language/reflect_and_annotation/2-反射-动态特性/2-2-访问成员.md",
+        "references/api/std/reflect/classes/typeinfo/get.md",
+        "references/api/std/reflect/classes/classtypeinfo/index.md"
+      ],
+      "rationale": "反射提供成员和构造器信息。"
+    },
+    {
+      "id": "v2-natural-18",
+      "category": "natural",
+      "query": "想检查两个集合是否包含同样元素，并且不关心排列顺序",
+      "relevant": [
+        "references/api/std/collection/classes/hashset/operator-eq.md",
+        "references/language/collections/hashset/12-相等比较.md",
+        "references/api/std/collection/classes/treeset/operator-eq.md"
+      ],
+      "rationale": "HashSet 无序相等比较。"
+    },
+    {
+      "id": "v2-conceptual-01",
+      "category": "conceptual",
+      "query": "for 的 0..n 和 0..=n，哪一个会把末尾的 n 也循环到",
+      "relevant": [
+        "references/language/for/2-range-区间类型/2-1-区间字面量.md",
+        "references/language/basic_data_type/10-区间类型-range/10-1-区间字面量.md"
+      ],
+      "rationale": "闭区间与半开区间。"
+    },
+    {
+      "id": "v2-conceptual-02",
+      "category": "conceptual",
+      "query": "let 变量不可重新赋值，为什么它仍然不是编译期间的常量",
+      "relevant": [
+        "references/language/const/1-const-变量/1-2-与-let-var-的区别.md"
+      ],
+      "rationale": "let 运行期不变与 const 编译期。"
+    },
+    {
+      "id": "v2-conceptual-03",
+      "category": "conceptual",
+      "query": "没有写访问修饰符的类成员，包外的代码能直接访问吗",
+      "relevant": [
+        "references/language/class/1-类定义/1-8-访问修饰符-4-级.md",
+        "references/language/class/1-类定义/index.md"
+      ],
+      "rationale": "类成员默认 internal。"
+    },
+    {
+      "id": "v2-conceptual-04",
+      "category": "conceptual",
+      "query": "扩展可以给已有类型增加存储数据的成员字段吗",
+      "relevant": [
+        "references/language/extend/1-扩展概述/1-2-可添加的内容.md",
+        "references/language/extend/1-扩展概述/index.md",
+        "references/language/extend/1-扩展概述/1-3-不能做的事.md"
+      ],
+      "rationale": "扩展可增加计算属性和函数，不能增加存储字段。"
+    },
+    {
+      "id": "v2-conceptual-05",
+      "category": "conceptual",
+      "query": "自定义泛型类的类型参数如果有父子关系，实例化出来的两个类就有子类型关系吗",
+      "relevant": [
+        "references/language/generic/8-泛型子类型关系/8-2-型变-用户自定义类型不变.md",
+        "references/language/type_system/3-型变规则-variance/3-2-仓颉中的规则.md",
+        "references/language/generic/8-泛型子类型关系/index.md"
+      ],
+      "rationale": "用户自定义泛型不变。"
+    },
+    {
+      "id": "v2-conceptual-06",
+      "category": "conceptual",
+      "query": "怎样区分函数类型的参数逆变和返回值协变",
+      "relevant": [
+        "references/language/type_system/3-型变规则-variance/3-2-仓颉中的规则.md"
+      ],
+      "rationale": "函数类型的型变规则。"
+    },
+    {
+      "id": "v2-conceptual-07",
+      "category": "conceptual",
+      "query": "import 的两个包都带了同名类型，能不能给其中一个名字起别名",
+      "relevant": [
+        "references/language/package/4-包导入/4-5-import-as-重命名导入.md"
+      ],
+      "rationale": "重命名导入。"
+    },
+    {
+      "id": "v2-conceptual-08",
+      "category": "conceptual",
+      "query": "字节字面量 b 的形式能表示一个汉字吗，和 Rune 的字符字面量有什么区别",
+      "relevant": [
+        "references/language/basic_data_type/1-整数类型/1-4-字节字面量.md",
+        "references/language/basic_data_type/4-字符类型-rune/三种字面量形式.md",
+        "references/examples/binary/byte-literal-conversion.md"
+      ],
+      "rationale": "字节字面量限制 ASCII；Rune 可表示 Unicode。"
+    },
+    {
+      "id": "v2-conceptual-09",
+      "category": "conceptual",
+      "query": "倒着遍历一个区间时起点小于终点会怎样，步长应该是什么符号",
+      "relevant": [
+        "references/language/for/2-range-区间类型/2-2-逆向与步长.md",
+        "references/language/for/2-range-区间类型/2-3-空区间.md"
+      ],
+      "rationale": "负步长和空区间。"
+    },
+    {
+      "id": "v2-conceptual-10",
+      "category": "conceptual",
+      "query": "同一个类能写多个 static init 吗，静态初始化器能带 public 修饰符吗",
+      "relevant": [
+        "references/language/class/1-类定义/1-4-静态初始化器.md"
+      ],
+      "rationale": "每个类最多一个静态初始化器且不可加访问修饰符。"
+    },
+    {
+      "id": "v2-conceptual-11",
+      "category": "conceptual",
+      "query": "try 的资源变量能在块外使用吗，这种资源管理表达式能返回计算结果吗",
+      "relevant": [
+        "references/language/error_handle/2-抛出与处理异常/2-3-try-with-resources-表达式.md"
+      ],
+      "rationale": "资源变量只有体作用域；表达式类型始终 Unit。"
+    },
+    {
+      "id": "v2-conceptual-12",
+      "category": "conceptual",
+      "query": "继承父类时 super 构造调用要写在子类初始化器的什么位置",
+      "relevant": [
+        "references/language/class/3-继承/3-3-父类构造函数调用.md",
+        "references/language/class/3-继承/index.md"
+      ],
+      "rationale": "父类构造调用位置规则。"
+    },
+    {
+      "id": "v2-conceptual-13",
+      "category": "conceptual",
+      "query": "abstract class 和 sealed abstract class 的继承范围有什么不同",
+      "relevant": [
+        "references/language/class/3-继承/3-2-sealed-抽象类.md",
+        "references/language/class/1-类定义/1-2-抽象类.md",
+        "references/language/class/3-继承/index.md"
+      ],
+      "rationale": "sealed 限制继承范围。"
+    },
+    {
+      "id": "v2-conceptual-14",
+      "category": "conceptual",
+      "query": "逻辑与运算有短路行为，自定义类型能自己重载这个运算符吗",
+      "relevant": [
+        "references/language/function/8-运算符重载/8-2-可重载的运算符.md"
+      ],
+      "rationale": "不可重载短路逻辑运算。"
+    },
+    {
+      "id": "v2-conceptual-15",
+      "category": "conceptual",
+      "query": "type 声明的别名和原始类型是两个互不相同的新类型吗",
+      "relevant": [
+        "references/language/type_system/5-类型别名/index.md",
+        "references/language/type_system/5-类型别名/5-1-声明.md"
+      ],
+      "rationale": "type 别名不引入新的名义类型。"
+    },
+    {
+      "id": "v2-conceptual-16",
+      "category": "conceptual",
+      "query": "match 里先匹配到了 case，但 where 条件不成立会继续尝试后面的分支吗",
+      "relevant": [
+        "references/language/pattern_match/1-match-表达式/1-3-模式守卫-where.md"
+      ],
+      "rationale": "守卫失败继续匹配。"
+    },
+    {
+      "id": "v2-compound-01",
+      "category": "compound",
+      "query": "ByteBuffer write seek position read empty target array",
+      "relevant": [
+        "references/examples/binary/bytebuffer.md",
+        "references/api/std/io/classes/bytebuffer/read.md",
+        "references/api/std/io/classes/bytebuffer/index.md"
+      ],
+      "rationale": "缓冲区写入定位读取及空目标限制。"
+    },
+    {
+      "id": "v2-compound-02",
+      "category": "compound",
+      "query": "URL resolveURL rawPath relative reference percent encoding",
+      "relevant": [
+        "references/examples/network/url-parse.md",
+        "references/api/stdx/encoding/url/classes/url/resolveurl.md"
+      ],
+      "rationale": "URL 相对合并及原始路径。"
+    },
+    {
+      "id": "v2-compound-03",
+      "category": "compound",
+      "query": "Base64 round trip String.fromUtf8 toArray getOrThrow",
+      "relevant": [
+        "references/examples/encoding/base64.md"
+      ],
+      "rationale": "字节与文本边界完整示例。"
+    },
+    {
+      "id": "v2-compound-04",
+      "category": "compound",
+      "query": "Decimal value scale BigInt exact construction without Float64",
+      "relevant": [
+        "references/examples/numeric/exact-decimal-value.md",
+        "references/api/std/math-numeric/structs/decimal/init/init-797277c9f2.md"
+      ],
+      "rationale": "从无标度 BigInt 精确构造金额。"
+    },
+    {
+      "id": "v2-compound-05",
+      "category": "compound",
+      "query": "SHA256 digest Array<Byte> standard convenience function",
+      "relevant": [
+        "references/examples/digests/digest-array.md",
+        "references/api/std/crypto/digest/functions/digest.md"
+      ],
+      "rationale": "标准便捷函数配具体算法。"
+    },
+    {
+      "id": "v2-compound-06",
+      "category": "compound",
+      "query": "cjpm target cross compile C library link-option",
+      "relevant": [
+        "references/tools/cjpm/6-高级配置/6-3-交叉编译-target.md",
+        "references/tools/cjpm/6-高级配置/6-2-c-语言-ffi-集成.md"
+      ],
+      "rationale": "交叉编译与 C FFI 链接配置。"
+    },
+    {
+      "id": "v2-compound-07",
+      "category": "compound",
+      "query": "macro quote Tokens multi statement generated declarations",
+      "relevant": [
+        "references/examples/macros/multi-statement-codegen.md"
+      ],
+      "rationale": "多语句宏生成与代码片段形态。"
+    },
+    {
+      "id": "v2-compound-08",
+      "category": "compound",
+      "query": "HttpServer HttpClient compressed JSON local roundtrip",
+      "relevant": [
+        "references/examples/network/compressed-json-http-roundtrip.md"
+      ],
+      "rationale": "压缩 JSON HTTP 端到端示例。"
+    },
+    {
+      "id": "v2-compound-09",
+      "category": "compound",
+      "query": "Regex replace find captures group matched string",
+      "relevant": [
+        "references/api/std/regex/classes/regex/index.md",
+        "references/api/std/regex/classes/regex/find.md",
+        "references/api/std/regex/classes/regex/findall.md",
+        "references/api/std/regex/classes/regex/replace.md",
+        "references/api/std/regex/classes/regex/replaceall.md"
+      ],
+      "rationale": "Regex API 成员表包含替换查找捕获。"
+    },
+    {
+      "id": "v2-compound-10",
+      "category": "compound",
+      "query": "FileInfo Directory.readFrom recursive extensionName filter",
+      "relevant": [
+        "references/examples/files/recursive-directory-walk.md"
+      ],
+      "rationale": "递归枚举及文件筛选。"
+    },
+    {
+      "id": "v2-error-01",
+      "category": "error",
+      "query": "两个函数参数完全相同，只把返回类型改掉，为什么还是报重载冲突",
+      "relevant": [
+        "references/language/function/7-函数重载/7-1-重载规则.md",
+        "references/language/function/7-函数重载/index.md"
+      ],
+      "rationale": "返回值不能单独区分重载。"
+    },
+    {
+      "id": "v2-error-02",
+      "category": "error",
+      "query": "在 struct 内直接定义一个同类型的成员变量，编译器提示递归结构体不合法",
+      "relevant": [
+        "references/language/struct/1-结构体定义/1-8-禁止递归结构体.md",
+        "references/language/struct/1-结构体定义/index.md"
+      ],
+      "rationale": "直接间接递归结构体受限。"
+    },
+    {
+      "id": "v2-error-03",
+      "category": "error",
+      "query": "在扩展方法里读取原类型的 private 字段为什么权限检查失败",
+      "relevant": [
+        "references/language/extend/4-访问规则/4-6-不能访问-private-成员.md",
+        "references/language/extend/1-扩展概述/1-3-不能做的事.md"
+      ],
+      "rationale": "扩展不能访问 private。"
+    },
+    {
+      "id": "v2-error-04",
+      "category": "error",
+      "query": "用 HashSet 的中括号下标取元素为什么找不到运算符",
+      "relevant": [
+        "references/language/collections/hashset/5-查询/5-3-无下标访问.md",
+        "references/language/collections/hashset/5-查询/index.md"
+      ],
+      "rationale": "HashSet 无索引下标。"
+    },
+    {
+      "id": "v2-error-05",
+      "category": "error",
+      "query": "main 返回 String 会报入口函数类型不正确，允许哪些返回类型",
+      "relevant": [
+        "references/language/package/3-程序入口/3-1-main-函数.md"
+      ],
+      "rationale": "main 的返回类型允许 Unit 或整数类型，不允许 String。"
+    },
+    {
+      "id": "v2-error-06",
+      "category": "error",
+      "query": "单元测试里写 enum 相等比较，编译器说没有实现 Equatable",
+      "relevant": [
+        "references/language/enum/3-枚举与-equatable/常见错误.md",
+        "references/language/enum/3-枚举与-equatable/手动实现自定义相等语义.md",
+        "references/examples/data-model/enum-equatable.md"
+      ],
+      "rationale": "enum 不自动实现自定义负载相等。"
+    },
+    {
+      "id": "v2-error-07",
+      "category": "error",
+      "query": "Mutex.condition 调用抛 IllegalSynchronizationStateException 是什么原因",
+      "relevant": [
+        "references/api/std/sync/classes/mutex/condition.md"
+      ],
+      "rationale": "创建 Condition 前须持锁。"
+    },
+    {
+      "id": "v2-error-08",
+      "category": "error",
+      "query": "String.fromUtf8 遇到损坏的字节串会发生什么，怎么预先验证",
+      "relevant": [
+        "references/language/string/4-静态方法/4-2-fromutf8-从-utf-8-字节数组构造.md",
+        "references/language/string/4-静态方法/4-4-checkutf8encoding-校验-utf-8-合法性.md",
+        "references/api/std/core/structs/string/fromutf8.md",
+        "references/api/std/core/structs/string/checkutf8encoding.md"
+      ],
+      "rationale": "UTF8 验证失败异常。"
+    },
+    {
+      "id": "v2-error-09",
+      "category": "error",
+      "query": "为什么 catch 接住不了 Error，throw 可以抛所有异常基类吗",
+      "relevant": [
+        "references/language/error_handle/1-异常层次与定义/1-1-两种基础异常类型.md",
+        "references/language/error_handle/2-抛出与处理异常/2-1-throw-关键字.md"
+      ],
+      "rationale": "Error 与 Exception 的处理差异。"
+    },
+    {
+      "id": "v2-error-10",
+      "category": "error",
+      "query": "src 自己没有任何 cj 文件，只有 src/sub 下有源码，为什么 cjpm 没有扫描到子包",
+      "relevant": [
+        "references/tools/cjpm/7-包扫描-循环依赖与命令扩展/7-1-有效源码包.md"
+      ],
+      "rationale": "目录与包扫描规则。"
+    },
+    {
+      "id": "v2-error-11",
+      "category": "error",
+      "query": "给带默认值的命名参数传值时提示缺少参数名，参数声明中的感叹号是什么意思",
+      "relevant": [
+        "references/language/function/1-函数定义/1-2-参数列表.md",
+        "references/examples/functions/default-parameters.md"
+      ],
+      "rationale": "p!: 为命名参数。"
+    },
+    {
+      "id": "v2-error-12",
+      "category": "error",
+      "query": "在 mut 成员函数里把 this 捕获到 Lambda 为什么不允许",
+      "relevant": [
+        "references/language/struct/3-mut-函数/3-6-mut-函数中-this-的限制.md"
+      ],
+      "rationale": "mut 中 this 不得被 Lambda 或嵌套函数捕获。"
+    },
+    {
+      "id": "v2-negative-01",
+      "category": "negative",
+      "query": "推荐一家适合家庭聚餐的川菜馆，最好能停车",
+      "relevant": [],
+      "rationale": "餐馆推荐不属于仓颉知识。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-02",
+      "category": "negative",
+      "query": "How many moons does Saturn have this year?",
+      "relevant": [],
+      "rationale": "天文事实不是代码库知识；many 是词汇混淆。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-03",
+      "category": "negative",
+      "query": "我的文件柜钥匙丢了，怎么联系物业开锁",
+      "relevant": [],
+      "rationale": "文件一词不是文件 API。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-04",
+      "category": "negative",
+      "query": "给孩子解释为什么随机下雨会影响周末出游",
+      "relevant": [],
+      "rationale": "随机一词不是 Random API。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-05",
+      "category": "negative",
+      "query": "今天人民币兑换欧元的汇率是多少",
+      "relevant": [],
+      "rationale": "实时金融事实不属于文档。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-06",
+      "category": "negative",
+      "query": "请帮我写一首关于 JSON 月亮和星空的诗",
+      "relevant": [],
+      "rationale": "含技术词但实际请求是诗歌。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-07",
+      "category": "negative",
+      "query": "推荐一款安静的机械键盘，HashMap 配色也可以",
+      "relevant": [],
+      "rationale": "推荐和 API 词仅为干扰。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-08",
+      "category": "negative",
+      "query": "Find the best way to sort laundry by fabric and wash temperature",
+      "relevant": [],
+      "rationale": "sort 的生活语义。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-09",
+      "category": "negative",
+      "query": "学校要求所有班级排成队列拍照，站位应该怎么安排",
+      "relevant": [],
+      "rationale": "队列的生活语义。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-10",
+      "category": "negative",
+      "query": "上海明天是否有大雨，出门要不要带伞",
+      "relevant": [],
+      "rationale": "天气事实不属于语言文档。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-11",
+      "category": "negative",
+      "query": "小区垃圾分类中的过期药品属于哪类",
+      "relevant": [],
+      "rationale": "分类并非数据类型。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-12",
+      "category": "negative",
+      "query": "Which string instrument should a beginner buy for classical music?",
+      "relevant": [],
+      "rationale": "string 音乐语义。",
+      "negative_kind": "out_of_domain_lexical"
+    },
+    {
+      "id": "v2-negative-13",
+      "category": "negative",
+      "query": "numpy.linalg.eigh 的 UPLO 参数有什么作用",
+      "relevant": [],
+      "rationale": "Python numpy 第三方 API 不在本库。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-14",
+      "category": "negative",
+      "query": "Spring Boot 的 @Transactional propagation=REQUIRES_NEW 应该如何配置",
+      "relevant": [],
+      "rationale": "Java Spring 框架事务未覆盖。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-15",
+      "category": "negative",
+      "query": "Rust tokio::select! cancellation safety 的最新规则是什么",
+      "relevant": [],
+      "rationale": "Rust tokio 行为不是仓颉 Future。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-16",
+      "category": "negative",
+      "query": "Node.js EventEmitter.captureRejections 选项怎样处理 Promise 拒绝",
+      "relevant": [],
+      "rationale": "Node 第三方生态行为未覆盖。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-17",
+      "category": "negative",
+      "query": "PostgreSQL EXPLAIN ANALYZE 的 shared hit blocks 如何解释",
+      "relevant": [],
+      "rationale": "数据库查询计划细节不在标准 SQL 接口库。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-18",
+      "category": "negative",
+      "query": "Kubernetes StatefulSet volumeClaimTemplates 如何保留 PVC",
+      "relevant": [],
+      "rationale": "容器编排不属于文档。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-19",
+      "category": "negative",
+      "query": "Vue 3 watchEffect 的 flush: post 与 nextTick 区别",
+      "relevant": [],
+      "rationale": "Web 前端框架行为未覆盖。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-20",
+      "category": "negative",
+      "query": "PyTorch torch.compile dynamic shapes 的 guard failure 怎样调试",
+      "relevant": [],
+      "rationale": "PyTorch 编译器细节不在本库。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-21",
+      "category": "negative",
+      "query": "仓颉 1.3 新增的 async await 语法具体是什么，列出 1.3 的发布变化",
+      "relevant": [],
+      "rationale": "知识基线仅1.0.5，未含未来版本发布变化；不应推断该特性存在。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-22",
+      "category": "negative",
+      "query": "这个仓库维护者的手机号码和家庭住址是什么",
+      "relevant": [],
+      "rationale": "个人联系方式不是编程文档内容。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-23",
+      "category": "negative",
+      "query": "仓颉官方商业许可证给企业收取多少钱",
+      "relevant": [],
+      "rationale": "API 开源接口文档不提供官方商业价格。",
+      "negative_kind": "unsupported_adjacent"
+    },
+    {
+      "id": "v2-negative-24",
+      "category": "negative",
+      "query": "你的检索模型训练了多少参数，线上日志保存在哪里",
+      "relevant": [],
+      "rationale": "知识库检索程序自身运行配置不在仓颉知识索引内。",
+      "negative_kind": "unsupported_adjacent"
+    }
+  ],
+  "audit": {
+    "method": "Independent agent inspection of each gold source and neighboring contracts before any candidate retrieval output; no ranking engine run by auditor.",
+    "label_policy": "A listed leaf or narrow table must directly state a useful answer or a direct component of a compound workflow; broad links alone are not sufficient.",
+    "queries": 94,
+    "positive_queries": 70,
+    "negative_queries": 24,
+    "changed_queries": 38,
+    "all_negative_labels_retained": true
+  }
+}
